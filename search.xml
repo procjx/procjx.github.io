@@ -50,7 +50,34 @@
   <entry>
     <title>【论文笔记】Discourse-Aware Neural Extractive Model for Text Summarization</title>
     <url>/2019/11/02/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Discourse-Aware-Neural-Extractive-Model-for-Text-Summarization/</url>
-    <content><![CDATA[<p><strong>Discourse-Aware Neural Extractive Model for Text Summarization</strong>. Jiacheng Xu, Zhe Gan, Yu Cheng, Jingjing Liu. ArXiv 1910.14142.<a href="https://arxiv.org/pdf/1910.14142.pdf" target="_blank" rel="noopener">[PDF]</a></p><h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1>]]></content>
+    <content><![CDATA[<p><strong>Discourse-Aware Neural Extractive Model for Text Summarization</strong>. Jiacheng Xu, Zhe Gan, Yu Cheng, Jingjing Liu. ArXiv 1910.14142.<a href="https://arxiv.org/pdf/1910.14142.pdf" target="_blank" rel="noopener">[PDF]</a></p><h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>作者分析认为现有抽取式文档摘要存在以下两个不足：</p><a id="more"></a>
+
+<ul>
+<li>抽取式文档摘要都是以句子级别进行抽取，导致结果包含冗余或者没有用的信息。</li>
+<li>BERT常被SOTA文档摘要模型用在文档编码器，但是BERT是再句对上预训练的，不能很好捕捉长距离的句间依赖关系。</li>
+</ul>
+<p>针对以上两个不足，作者提出了两个解决方法：</p>
+<ul>
+<li>按EDU进行抽取 （EDU是RST中的基本单元，具体可以去了解discourse parsing）</li>
+<li>构造RST Graph和Coreference Graph建模长距离句间依赖关系。</li>
+</ul>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>Discourse Segmentation: sequence to EDU</p>
+<p>Discourse Parsing: EDU to RST tree</p>
+<h2 id="RST-Graph"><a href="#RST-Graph" class="headerlink" title="RST Graph"></a>RST Graph</h2><p>通过篇章分析，可以在篇章上构造得到一棵树，树的叶子节点是EDU，树上的边代表的是对应子节点的重要性程度，N代表主要，S代表次要，可以认为S是N的补充。相邻两个子节点可以有三种关系，N-N,N-S,S-N。</p>
+<p>作者提出假设：S依赖N,所以存在一条路径从S指向N；如果两个节点都是N，就认为是右N依赖做N。</p>
+<p>根据这个假设，可以将RST discourse tree转成成RST dependence graph。</p>
+<p><img src="/images/discbert1.jpg" alt></p>
+<p>注：论文原图中没有标N和S，为了好理解我表了N和S。</p>
+<p>如果存在一条从第i个EDU指向第j个EDU的路径，则设GR[i][j]=1，否则为0,这样就可以将RST Graph转化成GR矩阵。</p>
+<p><img src="/images/discbert2.jpg" alt></p>
+<h2 id="Coreference-Graph"><a href="#Coreference-Graph" class="headerlink" title="Coreference Graph"></a>Coreference Graph</h2><p>通过斯坦福的CoreNLP工具，可以得到多个共指簇（coreference clusters），每个簇中的EDU都指向同一个实体。指向同一个实体的EDU存在联系，所以同一个簇中的所有EDU之间（包括自己跟自己）存在一条边。基于这个原则，作者设计一个构造coreference graph的算法，遍历所有簇，簇中每个EDU之间存在一个边。也就得到了共指矩阵GC。</p>
+<p><img src="/images/discbert3.jpg" alt></p>
+<h2 id="模型框架"><a href="#模型框架" class="headerlink" title="模型框架"></a>模型框架</h2><p><img src="/images/discbert4.jpg" alt></p>
+<p>首先使用BERT编码整个篇章，使用BERT得到的隐状态表示，每个EDU内部做self-attention得到EDU的表示，由得到的EDU表示和两个矩阵表示GR和GC，做GCN得到EDU新的表示，通过MLP预测EDU是否被抽取出来做EDU（0-1序列标注）。</p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p>作者在两个数据集上进行验证，并得到了SOTA结果。</p>
+<p><img src="/images/discbert5.jpg" alt></p>
+<p><img src="/images/discbert6.jpg" alt></p>
+]]></content>
       <categories>
         <category>论文笔记</category>
       </categories>
@@ -160,8 +187,8 @@
   <entry>
     <title>【论文笔记】Hierarchical Modeling of Global Context for Document-Level Neural Machine Translation</title>
     <url>/2019/10/31/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Hierarchical-Modeling-of-Global-Context-for-Document-Level-Neural-Machine-Translation/</url>
-    <content><![CDATA[<p><strong>Hierarchical Modeling of Global Context for Document-Level Neural Machine Translation</strong>. Xin Tan, Longyin Zhang, Deyi Xiong, Guodong Zhou. EMNLP 2019.</p><h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>本文觉得现有篇章翻译工作基于pre-context的方法存在两个不足：</p><a id="more"></a>
-
+    <content><![CDATA[<p><strong>Hierarchical Modeling of Global Context for Document-Level Neural Machine Translation</strong>. Xin Tan, Longyin Zhang, Deyi Xiong, Guodong Zhou. EMNLP 2019. <a href="https://www.aclweb.org/anthology/D19-1168.pdf" target="_blank" rel="noopener">[PDF]</a></p><a id="more"></a>
+<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>本文觉得现有篇章翻译工作基于pre-context的方法存在两个不足：</p>
 <p>（1）只利用一边（one-sidedness）的上下文可能还不够</p>
 <p>（2）不正确的pre-context（translation bias propagation caused by improper pre-context）可能会导致翻译错误，所以本文想要利用整个篇章建模全局上下文（global context）来提升篇章翻译。</p>
 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="使用层次结构建模全局上下文"><a href="#使用层次结构建模全局上下文" class="headerlink" title="使用层次结构建模全局上下文"></a>使用层次结构建模全局上下文</h2><p><img src="/images/HM-GDC.png" alt></p>
