@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【论文笔记】Improved Document Modelling with a Neural Discourse Parser</title>
+    <url>/2019/12/21/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Improved-Document-Modelling-with-a-Neural-Discourse-Parser/</url>
+    <content><![CDATA[<p><strong>Improved Document Modelling with a Neural Discourse Parser</strong>.Fajri Koto, Jey Han Lau, Timothy Baldwin. ArXiv 1911.<a href="https://arxiv.org/abs/1911.06919" target="_blank" rel="noopener">[PDF]</a></p><h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>使用篇章结构信息提高篇章建模。</p><h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>文章的关键有两点，篇章结构是什么？如何利用篇章结构？</p><a id="more"></a>
+
+
+<h2 id="篇章结构是什么？"><a href="#篇章结构是什么？" class="headerlink" title="篇章结构是什么？"></a>篇章结构是什么？</h2><p><img src="/images/DMDP1.jpg" alt></p>
+<p>本篇文章的篇章结构由RST分析得到，首先将篇章切分成EDU，然后再EDU基础上建立篇章分析树，树上的叶子结点为EDU，非叶子结点为其两个子节点的篇章关系，树上的边为对应子节点在该关系中的重要性。（具体可以去了解一下RST官网介绍和相关论文）</p>
+<h2 id="如何利用篇章结构？"><a href="#如何利用篇章结构？" class="headerlink" title="如何利用篇章结构？"></a>如何利用篇章结构？</h2><p>如何利用篇章结构，首先是如何编码篇章结构，也就是如何抽取篇章分析树的特征。针对每个树根节点到每个叶子结点的路径，作者设计两类特征：Shallow Discourse Features 和 Latent Discourse Features。</p>
+<h3 id="Shallow-Discourse-Features"><a href="#Shallow-Discourse-Features" class="headerlink" title="Shallow Discourse Features"></a>Shallow Discourse Features</h3><ul>
+<li>叶子结点重要性分数</li>
+</ul>
+<p><img src="/images/DMDP2.jpg" alt></p>
+<p>统计路径上Nucleus的比例，h(root)为根节点高度。</p>
+<ul>
+<li>关系重要性分数</li>
+</ul>
+<p><img src="/images/DMDP3.jpg" alt></p>
+<p>统计路径上每个关系的加权比例，h(x)为节点x的高度。</p>
+<ul>
+<li><p>结点类别</p>
+<p>  Nucleus or satellite</p>
+<ul>
+<li>兄弟结点</li>
+</ul>
+<h3 id="Latent-Discourse-Features"><a href="#Latent-Discourse-Features" class="headerlink" title="Latent Discourse Features"></a>Latent Discourse Features</h3></li>
+</ul>
+<p><img src="/images/DMDP6.jpg" alt></p>
+<p>使用两个Bi-LSTM分别编码词序列和句法特征序列，avg-pool，然后拼接。</p>
+<p><img src="/images/DMDP4.jpg" alt></p>
+<p>拼接后的序列再过一个Bi-LSTM得到最终特征表示。</p>
+<p><img src="/images/DMDP5.jpg" alt></p>
+<h3 id="如何利用篇章特征"><a href="#如何利用篇章特征" class="headerlink" title="如何利用篇章特征"></a>如何利用篇章特征</h3><p> 得到两类特征后，要如何利用呢？本文提出了三种方法。</p>
+<ul>
+<li><p>拼接word embedding</p>
+<p><img src="/images/DMDP7.jpg" alt></p>
+</li>
+<li><p>加一层Bi-LSTM</p>
+<p><img src="/images/DMDP8.jpg" alt></p>
+</li>
+<li><p>作为解码attention的一个额外输入</p>
+<p><img src="/images/DMDP9.jpg" alt></p>
+</li>
+</ul>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h2 id="Document-Summarizatoin"><a href="#Document-Summarizatoin" class="headerlink" title="Document Summarizatoin"></a>Document Summarizatoin</h2><p>  <img src="/images/DMDP10.jpg" alt></p>
+<p>  第一种和第二种方法较好。</p>
+<h2 id="Petition-Popularity-Prediction"><a href="#Petition-Popularity-Prediction" class="headerlink" title="Petition Popularity Prediction"></a>Petition Popularity Prediction</h2><p>  <img src="/images/DMDP11.jpg" alt></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Summarization</tag>
+        <tag>Discourse</tag>
+        <tag>RST</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【shell】linux批量杀死进程</title>
     <url>/2019/12/21/%E3%80%90shell%E3%80%91linux%E6%89%B9%E9%87%8F%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/</url>
     <content><![CDATA[<p>批量杀死包含关键字“keyword1”但不包含“keyword2”的进程。</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ps -ef|grep keyword1|grep -v keyword2|cut -c 9-15|xargs kill -9</span><br></pre></td></tr></table></figure><ul>
