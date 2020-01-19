@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录1. Humpty Dumpty: Controlling Word Meanings via Corpus Poisoning [PDF] 摘要 2. Balancing the composition of word embeddings across heterogenous data  sets [PDF] 摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-01-15">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;01&#x2F;16&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-15&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX">
+<meta property="og:description" content="目录1. Humpty Dumpty: Controlling Word Meanings via Corpus Poisoning [PDF] 摘要 2. Balancing the composition of word embeddings across heterogenous data  sets [PDF] 摘要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-19T16:42:10.628Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/01/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-15/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-01-15 | PROCJX</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/01/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="WITH LOVE OF WORLD">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-01-15
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-16 00:11:20" itemprop="dateCreated datePublished" datetime="2020-01-16T00:11:20+08:00">2020-01-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-20 00:42:10" itemprop="dateModified" datetime="2020-01-20T00:42:10+08:00">2020-01-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>9.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><p><font size="4"><div id="title1"><br><b>1.</b> Humpty Dumpty: Controlling Word Meanings via Corpus Poisoning <a href="https://arxiv.org/pdf/2001.04935" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div></font></p><div id="title2">
+<b>2.</b> Balancing the composition of word embeddings across heterogenous data  sets <a href="https://arxiv.org/pdf/2001.04693" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div><a id="more"></a>
+
+<div id="title3">
+<b>3.</b> Bi-Decoder Augmented Network for Neural Machine Translation <a href="https://arxiv.org/pdf/2001.04586" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> On the Replicability of Combining Word Embeddings and Retrieval Models <a href="https://arxiv.org/pdf/2001.04484" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Detecting depression in dyadic conversations with multimodal narratives  and visualizations <a href="https://arxiv.org/pdf/2001.04809" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> A (Simplified) Supreme Being Necessarily Exists -- Says the Computer! <a href="https://arxiv.org/pdf/2001.04701" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Improved Robust ASR for Social Robots in Public Spaces <a href="https://arxiv.org/pdf/2001.04619" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Faster Transformer Decoding: N-gram Masked Self-Attention <a href="https://arxiv.org/pdf/2001.04589" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<font><p></p>
+
+
+<hr>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Humpty Dumpty: Controlling Word Meanings via Corpus Poisoning</b>  <a href="https://arxiv.org/pdf/2001.04935" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Schuster%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Roei Schuster</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Schuster%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tal Schuster</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Meri%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yoav Meri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shmatikov%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vitaly Shmatikov</a><br>
+<font size="3">
+Abstract: Word embeddings, i.e., low-dimensional vector representations such as GloVe and SGNS, encode word "meaning" in the sense that distances between words' vectors correspond to their semantic proximity. This enables transfer learning of semantics for a variety of natural language processing tasks. Word embeddings are typically trained on large public corpora such as Wikipedia or Twitter. We demonstrate that an attacker who can modify the corpus on which the embedding is trained can control the "meaning" of new and existing words by changing their locations in the embedding space. We develop an explicit expression over corpus features that serves as a proxy for distance between words and establish a causative relationship between its values and embedding distances. We then show how to use this relationship for two adversarial objectives: (1) make a word a top-ranked neighbor of another word, and (2) move a word from one semantic cluster to another. An attack on the embedding can affect diverse downstream tasks, demonstrating for the first time the power of data poisoning in transfer learning scenarios. We use this attack to manipulate query expansion in information retrieval systems such as resume search, make certain names more or less visible to named entity recognition models, and cause new words to be translated to a particular target word regardless of the language. Finally, we show how the attacker can generate linguistically likely corpus modifications, thus fooling defenses that attempt to filter implausible sentences from the corpus using a language model. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：字的嵌入，即，低维向量表示，如手套和SGNS，编码字在这个意义上，词语向量之间的距离对应于它们的语义接近“意思是”。这使语义的迁移学习的各种自然语言处理任务。 Word中的嵌入通常是受过训练的大型公共语料库，如维基百科或Twitter。我们表明，攻击者谁可以修改其嵌入训练可以通过改变空间嵌入它们的位置控制的新的和现有的词“意义”的语料库。我们开发了语料库的特点，可作为单词之间距离的代理明确的表达，并建立自己的价值观和嵌入的距离之间的因果关系。然后，我们展示了如何使用两个敌对目标的这种关系：（1）做一个字一个字的世界排名第一的邻居，和（2）从一个语义集群移动一个字到另一个。在嵌入的攻击会影响不同的下游任务，这表明首次数据传输学习情境中毒的力量。我们使用这种攻击来操纵信息检索系统，如简历搜索查询扩展，使某些名字命名实体识别模型或多或少可见，并造成新词被翻译成特定的目标词无论使用什么语言。最后，我们展示了攻击者如何产生语言上可能语料库修改，从而欺骗试图难以置信的句子从使用语言模型的语料库过滤防御。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Balancing the composition of word embeddings across heterogenous data  sets</b>  <a href="https://arxiv.org/pdf/2001.04693" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Brandl%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Stephanie Brandl</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lassner%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">David Lassner</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Alber%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maximilian Alber</a><br>
+<font size="3">
+Abstract: Word embeddings capture semantic relationships based on contextual information and are the basis for a wide variety of natural language processing applications. Notably these relationships are solely learned from the data and subsequently the data composition impacts the semantic of embeddings which arguably can lead to biased word vectors. Given qualitatively different data subsets, we aim to align the influence of single subsets on the resulting word vectors, while retaining their quality. In this regard we propose a criteria to measure the shift towards a single data subset and develop approaches to meet both objectives. We find that a weighted average of the two subset embeddings balances the influence of those subsets while word similarity performance decreases. We further propose a promising optimization approach to balance influences and quality of word embeddings. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：基于上下文信息的嵌入Word中捕捉语义关系，并且是各种各样的自然语言处理应用的基础。值得注意的是这些关系仅由数据并随后将数据组合物影响的语义的嵌入可论证可导致偏置字矢量的教训。考虑到质的不同数据子集，我们的目标是一致的最终的字向量单亚群的影响力，同时保持它们的质量。在这方面，我们提出了一个标准来衡量一个单一的数据子集的转变和发展途径，以满足这两个目标。我们发现，两个子集的嵌入的加权平均余额部分数据的影响，而单词类似性能降低。我们进一步提出了一个有前途的优化方法来平衡影响和字的嵌入质量。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Bi-Decoder Augmented Network for Neural Machine Translation</b>  <a href="https://arxiv.org/pdf/2001.04586" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Pan%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Boyuan Pan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yazheng Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhou Zhao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhuang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yueting Zhuang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cai%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Deng Cai</a><br>
+<font size="3">
+Abstract: Neural Machine Translation (NMT) has become a popular technology in recent years, and the encoder-decoder framework is the mainstream among all the methods. It's obvious that the quality of the semantic representations from encoding is very crucial and can significantly affect the performance of the model. However, existing unidirectional source-to-target architectures may hardly produce a language-independent representation of the text because they rely heavily on the specific relations of the given language pairs. To alleviate this problem, in this paper, we propose a novel Bi-Decoder Augmented Network (BiDAN) for the neural machine translation task. Besides the original decoder which generates the target language sequence, we add an auxiliary decoder to generate back the source language sequence at the training time. Since each decoder transforms the representations of the input text into its corresponding language, jointly training with two target ends can make the shared encoder has the potential to produce a language-independent semantic space. We conduct extensive experiments on several NMT benchmark datasets and the results demonstrate the effectiveness of our proposed approach. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：神经机器翻译（NMT）已经成为一种流行的技术，近年来，和编码器，解码器的结构与第方法中所有的主流。很明显，从编码语义表示的质量是非常重要的，可以显著影响模型的性能。但是，现有的单向源到目标架构可以几乎不产生文本的语言无关的表示，因为他们在很大程度上依赖于特定的语言对的特定关系。为了缓解这一问题，在本文中，我们提出了一个新颖的双解码器增强网络（毕单）的神经机器翻译的任务。除了生成目标语言序列原有解码器，我们添加辅助解码器，以生成回到了训练时间的源语言序列。因为每个解码器将输入的文本的表示成其相应的语言，共同具有两个靶的端部的训练可以使共享编码器具有以产生独立于语言的语义空间的潜力。我们几个NMT基准数据集进行了广泛的实验，结果证明我们提出的方法的有效性。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. On the Replicability of Combining Word Embeddings and Retrieval Models</b>  <a href="https://arxiv.org/pdf/2001.04484" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Papariello%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Luca Papariello</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bampoulidis%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alexandros Bampoulidis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lupu%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mihai Lupu</a><br>
+<font size="3">
+Abstract: We replicate recent experiments attempting to demonstrate an attractive hypothesis about the use of the Fisher kernel framework and mixture models for aggregating word embeddings towards document representations and the use of these representations in document classification, clustering, and retrieval. Specifically, the hypothesis was that the use of a mixture model of von Mises-Fisher (VMF) distributions instead of Gaussian distributions would be beneficial because of the focus on cosine distances of both VMF and the vector space model traditionally used in information retrieval. Previous experiments had validated this hypothesis. Our replication was not able to validate it, despite a large parameter scan space. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：近期重复实验，试图证明有关使用费的内核架构和混合模型的聚集对文档表示字的嵌入和使用文档分类，聚类和检索这些表象的一个有吸引力的假说。具体而言，假设是使用冯米塞斯-Fisher分析（VMF）的混合物模型的分布，而不是高斯分布将是因为聚焦在两个VMF和信息检索传统上使用向量空间模型的余弦距离的有益的。以前的实验已经证实了这一假设。我们的复制无法验证它，尽管大的参数扫描空间。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Detecting depression in dyadic conversations with multimodal narratives  and visualizations</b>  <a href="https://arxiv.org/pdf/2001.04809" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Kim%2C+J+Y" target="_blank" rel="noopener" style="color:#0000EE;">Joshua Y. Kim</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kim%2C+G+Y" target="_blank" rel="noopener" style="color:#0000EE;">Greyson Y. Kim</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yacef%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kalina Yacef</a><br>
+<font size="3">
+Abstract: Conversations contain a wide spectrum of multimodal information that gives us hints about the emotions and moods of the speaker. In this paper, we developed a system that supports humans to analyze conversations. Our main contribution is the identification of appropriate multimodal features and the integration of such features into verbatim conversation transcripts. We demonstrate the ability of our system to take in a wide range of multimodal information and automatically generated a prediction score for the depression state of the individual. Our experiments showed that this approach yielded better performance than the baseline model. Furthermore, the multimodal narrative approach makes it easy to integrate learnings from other disciplines, such as conversational analysis and psychology. Lastly, this interdisciplinary and automated approach is a step towards emulating how practitioners record the course of treatment as well as emulating how conversational analysts have been analyzing conversations by hand. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：对话包含的多模式信息范围广泛，让我们有预兆说话者的情绪和心情。在本文中，我们开发了一个系统，支持人类分析的对话。我们的主要贡献是适当的多模式特征的识别和整合这些功能集成到逐字谈话笔录。我们证明我们的系统采取广泛的多模式信息，并自动生成个人的抑郁状态的预测得分的能力。我们的实验表明，这种方法取得了比基线模型更好的性能。此外，多模式的叙事方法，可以轻松集成到其他学科，如会话分析和心理学的学习收获。最后，这种跨学科的和自动化的方法是对模拟从业者如何记录治疗过程，以及如何模拟对话分析家一直用手分析对话的一个步骤。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. A (Simplified) Supreme Being Necessarily Exists -- Says the Computer!</b>  <a href="https://arxiv.org/pdf/2001.04701" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Benzm%C3%BCller%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Christoph Benzmüller</a><br>
+<font size="3">
+Abstract: A simplified variant of Kurt Gödel's modal ontological argument is presented. Some of Gödel's, resp. Scott's, premises are modified, others are dropped, and modal collapse is avoided. The emended argument is shown valid already in quantified modal logic K. The presented simplifications have been computationally explored utilising latest knowledge representation and reasoning technology based on higher-order logic. The paper thus illustrates how modern symbolic AI technology can contribute new knowledge to formal philosophy and theology. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：哥德尔的模式本体论的简化变体显示。有些哥德尔，RESP的。斯科特的，房屋被修改，其他被丢弃，避免了模态崩溃。在仔细的校勘参数显示有效的已量化模态逻辑K.所提出的简化了计算研究利用最新的知识表示和基于高阶逻辑推理技术。因此，阐述了象征性的AI技术如何现代可以促进新知识的正式哲学和神学。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Improved Robust ASR for Social Robots in Public Spaces</b>  <a href="https://arxiv.org/pdf/2001.04619" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Jankowski%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Charles Jankowski</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Mruthyunjaya%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vishwas Mruthyunjaya</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Lin%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruixi Lin</a><br>
+<font size="3">
+Abstract: Social robots deployed in public spaces present a challenging task for ASR because of a variety of factors, including noise SNR of 20 to 5 dB. Existing ASR models perform well for higher SNRs in this range, but degrade considerably with more noise. This work explores methods for providing improved ASR performance in such conditions. We use the AiShell-1 Chinese speech corpus and the Kaldi ASR toolkit for evaluations. We were able to exceed state-of-the-art ASR performance with SNR lower than 20 dB, demonstrating the feasibility of achieving relatively high performing ASR with open-source toolkits and hundreds of hours of training data, which is commonly available. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：部署在公共场所的社交机器人目前由于多种因素的影响，其中包括20至5分贝的噪音信噪比ASR一项艰巨的任务。现有ASR模型表现良好在这个范围内的较高的信噪比，但更多的噪音大大降低。这项工作探索提供在这样的条件下改善ASR性能的方法。我们使用AiShell-1中国语料库和Kaldi ASR工具包的评估。我们能够超过信噪比国家的最先进的ASR性能大于20dB低，表明达到比较高的用开源工具包和数以百计的训练数据，这是通常可以利用的时间来完成ASR的可行性。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Faster Transformer Decoding: N-gram Masked Self-Attention</b>  <a href="https://arxiv.org/pdf/2001.04589" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chelba%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Ciprian Chelba</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mia Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bapna%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Ankur Bapna</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shazeer%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Noam Shazeer</a><br>
+<font size="3">
+Abstract: Motivated by the fact that most of the information relevant to the prediction of target tokens is drawn from the source sentence $S=s_1, \ldots, s_S$, we propose truncating the target-side window used for computing self-attention by making an $N$-gram assumption. Experiments on WMT EnDe and EnFr data sets show that the $N$-gram masked self-attention model loses very little in BLEU score for $N$ values in the range $4, \ldots, 8$, depending on the task. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：事实上，大多数的相关目标令牌的预测信息从源句子$ S = S_1，\ ldots，S_S $绘制的启发，我们建议截断用于通过计算自我关注的目标侧窗做一个$ N $ -gram假设。在WMT恩德和EnFr数据集上的实验表明，$ N $ -gram掩盖自我注意模型的BLEU分数$ N $值的范围在$ 4 \ ldots，$ 8，根据任务非常小的损失。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+</font>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/01/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-15/" title="【arxiv论文】 Computation and Language 2020-01-15">https://procjx.github.io/2020/01/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-15/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/01/15/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-14/" rel="next" title="【arxiv论文】 Computation and Language 2020-01-14">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computation and Language 2020-01-14
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/01/17/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-01-16/" rel="prev" title="【arxiv论文】 Computation and Language 2020-01-16">
+                  【arxiv论文】 Computation and Language 2020-01-16 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description">WITH LOVE OF WORLD</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: '09be09e0912c322b7de50944d301d762',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
