@@ -5,15 +5,15 @@
     <url>/2020/02/13/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Unsupervised-Domain-Adaptation-for-Neural-Machine-Translation-with-Iterative-Back-Translation/</url>
     <content><![CDATA[<p><strong>Unsupervised Domain Adaptation for Neural Machine Translation with Iterative Back Translation</strong>. Di Jin, Zhijing Jin, Joey Tianyi Zhou, Peter Szolovits. AAAI 2020. <a href="https://arxiv.org/pdf/2001.08140.pdf" target="_blank" rel="noopener">[PDF]</a></p><a id="more"></a>
 <h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>构造领域平行数据成本很高，如何在没有领域平行数据的情况下训练领域翻译模型显得尤为重要。本文想要解决的就是非监督领域适应NMT问题，提出了一种新的构造领域平行数据的方法：迭代回翻。</p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p><img src="/images-nowatermark/UDA_IBT_1.png" alt></p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p><img src="/images/UDA_IBT_1.png" alt></p>
 <p>本文提出一种基于transformer的模型框架，修改了transformer的encoder和decoder的输入，加入了language embedding，该模型具有以下特点：<br><br>1.源语言和目标语言共享bpe词表 <br><br>2.源语言和目标语言共享隐空间 <br></p>
-<p>本文使用该模型用来训练语言模型、S2T翻译模型、T2S翻译模型，并且它们共享参数。<br>训练过程分三个步骤：<br>1.使用领域单语数据训练语言模型<br><img src="/images-nowatermark/UDA_IBT_3.png" alt></p>
-<p>2.使用S2T翻译模型构造伪平行数据训练T2S模型，使用T2S翻译模型构造伪平行数据训练S2T模型<br><img src="/images-nowatermark/UDA_IBT_4.png" alt><br><font style="color: red">*公式中应该是作者笔误，顺序写错了。</font></p>
-<p>3.使用平行数据训练模型<br><img src="/images-nowatermark/UDA_IBT_5.png" alt></p>
+<p>本文使用该模型用来训练语言模型、S2T翻译模型、T2S翻译模型，并且它们共享参数。<br>训练过程分三个步骤：<br>1.使用领域单语数据训练语言模型<br><img src="/images/UDA_IBT_3.png" alt></p>
+<p>2.使用S2T翻译模型构造伪平行数据训练T2S模型，使用T2S翻译模型构造伪平行数据训练S2T模型<br><img src="/images/UDA_IBT_4.png" alt><br><font style="color: red">*公式中应该是作者笔误，顺序写错了。</font></p>
+<p>3.使用平行数据训练模型<br><img src="/images/UDA_IBT_5.png" alt></p>
 <p>不断迭代三个步骤直到参数收敛。</p>
 <p>算法表示如下</p>
-<p><img src="/images-nowatermark/UDA_IBT_2.png" alt></p>
-<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p><img src="/images-nowatermark/UDA_IBT_6.png" alt></p>
+<p><img src="/images/UDA_IBT_2.png" alt></p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p><img src="/images/UDA_IBT_6.png" alt></p>
 <ul>
 <li><strong>COPY</strong>：混合(t_in, t_in)和(s_out, t_out)，一起训练nmt</li>
 <li><strong>BACK</strong>：使用Model_out构造伪平行in-domain数据，混合out-domain数据</li>
@@ -23,7 +23,7 @@
 <li><strong>IBT+OUTD</strong>: 使用out-domain数据训练步骤三</li>
 <li><strong>IBT+BACK</strong>: 使用伪平行数据和out-domain数据一起训练步骤三</li>
 </ul>
-<p>消融实验<br><img src="/images-nowatermark/UDA_IBT_7.png" alt></p>
+<p>消融实验<br><img src="/images/UDA_IBT_7.png" alt></p>
 ]]></content>
       <categories>
         <category>论文笔记</category>
