@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>screen后台运行进程</title>
+    <url>/2020/02/16/screen%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<p>我们常常需要将进程挂在后台运行，防止因关闭窗口或断开连接导致进程被杀掉。screen可以实现进程与当前窗口分离，即使断开连接了，进行仍可以继续运行；并且当我们重新连接后，仍可读取当前进程。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get install screen</span><br></pre></td></tr></table></figure><h1 id="新建窗口"><a href="#新建窗口" class="headerlink" title="新建窗口"></a>新建窗口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法一</span></span><br><span class="line">screen # 新建一个无名窗口，断开连接后仍可以后台运行，但是无法重新连接</span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法二</span></span><br><span class="line">screen -S &lt;screen_name&gt; # 新建一个窗口并进入该窗口</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+
+<h1 id="运行后台程序"><a href="#运行后台程序" class="headerlink" title="运行后台程序"></a>运行后台程序</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">screen &lt;your_command&gt; # 在无名窗口执行命令 &lt;your_command&gt;</span><br></pre></td></tr></table></figure>
+<p>或者在新建<code>&lt;screen_name&gt;</code>窗口后，直接运行相应程序就好</p>
+<h1 id="会话分离"><a href="#会话分离" class="headerlink" title="会话分离"></a>会话分离</h1><p>退出该screen，让进程在后台运行，按住快捷键<strong><em>Ctrl + A + D</em></strong></p>
+<h1 id="查看所有窗口"><a href="#查看所有窗口" class="headerlink" title="查看所有窗口"></a>查看所有窗口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">screen -ls</span><br></pre></td></tr></table></figure>
+<h1 id="恢复窗口"><a href="#恢复窗口" class="headerlink" title="恢复窗口"></a>恢复窗口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法一</span></span><br><span class="line">screen -r &lt;PID_to_screen&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法二</span></span><br><span class="line">screen -r &lt;screen_name&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="杀死会话"><a href="#杀死会话" class="headerlink" title="杀死会话"></a>杀死会话</h1><h2 id="杀死当前会话窗口"><a href="#杀死当前会话窗口" class="headerlink" title="杀死当前会话窗口"></a>杀死当前会话窗口</h2><p>按住快捷键<strong><em>Ctrl + A + K</em></strong></p>
+<h2 id="杀死指定会话窗口"><a href="#杀死指定会话窗口" class="headerlink" title="杀死指定会话窗口"></a>杀死指定会话窗口</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kill -9 &lt;PID_to_screen&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="清除僵尸窗口"><a href="#清除僵尸窗口" class="headerlink" title="清除僵尸窗口"></a>清除僵尸窗口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">screen -wipe</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术杂谈</category>
+      </categories>
+      <tags>
+        <tag>screen</tag>
+        <tag>后台</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tgz文件压缩&解压</title>
+    <url>/2020/02/15/tgz%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9-%E8%A7%A3%E5%8E%8B/</url>
+    <content><![CDATA[<h1 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h1><h2 id="压缩指定文件夹"><a href="#压缩指定文件夹" class="headerlink" title="压缩指定文件夹"></a>压缩指定文件夹</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar zcvf &lt;filename&gt;.tgz &lt;path_to_dir&gt;</span><br></pre></td></tr></table></figure><h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><h2 id="解压到当前文件夹"><a href="#解压到当前文件夹" class="headerlink" title="解压到当前文件夹"></a>解压到当前文件夹</h2><h3 id="保留原始压缩文件"><a href="#保留原始压缩文件" class="headerlink" title="保留原始压缩文件"></a>保留原始压缩文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar zxvf &lt;filename&gt;.tgz -C .</span><br></pre></td></tr></table></figure><h2 id="解压到指定文件夹"><a href="#解压到指定文件夹" class="headerlink" title="解压到指定文件夹"></a>解压到指定文件夹</h2><h3 id="保留原始压缩文件-1"><a href="#保留原始压缩文件-1" class="headerlink" title="保留原始压缩文件"></a>保留原始压缩文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar zxvf &lt;filename&gt;.tgz -C &lt;path_to_dir&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术杂谈</category>
+      </categories>
+      <tags>
+        <tag>tgz</tag>
+        <tag>压缩</tag>
+        <tag>解压</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【论文笔记】Unsupervised Domain Adaptation for Neural Machine Translation with Iterative Back Translation</title>
     <url>/2020/02/13/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Unsupervised-Domain-Adaptation-for-Neural-Machine-Translation-with-Iterative-Back-Translation/</url>
     <content><![CDATA[<p><strong>Unsupervised Domain Adaptation for Neural Machine Translation with Iterative Back Translation</strong>. Di Jin, Zhijing Jin, Joey Tianyi Zhou, Peter Szolovits. AAAI 2020. <a href="https://arxiv.org/pdf/2001.08140.pdf" target="_blank" rel="noopener">[PDF]</a></p><a id="more"></a>
