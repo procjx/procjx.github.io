@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Rethinking Batch Normalization in Transformers [PDF] 摘要  2. A Benchmarking Study of Embedding-based Entity Alignment for Knowledge  Graphs [PDF] 摘要  3. PO-EMO: Conceptualization, Annotation, an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-03-18">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;03&#x2F;18&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-18&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Rethinking Batch Normalization in Transformers [PDF] 摘要  2. A Benchmarking Study of Embedding-based Entity Alignment for Knowledge  Graphs [PDF] 摘要  3. PO-EMO: Conceptualization, Annotation, an">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-18T05:00:02.057Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/03/18/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-18/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-03-18 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/03/18/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-03-18
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-18 11:30:55 / 修改时间：13:00:02" itemprop="dateCreated datePublished" datetime="2020-03-18T11:30:55+08:00">2020-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>30k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>50 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Rethinking Batch Normalization in Transformers <a href="https://arxiv.org/pdf/2003.07845" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> A Benchmarking Study of Embedding-based Entity Alignment for Knowledge  Graphs <a href="https://arxiv.org/pdf/2003.07743" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> PO-EMO: Conceptualization, Annotation, and Modeling of Aesthetic  Emotions in German and English Poetry <a href="https://arxiv.org/pdf/2003.07723" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Adapting Deep Learning Methods for Mental Health Prediction on Social  Media <a href="https://arxiv.org/pdf/2003.07634" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> XPersona: Evaluating Multilingual Personalized Chatbot <a href="https://arxiv.org/pdf/2003.07568" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> Multi-label natural language processing to identify diagnosis and  procedure codes from MIMIC-III inpatient notes <a href="https://arxiv.org/pdf/2003.07507" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Recent Advances and Challenges in Task-oriented Dialog System <a href="https://arxiv.org/pdf/2003.07490" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Offensive Language Identification in Greek <a href="https://arxiv.org/pdf/2003.07459" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> HELFI: a Hebrew-Greek-Finnish Parallel Bible Corpus with Cross-Lingual  Morpheme Alignment <a href="https://arxiv.org/pdf/2003.07456" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> A Label Proportions Estimation technique for Adversarial Domain  Adaptation in Text Classification <a href="https://arxiv.org/pdf/2003.07444" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> LAXARY: A Trustworthy Explainable Twitter Analysis Model for  Post-Traumatic Stress Disorder Assessment <a href="https://arxiv.org/pdf/2003.07433" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+<div id="title12">
+<b>12.</b> Developing a Multilingual Annotated Corpus of Misogyny and Aggression <a href="https://arxiv.org/pdf/2003.07428" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper12" style="color:#0000EE;">摘要</a><br></div>
+<div id="title13">
+<b>13.</b> Parallel sequence tagging for concept recognition <a href="https://arxiv.org/pdf/2003.07424" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper13" style="color:#0000EE;">摘要</a><br></div>
+<div id="title14">
+<b>14.</b> A Formal Analysis of Multimodal Referring Strategies Under Common Ground <a href="https://arxiv.org/pdf/2003.07385" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper14" style="color:#0000EE;">摘要</a><br></div>
+<div id="title15">
+<b>15.</b> Overview of the TREC 2019 deep learning track <a href="https://arxiv.org/pdf/2003.07820" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper15" style="color:#0000EE;">摘要</a><br></div>
+<div id="title16">
+<b>16.</b> Multi-modal Dense Video Captioning <a href="https://arxiv.org/pdf/2003.07758" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper16" style="color:#0000EE;">摘要</a><br></div>
+<div id="title17">
+<b>17.</b> Hybrid Autoregressive Transducer (hat) <a href="https://arxiv.org/pdf/2003.07705" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper17" style="color:#0000EE;">摘要</a><br></div>
+<div id="title18">
+<b>18.</b> Who Wins the Game of Thrones? How Sentiments Improve the Prediction of  Candidate Choice <a href="https://arxiv.org/pdf/2003.07683" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper18" style="color:#0000EE;">摘要</a><br></div>
+<div id="title19">
+<b>19.</b> High-Accuracy and Low-Latency Speech Recognition with Two-Head  Contextual Layer Trajectory LSTM Model <a href="https://arxiv.org/pdf/2003.07482" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper19" style="color:#0000EE;">摘要</a><br></div>
+<div id="title20">
+<b>20.</b> Harnessing Explanations to Bridge AI and Humans <a href="https://arxiv.org/pdf/2003.07370" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper20" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Rethinking Batch Normalization in Transformers</b>  <a href="https://arxiv.org/pdf/2003.07845" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Shen%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sheng Shen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yao%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhewei Yao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gholami%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Amir Gholami</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mahoney%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Mahoney</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Keutzer%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kurt Keutzer</a><br>
+<font size="3">
+Abstract: The standard normalization method for neural network (NN) models used in Natural Language Processing (NLP) is layer normalization (LN). This is different than batch normalization (BN), which is widely-adopted in Computer Vision. The preferred use of LN in NLP is principally due to the empirical observation that a (naive/vanilla) use of BN leads to significant performance degradation for NLP tasks; however, a thorough understanding of the underlying reasons for this is not always evident. In this paper, we perform a systematic study of NLP transformer models to understand why BN has a poor performance, as compared to LN. We find that the statistics of NLP data across the batch dimension exhibit large fluctuations throughout training. This results in instability, if BN is naively implemented. To address this, we propose Power Normalization (PN), a novel normalization scheme that resolves this issue by (i) relaxing zero-mean normalization in BN, (ii) incorporating a running quadratic mean instead of per batch statistics to stabilize fluctuations, and (iii) using an approximate backpropagation for incorporating the running statistics in the forward pass. We show theoretically, under mild assumptions, that PN leads to a smaller Lipschitz constant for the loss, compared with BN. Furthermore, we prove that the approximate backpropagation scheme leads to bounded gradients. We extensively test PN for transformers on a range of NLP tasks, and we show that it significantly outperforms both LN and BN. In particular, PN outperforms LN by 0.4/0.6 BLEU on IWSLT14/WMT14 and 5.6/3.0 PPL on PTB/WikiText-103. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在自然语言处理（NLP）中使用的神经网络（NN）模型中的标准归一化方法是层正常化（LN）。这比批标准化（BN），计算机视觉中被广泛采用的不同。在NLP LN的优选的用途主要是由于经验观察，一个（幼稚/香草）使用BN引线为NLP任务显著性能退化;然而，这种情况的根本原因透彻的理解并不总是显而易见的。在本文中，我们进行了解NLP变压器模型的系统研究，为什么国阵有表现不佳，相比于LN。我们发现，在整个培训在整个批次尺寸表现出较大的波动NLP数据的统计信息。这会导致不稳定，如果国阵天真地实现。为了解决这个问题，我们提出了功率归（PN），一种新型的标准化方案可解决此问题通过（i）放宽零均值正常化BN，（II）将正在运行的二次平均，而不是每批次的统计数据，以稳定波动， （iii）使用近似反向传播用于并入在直传运行统计数据。我们发现从理论上说，在温和的假设，即PN导致较小Lipschitz常数的损失，与BN相比。此外，我们证明了近似的反向传播方案，导致有限的梯度。我们广泛的测试PN就一系列的NLP任务变压器，我们表明它显著性能优于LN和BN。具体地，PN性能优于LN 0.4 / 0.6 BLEU上IWSLT14 / WMT14和PTB / wikitext的-103 5.6 / 3.0 PPL。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. A Benchmarking Study of Embedding-based Entity Alignment for Knowledge  Graphs</b>  <a href="https://arxiv.org/pdf/2003.07743" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Sun%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zequn Sun</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qingheng Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wei Hu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chengming Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Muhao Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Akrami%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Farahnaz Akrami</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chengkai Li</a><br>
+<font size="3">
+Abstract: Entity alignment seeks to find entities in different knowledge graphs (KGs) that refer to the same real-world object. Recent advancement in KG embedding impels the advent of embedding-based entity alignment, which encodes entities in a continuous embedding space and measures entity similarities based on the learned embeddings. In this paper, we conduct a comprehensive experimental study of this emerging field. This study surveys 23 recent embedding-based entity alignment approaches and categorizes them based on their techniques and characteristics. We further observe that current approaches use different datasets in evaluation, and the degree distributions of entities in these datasets are inconsistent with real KGs. Hence, we propose a new KG sampling algorithm, with which we generate a set of dedicated benchmark datasets with various heterogeneity and distributions for a realistic evaluation. This study also produces an open-source library, which includes 12 representative embedding-based entity alignment approaches. We extensively evaluate these approaches on the generated datasets, to understand their strengths and limitations. Additionally, for several directions that have not been explored in current approaches, we perform exploratory experiments and report our preliminary findings for future studies. The benchmark datasets, open-source library and experimental results are all accessible online and will be duly maintained. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：实体对准试图找到在指向同一个现实世界对象的不同知识图（KGS）实体。最近的进步在KG嵌入推动基于嵌入的实体校准，其编码基于所学习的嵌入连续嵌入空间和措施实体相似的实体的出现。在本文中，我们进行这一新兴领域的综合实验研究。这项研究调查的近23基于嵌入的实体校准方法和分类根据它们的技术和特性。我们进一步观察，目前的方法在评估使用不同的数据集，并在这些数据集实体的度分布与实际不符幼稚园。因此，我们提出了一个新的KG采样算法，与我们产生一组与各种异质性和分布的现实的评估基准专用数据集。本研究也产生一个开源库，它包括12个代表性的基于嵌入的实体对准的方法。我们广泛地评估这些方法所产生的数据集，以了解自己的长处和局限性。此外，对于尚未在当前的方法被开发几个方向，我们进行探索性的实验和报告我们的初步调查结果为今后的研究。基准数据集，开放源码库和实验结果都在线访问，并会得到应有的维护。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. PO-EMO: Conceptualization, Annotation, and Modeling of Aesthetic  Emotions in German and English Poetry</b>  <a href="https://arxiv.org/pdf/2003.07723" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Haider%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thomas Haider</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Eger%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Steffen Eger</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kim%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Evgeny Kim</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Klinger%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Roman Klinger</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Menninghaus%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Winfried Menninghaus</a><br>
+<font size="3">
+Abstract: Most approaches to emotion analysis regarding social media, literature, news, and other domains focus exclusively on basic emotion categories as defined by Ekman or Plutchik. However, art (such as literature) enables engagement in a broader range of more complex and subtle emotions that have been shown to also include mixed emotional responses. We consider emotions as they are elicited in the reader, rather than what is expressed in the text or intended by the author. Thus, we conceptualize a set of aesthetic emotions that are predictive of aesthetic appreciation in the reader, and allow the annotation of multiple labels per line to capture mixed emotions within context. We evaluate this novel setting in an annotation experiment both with carefully trained experts and via crowdsourcing. Our annotation with experts leads to an acceptable agreement of kappa=.70, resulting in a consistent dataset for future large scale analysis. Finally, we conduct first emotion classification experiments based on BERT, showing that identifying aesthetic emotions is challenging in our data, with up to .52 F1-micro on the German subset. Data and resources are available at this https URL </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：大多数接近情感分析有关社交媒体，文学，新闻和其他领域专注于通过埃克曼或普拉奇克定义的基本情感类别。然而，本领域（如文献）使得在已被示出为还包括混合的情绪反应更复杂和微妙的情感的更宽范围的接合。我们认为情绪，因为他们在阅读器引起的，而不是什么是在文字表述或作者的意图。因此，我们构思了一组唯美的情绪是预测在读者审美，并允许每行多个标签的注释范围内捕捉百感交集。我们评估的注释本小说设置实验都与受过训练的专家，并通过众包。我们的专家引线卡帕= 0.70的接受的协议，从而为今后的大规模分析一致的数据集注释。最后，我们进行基于BERT第一情感分类实验，表明识别审美情感在我们的数据是具有挑战性的，拥有高达0.52 F1-微对德国的子集。数据和资源可在此HTTPS URL</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Adapting Deep Learning Methods for Mental Health Prediction on Social  Media</b>  <a href="https://arxiv.org/pdf/2003.07634" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Sekuli%C4%87%2C+I" target="_blank" rel="noopener" style="color:#0000EE;">Ivan Sekulić</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Strube%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Strube</a><br>
+<font size="3">
+Abstract: Mental health poses a significant challenge for an individual's well-being. Text analysis of rich resources, like social media, can contribute to deeper understanding of illnesses and provide means for their early detection. We tackle a challenge of detecting social media users' mental status through deep learning-based models, moving away from traditional approaches to the task. In a binary classification task on predicting if a user suffers from one of nine different disorders, a hierarchical attention network outperforms previously set benchmarks for four of the disorders. Furthermore, we explore the limitations of our model and analyze phrases relevant for classification by inspecting the model's word-level attention weights. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：心理健康带来了个人的幸福感一个显著的挑战。资源丰富的文本进行分析，如社会化媒体，可以有助于疾病的更深入的了解，并为他们提供早期检测手段。我们解决的检测社交媒体用户通过深入学习型模型的精神状态，从传统方法任务搬走了挑战。在上如果从九个不同病症的一用户遭罪，分层关注网络性能优于先前设定的基准病症四个预测的二元分类任务。此外，我们探索我们的模型的局限性，并通过检查模型的字级关注权重分析与分类相关词组。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. XPersona: Evaluating Multilingual Personalized Chatbot</b>  <a href="https://arxiv.org/pdf/2003.07568" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhaojiang Lin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zihan Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Winata%2C+G+I" target="_blank" rel="noopener" style="color:#0000EE;">Genta Indra Winata</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cahyawijaya%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Samuel Cahyawijaya</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Madotto%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Andrea Madotto</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yejin Bang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ishii%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Etsuko Ishii</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Fung%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pascale Fung</a><br>
+<font size="3">
+Abstract: Personalized dialogue systems are an essential step toward better human-machine interaction. Existing personalized dialogue agents rely on properly designed conversational datasets, which are mostly monolingual (e.g., English), which greatly limits the usage of conversational agents in other languages. In this paper, we propose a multi-lingual extension of Persona-Chat, namely XPersona. Our dataset includes persona conversations in six different languages other than English for building and evaluating multilingual personalized agents. We experiment with both multilingual and cross-lingual trained baselines, and evaluate them against monolingual and translation-pipeline models using both automatic and human evaluation. Experimental results show that the multilingual trained models outperform the translation-pipeline and that they are on par with the monolingual models, with the advantage of having a single model across multiple languages. On the other hand, the state-of-the-art cross-lingual trained models achieve inferior performance to the other models, showing that cross-lingual conversation modeling is a challenging task. We hope that our dataset and baselines~\footnote{Datasets and all the baselines will be released} will accelerate research in multilingual dialogue systems. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：个性化的对话系统是朝着更好的人机交互的重要一步。现有个性化的对话代理依赖于正确设计的会话数据集，其中大多是单语（例如，英文），这极大地限制了其他语言的会话药物使用。在本文中，我们提出了假面聊天，即XPersona的多语种扩展。我们的数据集包括用于构建和评估多语言个性化剂在英语以外的六种不同语言的人物对话。我们既多语言和跨语言训练的基线实验，并使用自动和人工评估评估它们对单语和翻译的流水线模式。实验结果表明，多语言训练的模型跑赢翻译流水线和他们看齐，与单语的机型，具有跨多个语言的单一模式的优势。在另一方面，国家的最先进的跨语言训练的模型实现性能差于其他车型，显示出跨语种交谈建模是一个具有挑战性的任务。我们希望，我们的数据和基线〜\ {脚注数据集和所有的基线将被释放}将加快多语种对话系统的研究。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. Multi-label natural language processing to identify diagnosis and  procedure codes from MIMIC-III inpatient notes</b>  <a href="https://arxiv.org/pdf/2003.07507" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Singh%2C+A+K+B" target="_blank" rel="noopener" style="color:#0000EE;">A.K. Bhavani Singh</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Guntu%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mounika Guntu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bhimireddy%2C+A+R" target="_blank" rel="noopener" style="color:#0000EE;">Ananth Reddy Bhimireddy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gichoya%2C+J+W" target="_blank" rel="noopener" style="color:#0000EE;">Judy W. Gichoya</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Purkayastha%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Saptarshi Purkayastha</a><br>
+<font size="3">
+Abstract: In the United States, 25% or greater than 200 billion dollars of hospital spending accounts for administrative costs that involve services for medical coding and billing. With the increasing number of patient records, manual assignment of the codes performed is overwhelming, time-consuming and error-prone, causing billing errors. Natural language processing can automate the extraction of codes/labels from unstructured clinical notes, which can aid human coders to save time, increase productivity, and verify medical coding errors. Our objective is to identify appropriate diagnosis and procedure codes from clinical notes by performing multi-label classification. We used de-identified data of critical care patients from the MIMIC-III database and subset the data to select the ten (top-10) and fifty (top-50) most common diagnoses and procedures, which covers 47.45% and 74.12% of all admissions respectively. We implemented state-of-the-art Bidirectional Encoder Representations from Transformers (BERT) to fine-tune the language model on 80% of the data and validated on the remaining 20%. The model achieved an overall accuracy of 87.08%, an F1 score of 85.82%, and an AUC of 91.76% for top-10 codes. For the top-50 codes, our model achieved an overall accuracy of 93.76%, an F1 score of 92.24%, and AUC of 91%. When compared to previously published research, our model outperforms in predicting codes from the clinical text. We discuss approaches to generalize the knowledge discovery process of our MIMIC-BERT to other clinical notes. This can help human coders to save time, prevent backlogs, and additional costs due to coding errors. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在美国，25％或大于200十亿美元医院支出占涉及医疗编码和计费服务的管理成本。随着越来越多的病人记录，该代码的手动分配进行的是压倒性的，耗时且容易出错，造成计费错误。自然语言处理可以自动从非结构化临床记录代码/标签，它可以帮助人体编码器，以节省时间，提高生产效率的提取和验证的医疗编码错误。我们的目标是通过进行多标签分类，以确定从临床笔记适当的诊断和程序代码。我们使用来自MIMIC-III数据库危重病人的去标识数据和子集的数据来选择十（前10名）和五十（前50位）最常见的诊断和程序，其中包括47.45％和74.12％分别所有招生。我们实施状态的最先进的编码器双向交涉从变压器（BERT）微调所述语言模型上的数据的80％，并且在剩余的20％的验证。该模型实现的87.08％的总体精确度，一个F1得分的85.82％，而91.76％为前10名的代码的AUC。对于排名前50位的代码，我们的模型实现全面准确的93.76％，92.24的％的F1分数，和91％的AUC。相较于先前发表的研究，从临床文本预测码我们的模型优于。我们讨论的方法来推广我们的MIMIC-BERT到其他临床笔记的知识发现过程。这可以帮助人类编码器，以节省时间，防止积压，而且由于编码错误的额外费用。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Recent Advances and Challenges in Task-oriented Dialog System</b>  <a href="https://arxiv.org/pdf/2003.07490" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zheng Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Takanobu%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ryuichi Takanobu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Minlie Huang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaoyan Zhu</a><br>
+<font size="3">
+Abstract: Due to the significance and value in human-computer interaction and natural language processing, task-oriented dialog systems are attracting more and more attention in both academic and industrial communities. In this paper, we survey recent advances and challenges in an issue-specific manner. We discuss three critical topics for task-oriented dialog systems: (1) improving data efficiency to facilitate dialog system modeling in low-resource settings, (2) modeling multi-turn dynamics for dialog policy learning to achieve better task-completion performance, and (3) integrating domain ontology knowledge into the dialog model in both pipeline and end-to-end models. We also review the recent progresses in dialog evaluation and some widely-used corpora. We believe that this survey can shed a light on future research in task-oriented dialog systems. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：由于人机交互和自然语言处理的意义和价值，面向任务的对话系统正吸引着越来越多的关注学术界和工业界。在本文中，我们调查最近在针对特定问题的方式的进步和挑战。我们讨论了面向任务的对话系统三个关键问题：（1）提高数据效率，方便在低资源设置对话框系统建模，（2）学习，以实现更好的任务完成造型表现多圈动力学的对话政策，和（3）集成领域本体知识转化为在这两个管道和终端到高端机型的对话模式。我们还审查对话框评估最新进展和一些广泛使用的语料库。我们相信，本次调查可以摆脱对面向任务的对话系统未来的研究轻。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Offensive Language Identification in Greek</b>  <a href="https://arxiv.org/pdf/2003.07459" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Pitenis%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zeses Pitenis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zampieri%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Marcos Zampieri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ranasinghe%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tharindu Ranasinghe</a><br>
+<font size="3">
+Abstract: As offensive language has become a rising issue for online communities and social media platforms, researchers have been investigating ways of coping with abusive content and developing systems to detect its different types: cyberbullying, hate speech, aggression, etc. With a few notable exceptions, most research on this topic so far has dealt with English. This is mostly due to the availability of language resources for English. To address this shortcoming, this paper presents the first Greek annotated dataset for offensive language identification: the Offensive Greek Tweet Dataset (OGTD). OGTD is a manually annotated dataset containing 4,779 posts from Twitter annotated as offensive and not offensive. Along with a detailed description of the dataset, we evaluate several computational models trained and tested on this data. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：随着攻击性的语言已经成为一个上升的问题在线社区和社交媒体平台，研究人员一直在研究用侮辱性内容的应对和开发系统，以检测其不同类型的方式：网络欺凌，仇恨言论，侵略等少数显着例外，关于这一主题的大多数研究迄今已处理了英语。这主要是由于语言资源的英语可用性。为了解决这个问题，本文提出了一种攻击性的语言识别第一个希腊注释数据集：进攻希腊分享Tweet数据集（OGTD）。 OGTD是含有从Twitter 4779个讯息注释为进攻和不进攻一个手动注释的数据集。随着数据集的详细说明，我们评估培训，并就这几个数据的计算模型。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. HELFI: a Hebrew-Greek-Finnish Parallel Bible Corpus with Cross-Lingual  Morpheme Alignment</b>  <a href="https://arxiv.org/pdf/2003.07456" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Yli-Jyr%C3%A4%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anssi Yli-Jyrä</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Purhonen%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Josi Purhonen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liljeqvist%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Matti Liljeqvist</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Antturi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Arto Antturi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nieminen%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pekka Nieminen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=R%C3%A4ntil%C3%A4%2C+K+M" target="_blank" rel="noopener" style="color:#0000EE;">Kari M. Räntilä</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Luoto%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Valtter Luoto</a><br>
+<font size="3">
+Abstract: Twenty-five years ago, morphologically aligned Hebrew-Finnish and Greek-Finnish bitexts (texts accompanied by a translation) were constructed manually in order to create an analytical concordance (Luoto et al., 1997) for a Finnish Bible translation. The creators of the bitexts recently secured the publisher's permission to release its fine-grained alignment, but the alignment was still dependent on proprietary, third-party resources such as a copyrighted text edition and proprietary morphological analyses of the source texts. In this paper, we describe a nontrivial editorial process starting from the creation of the original one-purpose database and ending with its reconstruction using only freely available text editions and annotations. This process produced an openly available dataset that contains (i) the source texts and their translations, (ii) the morphological analyses, (iii) the cross-lingual morpheme alignments. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：二十五年前，形态一致希伯来文，芬兰和希腊，芬兰bitexts（陪同翻译文本）手动构建以创造一个和谐的分析为芬兰圣经翻译（Luoto等，1997）。该bitexts的创作者最近获得出版商的释放其细粒度对准许可，但排列仍依赖于专有的第三方资源，如版权文字版本和源文本的专有形态分析。在本文中，我们描述了从创建原来的目的数据库的启动和只使用免费提供的文字版本和注释其重建结束了平凡的编辑过程。该方法生产包含（i）所述源文本及其译文的公开可用的数据集，（ii）所述形态分析，（iii）所述跨语言语素比对。</font>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. A Label Proportions Estimation technique for Adversarial Domain  Adaptation in Text Classification</b>  <a href="https://arxiv.org/pdf/2003.07444" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhuohao Chen</a><br>
+<font size="3">
+Abstract: Many text classification tasks are domain-dependent, and various domain adaptation approaches have been proposed to predict unlabeled data in a new domain. Domain-adversarial neural networks(DANN) and their variants have been actively used recently and have achieved state-of-the-art results for this problem. However, most of these approaches assume that the label proportions of the source and target domains are similar, which rarely holds in real-world scenarios. Sometimes the label shift is very large and the DANN fails to learn domain-invariant features. In this study, we focus on unsupervised domain adaptation of text classification with label shift and introduce a domain adversarial network with label proportions estimation (DAN-LPE) framework. The DAN-LPEsimultaneously trains a domain adversarial net and processes label proportions estimation by the distributions of the predictions. Experiments show the DAN-LPE achieves a good estimate of the target label distributions and reduces the label shift to improve the classification performance. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：许多文本分类的任务是领域相关的，不同的领域适应性方法已经提出了一个新的领域，预测未标记数据。域名对抗性神经网络（DANN）及其变种一直在积极最近使用过并取得了国家的最先进结果这个问题。然而，大多数这些方法假定源和目标域的标签的比例是相似的，这在现实世界的情景很少持有。有时标签转变非常大，DANN学习不到域不变特征。在这项研究中，我们注重与标签移文本分类的无监督的领域适应性和引进与标签的比例估计（DAN-LPE）框架域对抗网络。所述DAN-LPEsimultaneously训练域对抗性净和处理由预测的分布比例标签估计。实验表明，DAN-LPE达到目标标签分布的一个很好的估计，并降低了标签转移到提高分类性能。</font>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. LAXARY: A Trustworthy Explainable Twitter Analysis Model for  Post-Traumatic Stress Disorder Assessment</b>  <a href="https://arxiv.org/pdf/2003.07433" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Alam%2C+M+A+U" target="_blank" rel="noopener" style="color:#0000EE;">Mohammad Arif Ul Alam</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kapadia%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dhawal Kapadia</a><br>
+<font size="3">
+Abstract: Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：退伍军人的心理健康是一个显著国家的问题，因为大量的退伍军人从伊拉克近战和继续驻军阿富汗回国。虽然显著现有的作品已经研究Twitter的职位为基础的创伤后应激障碍（PTSD），使用黑盒机器学习技术的评估，这些框架不能由临床医生由于缺乏临床explainability的信任。要获得医生的信任，我们探讨了大问题，可以Twitter的职位提供足够的信息，弥补目前已被临床医生传统上信任临床创伤后应激障碍的评估调查？为了回答上述问题，我们提出，LAXARY（分析为基础的语言Exaplainable查询）模型，一种新的解释的人工智能（XAI）模型来检测并使用改进的语言调查和字数表示Twitter用户的PTSD评估（LIWC）分析。首先，我们采用临床验证测量工具，从真正Twitter用户收集临床创伤后应激障碍的评估数据，并使用PTSD评估调查结果制定了PTSD语言词典。然后，我们用PTSD语言词典与机器学习模型一起朝着检测PTSD状况及其对应的Twitter用户的强度填补了调查工具。我们对210个临床验证老将Twitter用户实验评估提供了看好双方PTSD分类及其强度估计的准确度。我们也评估我们的发展PTSD语言词典的可靠性和有效性。</font>
+</div>
+
+
+<hr>
+<div id="paper12"> <b>12. Developing a Multilingual Annotated Corpus of Misogyny and Aggression</b>  <a href="https://arxiv.org/pdf/2003.07428" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title12" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Bhattacharya%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shiladitya Bhattacharya</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Singh%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Siddharth Singh</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kumar%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ritesh Kumar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bansal%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Akanksha Bansal</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bhagat%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Akash Bhagat</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dawer%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yogesh Dawer</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lahiri%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bornini Lahiri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ojha%2C+A+K" target="_blank" rel="noopener" style="color:#0000EE;">Atul Kr. Ojha</a><br>
+<font size="3">
+Abstract: In this paper, we discuss the development of a multilingual annotated corpus of misogyny and aggression in Indian English, Hindi, and Indian Bangla as part of a project on studying and automatically identifying misogyny and communalism on social media (the ComMA Project). The dataset is collected from comments on YouTube videos and currently contains a total of over 20,000 comments. The comments are annotated at two levels - aggression (overtly aggressive, covertly aggressive, and non-aggressive) and misogyny (gendered and non-gendered). We describe the process of data collection, the tagset used for annotation, and issues and challenges faced during the process of annotation. Finally, we discuss the results of the baseline experiments conducted to develop a classifier for misogyny in the three languages. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本文中，我们讨论了在印度英语，印地文和印度孟加拉厌女症和侵略的多语言注释的语料库的发展，对社会化媒体（逗号项目）学习，并自动识别厌女症和地方自治工程的一部分。该数据集是从YouTube上的视频评论收集，目前共收录了超过20,000意见。这些评论注释在两个级别 - 攻击（攻击性公然，隐蔽攻击性，无腐蚀性）和厌女症（性别和非性别）。我们描述了数据收集，用于标注的标记集，以及问题和注释的过程中所面临的挑战的过程。最后，我们讨论进行开发分类为三种语言厌女症基线实验的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper13"> <b>13. Parallel sequence tagging for concept recognition</b>  <a href="https://arxiv.org/pdf/2003.07424" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title13" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Furrer%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lenz Furrer</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cornelius%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Joseph Cornelius</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rinaldi%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Fabio Rinaldi</a><br>
+<font size="3">
+Abstract: Motivation: Named Entity Recognition (NER) and Normalisation (NEN) are core components of any text-mining system for biomedical texts. In a traditional concept-recognition pipeline, these tasks are combined in a serial way, which is inherently prone to error propagation from NER to NEN. We propose a parallel architecture, where both NER and NEN are modeled as a sequence-labeling task, operating directly on the source text. We examine different harmonisation strategies for merging the predictions of the two classifiers into a single output sequence. Results: We test our approach on the recent Version 4 of the CRAFT corpus. In all 20 annotation sets of the concept-annotation task, our system outperforms the pipeline system reported as a baseline in the CRAFT shared task 2019. Our analysis shows that the strengths of the two classifiers can be combined in a fruitful way. However, prediction harmonisation requires individual calibration on a development set for each annotation set. This allows achieving a good trade-off between established knowledge (training set) and novel information (unseen concepts). Availability and Implementation: Source code freely available for download at this https URL. Supplementary data are available at arXiv online. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：动机：命名实体识别（NER）和规范化（NEN）是生物医学文本的任何文本挖掘系统的核心部件。在传统的概念识别管道，这些任务被组合在一个串行方式，它本质上是容易出错传播从NER到NEN。我们提出了一个并行体系结构，其中两个NER和NEN建模为一个序列标签制作任务，直接在源文本操作。我们研究了两个分类的预测合并成一个单一的输出序列不同的统一战略。结果：我们测试我们对近期的CRAFT语料库的第4版的方法。在所有20分注解集的概念，诠释的任务，我们的系统优于报告为CRAFT共享任务2019年我们的分析表明，这两种分类的优势可以在富有成效的方式组合基准的管道系统。然而，预测统一要求对每个注释集开发一套单独校准。这使得实现了很好的权衡建立知识（训练集）和新的信息（看不见的概念）之间。可用性和执行：在此HTTPS URL的源代码可免费下载。补充数据的arXiv在在线提供。</font>
+</div>
+
+
+<hr>
+<div id="paper14"> <b>14. A Formal Analysis of Multimodal Referring Strategies Under Common Ground</b>  <a href="https://arxiv.org/pdf/2003.07385" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title14" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Krishnaswamy%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nikhil Krishnaswamy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Pustejovsky%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">James Pustejovsky</a><br>
+<font size="3">
+Abstract: In this paper, we present an analysis of computationally generated mixed-modality definite referring expressions using combinations of gesture and linguistic descriptions. In doing so, we expose some striking formal semantic properties of the interactions between gesture and language, conditioned on the introduction of content into the common ground between the (computational) speaker and (human) viewer, and demonstrate how these formal features can contribute to training better models to predict viewer judgment of referring expressions, and potentially to the generation of more natural and informative referring expressions. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本文中，我们提出使用手势和语言描述的组合计算产生的混合模态确定的参照表达的分析。在此过程中，我们揭露的手势和语言之间的相互作用，有条件地引入内容到（计算）扬声器和（人）观众之间的共同点的一些惊人的正式语义特性，并证明这些形式特征如何促进训练更好的模型来预测观众的判断参考表达式，并有可能以更自然，更翔实的指称词语的产生。</font>
+</div>
+
+
+<hr>
+<div id="paper15"> <b>15. Overview of the TREC 2019 deep learning track</b>  <a href="https://arxiv.org/pdf/2003.07820" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title15" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Craswell%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nick Craswell</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mitra%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bhaskar Mitra</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yilmaz%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emine Yilmaz</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Campos%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Daniel Campos</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Voorhees%2C+E+M" target="_blank" rel="noopener" style="color:#0000EE;">Ellen M. Voorhees</a><br>
+<font size="3">
+Abstract: The Deep Learning Track is a new track for TREC 2019, with the goal of studying ad hoc ranking in a large data regime. It is the first track with large human-labeled training sets, introducing two sets corresponding to two tasks, each with rigorous TREC-style blind evaluation and reusable test sets. The document retrieval task has a corpus of 3.2 million documents with 367 thousand training queries, for which we generate a reusable test set of 43 queries. The passage retrieval task has a corpus of 8.8 million passages with 503 thousand training queries, for which we generate a reusable test set of 43 queries. This year 15 groups submitted a total of 75 runs, using various combinations of deep learning, transfer learning and traditional IR ranking methods. Deep learning runs significantly outperformed traditional IR runs. Possible explanations for this result are that we introduced large training data and we included deep models trained on such data in our judging pools, whereas some past studies did not have such training data or pooling. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：深学习轨道是TREC 2019一条新的轨道，以研究专案在大数据政权居的目标。它是第一个轨道上大的人标记的训练集，将对应于两个任务，每个都有严格的TREC风格盲评和可重复使用的测试设备两套。文档检索任务有320万个文档与36.7万的培训查询，我们生成一个可重用的测试集的43个查询语料库。段检索任务有880万个通道与503000个训练查询，我们生成一个可重用的测试集的43个查询语料库。今年15组共75个运行的提交，使用深度学习，学习转移和传统的IR排名方法的各种组合。深度学习运行显著优于传统的IR运行。这一结果可能的解释是，我们引入了大量的训练数据，我们的培训包括在我们的判断池这样的数据模型深，而一些过去的研究中并没有这样的训练数据或池。</font>
+</div>
+
+
+<hr>
+<div id="paper16"> <b>16. Multi-modal Dense Video Captioning</b>  <a href="https://arxiv.org/pdf/2003.07758" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title16" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Iashin%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vladimir Iashin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rahtu%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Esa Rahtu</a><br>
+<font size="3">
+Abstract: Dense video captioning is a task of localizing interesting events from an untrimmed video and producing textual description (captions) for each localized event. Most of the previous works in dense video captioning are solely based on visual information and completely ignore the audio track. However, audio, and speech, in particular, are vital cues for a human observer in understanding an environment. In this paper, we present a new dense video captioning approach that is able to utilize any number of modalities for event description. Specifically, we show how audio and speech modalities may improve a dense video captioning model. We apply automatic speech recognition (ASR) system to obtain a temporally aligned textual description of the speech (similar to subtitles) and treat it as a separate input alongside video frames and the corresponding audio track. We formulate the captioning task as a machine translation problem and utilize recently proposed Transformer architecture to convert multi-modal input data into textual descriptions. We demonstrate the performance of our model on ActivityNet Captions dataset. The ablation studies indicate a considerable contribution from audio and speech components suggesting that these modalities contain substantial complementary information to video frames. Furthermore, we provide an in-depth analysis of the ActivityNet Caption results by leveraging the category tags obtained from original YouTube videos. The program code of our method and evaluations will be made publicly available. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：密集的视频字幕是从修剪视频本地化有趣的活动和生产文字说明（字幕）的每个局部事件的任务。最密集的视频字幕以往的作品中的唯一依据是视觉信息，完全忽略音轨。然而，音频，声音，特别是在理解的环境中为人类观察者重要线索。在本文中，我们提出了一个新的密集视频字幕的方法，它能够使用任意数量的事件描述方式的。具体来说，我们将展示如何音频和语音方式可以提高致密视频字幕模式。我们应用自动语音识别（ASR）系统，以获得语音（类似于字幕）的时间对准文本描述并把它当作旁边的视频帧的单独的输入和相应的音频轨迹。我们制定的字幕任务作为机器翻译的问题，并利用最近提出的变压器架构，多模式输入数据转换为文本描述。我们证明我们的模型对ActivityNet字幕数据集的性能。消融研究表明，从音频和语音组件表明这些模式包含大量的补充信息的视频帧相当大的贡献。此外，我们通过利用从原来的YouTube视频获得的分类标签提供ActivityNet标题结果的深入分析。我们的方法和评价的程序代码会被公之于众。</font>
+</div>
+
+
+<hr>
+<div id="paper17"> <b>17. Hybrid Autoregressive Transducer (hat)</b>  <a href="https://arxiv.org/pdf/2003.07705" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title17" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Variani%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Ehsan Variani</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Rybach%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">David Rybach</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Allauzen%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Cyril Allauzen</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Riley%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Riley</a><br>
+<font size="3">
+Abstract: This paper proposes and evaluates the hybrid autoregressive transducer (HAT) model, a time-synchronous encoderdecoder model that preserves the modularity of conventional automatic speech recognition systems. The HAT model provides a way to measure the quality of the internal language model that can be used to decide whether inference with an external language model is beneficial or not. This article also presents a finite context version of the HAT model that addresses the exposure bias problem and significantly simplifies the overall training and inference. We evaluate our proposed model on a large-scale voice search task. Our experiments show significant improvements in WER compared to the state-of-the-art approaches. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：提出并评估该混合自回归换能器（HAT）模型，时间同步的encoderdecoder模型，蜜饯常规自动语音识别系统的模块性。该HAT模型提供了一种方法来测量可用于确定推理与外部语言模型是否有益的或不是内部语言模型的质量。本文还介绍了HAT模型地址的曝光偏差问题和显著简化了整个训练和推理的有限范围内的版本。我们评估我们提出了一个大规模的语音搜索任务模型。我们的实验显示，WER显著的改善相比，国家的最先进的方法。</font>
+</div>
+
+
+<hr>
+<div id="paper18"> <b>18. Who Wins the Game of Thrones? How Sentiments Improve the Prediction of  Candidate Choice</b>  <a href="https://arxiv.org/pdf/2003.07683" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title18" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=So%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chaehan So</a><br>
+<font size="3">
+Abstract: This paper analyzes how candidate choice prediction improves by different psychological predictors. To investigate this question, it collected an original survey dataset featuring the popular TV series "Game of Thrones". The respondents answered which character they anticipated to win in the final episode of the series, and explained their choice of the final candidate in free text from which sentiments were extracted. These sentiments were compared to feature sets derived from candidate likeability and candidate personality ratings. In our benchmarking of 10-fold cross-validation in 100 repetitions, all feature sets except the likeability ratings yielded a 10-11% improvement in accuracy on the holdout set over the base model. Treating the class imbalance with synthetic minority oversampling (SMOTE) increased holdout set performance by 20-34% but surprisingly not testing set performance. Taken together, our study provides a quantified estimation of the additional predictive value of psychological predictors. Likeability ratings were clearly outperformed by the feature sets based on personality, emotional valence, and basic emotions. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文分析了候选人选定预测由不同的心理预测如何改进。为了探讨这一问题，它收集的原始数据集的调查为特色的热门电视剧“权力的游戏”。受访者回答说，他们预计该系列的最后一集取胜的字符，并从中提取情感自由文本解释了他们选择的最终候选人。这些情绪进行了比较，从候选人喜爱程度和候选资格等级派生的功能集。在我们的基准10倍的100次交叉验证，所有的功能集，除了可爱度评级产生的抵抗组过基础模型准确性的10-11％的改善。治疗类不平衡与合成少数类过采样（SMOTE）由20-34％提高截留组性能，但令人惊讶不是测试集的性能。总之，我们的研究提供心理预测的额外预测值的量化估计。可爱度评级被清楚地基于人格，情绪价和基本情绪的功能集跑赢。</font>
+</div>
+
+
+<hr>
+<div id="paper19"> <b>19. High-Accuracy and Low-Latency Speech Recognition with Two-Head  Contextual Layer Trajectory LSTM Model</b>  <a href="https://arxiv.org/pdf/2003.07482" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title19" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Li%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jinyu Li</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Zhao%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rui Zhao</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Sun%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Eric Sun</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Wong%2C+J+H+M" target="_blank" rel="noopener" style="color:#0000EE;">Jeremy H. M. Wong</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Das%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Amit Das</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Meng%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhong Meng</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Gong%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yifan Gong</a><br>
+<font size="3">
+Abstract: While the community keeps promoting end-to-end models over conventional hybrid models, which usually are long short-term memory (LSTM) models trained with a cross entropy criterion followed by a sequence discriminative training criterion, we argue that such conventional hybrid models can still be significantly improved. In this paper, we detail our recent efforts to improve conventional hybrid LSTM acoustic models for high-accuracy and low-latency automatic speech recognition. To achieve high accuracy, we use a contextual layer trajectory LSTM (cltLSTM), which decouples the temporal modeling and target classification tasks, and incorporates future context frames to get more information for accurate acoustic modeling. We further improve the training strategy with sequence-level teacher-student learning. To obtain low latency, we design a two-head cltLSTM, in which one head has zero latency and the other head has a small latency, compared to an LSTM. When trained with Microsoft's 65 thousand hours of anonymized training data and evaluated with test sets with 1.8 million words, the proposed two-head cltLSTM model with the proposed training strategy yields a 28.2\% relative WER reduction over the conventional LSTM acoustic model, with a similar perceived latency. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：虽然社会不断推动终端到高端机型比传统的混合动力车型，这通常是长短期记忆（LSTM）车型有交叉熵准则后跟一个序列判别训练标准的训练，我们认为，这样的常规混合动力车型仍可显著改善。在本文中，我们详细介绍我们最近的努力，以改善高精确度和低延时自动语音识别现有混合动力车辆LSTM声学模型。为了达到较高的精度，我们使用一个上下文层轨迹LSTM（cltLSTM），其中解耦时间建模和目标分类的任务，并结合未来背景帧以获取准确的声学建模的更多信息。我们进一步改进与序列级师生学习培训战略。为了获得低潜伏时间，我们设计了两个头cltLSTM，其中一个头部具有零延迟和另一个磁头具有小的延迟，相比于LSTM。当与微软的65000小时匿名训练数据的训练，以测试集1.8万字进行评价时所提出的培训策略建议双头cltLSTM模型产生了28.2 \％的相对WER减少在传统LSTM声学模型，用类似的延迟时间。</font>
+</div>
+
+
+<hr>
+<div id="paper20"> <b>20. Harnessing Explanations to Bridge AI and Humans</b>  <a href="https://arxiv.org/pdf/2003.07370" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title20" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lai%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vivian Lai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Carton%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Samuel Carton</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tan%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chenhao Tan</a><br>
+<font size="3">
+Abstract: Machine learning models are increasingly integrated into societally critical applications such as recidivism prediction and medical diagnosis, thanks to their superior predictive power. In these applications, however, full automation is often not desired due to ethical and legal concerns. The research community has thus ventured into developing interpretable methods that explain machine predictions. While these explanations are meant to assist humans in understanding machine predictions and thereby allowing humans to make better decisions, this hypothesis is not supported in many recent studies. To improve human decision-making with AI assistance, we propose future directions for closing the gap between the efficacy of explanations and improvement in human performance. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：机器学习模型越来越多地融入societally关键应用，如再犯预测和医疗诊断，由于其优越的预测能力。在这些应用中，但是，全自动化通常是不希望因伦理和法律问题。因此，研究界已经开始尝试开发机器解释可解释的预测方法。虽然这些解释是为了帮助理解机器的预测，从而让人类做出更好的决定人类，这种假设并不在最近的许多研究的支持。为了提高人类的决策与AI的帮助，我们提出了未来的发展方向关闭解释的效力和改进人的行为之间的差距。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/03/18/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-18/" title="【arxiv论文】 Computation and Language 2020-03-18">https://procjx.github.io/2020/03/18/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-18/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/03/17/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-17/" rel="next" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-17">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-17
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: '59b569b6a7c9f5a5dba992e9c10a6ed4',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
