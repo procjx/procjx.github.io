@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. X-Stance: A Multilingual Multi-Target Dataset for Stance Detection [PDF] 摘要  2. TTTTTackling WinoGrande Schemas [PDF] 摘要  3. Distant Supervision and Noisy Label Learning for Low Resource Named">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-03-19">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;03&#x2F;19&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-19&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. X-Stance: A Multilingual Multi-Target Dataset for Stance Detection [PDF] 摘要  2. TTTTTackling WinoGrande Schemas [PDF] 摘要  3. Distant Supervision and Noisy Label Learning for Low Resource Named">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-19T05:00:02.083Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/03/19/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-19/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-03-19 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/03/19/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-03-19
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-19 11:28:49 / 修改时间：13:00:02" itemprop="dateCreated datePublished" datetime="2020-03-19T11:28:49+08:00">2020-03-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>19 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> X-Stance: A Multilingual Multi-Target Dataset for Stance Detection <a href="https://arxiv.org/pdf/2003.08385" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> TTTTTackling WinoGrande Schemas <a href="https://arxiv.org/pdf/2003.08380" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> Distant Supervision and Noisy Label Learning for Low Resource Named  Entity Recognition: A Study on Hausa and Yorùbá <a href="https://arxiv.org/pdf/2003.08370" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Unsupervised Pidgin Text Generation By Pivoting English Data and  Self-Training <a href="https://arxiv.org/pdf/2003.08272" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Pre-trained Models for Natural Language Processing: A Survey <a href="https://arxiv.org/pdf/2003.08271" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> Gender Representation in Open Source Speech Resources <a href="https://arxiv.org/pdf/2003.08132" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Calibration of Pre-trained Transformers <a href="https://arxiv.org/pdf/2003.07892" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Anchor &amp; Transform: Learning Sparse Representations of Discrete Objects <a href="https://arxiv.org/pdf/2003.08197" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> Deliberation Model Based Two-Pass End-to-End Speech Recognition <a href="https://arxiv.org/pdf/2003.07962" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. X-Stance: A Multilingual Multi-Target Dataset for Stance Detection</b>  <a href="https://arxiv.org/pdf/2003.08385" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Vamvas%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jannis Vamvas</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sennrich%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rico Sennrich</a><br>
+<font size="3">
+Abstract: We extract a large-scale stance detection dataset from comments written by candidates of elections in Switzerland. The dataset consists of German, French and Italian text, allowing for a cross-lingual evaluation of stance detection. It contains 67 000 comments on more than 150 political issues (targets). Unlike stance detection models that have specific target issues, we use the dataset to train a single model on all the issues. To make learning across targets possible, we prepend to each instance a natural question that represents the target (e.g. "Do you support X?"). Baseline results from multilingual BERT show that zero-shot cross-lingual and cross-target transfer of stance detection is moderately successful with this approach. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们提取在瑞士选举候选人的书面意见大规模的姿态检测数据集。该数据集包括德语，法语和意大利语的文本，允许姿态检测的跨语种的评价。它包含了超过150个政治问题（目标）67点000意见。具有特定目标的问题与立场检测模型，我们使用的数据集训练就所有问题的单一模式。为了使各可能的目标学习，我们预先考虑到每个实例表示目标一个自然的问题（如“你是否支持X？”）。从多语种BERT显示基线结果的姿态检测的零次跨语言，跨目标转移是用这种方法比较成功的。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. TTTTTackling WinoGrande Schemas</b>  <a href="https://arxiv.org/pdf/2003.08380" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sheng-Chieh Lin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jheng-Hong Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nogueira%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rodrigo Nogueira</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tsai%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Ming-Feng Tsai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chuan-Ju Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jimmy Lin</a><br>
+<font size="3">
+Abstract: We applied the T5 sequence-to-sequence model to tackle the AI2 WinoGrande Challenge by decomposing each example into two input text strings, each containing a hypothesis, and using the probabilities assigned to the "entailment" token as a score of the hypothesis. Our first (and only) submission to the official leaderboard yielded 0.7673 AUC on March 13, 2020, which is the best known result at this time and beats the previous state of the art by over five points. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：施加的T5序列到序列模型通过分解每个实施例为两个输入的文本串，每个包含一个假设，并且利用分配给令牌作为评分假设的“蕴涵”的概率，以解决AI2 WinoGrande挑战。我们的第一个（也是唯一一个）提交正式的排行榜取得了2020年3月13日，0.7673 AUC，这是在这个时候最有名的结果和通过5个点跳动艺术的以前的状态。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Distant Supervision and Noisy Label Learning for Low Resource Named  Entity Recognition: A Study on Hausa and Yorùbá</b>  <a href="https://arxiv.org/pdf/2003.08370" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Adelani%2C+D+I" target="_blank" rel="noopener" style="color:#0000EE;">David Ifeoluwa Adelani</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hedderich%2C+M+A" target="_blank" rel="noopener" style="color:#0000EE;">Michael A. Hedderich</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dawei Zhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=van+den+Berg%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Esther van den Berg</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Klakow%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dietrich Klakow</a><br>
+<font size="3">
+Abstract: The lack of labeled training data has limited the development of natural language processing tools, such as named entity recognition, for many languages spoken in developing countries. Techniques such as distant and weak supervision can be used to create labeled data in a (semi-) automatic way. Additionally, to alleviate some of the negative effects of the errors in automatic annotation, noise-handling methods can be integrated. Pretrained word embeddings are another key component of most neural named entity classifiers. With the advent of more complex contextual word embeddings, an interesting trade-off between model size and performance arises. While these techniques have been shown to work well in high-resource settings, we want to study how they perform in low-resource scenarios. In this work, we perform named entity recognition for Hausa and Yorùbá, two languages that are widely spoken in several developing countries. We evaluate different embedding approaches and show that distant supervision can be successfully leveraged in a realistic low-resource scenario where it can more than double a classifier's performance. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：缺乏标记的训练数据的有限的自然语言处理工具，如命名实体识别的发展，发展中国家发言的许多语言。技术，例如遥远和弱监督可用于在（半）自动的方式来创建标签数据。此外，为了减轻一些在自动标注的误差的负面影响，噪声处理的方法可以集成。预训练字的嵌入是最神经命名实体分类的另一个重要组成部分。对于更复杂的背景字的嵌入的到来，一个有趣的权衡模型的尺寸和性能之间出现。虽然这些技术已经在高资源环境被证明工作做好了，我们要学习他们在资源匮乏的情况下如何执行。在这项工作中，我们进行了命名和豪萨语约鲁巴人，两种语言被广泛使用在一些发展中国家实体识别。我们评估不同嵌入方法和显示那个遥远的监督，可以成功地利用在逼真的低资源场景，它可以增加一倍以上分类的性能。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Unsupervised Pidgin Text Generation By Pivoting English Data and  Self-Training</b>  <a href="https://arxiv.org/pdf/2003.08272" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chang%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Ernie Chang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Adelani%2C+D+I" target="_blank" rel="noopener" style="color:#0000EE;">David Ifeoluwa Adelani</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shen%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaoyu Shen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Demberg%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vera Demberg</a><br>
+<font size="3">
+Abstract: West African Pidgin English is a language that is significantly spoken in West Africa, consisting of at least 75 million speakers. Nevertheless, proper machine translation systems and relevant NLP datasets for pidgin English are virtually absent. In this work, we develop techniques targeted at bridging the gap between Pidgin English and English in the context of natural language generation. %As a proof of concept, we explore the proposed techniques in the area of data-to-text generation. By building upon the previously released monolingual Pidgin English text and parallel English data-to-text corpus, we hope to build a system that can automatically generate Pidgin English descriptions from structured data. We first train a data-to-English text generation system, before employing techniques in unsupervised neural machine translation and self-training to establish the Pidgin-to-English cross-lingual alignment. The human evaluation performed on the generated Pidgin texts shows that, though still far from being practically usable, the pivoting + self-training technique improves both Pidgin text fluency and relevance. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：西非洋泾浜英语是在西非显著说，由至少75亿人讲的语言。不过，适当的机器翻译系统和洋泾浜英语相关的NLP的数据集几乎不存在。在这项工作中，我们开发的目标是缩小洋泾浜英语和英语之间的差距在自然语言生成的背景技术。 ％作为概念证明，我们探索数据到文本生成部分的面积所提出的技术。通过建立在之前发布的单语洋泾浜英语文本和平行英语数据到文本语料库，我们希望建立一个系统，可以自动从结构化数据生成洋泾浜英语的描述。首先，我们培养出的数据对英文文本生成系统，采用在无监督神经机器翻译和自我培训技术来建立洋泾浜到英语跨语种对准前。人的评价上产生的洋泾浜的文本显示，虽然还是被实际可用远，转动+自我训练的技术改善了洋泾浜的文字流畅性和相关性进行。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Pre-trained Models for Natural Language Processing: A Survey</b>  <a href="https://arxiv.org/pdf/2003.08271" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Qiu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xipeng Qiu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sun%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tianxiang Sun</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yige Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shao%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yunfan Shao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dai%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Ning Dai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xuanjing Huang</a><br>
+<font size="3">
+Abstract: Recently, the emergence of pre-trained models (PTMs) has brought natural language processing (NLP) to a new era. In this survey, we provide a comprehensive review of PTMs for NLP. We first briefly introduce language representation learning and its research progress. Then we systematically categorize existing PTMs based on a taxonomy with four perspectives. Next, we describe how to adapt the knowledge of PTMs to the downstream tasks. Finally, we outline some potential directions of PTMs for future research. This survey is purposed to be a hands-on guide for understanding, using, and developing PTMs for various NLP tasks. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：近日，预先训练模型（PTM的）的出现带来了自然语言处理（NLP），以一个新的时代。在这次调查中，我们提供了翻译后修饰的NLP的全面审查。我们首先简要介绍了语言表达的学习和及其研究进展。然后，我们系统地分类，基于具有四个方面的分类法现有的翻译后修饰。接下来，我们将介绍如何翻译后修饰的知识，适应下游任务。最后，我们列出了翻译后修饰的对未来研究的一些潜在方向。该调查意要成为实践指南的理解，使用和开发各种NLP任务的翻译后修饰。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. Gender Representation in Open Source Speech Resources</b>  <a href="https://arxiv.org/pdf/2003.08132" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Garnerin%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mahault Garnerin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rossato%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Solange Rossato</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Besacier%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Laurent Besacier</a><br>
+<font size="3">
+Abstract: With the rise of artificial intelligence (AI) and the growing use of deep-learning architectures, the question of ethics, transparency and fairness of AI systems has become a central concern within the research community. We address transparency and fairness in spoken language systems by proposing a study about gender representation in speech resources available through the Open Speech and Language Resource platform. We show that finding gender information in open source corpora is not straightforward and that gender balance depends on other corpus characteristics (elicited/non elicited speech, low/high resource language, speech task targeted). The paper ends with recommendations about metadata and gender information for researchers in order to assure better transparency of the speech systems built using such corpora. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：随着人工智能（AI）的崛起，越来越多地使用深层学习架构，伦理，透明度问题和公平性的AI系统已成为研究界关注的中心。我们通过提出一个关于在语音资源的性别比例可以通过打开语音和语言资源平台，研究解决语言系统的透明度和公平性。我们表明，在开源语料库发现性别信息并不简单，性别平衡取决于其他语料库特性（引起/非言语引起，低/高源语言，言语任务目标）。与有关以确保使用这些语料库内置语音系统，提高透明度研究的元数据和性别信息建议的文件结束。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Calibration of Pre-trained Transformers</b>  <a href="https://arxiv.org/pdf/2003.07892" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Desai%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shrey Desai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Durrett%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Greg Durrett</a><br>
+<font size="3">
+Abstract: Pre-trained Transformers are now ubiquitous in natural language processing, but despite their high end-task performance, little is known empirically about whether they are calibrated. Specifically, do these models' posterior probabilities provide an accurate empirical measure of how likely the model is to be correct on a given example? We focus on BERT and RoBERTa in this work, and analyze their calibration across three tasks: natural language inference, paraphrase detection, and commonsense reasoning. For each task, we consider in-domain as well as challenging out-of-domain settings, where models face more examples they should be uncertain about. We show that: (1) when used out-of-the-box, pre-trained models are calibrated in-domain, and compared to baselines, their calibration error out-of-domain can be as much as 3.5x lower; (2) temperature scaling is effective at further reducing calibration error in-domain, and using label smoothing to deliberately increase empirical uncertainty helps calibrate posteriors out-of-domain. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：预先训练变压器现在在自然语言处理无处不在，但尽管他们的高端任务性能，鲜为人​​知的是经验，他们是否进行校准。具体而言，做这些模型的后验概率提供的模型是如何可能是正确的在一个给定的例子准确的经验措施？我们专注于BERT和罗伯塔在这项工作中，并在三个工作分析他们的校准：自然语言推理，释义检测和常识推理。对于每一个任务，我们考虑在域以及挑战外的域设置，在模特脸上更多的例子，他们应该是不确定的。我们表明：（1）使用时出的即装即用，预先训练模型校准域内，且相比基准，它们的校准误差外的域可以是高达3.5倍低; （2）温度缩放是在域进一步降低校准误差有效，以及使用标签平滑故意增加经验不确定性有助于校准后验外的结构域。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Anchor &amp; Transform: Learning Sparse Representations of Discrete Objects</b>  <a href="https://arxiv.org/pdf/2003.08197" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Liang%2C+P+P" target="_blank" rel="noopener" style="color:#0000EE;">Paul Pu Liang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zaheer%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Manzil Zaheer</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuan Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ahmed%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Amr Ahmed</a><br>
+<font size="3">
+Abstract: Learning continuous representations of discrete objects such as text, users, and URLs lies at the heart of many applications including language and user modeling. When using discrete objects as input to neural networks, we often ignore the underlying structures (e.g. natural groupings and similarities) and embed the objects independently into individual vectors. As a result, existing methods do not scale to large vocabulary sizes. In this paper, we design a Bayesian nonparametric prior for embeddings that encourages sparsity and leverages natural groupings among objects. We derive an approximate inference algorithm based on Small Variance Asymptotics which yields a simple and natural algorithm for learning a small set of anchor embeddings and a sparse transformation matrix. We call our method Anchor & Transform (ANT) as the embeddings of discrete objects are a sparse linear combination of the anchors, weighted according to the transformation matrix. ANT is scalable, flexible, end-to-end trainable, and allows the user to incorporate domain knowledge about object relationships. On text classification and language modeling benchmarks, ANT demonstrates stronger performance with fewer parameters as compared to existing compression baselines. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在许多应用，包括语言和用户建模的心脏学习离散对象，如文本，用户和网址谎言连续表示。当使用离散对象作为输入到神经网络，我们经常忽略下层结构（例如自然分组和相似性）和嵌入对象独立地为单个矢量。其结果是，现有方法不适合大规模词汇量。在本文中，我们设计了一个贝叶斯非参之前为鼓励稀疏和对象之间的充分利用自然分组的嵌入。我们推导基于小方差渐近性的近似推理算法产生学习一小锚的嵌入和稀疏变换矩阵简单自然的算法。我们称我们的方法锚和变换（ANT）作为离散的物体的嵌入是锚定件的稀疏线性组合，根据所述变换矩阵进行加权。 ANT是可扩展的，灵活的，到终端的可训练，并允许用户对对象关系一体化领域的知识。文本分类和语言模型的基准，ANT演示用较少的参数相比，现有的压缩基准为性能更强。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. Deliberation Model Based Two-Pass End-to-End Speech Recognition</b>  <a href="https://arxiv.org/pdf/2003.07962" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Hu%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Ke Hu</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Sainath%2C+T+N" target="_blank" rel="noopener" style="color:#0000EE;">Tara N. Sainath</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Pang%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruoming Pang</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Prabhavalkar%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rohit Prabhavalkar</a><br>
+<font size="3">
+Abstract: End-to-end (E2E) models have made rapid progress in automatic speech recognition (ASR) and perform competitively relative to conventional models. To further improve the quality, a two-pass model has been proposed to rescore streamed hypotheses using the non-streaming Listen, Attend and Spell (LAS) model while maintaining a reasonable latency. The model attends to acoustics to rescore hypotheses, as opposed to a class of neural correction models that use only first-pass text hypotheses. In this work, we propose to attend to both acoustics and first-pass hypotheses using a deliberation network. A bidirectional encoder is used to extract context information from first-pass hypotheses. The proposed deliberation model achieves 12% relative WER reduction compared to LAS rescoring in Google Voice Search (VS) tasks, and 23% reduction on a proper noun test set. Compared to a large conventional model, our best model performs 21% relatively better for VS. In terms of computational complexity, the deliberation decoder has a larger size than the LAS decoder, and hence requires more computations in second-pass decoding. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：端至端（E2E）模型已经在自动语音识别（ASR）取得了快速的进展，并竞争性地相对于常规模型执行。为了进一步提高质量，双通模式已经提出了rescore使用非流倾听，顾不上和拼写（LAS）模式，同时保持合理的等待时间流的假设。该模型照顾到音响到rescore假设，而不是一类只使用一次通过文本假设神经校正模型。在这项工作中，我们提出了参加这两个声学和使用网络审议第一通假说。双向编码器用于从第一通假设提取的上下文信息。建议的审议模型实现相对减少WER为12％比LAS在谷歌语音搜索再评分（VS）的任务，并在一个专有名词的测试集％，减少23。相较于传统的大型模型，我们最好的模型进行21％相对更好的为VS.在计算复杂性方面，审议译码器具有比LAS解码器更大的尺寸，并且因此需要在第二次解码更多的计算。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/03/19/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-19/" title="【arxiv论文】 Computation and Language 2020-03-19">https://procjx.github.io/2020/03/19/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-19/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/03/18/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-18/" rel="next" title="【arxiv论文】 Computation and Language 2020-03-18">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computation and Language 2020-03-18
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/03/20/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-20/" rel="prev" title="【arxiv论文】 Computation and Language 2020-03-20">
+                  【arxiv论文】 Computation and Language 2020-03-20 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: '047e9522c91ce6f99427199dccde74d2',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

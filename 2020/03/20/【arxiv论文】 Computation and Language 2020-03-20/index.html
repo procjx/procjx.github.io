@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Utilizing Language Relatedness to improve Machine Translation: A Case  Study on Languages of the Indian Subcontinent [PDF] 摘要  2. Beheshti-NER: Persian Named Entity Recognition Using BERT [PDF]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-03-20">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;03&#x2F;20&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-20&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Utilizing Language Relatedness to improve Machine Translation: A Case  Study on Languages of the Indian Subcontinent [PDF] 摘要  2. Beheshti-NER: Persian Named Entity Recognition Using BERT [PDF]">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-20T05:00:02.726Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/03/20/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-20/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-03-20 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/03/20/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-03-20
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-20 11:29:11 / 修改时间：13:00:02" itemprop="dateCreated datePublished" datetime="2020-03-20T11:29:11+08:00">2020-03-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>25 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Utilizing Language Relatedness to improve Machine Translation: A Case  Study on Languages of the Indian Subcontinent <a href="https://arxiv.org/pdf/2003.08925" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> Beheshti-NER: Persian Named Entity Recognition Using BERT <a href="https://arxiv.org/pdf/2003.08875" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> Boosting Factual Correctness of Abstractive Summarization with Knowledge  Graph <a href="https://arxiv.org/pdf/2003.08612" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Diversity, Density, and Homogeneity: Quantitative Characteristic Metrics  for Text Collections <a href="https://arxiv.org/pdf/2003.08529" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> An Analysis on the Learning Rules of the Skip-Gram Model <a href="https://arxiv.org/pdf/2003.08489" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> Normalized and Geometry-Aware Self-Attention Network for Image  Captioning <a href="https://arxiv.org/pdf/2003.08897" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Deep Learning for Automatic Tracking of Tongue Surface in Real-time  Ultrasound Videos, Landmarks instead of Contours <a href="https://arxiv.org/pdf/2003.08808" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Personalized Taste and Cuisine Preference Modeling via Images <a href="https://arxiv.org/pdf/2003.08769" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> Giving Commands to a Self-driving Car: A Multimodal Reasoner for Visual  Grounding <a href="https://arxiv.org/pdf/2003.08717" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> QnAMaker: Data to Bot in 2 Minutes <a href="https://arxiv.org/pdf/2003.08553" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> A Corpus of Adpositional Supersenses for Mandarin Chinese <a href="https://arxiv.org/pdf/2003.08437" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Utilizing Language Relatedness to improve Machine Translation: A Case  Study on Languages of the Indian Subcontinent</b>  <a href="https://arxiv.org/pdf/2003.08925" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Kunchukuttan%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anoop Kunchukuttan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bhattacharyya%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pushpak Bhattacharyya</a><br>
+<font size="3">
+Abstract: In this work, we present an extensive study of statistical machine translation involving languages of the Indian subcontinent. These languages are related by genetic and contact relationships. We describe the similarities between Indic languages arising from these relationships. We explore how lexical and orthographic similarity among these languages can be utilized to improve translation quality between Indic languages when limited parallel corpora is available. We also explore how the structural correspondence between Indic languages can be utilized to re-use linguistic resources for English to Indic language translation. Our observations span 90 language pairs from 9 Indic languages and English. To the best of our knowledge, this is the first large-scale study specifically devoted to utilizing language relatedness to improve translation between related languages. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在这项工作中，我们提出涉及印度次大陆的语言统计机器翻译的广泛研究。这些语言是由遗传和接触关系有关。我们描述了从这些关系所产生的印度语言之间的相似性。我们探讨如何这些语言中的词汇和拼写相似性可以用来提高印度语言之间的翻译质量时，限制平行语料库是可用的。我们也探讨如何印度语言之间的结构对应可用于再利用语言资源英语印度语翻译。我们的观察涵盖从9台印度语和英语90语言对。据我们所知，这是专门针对利用语言关联性，以提高相关的语言之间的翻译的第一次大规模的研究。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Beheshti-NER: Persian Named Entity Recognition Using BERT</b>  <a href="https://arxiv.org/pdf/2003.08875" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Taher%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Ehsan Taher</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hoseini%2C+S+A" target="_blank" rel="noopener" style="color:#0000EE;">Seyed Abbas Hoseini</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shamsfard%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mehrnoush Shamsfard</a><br>
+<font size="3">
+Abstract: Named entity recognition is a natural language processing task to recognize and extract spans of text associated with named entities and classify them in semantic Categories. Google BERT is a deep bidirectional language model, pre-trained on large corpora that can be fine-tuned to solve many NLP tasks such as question answering, named entity recognition, part of speech tagging and etc. In this paper, we use the pre-trained deep bidirectional network, BERT, to make a model for named entity recognition in Persian. We also compare the results of our model with the previous state of the art results achieved on Persian NER. Our evaluation metric is CONLL 2003 score in two levels of word and phrase. This model achieved second place in NSURL-2019 task 7 competition which associated with NER for the Persian language. our results in this competition are 83.5 and 88.4 f1 CONLL score respectively in phrase and word level evaluation. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：命名实体识别是自然语言处理任务的认识，并与命名实体相关联的文本提取跨度和语义类别进行归类。谷歌BERT是一种深深的双向语言模式，对大语料库，可以进行微调，以解决许多NLP任务，比如答疑，命名实体识别，词性标注等在本文中预先训练，我们使用的预-trained深双向网络，BERT，使在波斯命名实体识别模型。我们还比较我们的模型结果与波斯NER所取得的艺术成绩的前一个状态。我们的评估指标是CONLL 2003得分词语和短语中两个层次。这种模式在与NER的波斯语言相关NSURL-2019的任务7竞争中取得第二名。我们在本次比赛的结果是83.5和短语和单词水平评估88.4 F1 CONLL比分分别。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Boosting Factual Correctness of Abstractive Summarization with Knowledge  Graph</b>  <a href="https://arxiv.org/pdf/2003.08612" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chenguang Zhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hinthorn%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">William Hinthorn</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruochen Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zeng%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qingkai Zeng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zeng%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Zeng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xuedong Huang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jiang%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Meng Jiang</a><br>
+<font size="3">
+Abstract: A commonly observed problem with abstractive summarization is the distortion or fabrication of factual information in the article. This inconsistency between summary and original text has led to various concerns over its applicability. In this paper, we propose to boost factual correctness of summaries via the fusion of knowledge, i.e. extracted factual relations from the article. We present a Fact-Aware Summarization model, FASum. In this model, the knowledge information can be organically integrated into the summary generation process via neural graph computation and effectively improves the factual correctness. Empirical results show that FASum generates summaries with significantly higher factual correctness compared with state-of-the-art abstractive summarization systems, both under an independently trained factual correctness evaluator and human evaluation. For example, in CNN/DailyMail dataset, FASum obtains 1.2% higher fact correctness scores than UniLM and 4.5% higher than BottomUp. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：与抽象的聚合通常观察到的问题是失真或物品在实际信息制作。摘要和原文之间的矛盾，导致了其适用性多方面的关注。在本文中，我们提出通过知识的融合，从文章中提取，即事实关系，以提高摘要的事实正确性。我们提出了一个事实感知汇总模型，FASum。在这个模型中，知识信息可以有机地融入通过神经图计算汇总生成过程，并有效地提高了事实的正确性。经验结果显示，与FASum更高显著事实正确性产生摘要与国家的最先进的抽象汇总系统相比，两者的下独立地训练事实正确性评价者和人工评估。例如，在CNN /每日邮报数据集，FASum获得高1.2％事实正确性得分高于UniLM和比自下而上4.5％以上。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Diversity, Density, and Homogeneity: Quantitative Characteristic Metrics  for Text Collections</b>  <a href="https://arxiv.org/pdf/2003.08529" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lai%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yi-An Lai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xuan Zhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yi Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Diab%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mona Diab</a><br>
+<font size="3">
+Abstract: Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：通过定量措施汇总数据样本具有悠久的历史，具有描述性统计是一个很好的例子。然而，由于自然语言处理方法蓬勃发展，但仍有特性指标不足以形容的词，句，或者它们包括段落文本条款的集合。在这项工作中，我们提出了多样性，密度和均匀性的指标，定量测量分散，稀疏和文本集合的一致性。我们进行了一系列的模拟，以验证各指标保持所需的性能和共鸣与人类的直觉。在现实世界中的数据集的实验表明，该特性指标是高度著名的模型，BERT，这可能会激发未来应用的文本分类性能相关。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. An Analysis on the Learning Rules of the Skip-Gram Model</b>  <a href="https://arxiv.org/pdf/2003.08489" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Canlin Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiuwen Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bis%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Daniel Bis</a><br>
+<font size="3">
+Abstract: To improve the generalization of the representations for natural language processing tasks, words are commonly represented using vectors, where distances among the vectors are related to the similarity of the words. While word2vec, the state-of-the-art implementation of the skip-gram model, is widely used and improves the performance of many natural language processing tasks, its mechanism is not yet well understood. In this work, we derive the learning rules for the skip-gram model and establish their close relationship to competitive learning. In addition, we provide the global optimal solution constraints for the skip-gram model and validate them by experimental results. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：为了提高对申述自然语言处理任务的泛化，也就是说使用矢量，其中矢量中距离有关的词的相似性普遍表示。虽然word2vec，国家的最先进的实现跳跃克模型，被广泛使用，并提高了许多自然语言处理任务的性能，其作用机制尚不清楚。在这项工作中，我们推导出跳跃-gram模型的学习规则，并建立自己的密切关系，以有竞争力的学习。此外，我们还提供了跳过克模型的全局最优解的约束，并通过实验验证它们。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. Normalized and Geometry-Aware Self-Attention Network for Image  Captioning</b>  <a href="https://arxiv.org/pdf/2003.08897" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Guo%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Longteng Guo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jing Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xinxin Zhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yao%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peng Yao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lu%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shichen Lu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lu%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hanqing Lu</a><br>
+<font size="3">
+Abstract: Self-attention (SA) network has shown profound value in image captioning. In this paper, we improve SA from two aspects to promote the performance of image captioning. First, we propose Normalized Self-Attention (NSA), a reparameterization of SA that brings the benefits of normalization inside SA. While normalization is previously only applied outside SA, we introduce a novel normalization method and demonstrate that it is both possible and beneficial to perform it on the hidden activations inside SA. Second, to compensate for the major limit of Transformer that it fails to model the geometry structure of the input objects, we propose a class of Geometry-aware Self-Attention (GSA) that extends SA to explicitly and efficiently consider the relative geometry relations between the objects in the image. To construct our image captioning model, we combine the two modules and apply it to the vanilla self-attention network. We extensively evaluate our proposals on MS-COCO image captioning dataset and superior results are achieved when comparing to state-of-the-art approaches. Further experiments on three challenging tasks, i.e. video captioning, machine translation, and visual question answering, show the generality of our methods. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：自注意（SA）网络已经显示出图像字幕具有深远的意义。在本文中，我们从两个方面提高SA促进图像字幕的性能。首先，我们建议归自注意（NSA），SA的重新参数化带来的内部SA正常化的好处。而归一化是以前仅SA外部施加，我们介绍一种新颖的归一化方法，并表明它是既可以与有益的上里面SA隐藏激活执行它。其次，以补偿变压器的主要限制在于它不输入对象的几何结构模型，我们提出了一个类，它扩展SA明确和有效的考虑之间的相对几何关系几何感知自我关注（GSA）的的对象在图像中。为了构建我们的形象字幕模型中，我们结合两个模块，并将其应用到香草自重视网络。我们广泛地评估我们在MS-COCO图像字幕数据集的建议和优异的业绩都比较先进设备，最先进的方法时实现。三个有挑战性的任务进一步的实验，即视频字幕，机器翻译，和视觉答疑，表明我们的方法的通用性。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Deep Learning for Automatic Tracking of Tongue Surface in Real-time  Ultrasound Videos, Landmarks instead of Contours</b>  <a href="https://arxiv.org/pdf/2003.08808" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Mozaffari%2C+M+H" target="_blank" rel="noopener" style="color:#0000EE;">M. Hamed Mozaffari</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lee%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Won-Sook Lee</a><br>
+<font size="3">
+Abstract: One usage of medical ultrasound imaging is to visualize and characterize human tongue shape and motion during a real-time speech to study healthy or impaired speech production. Due to the low-contrast characteristic and noisy nature of ultrasound images, it might require expertise for non-expert users to recognize tongue gestures in applications such as visual training of a second language. Moreover, quantitative analysis of tongue motion needs the tongue dorsum contour to be extracted, tracked, and visualized. Manual tongue contour extraction is a cumbersome, subjective, and error-prone task. Furthermore, it is not a feasible solution for real-time applications. The growth of deep learning has been vigorously exploited in various computer vision tasks, including ultrasound tongue contour tracking. In the current methods, the process of tongue contour extraction comprises two steps of image segmentation and post-processing. This paper presents a new novel approach of automatic and real-time tongue contour tracking using deep neural networks. In the proposed method, instead of the two-step procedure, landmarks of the tongue surface are tracked. This novel idea enables researchers in this filed to benefits from available previously annotated databases to achieve high accuracy results. Our experiment disclosed the outstanding performances of the proposed technique in terms of generalization, performance, and accuracy. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：医学超声成像的一个用途是可视化和一个实时语音期间表征人舌的形状和运动来研究健康或受损的语音产生。由于低对比度的特点和超声图像的嘈杂性质，可能需要对非专业用户的专业知识来识别应用，例如作为第二语言的视觉训练舌头手势。此外，舌运动的定量分析需要舌背部轮廓被提取，跟踪和可视化。手册舌轮廓提取是一个繁琐的，主观的，容易出错的任务。此外，它不是为实时应用提供可行的解决方案。深度学习的增长一直在大力开发各种计算机视觉任务，包括超声舌轮廓跟踪。在当前的方法中，舌轮廓提取的方法包括图像分割和后处理的两个步骤。本文给出了使用深层神经网络自动的，实时的舌头轮廓跟踪的新新方法。在所提出的方法，而不是两步程序，舌头表面的地标被跟踪。这种新颖的想法使研究人员在此从可用先前注释数据库提交给好处，以实现高精确度的结果。我们的实验中所公开的提出的技术的杰出表现在泛化，性能和准确性方面。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Personalized Taste and Cuisine Preference Modeling via Images</b>  <a href="https://arxiv.org/pdf/2003.08769" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Nag%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nitish Nag</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rajanna%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bindu Rajanna</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jain%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ramesh Jain</a><br>
+<font size="3">
+Abstract: With the exponential growth in the usage of social media to share live updates about life, taking pictures has become an unavoidable phenomenon. Individuals unknowingly create a unique knowledge base with these images. The food images, in particular, are of interest as they contain a plethora of information. From the image metadata and using computer vision tools, we can extract distinct insights for each user to build a personal profile. Using the underlying connection between cuisines and their inherent tastes, we attempt to develop such a profile for an individual based solely on the images of his food. Our study provides insights about an individual's inclination towards particular cuisines. Interpreting these insights can lead to the development of a more precise recommendation system. Such a system would avoid the generic approach in favor of a personalized recommendation system. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：随着社会化媒体的使用量呈指数级增长，分享生活实时更新，拍照已经成为一个不可回避的现象。个人在不知不觉中创建这些图像的独特的知识基础。食品的图像，特别感兴趣，因为它们包含的信息太多了。从图像元数据和基于计算机视觉的工具，我们可以为每个用户建立个人档案中提取不同的见解。用美食和其固有的口味与基础连接，我们试图开发完全基于他的食物的图像的单独这样的外形。我们的研究提供了关于个人向特定的美食倾向的见解。解释这些观点可能会导致更精确的推荐系统的发展。这样的系统将避免，取而代之的是个性化推荐系统的通用方法。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. Giving Commands to a Self-driving Car: A Multimodal Reasoner for Visual  Grounding</b>  <a href="https://arxiv.org/pdf/2003.08717" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Deruyttere%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thierry Deruyttere</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Collell%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guillem Collell</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Moens%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Marie-Francine Moens</a><br>
+<font size="3">
+Abstract: We propose a new spatial memory module and a spatial reasoner for the Visual Grounding (VG) task. The goal of this task is to find a certain object in an image based on a given textual query. Our work focuses on integrating the regions of a Region Proposal Network (RPN) into a new multi-step reasoning model which we have named a Multimodal Spatial Region Reasoner (MSRR). The introduced model uses the object regions from an RPN as initialization of a 2D spatial memory and then implements a multi-step reasoning process scoring each region according to the query, hence why we call it a multimodal reasoner. We evaluate this new model on challenging datasets and our experiments show that our model that jointly reasons over the object regions of the image and words of the query largely improves accuracy compared to current state-of-the-art models. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们提出了一个新的空间存储模块和视觉接地（VG）任务的空间推理。这项任务的目标是找到基于给定文本查询图像中的特定对象。我们的工作主要集中在一个区域建议网络（RPN）的区域纳入其中我们命名多式联运空间地域里森纳（MSRR）一个新的多步推理模型。所引入的模型从RPN为2D空间记忆的初始化使用对象区域，然后实现一个多步骤的推理过程根据查询得分每个区域，因此为什么我们称之为多峰推理。我们评估有挑战性的数据集，这种新的模式和我们的实验表明，我们的模型，在图像的查询的物体的区域和字共同的原因在很大程度上提高了精度，相比于国家的最先进的电流模式。</font>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. QnAMaker: Data to Bot in 2 Minutes</b>  <a href="https://arxiv.org/pdf/2003.08553" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Agrawal%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Parag Agrawal</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Menon%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tulasi Menon</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kamel%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Aya Kamel</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Naim%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michel Naim</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chouragade%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chaikesh Chouragade</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Singh%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gurvinder Singh</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kulkarni%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rohan Kulkarni</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Suri%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anshuman Suri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Katakam%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sahithi Katakam</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Pratik%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vineet Pratik</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bansal%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Prakul Bansal</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kaur%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Simerpreet Kaur</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rajput%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Neha Rajput</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Duggal%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anand Duggal</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chalabi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Achraf Chalabi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Choudhari%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Prashant Choudhari</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Satti%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Reddy Satti</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nayak%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Niranjan Nayak</a><br>
+<font size="3">
+Abstract: Having a bot for seamless conversations is a much-desired feature that products and services today seek for their websites and mobile apps. These bots help reduce traffic received by human support significantly by handling frequent and directly answerable known questions. Many such services have huge reference documents such as FAQ pages, which makes it hard for users to browse through this data. A conversation layer over such raw data can lower traffic to human support by a great margin. We demonstrate QnAMaker, a service that creates a conversational layer over semi-structured data such as FAQ pages, product manuals, and support documents. QnAMaker is the popular choice for Extraction and Question-Answering as a service and is used by over 15,000 bots in production. It is also used by search interfaces and not just bots. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：拥有无缝对话僵尸是一个极为理想的功能，今天的产品和服务寻求自己的网站和移动应用。这些机器人帮助减少显著通过处理频繁和直接回答的问题已知的人类得到的支持交通。许多这样的服务具有巨大的参考文档，如FAQ页面，这使得用户很难通过这个数据浏览。在这样的原始数据的对话层可以通过很大余量降低流量人力支持。我们证明QnAMaker，创建了半结构化数据，如FAQ页面，产品手册和支持文档的会话层的服务。 QnAMaker是提取和答疑的服务，并用于在生产超过15,000个机器人的热门之选。它也可以用来通过搜索界面，而不只是机器人。</font>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. A Corpus of Adpositional Supersenses for Mandarin Chinese</b>  <a href="https://arxiv.org/pdf/2003.08437" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Peng%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Siyao Peng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yang Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yilun Zhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Blodgett%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Austin Blodgett</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yushi Zhao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Schneider%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nathan Schneider</a><br>
+<font size="3">
+Abstract: Adpositions are frequent markers of semantic relations, but they are highly ambiguous and vary significantly from language to language. Moreover, there is a dearth of annotated corpora for investigating the cross-linguistic variation of adposition semantics, or for building multilingual disambiguation systems. This paper presents a corpus in which all adpositions have been semantically annotated in Mandarin Chinese; to the best of our knowledge, this is the first Chinese corpus to be broadly annotated with adposition semantics. Our approach adapts a framework that defined a general set of supersenses according to ostensibly language-independent semantic criteria, though its development focused primarily on English prepositions (Schneider et al., 2018). We find that the supersense categories are well-suited to Chinese adpositions despite syntactic differences from English. On a Mandarin translation of The Little Prince, we achieve high inter-annotator agreement and analyze semantic correspondences of adposition tokens in bitext. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：Adpositions是语义关系的频繁标记，但他们是非常模糊的，显著变化从语言到语言。此外，有注释的语料库的调查adposition语义的跨语言变体中，或用于构建消歧多种语言系统缺乏。本文介绍了其中所有adpositions都用普通话中国是语义标注的语料库;据我们所知，这是中国第一语料库与adposition语义被广泛地注释。我们的方法适应，根据表面上是独立于语言的语义标准来定义supersenses的一般设定的框架，但它的发展主要集中在英语介词（Schneider等，2018）。我们发现的SuperSense类别非常适合于中国adpositions尽管英语语法上的不同。在小王子的国语翻译，我们实现了高注释间协议和分析adposition令牌的语义对应于bitext。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/03/20/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-20/" title="【arxiv论文】 Computation and Language 2020-03-20">https://procjx.github.io/2020/03/20/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-20/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/03/19/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-19/" rel="next" title="【arxiv论文】 Computation and Language 2020-03-19">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computation and Language 2020-03-19
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/03/20/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-20/" rel="prev" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-20">
+                  【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-20 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: 'e1d00a8dbfb67af6200d354af8ec4554',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
