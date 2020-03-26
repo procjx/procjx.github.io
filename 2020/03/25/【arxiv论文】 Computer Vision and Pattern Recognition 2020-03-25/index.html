@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Know Your Surroundings: Exploiting Scene Information for Object Tracking [PDF] 摘要  2. Generalizing Spatial Transformers to Projective Geometry with  Applications to 2D&#x2F;3D Registration [PDF] 摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-25">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;03&#x2F;25&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-25&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Know Your Surroundings: Exploiting Scene Information for Object Tracking [PDF] 摘要  2. Generalizing Spatial Transformers to Projective Geometry with  Applications to 2D&#x2F;3D Registration [PDF] 摘要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-25T05:00:03.089Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/03/25/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-25/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-25 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/03/25/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-25
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-25 12:40:33 / 修改时间：13:00:03" itemprop="dateCreated datePublished" datetime="2020-03-25T12:40:33+08:00">2020-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CV/" itemprop="url" rel="index">
+                    <span itemprop="name">CV</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>90k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>2:31</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Know Your Surroundings: Exploiting Scene Information for Object Tracking <a href="https://arxiv.org/pdf/2003.11014" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> Generalizing Spatial Transformers to Projective Geometry with  Applications to 2D/3D Registration <a href="https://arxiv.org/pdf/2003.10987" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> Multi-Scale Progressive Fusion Network for Single Image Deraining <a href="https://arxiv.org/pdf/2003.10985" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Deep Local Shapes: Learning Local SDF Priors for Detailed 3D  Reconstruction <a href="https://arxiv.org/pdf/2003.10983" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Exploiting Event Cameras by Using a Network Grafting Algorithm <a href="https://arxiv.org/pdf/2003.10959" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> MaskFlownet: Asymmetric Feature Matching with Learnable Occlusion Mask <a href="https://arxiv.org/pdf/2003.10955" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Learning Compact Reward for Image Captioning <a href="https://arxiv.org/pdf/2003.10925" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> RN-VID: A Feature Fusion Architecture for Video Object Detection <a href="https://arxiv.org/pdf/2003.10898" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> Do We Need Depth in State-Of-The-Art Face Authentication? <a href="https://arxiv.org/pdf/2003.10895" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> EllipBody: A Light-weight and Part-based Representation for Human Pose  and Shape Recovery <a href="https://arxiv.org/pdf/2003.10873" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> Dynamic Reconstruction of Deformable Soft-tissue with Stereo Scope in  Minimal Invasive Surgery <a href="https://arxiv.org/pdf/2003.10867" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+<div id="title12">
+<b>12.</b> Bone Structures Extraction and Enhancement in Chest Radiographs via CNN  Trained on Synthetic Data <a href="https://arxiv.org/pdf/2003.10839" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper12" style="color:#0000EE;">摘要</a><br></div>
+<div id="title13">
+<b>13.</b> Palm-GAN: Generating Realistic Palmprint Images Using Total-Variation  Regularized GAN <a href="https://arxiv.org/pdf/2003.10834" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper13" style="color:#0000EE;">摘要</a><br></div>
+<div id="title14">
+<b>14.</b> DeepFit: 3D Surface Fitting via Neural Network Weighted Least Squares <a href="https://arxiv.org/pdf/2003.10826" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper14" style="color:#0000EE;">摘要</a><br></div>
+<div id="title15">
+<b>15.</b> Toward Accurate and Realistic Virtual Try-on Through Shape Matching and  Multiple Warps <a href="https://arxiv.org/pdf/2003.10817" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper15" style="color:#0000EE;">摘要</a><br></div>
+<div id="title16">
+<b>16.</b> Dataset Cleaning -- A Cross Validation Methodology for Large Facial  Datasets using Face Recognition <a href="https://arxiv.org/pdf/2003.10815" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper16" style="color:#0000EE;">摘要</a><br></div>
+<div id="title17">
+<b>17.</b> Rethinking Class-Balanced Methods for Long-Tailed Visual Recognition  from a Domain Adaptation Perspective <a href="https://arxiv.org/pdf/2003.10780" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper17" style="color:#0000EE;">摘要</a><br></div>
+<div id="title18">
+<b>18.</b> Two-Step Surface Damage Detection Scheme using Convolutional Neural  Network and Artificial Neural Neural <a href="https://arxiv.org/pdf/2003.10760" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper18" style="color:#0000EE;">摘要</a><br></div>
+<div id="title19">
+<b>19.</b> FADNet: A Fast and Accurate Network for Disparity Estimation <a href="https://arxiv.org/pdf/2003.10758" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper19" style="color:#0000EE;">摘要</a><br></div>
+<div id="title20">
+<b>20.</b> Scalable learning for bridging the species gap in image-based plant  phenotyping <a href="https://arxiv.org/pdf/2003.10757" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper20" style="color:#0000EE;">摘要</a><br></div>
+<div id="title21">
+<b>21.</b> Dynamic Hierarchical Mimicking Towards Consistent Optimization  Objectives <a href="https://arxiv.org/pdf/2003.10739" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper21" style="color:#0000EE;">摘要</a><br></div>
+<div id="title22">
+<b>22.</b> Deep Line Art Video Colorization with a Few References <a href="https://arxiv.org/pdf/2003.10685" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper22" style="color:#0000EE;">摘要</a><br></div>
+<div id="title23">
+<b>23.</b> Real-time 3D object proposal generation and classification under limited  processing resources <a href="https://arxiv.org/pdf/2003.10670" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper23" style="color:#0000EE;">摘要</a><br></div>
+<div id="title24">
+<b>24.</b> On Localizing a Camera from a Single Image <a href="https://arxiv.org/pdf/2003.10664" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper24" style="color:#0000EE;">摘要</a><br></div>
+<div id="title25">
+<b>25.</b> Modeling Cross-view Interaction Consistency for Paired Egocentric  Interaction Recognition <a href="https://arxiv.org/pdf/2003.10663" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper25" style="color:#0000EE;">摘要</a><br></div>
+<div id="title26">
+<b>26.</b> CRNet: Cross-Reference Networks for Few-Shot Segmentation <a href="https://arxiv.org/pdf/2003.10658" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper26" style="color:#0000EE;">摘要</a><br></div>
+<div id="title27">
+<b>27.</b> Gen-LaneNet: A Generalized and Scalable Approach for 3D Lane Detection <a href="https://arxiv.org/pdf/2003.10656" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper27" style="color:#0000EE;">摘要</a><br></div>
+<div id="title28">
+<b>28.</b> KFNet: Learning Temporal Camera Relocalization using Kalman Filtering <a href="https://arxiv.org/pdf/2003.10629" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper28" style="color:#0000EE;">摘要</a><br></div>
+<div id="title29">
+<b>29.</b> UnrealText: Synthesizing Realistic Scene Text Images from the Unreal  World <a href="https://arxiv.org/pdf/2003.10608" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper29" style="color:#0000EE;">摘要</a><br></div>
+<div id="title30">
+<b>30.</b> Synergic Adversarial Label Learning with DR and AMD for Retinal Image  Grading <a href="https://arxiv.org/pdf/2003.10607" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper30" style="color:#0000EE;">摘要</a><br></div>
+<div id="title31">
+<b>31.</b> Video Object Grounding using Semantic Roles in Language Description <a href="https://arxiv.org/pdf/2003.10606" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper31" style="color:#0000EE;">摘要</a><br></div>
+<div id="title32">
+<b>32.</b> First Investigation Into the Use of Deep Learning for Continuous  Assessment of Neonatal Postoperative Pain <a href="https://arxiv.org/pdf/2003.10601" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper32" style="color:#0000EE;">摘要</a><br></div>
+<div id="title33">
+<b>33.</b> Adversarial Perturbations Fool Deepfake Detectors <a href="https://arxiv.org/pdf/2003.10596" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper33" style="color:#0000EE;">摘要</a><br></div>
+<div id="title34">
+<b>34.</b> Spatio-Temporal Handwriting Imitation <a href="https://arxiv.org/pdf/2003.10593" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper34" style="color:#0000EE;">摘要</a><br></div>
+<div id="title35">
+<b>35.</b> A Simple Fix for Convolutional Neural Network via Coordinate Embedding <a href="https://arxiv.org/pdf/2003.10589" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper35" style="color:#0000EE;">摘要</a><br></div>
+<div id="title36">
+<b>36.</b> Broad Area Search and Detection of Surface-to-Air Missile Sites Using  Spatial Fusion of Component Object Detections from Deep Neural Networks <a href="https://arxiv.org/pdf/2003.10566" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper36" style="color:#0000EE;">摘要</a><br></div>
+<div id="title37">
+<b>37.</b> ScrabbleGAN: Semi-Supervised Varying Length Handwritten Text Generation <a href="https://arxiv.org/pdf/2003.10557" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper37" style="color:#0000EE;">摘要</a><br></div>
+<div id="title38">
+<b>38.</b> Peeking into occluded joints: A novel framework for crowd pose  estimation <a href="https://arxiv.org/pdf/2003.10506" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper38" style="color:#0000EE;">摘要</a><br></div>
+<div id="title39">
+<b>39.</b> Distillating Knowledge from Graph Convolutional Networks <a href="https://arxiv.org/pdf/2003.10477" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper39" style="color:#0000EE;">摘要</a><br></div>
+<div id="title40">
+<b>40.</b> Label Noise Types and Their Effects on Deep Learning <a href="https://arxiv.org/pdf/2003.10471" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper40" style="color:#0000EE;">摘要</a><br></div>
+<div id="title41">
+<b>41.</b> Learning Object Permanence from Video <a href="https://arxiv.org/pdf/2003.10469" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper41" style="color:#0000EE;">摘要</a><br></div>
+<div id="title42">
+<b>42.</b> Tractogram filtering of anatomically non-plausible fibers with geometric  deep learning <a href="https://arxiv.org/pdf/2003.11013" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper42" style="color:#0000EE;">摘要</a><br></div>
+<div id="title43">
+<b>43.</b> Learning to Reconstruct Confocal Microscopy Stacks from Single Light  Field Images <a href="https://arxiv.org/pdf/2003.11004" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper43" style="color:#0000EE;">摘要</a><br></div>
+<div id="title44">
+<b>44.</b> Hybrid Classification and Reasoning for Image-based Constraint Solving <a href="https://arxiv.org/pdf/2003.11001" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper44" style="color:#0000EE;">摘要</a><br></div>
+<div id="title45">
+<b>45.</b> Automatic Detection of Coronavirus Disease (COVID-19) Using X-ray Images  and Deep Convolutional Neural Networks <a href="https://arxiv.org/pdf/2003.10849" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper45" style="color:#0000EE;">摘要</a><br></div>
+<div id="title46">
+<b>46.</b> Re-Training StyleGAN -- A First Step Towards Building Large, Scalable  Synthetic Facial Datasets <a href="https://arxiv.org/pdf/2003.10847" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper46" style="color:#0000EE;">摘要</a><br></div>
+<div id="title47">
+<b>47.</b> SMArtCast: Predicting soil moisture interpolations into the future using  Earth observation data in a deep learning framework <a href="https://arxiv.org/pdf/2003.10823" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper47" style="color:#0000EE;">摘要</a><br></div>
+<div id="title48">
+<b>48.</b> Pre-processing Image using Brightening, CLAHE and RETINEX <a href="https://arxiv.org/pdf/2003.10822" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper48" style="color:#0000EE;">摘要</a><br></div>
+<div id="title49">
+<b>49.</b> Registration by tracking for sequential 2D MRI <a href="https://arxiv.org/pdf/2003.10819" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper49" style="color:#0000EE;">摘要</a><br></div>
+<div id="title50">
+<b>50.</b> PanNuke Dataset Extension, Insights and Baselines <a href="https://arxiv.org/pdf/2003.10778" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper50" style="color:#0000EE;">摘要</a><br></div>
+<div id="title51">
+<b>51.</b> Generating Chinese Poetry from Images via Concrete and Abstract  Information <a href="https://arxiv.org/pdf/2003.10773" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper51" style="color:#0000EE;">摘要</a><br></div>
+<div id="title52">
+<b>52.</b> Estimating Uncertainty and Interpretability in Deep Learning for  Coronavirus (COVID-19) Detection <a href="https://arxiv.org/pdf/2003.10769" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper52" style="color:#0000EE;">摘要</a><br></div>
+<div id="title53">
+<b>53.</b> TeCNO: Surgical Phase Recognition with Multi-Stage Temporal  Convolutional Networks <a href="https://arxiv.org/pdf/2003.10751" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper53" style="color:#0000EE;">摘要</a><br></div>
+<div id="title54">
+<b>54.</b> Organ Segmentation From Full-size CT Images Using Memory-Efficient FCN <a href="https://arxiv.org/pdf/2003.10690" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper54" style="color:#0000EE;">摘要</a><br></div>
+<div id="title55">
+<b>55.</b> Learning regularization and intensity-gradient-based fidelity for single  image super resolution <a href="https://arxiv.org/pdf/2003.10689" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper55" style="color:#0000EE;">摘要</a><br></div>
+<div id="title56">
+<b>56.</b> Robust and On-the-fly Dataset Denoising for Image Classification <a href="https://arxiv.org/pdf/2003.10647" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper56" style="color:#0000EE;">摘要</a><br></div>
+<div id="title57">
+<b>57.</b> Automated Detection of Cribriform Growth Patterns in Prostate Histology  Images <a href="https://arxiv.org/pdf/2003.10543" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper57" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Know Your Surroundings: Exploiting Scene Information for Object Tracking</b>  <a href="https://arxiv.org/pdf/2003.11014" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Bhat%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Goutam Bhat</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Danelljan%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Martin Danelljan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Van+Gool%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Luc Van Gool</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Timofte%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Radu Timofte</a><br>
+<font size="3">
+Abstract: Current state-of-the-art trackers only rely on a target appearance model in order to localize the object in each frame. Such approaches are however prone to fail in case of e.g. fast appearance changes or presence of distractor objects, where a target appearance model alone is insufficient for robust tracking. Having the knowledge about the presence and locations of other objects in the surrounding scene can be highly beneficial in such cases. This scene information can be propagated through the sequence and used to, for instance, explicitly avoid distractor objects and eliminate target candidate regions. In this work, we propose a novel tracking architecture which can utilize scene information for tracking. Our tracker represents such information as dense localized state vectors, which can encode, for example, if the local region is target, background, or distractor. These state vectors are propagated through the sequence and combined with the appearance model output to localize the target. Our network is learned to effectively utilize the scene information by directly maximizing tracking performance on video segments. The proposed approach sets a new state-of-the-art on 3 tracking benchmarks, achieving an AO score of 63.6% on the recent GOT-10k dataset. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：当前状态的最先进的跟踪器仅依赖于目标外观模型以便定位所述对象中的每个帧。此类方法易于然而在例如壳体失败快速外观变化或牵开器对象，其中单独一个目标外观模型是不够的鲁棒跟踪的存在。有关于存在和周围场景中的其他对象的位置的知识在这种情况下，是非常有益的。这个场景的信息可以通过序列传播和使用，例如，明确地避免牵张对象和消除目标候选区域。在这项工作中，我们提出可以利用场景信息来跟踪新的跟踪架构。我们的跟踪器表示这样的信息作为密局域态载体，其可以编码，例如，如果局部区域是目标，背景，或牵开器。这些状态矢量是通过序列传播和与外观模型输出来定位目标相结合。我们的网络是学会有效地利用直接最大限度地提高视频片段跟踪性能的现场信息。所提出的方法设定了3个跟踪基准的新的国家的最先进，实现了对近期GOT-10K数据集的AO得分的63.6％。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Generalizing Spatial Transformers to Projective Geometry with  Applications to 2D/3D Registration</b>  <a href="https://arxiv.org/pdf/2003.10987" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gao%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Cong Gao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xingtong Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gu%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wenhao Gu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Killeen%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Benjamin Killeen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Armand%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mehran Armand</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Taylor%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Russell Taylor</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Unberath%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mathias Unberath</a><br>
+<font size="3">
+Abstract: Differentiable rendering is a technique to connect 3D scenes with corresponding 2D images. Since it is differentiable, processes during image formation can be learned. Previous approaches to differentiable rendering focus on mesh-based representations of 3D scenes, which is inappropriate for medical applications where volumetric, voxelized models are used to represent anatomy. We propose a novel Projective Spatial Transformer module that generalizes spatial transformers to projective geometry, thus enabling differentiable volume rendering. We demonstrate the usefulness of this architecture on the example of 2D/3D registration between radiographs and CT scans. Specifically, we show that our transformer enables end-to-end learning of an image processing and projection model that approximates an image similarity function that is convex with respect to the pose parameters, and can thus be optimized effectively using conventional gradient descent. To the best of our knowledge, this is the first time that spatial transformers have been described for projective geometry. The source code will be made public upon publication of this manuscript and we hope that our developments will benefit related 3D research applications. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：微的渲染是3D的场景对应的2D图像连接的技术。因为它是可微的，在图像形成期间过程可以得知。以前的办法来区分的渲染专注于3D场景，这是不恰当的医疗应用中的体积，体素化模型的基于网格的表示是用来代表解剖。我们建议，推广空间变压器射影几何，从而使微体绘制一个新的射影空间变压器模块。我们证明对X光片和CT扫描之间的2D / 3D配准的示例中，这结构的有用性。具体而言，我们表明，我们的变压器使端至端学习近似的图像的相似性函数是凸面相对于姿态参数的图像处理和投影模型的，并且因此可以使用传统的梯度下降有效地优化。据我们所知，这是空间变压器已为射影几何描述的第一次。源代码将在这个手稿的出版予以公开，但我们希望，我们的发展将有利于相关3D研究中的应用。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Multi-Scale Progressive Fusion Network for Single Image Deraining</b>  <a href="https://arxiv.org/pdf/2003.10985" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Jiang%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kui Jiang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhongyuan Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yi%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peng Yi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chen Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Baojin Huang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Luo%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yimin Luo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ma%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jiayi Ma</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jiang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Junjun Jiang</a><br>
+<font size="3">
+Abstract: Rain streaks in the air appear in various blurring degrees and resolutions due to different distances from their positions to the camera. Similar rain patterns are visible in a rain image as well as its multi-scale (or multi-resolution) versions, which makes it possible to exploit such complementary information for rain streak representation. In this work, we explore the multi-scale collaborative representation for rain streaks from the perspective of input image scales and hierarchical deep features in a unified framework, termed multi-scale progressive fusion network (MSPFN) for single image rain streak removal. For similar rain streaks at different positions, we employ recurrent calculation to capture the global texture, thus allowing to explore the complementary and redundant information at the spatial dimension to characterize target rain streaks. Besides, we construct multi-scale pyramid structure, and further introduce the attention mechanism to guide the fine fusion of this correlated information from different scales. This multi-scale progressive fusion strategy not only promotes the cooperative representation, but also boosts the end-to-end training. Our proposed method is extensively evaluated on several benchmark datasets and achieves state-of-the-art results. Moreover, we conduct experiments on joint deraining, detection, and segmentation tasks, and inspire a new research direction of vision task-driven image deraining. The source code is available at \url{this https URL}. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在空气雨条纹由于从职务上的照相机的距离不同会出现在不同的模糊度和分辨率。类似雨图案是在一场图像以及它的多尺度（或者多分辨率）的版本，这使得有可能利用对雨条纹表示这样的互补信息可见。在这项工作中，我们探索用于从输入图像尺度和层次深特征的在一个统一的框架的透视雨条纹多尺度协同表示，称为单图像雨条纹去除多尺度逐步融合网络（MSPFN）。出于类似的雨条纹在不同的位置，我们采用反复计算来捕获全局纹理，因此允许探索互补和冗余信息在空间维度来表征目标雨条纹。此外，我们建立多尺度金字塔结构，并进一步介绍了注意机制，引导来自不同尺度该关联信息的精细融合。这种多尺度渐进融合策略不仅促进了合作代理，但也提高了终端到终端的培训。我们提出的方法是在几个基准数据集广泛的评估和实现国家的最先进的成果。此外，我们联合deraining，检测和分割任务进行实验，激发视觉任务驱动的图像deraining的一个新的研究方向。源代码可以在\ {URL这HTTPS URL}。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Deep Local Shapes: Learning Local SDF Priors for Detailed 3D  Reconstruction</b>  <a href="https://arxiv.org/pdf/2003.10983" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chabra%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rohan Chabra</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lenssen%2C+J+E" target="_blank" rel="noopener" style="color:#0000EE;">Jan Eric Lenssen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ilg%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Eddy Ilg</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Schmidt%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tanner Schmidt</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Straub%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Julian Straub</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lovegrove%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Steven Lovegrove</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Newcombe%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Richard Newcombe</a><br>
+<font size="3">
+Abstract: Efficiently reconstructing complex and intricate surfaces at scale is a long-standing goal in machine perception. To address this problem we introduce Deep Local Shapes (DeepLS), a deep shape representation that enables encoding and reconstruction of high-quality 3D shapes without prohibitive memory requirements. DeepLS replaces the dense volumetric signed distance function (SDF) representation used in traditional surface reconstruction systems with a set of locally learned continuous SDFs defined by a neural network, inspired by recent work such as DeepSDF. Unlike DeepSDF, which represents an object-level SDF with a neural network and a single latent code, we store a grid of independent latent codes, each responsible for storing information about surfaces in a small local neighborhood. This decomposition of scenes into local shapes simplifies the prior distribution that the network must learn, and also enables efficient inference. We demonstrate the effectiveness and generalization power of DeepLS by showing object shape encoding and reconstructions of full scenes, where DeepLS delivers high compression, accuracy, and local shape completion. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：大规模高效重建错综复杂的表面是机器感知的长期目标。为了解决这个问题，我们引入深本地形状（DeepLS），深形状表示，使编码和高品质的重建三维形状，而不禁止存储器需求。 DeepLS替换传统的表面重建系统中使用的具有一组由神经网络所规定的本地了解到连续的SDF的致密的体积符号距离函数（SDF）表示，由最近的工作启发如DeepSDF。不像DeepSDF，其表示具有一个神经网络和单个潜码的对象级SDF，我们存储的独立潜码的网格，每个负责在一个小的局部邻域中存储关于表面的信息。场景的这种分解成当地的形状简化了先验分布网络必须学习，还能够有效的推断。我们通过显示物体的形状编码和完整的场景，其中DeepLS提供高压缩性，准确性和局部形状完成重建示范DeepLS的有效性和概括能力。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Exploiting Event Cameras by Using a Network Grafting Algorithm</b>  <a href="https://arxiv.org/pdf/2003.10959" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuhuang Hu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Delbruck%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tobi Delbruck</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shih-Chii Liu</a><br>
+<font size="3">
+Abstract: Novel vision sensors such as event cameras provide information that is not available from conventional intensity cameras. An obstacle to using these sensors with current powerful deep neural networks is the lack of large labeled training datasets. This paper proposes a Network Grafting Algorithm (NGA), where a new front end network driven by unconventional visual inputs replaces the front end network of a pretrained deep network that processes intensity frames. The self-supervised training uses only synchronously-recorded intensity frames and novel sensor data to maximize feature similarity between the pretrained network and the grafted network. We show that the enhanced grafted network reaches comparable average precision (AP$_{50}$) scores to the pretrained network on an object detection task using an event camera dataset, with no increase in inference costs. The grafted front end has only 5--8% of the total parameters and can be trained in a few hours on a single GPU equivalent to 5% of the time that would be needed to train the entire object detector from labeled data. NGA allows these new vision sensors to capitalize on previously pretrained powerful deep models, saving on training cost. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：新型视觉传感器，诸如事件摄像机提供不能从常规强度的相机的信息。使用这些传感器与目前的强大深层神经网络的一个障碍是缺乏大标记的训练数据集。本文提出了一种网络接枝算法（NGA），其中，一个新的前端通过网络非常规视觉输入从动替换一个预训练的深网络进程强度帧的前端网络。自监督训练用途仅同步记录的强度的帧的和新颖的传感器数据以最大化预训练网络和所述接枝网络之间的特征的相似性。我们表明，提高移植网络达到媲美平均精度（AP $ _ {50} $）得分上使用事件摄像机数据集对象检测任务预训练的网络，在推理成本没有增加。接枝前端具有仅5-8％的总的参数，并且可以在几小时内对单个GPU相当于将被需要从标记的训练数据的整个对象检测器5％的时间进行训练。 NGA允许这些新的视觉传感器，以利用先前预训练的强大的深度模式，节约了培训成本。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. MaskFlownet: Asymmetric Feature Matching with Learnable Occlusion Mask</b>  <a href="https://arxiv.org/pdf/2003.10955" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shengyu Zhao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sheng%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yilun Sheng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dong%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yue Dong</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chang%2C+E+I" target="_blank" rel="noopener" style="color:#0000EE;">Eric I-Chao Chang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yan Xu</a><br>
+<font size="3">
+Abstract: Feature warping is a core technique in optical flow estimation; however, the ambiguity caused by occluded areas during warping is a major problem that remains unsolved. In this paper, we propose an asymmetric occlusion-aware feature matching module, which can learn a rough occlusion mask that filters useless (occluded) areas immediately after feature warping without any explicit supervision. The proposed module can be easily integrated into end-to-end network architectures and enjoys performance gains while introducing negligible computational cost. The learned occlusion mask can be further fed into a subsequent network cascade with dual feature pyramids with which we achieve state-of-the-art performance. At the time of submission, our method, called MaskFlownet, surpasses all published optical flow methods on the MPI Sintel, KITTI 2012 and 2015 benchmarks. Code is available at this https URL. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：特征翘曲是在光流估计的芯技术;然而，翘曲过程中因封闭区域的不确定性是仍然没有解决的一个重大问题。在本文中，我们提出了一种非对称的闭塞感知功能匹配模块，它可以学习一个粗略的遮挡遮罩，没有任何明确的监督功能扭曲后立即过滤无用（遮挡）的区域。所提出的模块可以很容易地整合到终端到终端的网络架构和享受性能提升，同时引入微不足道的计算成本。所学习的遮挡掩模可以被进一步馈送到与我们实现状态的最先进的高性能双特征金字塔后续网络级联。在提交的时候，我们的方法，称为MaskFlownet，超过上MPI辛特尔，KITTI 2012年和2015年的基准所有已发布的光流法。代码可在此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Learning Compact Reward for Image Captioning</b>  <a href="https://arxiv.org/pdf/2003.10925" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nannan Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhenzhong Chen</a><br>
+<font size="3">
+Abstract: Adversarial learning has shown its advances in generating natural and diverse descriptions in image captioning. However, the learned reward of existing adversarial methods is vague and ill-defined due to the reward ambiguity problem. In this paper, we propose a refined Adversarial Inverse Reinforcement Learning (rAIRL) method to handle the reward ambiguity problem by disentangling reward for each word in a sentence, as well as achieve stable adversarial training by refining the loss function to shift the generator towards Nash equilibrium. In addition, we introduce a conditional term in the loss function to mitigate mode collapse and to increase the diversity of the generated descriptions. Our experiments on MS COCO and Flickr30K show that our method can learn compact reward for image captioning. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：对抗性学习已显示在图像生成字幕天然和多样的描述其进展。然而，现有的对抗方法学习奖励是模糊的，不明确的，由于报酬不明确的问题。在本文中，我们提出了一个精致对抗性逆强化学习（rAIRL）方法解开奖励句子中的每个单词通过细化损失函数发生器向纳什转移到处理报酬不明确的问题，以及实现稳定的对抗性训练平衡。此外，我们引入的损失功能的条件项，以减轻模式崩溃，并增加所产生的描述的多样性。我们对MS COCO和Flickr30K实验表明，我们的方法可以学习图像字幕紧凑奖励。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. RN-VID: A Feature Fusion Architecture for Video Object Detection</b>  <a href="https://arxiv.org/pdf/2003.10898" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Perreault%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hughes Perreault</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=H%C3%A9ritier%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maguelonne Héritier</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gravel%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pierre Gravel</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bilodeau%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guillaume-Alexandre Bilodeau</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Saunier%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nicolas Saunier</a><br>
+<font size="3">
+Abstract: Consecutive frames in a video are highly redundant. Therefore, to perform the task of video object detection, executing single frame detectors on every frame without reusing any information is quite wasteful. It is with this idea in mind that we propose RN-VID, a novel approach to video object detection. Our contributions are twofold. First, we propose a new architecture that allows the usage of information from nearby frames to enhance feature maps. Second, we propose a novel module to merge feature maps of same dimensions using re-ordering of channels and 1 x 1 convolutions. We then demonstrate that RN-VID achieves better mAP than corresponding single frame detectors with little additional cost during inference. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在视频连续帧是高度冗余的。因此，为了执行视频对象检测的任务，每帧上执行的单个帧的检测器没有任何复用信息是相当浪费的。正是带着这种想法记住，我们提出RN-VID，一种新的方法，以视频对象检测。我们的贡献是双重的。首先，我们提出了一个新的架构，允许从附近的帧的信息的使用，以增强功能的地图。其次，我们建议使用渠道的重新排序和1轮1匝相同尺寸的新模块，合并功能映射。然后，我们证明了RN-VID实现比推理过程中相应的很少额外费用单帧探测器更好的地图。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. Do We Need Depth in State-Of-The-Art Face Authentication?</b>  <a href="https://arxiv.org/pdf/2003.10895" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Livne%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Amir Livne</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bronstein%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alex Bronstein</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kimmel%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ron Kimmel</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Aviv%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Ziv Aviv</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Grofit%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shahaf Grofit</a><br>
+<font size="3">
+Abstract: Some face recognition methods are designed to utilize geometric features extracted from depth sensors to handle the challenges of single-image based recognition technologies. However, calculating the geometrical data is an expensive and challenging process. Here, we introduce a novel method that learns distinctive geometric features from stereo camera systems without the need to explicitly compute the facial surface or depth map. The raw face stereo images along with coordinate maps allow a CNN to learn geometric features. This way, we keep the simplicity and cost efficiency of recognition from a single image, while enjoying the benefits of geometric data without explicitly reconstructing it. We demonstrate that the suggested method outperforms both existing single-image and explicit depth based methods on large-scale benchmarks. We also provide an ablation study to show that the suggested method uses the coordinate maps to encode more informative features. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：某些面部识别方法被设计成利用来自深度传感器提取到处理单图像基于识别技术的挑战几何特征。然而，计算所述几何数据是昂贵且具有挑战性的过程。在这里，我们引入学习从立体摄像机系统独特的几何特征，而不需要明确地计算面部表面或深度图的新方法。用坐标图沿原始面部立体图像允许CNN学习几何特征。这样一来，我们不断认识的简单性和成本效益，从一个单一的形象，同时享受几何数据的好处，而不明确地重建它。我们表明，所提出的方法性能优于现有的单图像和大规模基准明确的基于深度的方法。我们还提供消融研究表明，所建议的方法使用的坐标映射到编码信息更丰富的功能。</font>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. EllipBody: A Light-weight and Part-based Representation for Human Pose  and Shape Recovery</b>  <a href="https://arxiv.org/pdf/2003.10873" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Min Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Qiu%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Feng Qiu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wentao Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Qian%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chen Qian</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhou%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaowei Zhou</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ma%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lizhuang Ma</a><br>
+<font size="3">
+Abstract: Human pose and shape recovery is an important task in computer vision and real-world understanding. Current works are tackled due to the lack of 3D annotations for whole body shapes. We find that part segmentation is a very efficient 2D annotation in 3D human body recovery. It not only indicates the location of each part but also contains 3D information through occlusions from the shape of parts, as indicated in Figure 1. To better utilize 3D information contained in part segmentation, we propose a part-level differentiable renderer which model occlusion between parts explicitly. It enhances the performance in both learning-based and optimization-based methods. To further improve the efficiency of the task, we propose a light-weight body model called EllipBody, which uses ellipsoids to indicate each body part. Together with SMPL, the relationship between forward time, performance and number of faces in body models are analyzed. A small number of faces is chosen for achieving good performance and efficiency at the same time. Extensive experiments show that our methods achieve the state-of-the-art results on Human3.6M and LSP dataset for 3D pose estimation and part segmentation. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：人体姿势和形状恢复是计算机视觉和现实世界的认识的重要任务。目前的作品被解决由于缺乏3D注解整个身体的形状。我们发现，部分分割是三维人体恢复的非常有效的2D注释。它不仅表示各部分的位置，但也包含通过从零件的形状闭塞3D信息，如图1所示。为了更好地利用3D信息中包含的部分分割，我们提出了一个部件级微分渲染器之间哪个模型闭塞部分明确。它增强了双方基于优化的学习基础和方法的性能。为了进一步提高工作效率，我们提出了一个重量轻的人体模型称为EllipBody，它采用椭圆体来表示每个身体部位。加上SMPL之间转发时间，性能和人体模型面数的关系进行了分析。被选择的面孔少数用于同时实现良好的性能和效率。大量的实验表明，我们的方法实现对Human3.6M和LSP数据集的国家的最先进的结果三维姿态估计和部分分割。</font>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. Dynamic Reconstruction of Deformable Soft-tissue with Stereo Scope in  Minimal Invasive Surgery</b>  <a href="https://arxiv.org/pdf/2003.10867" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Song%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jingwei Song</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jun Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Liang Zhao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shoudong Huang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dissanayake%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gamini Dissanayake</a><br>
+<font size="3">
+Abstract: In minimal invasive surgery, it is important to rebuild and visualize the latest deformed shape of soft-tissue surfaces to mitigate tissue damages. This paper proposes an innovative Simultaneous Localization and Mapping (SLAM) algorithm for deformable dense reconstruction of surfaces using a sequence of images from a stereoscope. We introduce a warping field based on the Embedded Deformation (ED) nodes with 3D shapes recovered from consecutive pairs of stereo images. The warping field is estimated by deforming the last updated model to the current live model. Our SLAM system can: (1) Incrementally build a live model by progressively fusing new observations with vivid accurate texture. (2) Estimate the deformed shape of unobserved region with the principle As-Rigid-As-Possible. (3) Show the consecutive shape of models. (4) Estimate the current relative pose between the soft-tissue and the scope. In-vivo experiments with publicly available datasets demonstrate that the 3D models can be incrementally built for different soft-tissues with different deformations from sequences of stereo images obtained by laparoscopes. Results show the potential clinical application of our SLAM system for providing surgeon useful shape and texture information in minimal invasive surgery. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在微创手术中，以重建和可视化的软组织表面的最新变形形状来减轻组织损伤是重要的。本文提出了一种创新的同步定位和地图创建（SLAM），用于可变形致密重建使用图像的序列从立体镜表面的算法。我们介绍了基于嵌入式变形（ED）翘曲场的3D形状节点从连续对立体图像的恢复。翘曲场由上次更新模型当前真人模特变形估计。我们的SLAM系统能：（1）通过增量逐步融合新的观测以生动准确的质地打造真人模特。 （2）与所述原理AS-刚性 - 砷 - 可能的估计未观测到的区域的变形形状。 （3）显示的模型的连续形状。 （4）估算软组织和范围之间的当前相对姿势。在体内与公开可用的数据集实验表明，该3D模型可以递增建为不同的软组织与来自通过腹腔镜获得的立体图像的序列不同的变形。结果表明我们的SLAM系统，用于微创手术外科医生提供有用的形状和纹理信息的潜在临床应用。</font>
+</div>
+
+
+<hr>
+<div id="paper12"> <b>12. Bone Structures Extraction and Enhancement in Chest Radiographs via CNN  Trained on Synthetic Data</b>  <a href="https://arxiv.org/pdf/2003.10839" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title12" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gozes%2C+O" target="_blank" rel="noopener" style="color:#0000EE;">Ophir Gozes</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Greenspan%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hayit Greenspan</a><br>
+<font size="3">
+Abstract: In this paper, we present a deep learning-based image processing technique for extraction of bone structures in chest radiographs using a U-Net FCNN. The U-Net was trained to accomplish the task in a fully supervised setting. To create the training image pairs, we employed simulated X-Ray or Digitally Reconstructed Radiographs (DRR), derived from 664 CT scans belonging to the LIDC-IDRI dataset. Using HU based segmentation of bone structures in the CT domain, a synthetic 2D "Bone x-ray" DRR is produced and used for training the network. For the reconstruction loss, we utilize two loss functions- L1 Loss and perceptual loss. Once the bone structures are extracted, the original image can be enhanced by fusing the original input x-ray and the synthesized "Bone X-ray". We show that our enhancement technique is applicable to real x-ray data, and display our results on the NIH Chest X-Ray-14 dataset. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本文中，我们提出了一个深基于学习的图像处理技术用于使用一个U净FCNN胸片的骨结构的提取。 U型网络被训练来完成任务的全面监督的环境。为了创建训练图像对，我们采用模拟X射线或数字重建射线照片（DRR），从664 CT扫瞄属于LIDC-IDRI数据集导出的。在CT域中使用的骨结构的HU基于分割，合成的2D“骨X线” DRR产生并用于训练网络。对于重建的损失，我们利用两个损失职能 -  L1损失和知觉丧失。一旦骨结构被提取，原始图像可以通过将原始输入x射线并且将合成的“骨透视”来增强。我们证明了我们的增强技术适用于真正的X射线数据，并显示我们对NIH胸部X光-14数据集的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper13"> <b>13. Palm-GAN: Generating Realistic Palmprint Images Using Total-Variation  Regularized GAN</b>  <a href="https://arxiv.org/pdf/2003.10834" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title13" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Minaee%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shervin Minaee</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Minaei%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mehdi Minaei</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Abdolrashidi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Amirali Abdolrashidi</a><br>
+<font size="3">
+Abstract: Generating realistic palmprint (more generally biometric) images has always been an interesting and, at the same time, challenging problem. Classical statistical models fail to generate realistic-looking palmprint images, as they are not powerful enough to capture the complicated texture representation of palmprint images. In this work, we present a deep learning framework based on generative adversarial networks (GAN), which is able to generate realistic palmprint images. To help the model learn more realistic images, we proposed to add a suitable regularization to the loss function, which imposes the line connectivity of generated palmprint images. This is very desirable for palmprints, as the principal lines in palm are usually connected. We apply this framework to a popular palmprint databases, and generate images which look very realistic, and similar to the samples in this database. Through experimental results, we show that the generated palmprint images look very realistic, have a good diversity, and are able to capture different parts of the prior distribution. We also report the Frechet Inception distance (FID) of the proposed model, and show that our model is able to achieve really good quantitative performance in terms of FID score. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：生成逼真的掌纹（更普遍的生物特征）的图像一直是一个有趣的，在同一时间，具有挑战性的问题。古典统计模型不能产生逼真的图像掌纹，因为他们没有足够强大的拍摄掌纹图像的复杂纹理表示。在这项工作中，我们提出了基于生成对抗网络（GAN）深的学习框架，它能够产生逼真的掌纹图像。为了帮助学习之典范图像更逼真，我们提出一个合适的正则增加了损失函数强行产生的掌纹图像的线连接。这是非常掌纹希望的，因为在手掌上的主要线通常连接。我们应用这个框架来流行的掌纹数据库，并生成看起来非常逼真，和类似于此数据库中的样本图像。通过实验结果，我们表明，生成的图像掌纹看非常逼真，有良好的多样性，能够捕捉到先验分布的不同部分。我们还报告了该模型的弗雷谢盗梦空间距离（FID），并表明我们的模型能够实现FID得分方面确实不错定量绩效。</font>
+</div>
+
+
+<hr>
+<div id="paper14"> <b>14. DeepFit: 3D Surface Fitting via Neural Network Weighted Least Squares</b>  <a href="https://arxiv.org/pdf/2003.10826" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title14" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ben-Shabat%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yizhak Ben-Shabat</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gould%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Stephen Gould</a><br>
+<font size="3">
+Abstract: We propose a surface fitting method for unstructured 3D point clouds. This method, called DeepFit, incorporates a neural network to learn point-wise weights for weighted least squares polynomial surface fitting. The learned weights act as a soft selection for the neighborhood of surface points thus avoiding the scale selection required of previous methods. To train the network we propose a novel surface consistency loss that improves point weight estimation. The method enables extracting normal vectors and other geometrical properties, such as principal curvatures, the latter were not presented as ground truth during training. We achieve state-of-the-art results on a benchmark normal and curvature estimation dataset, demonstrate robustness to noise, outliers and density variations, and show its application on noise removal. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们提出非结构化的三维点云的表面拟合方法。该方法中，称为DeepFit，采用了神经网络去学习加权最小二乘多项式曲面拟合逐点的权重。该学会的权重作为一个软选择用于从而避免了以前的方法所需的规模选择面点附近。对网络进行训练，我们提出改善点权重估计的新型表面一致性的损失。该方法能够提取法向矢量和其他几何性质，例如主曲率，后者没有在训练期间呈现为基础事实。我们达到上基准正常和曲率估计数据集中的国家的最先进的结果，证明鲁棒性噪声，异常值和密度的变化，并显示其上的噪声去除的应用程序。</font>
+</div>
+
+
+<hr>
+<div id="paper15"> <b>15. Toward Accurate and Realistic Virtual Try-on Through Shape Matching and  Multiple Warps</b>  <a href="https://arxiv.org/pdf/2003.10817" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title15" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kedan Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chong%2C+M+J" target="_blank" rel="noopener" style="color:#0000EE;">Min Jin Chong</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jingen Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Forsyth%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">David Forsyth</a><br>
+<font size="3">
+Abstract: A virtual try-on method takes a product image and an image of a model and produces an image of the model wearing the product. Most methods essentially compute warps from the product image to the model image and combine using image generation methods. However, obtaining a realistic image is challenging because the kinematics of garments is complex and because outline, texture, and shading cues in the image reveal errors to human viewers. The garment must have appropriate drapes; texture must be warped to be consistent with the shape of a draped garment; small details (buttons, collars, lapels, pockets, etc.) must be placed appropriately on the garment, and so on. Evaluation is particularly difficult and is usually qualitative. This paper uses quantitative evaluation on a challenging, novel dataset to demonstrate that (a) for any warping method, one can choose target models automatically to improve results, and (b) learning multiple coordinated specialized warpers offers further improvements on results. Target models are chosen by a learned embedding procedure that predicts a representation of the products the model is wearing. This prediction is used to match products to models. Specialized warpers are trained by a method that encourages a second warper to perform well in locations where the first works poorly. The warps are then combined using a U-Net. Qualitative evaluation confirms that these improvements are wholesale over outline, texture shading, and garment details. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：虚拟试穿方法采用产品图像和模型的图像并产生模型穿着的产品的图像。大多数方法基本上是从产品形象模型图像计算经纱和使用图像生成方法相结合。然而，获得逼真的图像是具有挑战性的，因为服装的运动是复杂的，因为外形，纹理和阴影图像中的线索显示错误人类观察者。服装必须有适当的窗帘;纹理必须扭曲成与一个披服装的形状相一致;小细节（按钮，项圈，翻领，口袋等）必须被适当地放置在衣服，等等。评估是特别困难的，通常是定性的。本文采用一个挑战，新的数据集定量评价证明（一）任何扭曲方法，可以自动选择目标模式，以改善结果，并在结果（二）学习多专业协调提供整经机进一步改善。目标模型是由预测模型穿着的产品的表示得知嵌入程序选择。这个预测是用来匹配的产品型号。专业整经机是由鼓励第二个整经机中的位置，其中第一部作品表现不佳以及方法的培训。然后经纱使用的是U形网相结合。定性评估证实，这些改进是批发了轮廓，纹理着色和服装细节。</font>
+</div>
+
+
+<hr>
+<div id="paper16"> <b>16. Dataset Cleaning -- A Cross Validation Methodology for Large Facial  Datasets using Face Recognition</b>  <a href="https://arxiv.org/pdf/2003.10815" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title16" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Varkarakis%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Viktor Varkarakis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Corcoran%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peter Corcoran</a><br>
+<font size="3">
+Abstract: In recent years, large "in the wild" face datasets have been released in an attempt to facilitate progress in tasks such as face detection, face recognition, and other tasks. Most of these datasets are acquired from webpages with automatic procedures. As a consequence, noisy data are often found. Furthermore, in these large face datasets, the annotation of identities is important as they are used for training face recognition algorithms. But due to the automatic way of gathering these datasets and due to their large size, many identities folder contain mislabeled samples which deteriorates the quality of the datasets. In this work, it is presented a semi-automatic method for cleaning the noisy large face datasets with the use of face recognition. This methodology is applied to clean the CelebA dataset and show its effectiveness. Furthermore, the list with the mislabelled samples in the CelebA dataset is made available. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：近年来，大“在野外”面子数据集已经在试图促进任务，如人脸检测，人脸识别，和其他任务的进展公布。大多数这些数据集是由自动程序的网页获得的。因此，嘈杂的数据经常被发现。此外，在这些大脸数据集，因为它们是用于训练面部识别算法的标识的标注是非常重要的。但由于收集这些数据集和自动的方式，由于其规模大，众多的身份文件夹包含错误标记这会降低数据集的质量采样。在这项工作中，它提出了一种用于通过使用面部识别的清洁嘈杂大面数据集半自动方法。这种方法适用于清洁CelebA数据集，并显示其有效性。此外，在CelebA数据集中的贴错标签的样本列表中可用。</font>
+</div>
+
+
+<hr>
+<div id="paper17"> <b>17. Rethinking Class-Balanced Methods for Long-Tailed Visual Recognition  from a Domain Adaptation Perspective</b>  <a href="https://arxiv.org/pdf/2003.10780" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title17" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Jamal%2C+M+A" target="_blank" rel="noopener" style="color:#0000EE;">Muhammad Abdullah Jamal</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Brown%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Matthew Brown</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Ming-Hsuan Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Liqiang Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gong%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Boqing Gong</a><br>
+<font size="3">
+Abstract: Object frequency in the real world often follows a power law, leading to a mismatch between datasets with long-tailed class distributions seen by a machine learning model and our expectation of the model to perform well on all classes. We analyze this mismatch from a domain adaptation point of view. First of all, we connect existing class-balanced methods for long-tailed classification to target shift, a well-studied scenario in domain adaptation. The connection reveals that these methods implicitly assume that the training data and test data share the same class-conditioned distribution, which does not hold in general and especially for the tail classes. While a head class could contain abundant and diverse training examples that well represent the expected data at inference time, the tail classes are often short of representative training data. To this end, we propose to augment the classic class-balanced learning by explicitly estimating the differences between the class-conditioned distributions with a meta-learning approach. We validate our approach with six benchmark datasets and three loss functions. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在现实世界中对象的频率往往遵循幂律，导致与机器学习模型，我们对模型的期望观察到在所有类表现良好长尾类分布数据集之间的不匹配。我们分析从一个领域适应性点这种不匹配。首先，我们连接现有的长尾分类目标的转变，在领域适应性良好的学习情景类的平衡方法。连接表明这些方法隐含地假定训练数据和测试数据共享同一个类空调的分布，不一般，尤其是对尾班举行。虽然头类可以包含丰富多样的训练例子是较好的代表在推理时预期的数据，尾班往往代表短训练数据。为此，我们建议通过明确估计与元学习方法的类空调的分布之间的差异，以增加经典类平衡学习。我们确认我们有六个标准数据集和三个损失函数的方法。</font>
+</div>
+
+
+<hr>
+<div id="paper18"> <b>18. Two-Step Surface Damage Detection Scheme using Convolutional Neural  Network and Artificial Neural Neural</b>  <a href="https://arxiv.org/pdf/2003.10760" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title18" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+A+Y" target="_blank" rel="noopener" style="color:#0000EE;">Alice Yi Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cheng%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Ling Cheng</a><br>
+<font size="3">
+Abstract: Surface damage on concrete is important as the damage can affect the structural integrity of the structure. This paper proposes a two-step surface damage detection scheme using Convolutional Neural Network (CNN) and Artificial Neural Network (ANN). The CNN classifies given input images into two categories: positive and negative. The positive category is where the surface damage is present within the image, otherwise the image is classified as negative. This is an image-based classification. The ANN accepts image inputs that have been classified as positive by the ANN. This reduces the number of images that are further processed by the ANN. The ANN performs feature-based classification, in which the features are extracted from the detected edges within the image. The edges are detected using Canny edge detection. A total of 19 features are extracted from the detected edges. These features are inputs into the ANN. The purpose of the ANN is to highlight only the positive damaged edges within the image. The CNN achieves an accuracy of 80.7% for image classification and the ANN achieves an accuracy of 98.1% for surface detection. The decreased accuracy in the CNN is due to the false positive detection, however false positives are tolerated whereas false negatives are not. The false negative detection for both CNN and ANN in the two-step scheme are 0%. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：对混凝土表面损伤是重要的，因为损坏能够影响该结构的结构完整性。本文提出使用卷积神经网络（CNN）和人工神经网络（ANN）的两步表面损伤检测方案。的CNN进行分类给定的输入图像分为两类：阳性和阴性。正类别是在表面损坏是图像中存在，否则图像被分类为负。这是一种基于图像的分类。人工神经网络接受已被分类为通过ANN正面图像的输入。这减少了由ANN进一步处理的图像的数目。人工神经网络进行基于特征的分类，其中，所述特征从图像内的检测到的边缘提取。边缘被使用Canny边缘检测来检测。共有19个特征从所检测的边缘提取。这些特征是输入到ANN。人工神经网络的目的是突出只有图像内的正损坏的边缘。 CNN的实现的80.7％的准确度进行图像分类和ANN实现了98.1％用于表面检测的精度。在由于假阳性检测在CNN精度下降，但是假阳性被容忍而假阴性则不是。在两步方案的假阴性检测两个CNN和ANN是0％。</font>
+</div>
+
+
+<hr>
+<div id="paper19"> <b>19. FADNet: A Fast and Accurate Network for Disparity Estimation</b>  <a href="https://arxiv.org/pdf/2003.10758" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title19" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qiang Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shi%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shaohuai Shi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zheng%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shizhen Zheng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kaiyong Zhao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaowen Chu</a><br>
+<font size="3">
+Abstract: Deep neural networks (DNNs) have achieved great success in the area of computer vision. The disparity estimation problem tends to be addressed by DNNs which achieve much better prediction accuracy in stereo matching than traditional hand-crafted feature based methods. On one hand, however, the designed DNNs require significant memory and computation resources to accurately predict the disparity, especially for those 3D convolution based networks, which makes it difficult for deployment in real-time applications. On the other hand, existing computation-efficient networks lack expression capability in large-scale datasets so that they cannot make an accurate prediction in many scenarios. To this end, we propose an efficient and accurate deep network for disparity estimation named FADNet with three main features: 1) It exploits efficient 2D based correlation layers with stacked blocks to preserve fast computation; 2) It combines the residual structures to make the deeper model easier to learn; 3) It contains multi-scale predictions so as to exploit a multi-scale weight scheduling training technique to improve the accuracy. We conduct experiments to demonstrate the effectiveness of FADNet on two popular datasets, Scene Flow and KITTI 2015. Experimental results show that FADNet achieves state-of-the-art prediction accuracy, and runs at a significant order of magnitude faster speed than existing 3D models. The codes of FADNet are available at this https URL. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：深层神经网络（DNNs）已经在计算机视觉领域取得了巨大的成功。视差估计问题往往通过实现比传统的手工制作的基于特征的方法立体匹配更好的预测精度DNNs加以解决。一方面，然而，设计DNNs需要显著存储和计算资源，准确预测的差距，特别是对那些基于3D卷积网络，这使得它很难在实时应用程序的部署。在另一方面，现有的计算效率的网络缺乏大规模数据集的表达能力，使他们无法在很多情况下做出准确的预测。为此，我们提出了一个名为FADNet有三个主要特征差异估算的有效和准确的深网：1）它利用高效的2D基于相关层，叠块以保留快速计算; 2）它结合了残余结构，使更深层次的模型更容易学习; 3）它包含多尺度预测以便利用多尺度重量调度训练技术，以提高精度。我们进行实验来证明两个流行的数据集FADNet的效果，场景流量和KITTI 2015年实验结果表明，FADNet实现国家的最先进的预测精度，并在幅度的显著顺序运行更快的速度比现有的3D模型。 FADNet的代码可在此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper20"> <b>20. Scalable learning for bridging the species gap in image-based plant  phenotyping</b>  <a href="https://arxiv.org/pdf/2003.10757" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title20" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ward%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Daniel Ward</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Moghadam%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peyman Moghadam</a><br>
+<font size="3">
+Abstract: The traditional paradigm of applying deep learning -- collect, annotate and train on data -- is not applicable to image-based plant phenotyping as almost 400,000 different plant species exists. Data costs include growing physical samples, imaging and labelling them. Model performance is impacted by the species gap between the domain of each plant species, it is not generalisable and may not transfer to unseen plant species. In this paper, we investigate the use of synthetic data for leaf instance segmentation. We study multiple synthetic data training regimes using Mask-RCNN when few or no annotated real data is available. We also present UPGen: a Universal Plant Generator for bridging the species gap. UPGen leverages domain randomisation to produce widely distributed data samples and models stochastic biological variation. Our methods outperform standard practices, such as transfer learning from publicly available plant data, by 26.6% and 51.46% on two unseen plant species respectively. We benchmark UPGen by competing in the CVPPP Leaf Segmentation Challenge and set a new state-of-the-art, a mean of 88% across A1-4 test datasets. This study is applicable to use of synthetic data for automating the measurement of phenotypic traits. Our synthetic dataset and pretrained model are available at this https URL. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在应用深度学习的传统模式 - 收集，注释和数据火车 - 是不是适用于基于图像的植物表型，因为几乎400,000种不同的植物物种存在。数据成本包括生长实物样品，成像和标记它们。模型的性能是由每种植物物种的结构域之间的间隙物种的影响，它是不普遍意义，并且可以不转移到看不见植物物种。在本文中，我们探讨叶例如分割使用合成的数据。我们使用面膜时RCNN很少或没有标注的真实数据可研究多种合成数据的培训制度。我们还提出UPGen：通用厂房发电机为缩小差距的物种。 UPGen杠杆域随机产生广泛分布的数据样本和模型的随机变异生物。我们的方法优于标准的做法，如从公开的数据工厂分别在传送学习，26.6％和两个看不见的植物种类51.46％。我们的基准UPGen由CVPPP叶分割挑战竞争，并设置一个新的国家的最先进的，平均的跨A1-4测试数据集的88％。这项研究是适用于使用合成的数据的自动化的表型性状的测量。我们的合成数据集和预训练的模型可在此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper21"> <b>21. Dynamic Hierarchical Mimicking Towards Consistent Optimization  Objectives</b>  <a href="https://arxiv.org/pdf/2003.10739" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title21" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Duo Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qifeng Chen</a><br>
+<font size="3">
+Abstract: While the depth of modern Convolutional Neural Networks (CNNs) surpasses that of the pioneering networks with a significant margin, the traditional way of appending supervision only over the final classifier and progressively propagating gradient flow upstream remains the training mainstay. Seminal Deeply-Supervised Networks (DSN) were proposed to alleviate the difficulty of optimization arising from gradient flow through a long chain. However, it is still vulnerable to issues including interference to the hierarchical representation generation process and inconsistent optimization objectives, as illustrated theoretically and empirically in this paper. Complementary to previous training strategies, we propose Dynamic Hierarchical Mimicking, a generic feature learning mechanism, to advance CNN training with enhanced generalization ability. Partially inspired by DSN, we fork delicately designed side branches from the intermediate layers of a given neural network. Each branch can emerge from certain locations of the main branch dynamically, which not only retains representation rooted in the backbone network but also generates more diverse representations along its own pathway. We go one step further to promote multi-level interactions among different branches through an optimization formula with probabilistic prediction matching losses, thus guaranteeing a more robust optimization process and better representation ability. Experiments on both category and instance recognition tasks demonstrate the substantial improvements of our proposed method over its corresponding counterparts using diverse state-of-the-art CNN architectures. Code and models are publicly available at this https URL </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：虽然现代卷积神经网络（细胞神经网络）的深度超过与一个显著保证金开拓网络，仅在最终的分类追加监督，并逐步传播梯度流动上游的传统方式仍然是培训主体。精液深监督网络（DSN）提出以减轻通过长链从梯度流产生优化的困难。然而，它仍然是脆弱的问题，包括干扰到分层表示生成过程和不一致的优化目标，如本文所示理论和实证。为了补充先前的训练策略，我们提出了动态层次型仿，通用的特点学习机制，推进CNN培训，提高泛化能力。通过从给定的神经网络的中间层DSN，我们叉精心设计侧分支部分的启发。每个分支可以从动态的主要分支的某些位置，它不仅保留表示扎根在骨干网中，但也产生了沿其自身的途径更多样化的表示出来。我们进一步走一步通过与概率预测匹配损失的优化配方，以促进不同分支之间的多级交互，从而保证了更鲁棒性优化处理，更好的表现能力。两个类别，例如识别任务实验证明在使用不同的国家的最先进的CNN结构及其相应的同行我们提出的方法的显着改善。代码和模式是公开的，在此HTTPS URL</font>
+</div>
+
+
+<hr>
+<div id="paper22"> <b>22. Deep Line Art Video Colorization with a Few References</b>  <a href="https://arxiv.org/pdf/2003.10685" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title22" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Shi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Min Shi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jia-Qi Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shu-Yu Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gao%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lin Gao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lai%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yu-Kun Lai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Fang-Lue Zhang</a><br>
+<font size="3">
+Abstract: Coloring line art images based on the colors of reference images is an important stage in animation production, which is time-consuming and tedious. In this paper, we propose a deep architecture to automatically color line art videos with the same color style as the given reference images. Our framework consists of a color transform network and a temporal constraint network. The color transform network takes the target line art images as well as the line art and color images of one or more reference images as input, and generates corresponding target color images. To cope with larger differences between the target line art image and reference color images, our architecture utilizes non-local similarity matching to determine the region correspondences between the target image and the reference images, which are used to transform the local color information from the references to the target. To ensure global color style consistency, we further incorporate Adaptive Instance Normalization (AdaIN) with the transformation parameters obtained from a style embedding vector that describes the global color style of the references, extracted by an embedder. The temporal constraint network takes the reference images and the target image together in chronological order, and learns the spatiotemporal features through 3D convolution to ensure the temporal consistency of the target image and the reference image. Our model can achieve even better coloring results by fine-tuning the parameters with only a small amount of samples when dealing with an animation of a new style. To evaluate our method, we build a line art coloring dataset. Experiments show that our method achieves the best performance on line art video coloring compared to the state-of-the-art methods and other baselines. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：着色基于参考图像上的颜色艺术线条是在动画制作，这是耗时且繁琐的一个重要阶段。在本文中，我们提出了一个深刻的架构，搭配同色系的风格为给定的参考图像自动彩色线条艺术影片。我们的框架是由彩色变换网络和时间约束网络。颜色变换网络取目标艺术线条以及艺术线条和彩色图像的一个或多个参考图像作为输入，并且生成相应的目标彩色图像。为了应对目标线画图像和参考彩色图像之间的较大差异，我们的体系结构利用非局部相似性匹配，以确定目标图像和参考图像，这是用来从引用变换局部颜色信息之间的区域对应到目标。为了确保全局颜色样式一致，我们进一步用从描述的参考文献的全局颜色样式，由嵌入器提取的风格嵌入矢量得到的变换参数纳入自适应实例正常化（AdaIN）。时间约束网络需要参考图像和目标图像一起按时间顺序，并获知通过三维卷积时空功能，以确保目标图像的和时间一致性的参考图像。我们的模型甚至可以达到更好的新的风格的动画打交道时通过微调着色结果的参数，只有样本量小。为了评估我们的方法，我们建立了一个艺术线条着色的数据集。实验表明，我们的方法实现相比，国家的最先进的方法和其它基准线艺术视频着色最佳性能。</font>
+</div>
+
+
+<hr>
+<div id="paper23"> <b>23. Real-time 3D object proposal generation and classification under limited  processing resources</b>  <a href="https://arxiv.org/pdf/2003.10670" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title23" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xuesong Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Guivant%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jose Guivant</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Khan%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Subhan Khan</a><br>
+<font size="3">
+Abstract: The task of detecting 3D objects is important to various robotic applications. The existing deep learning-based detection techniques have achieved impressive performance. However, these techniques are limited to run with a graphics processing unit (GPU) in a real-time environment. To achieve real-time 3D object detection with limited computational resources for robots, we propose an efficient detection method consisting of 3D proposal generation and classification. The proposal generation is mainly based on point segmentation, while the proposal classification is performed by a lightweight convolution neural network (CNN) model. To validate our method, KITTI datasets are utilized. The experimental results demonstrate the capability of proposed real-time 3D object detection method from the point cloud with a competitive performance of object recall and classification. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：检测三维物体的任务是各种机器人应用很重要。现有的深基于学习的检测技术都取得了骄人的业绩。然而，这些技术仅限于与图形在实时环境中处理单元（GPU）上运行。为了实现实时立体物检测与机器人的计算资源有限，我们建议由3D方案生成和分类的有效检测方法。该建议生成主要是基于点分割，而建议的分类是由轻质卷积神经网络（CNN）模型进行的。为了验证我们的方法，KITTI数据集被利用。实验结果表明，从点云与对象的召回和分类的有竞争力的性能提出了实时三维物体检测方法的能力。</font>
+</div>
+
+
+<hr>
+<div id="paper24"> <b>24. On Localizing a Camera from a Single Image</b>  <a href="https://arxiv.org/pdf/2003.10664" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title24" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ghosh%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pradipta Ghosh</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaochen Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Qiu%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hang Qiu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Vieira%2C+M+A+M" target="_blank" rel="noopener" style="color:#0000EE;">Marcos A. M. Vieira</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sukhatme%2C+G+S" target="_blank" rel="noopener" style="color:#0000EE;">Gaurav S. Sukhatme</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Govindan%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ramesh Govindan</a><br>
+<font size="3">
+Abstract: Public cameras often have limited metadata describing their attributes. A key missing attribute is the precise location of the camera, using which it is possible to precisely pinpoint the location of events seen in the camera. In this paper, we explore the following question: under what conditions is it possible to estimate the location of a camera from a single image taken by the camera? We show that, using a judicious combination of projective geometry, neural networks, and crowd-sourced annotations from human workers, it is possible to position 95% of the images in our test data set to within 12 m. This performance is two orders of magnitude better than PoseNet, a state-of-the-art neural network that, when trained on a large corpus of images in an area, can estimate the pose of a single image. Finally, we show that the camera's inferred position and intrinsic parameters can help design a number of virtual sensors, all of which are reasonably accurate. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：公共相机往往有一个描述其属性有限的元数据。缺少的关键属性是摄像头的精确位置，使用它可以精确地查明相机看到事件的位置。在本文中，我们将探讨以下问题：在什么条件下，才有可能从摄像机拍摄单个图像估计摄像机的位置？我们表明，使用投影几何，神经网络，以及来自于人类的工人人群来源注解的明智组合，有可能取代95％在我们的测试数据集的图像到12米以内。这表现了两个数量级比PoseNet，即，在一个区的大型语料库的图像训练的时候，可以估算单个图像的姿态一个国家的最先进的神经网络更好。最后，我们表明，相机的推断位置和内部参数可以帮助设计一些虚拟传感器，所有这些都是相当准确的。</font>
+</div>
+
+
+<hr>
+<div id="paper25"> <b>25. Modeling Cross-view Interaction Consistency for Paired Egocentric  Interaction Recognition</b>  <a href="https://arxiv.org/pdf/2003.10663" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title25" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhongguo Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lyu%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Fan Lyu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Feng%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wei Feng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Song Wang</a><br>
+<font size="3">
+Abstract: With the development of Augmented Reality (AR), egocentric action recognition (EAR) plays important role in accurately understanding demands from the user. However, EAR is designed to help recognize human-machine interaction in single egocentric view, thus difficult to capture interactions between two face-to-face AR users. Paired egocentric interaction recognition (PEIR) is the task to collaboratively recognize the interactions between two persons with the videos in their corresponding views. Unfortunately, existing PEIR methods always directly use linear decision function to fuse the features extracted from two corresponding egocentric videos, which ignore consistency of interaction in paired egocentric videos. The consistency of interactions in paired videos, and features extracted from them are correlated to each other. On top of that, we propose to build the relevance between two views using biliear pooling, which capture the consistency of two views in feature-level. Specifically, each neuron in the feature maps from one view connects to the neurons from another view, which guarantee the compact consistency between two views. Then all possible paired neurons are used for PEIR for the inside consistent information of them. To be efficient, we use compact bilinear pooling with Count Sketch to avoid directly computing outer product in bilinear. Experimental results on dataset PEV shows the superiority of the proposed methods on the task PEIR. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：增强现实（AR）的发展，自我中心的行为识别（EAR）起着从用户准确地理解需求重要的作用。然而，EAR旨在帮助识别单自我中心观点人机交互，因而难以捕捉的交互两人的脸对脸AR用户之间。配对自我中心交互识别（PEIR）是协作承认其相应的视图中的两个人与视频之间的交互任务。不幸的是，现有方法PEIR总是直接使用线性决策函数来融合从两个对应的自我中心的视频，其中忽略在成对的自我中心视频相互作用的一致性提取的特征。在成对的视频相互作用，并从中提取的特征的一致性被彼此相关。最重要的是，我们提出构建两个视图之间的相关性使用biliear池，它捕获的特征级两种观点的一致性。具体而言，在特征每个神经元从一个视图所连接到从另一视图中的神经元，从而保证两个视图之间的一致性紧凑映射。然后，所有可能的配对神经元用于PEIR他们内部一致的信息。为了提高效率，我们使用紧凑双线性池以计数草图，以避免直接在双线性计算外积。对数据集PEV显示实验结果的任务PEIR所提出的方法的优越性。</font>
+</div>
+
+
+<hr>
+<div id="paper26"> <b>26. CRNet: Cross-Reference Networks for Few-Shot Segmentation</b>  <a href="https://arxiv.org/pdf/2003.10658" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title26" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Weide Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chi Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guosheng Lin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Fayao Liu</a><br>
+<font size="3">
+Abstract: Over the past few years, state-of-the-art image segmentation algorithms are based on deep convolutional neural networks. To render a deep network with the ability to understand a concept, humans need to collect a large amount of pixel-level annotated data to train the models, which is time-consuming and tedious. Recently, few-shot segmentation is proposed to solve this problem. Few-shot segmentation aims to learn a segmentation model that can be generalized to novel classes with only a few training images. In this paper, we propose a cross-reference network (CRNet) for few-shot segmentation. Unlike previous works which only predict the mask in the query image, our proposed model concurrently make predictions for both the support image and the query image. With a cross-reference mechanism, our network can better find the co-occurrent objects in the two images, thus helping the few-shot segmentation task. We also develop a mask refinement module to recurrently refine the prediction of the foreground regions. For the $k$-shot learning, we propose to finetune parts of networks to take advantage of multiple labeled support images. Experiments on the PASCAL VOC 2012 dataset show that our network achieves state-of-the-art performance. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在过去的几年中，国家的最先进的图像分割算法是基于深刻的卷积神经网络。要呈现一个深深的网络来了解一个概念的能力，人类需要收集注释数据来训练模型的大量像素级的，这是费时和繁琐。近日，为数不多的镜头分割，提出了解决这一问题。为数不多的镜头分割的目的去学习，可以推广到新的班级，只有几个训练图像的分割模型。在本文中，我们提出了一个交叉参考网络（CRNET）的为数不多的镜头分割。不同于以往的作品，只有预测面具查询图像中，我们提出的模型兼做的支持图像和查询图像两种预测。随着交叉引用机制，我们的网络可以更好地找到两个图像共发生着的物体，从而帮助为数不多的镜头分割任务。我们还开发了一个面具细化模块反复细化前景区域的预测。对于$ķ$ -shot学习，我们建议网络的精调部分采取多种标记支持图像的优势。在PASCAL VOC 2012数据集上，我们的网络实现了国家的最先进的性能试验。</font>
+</div>
+
+
+<hr>
+<div id="paper27"> <b>27. Gen-LaneNet: A Generalized and Scalable Approach for 3D Lane Detection</b>  <a href="https://arxiv.org/pdf/2003.10656" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title27" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Guo%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuliang Guo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guang Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peitao Zhao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Weide Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Miao%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jinghao Miao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jingao Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Choe%2C+T+E" target="_blank" rel="noopener" style="color:#0000EE;">Tae Eun Choe</a><br>
+<font size="3">
+Abstract: We present a generalized and scalable method, called Gen-LaneNet, to detect 3D lanes from a single image. The method, inspired by the latest state-of-the-art 3D-LaneNet, is a unified framework solving image encoding, spatial transform of features and 3D lane prediction in a single network. However, we propose unique designs for Gen-LaneNet in two folds. First, we introduce a new geometry-guided lane anchor representation in a new coordinate frame and apply a specific geometric transformation to directly calculate real 3D lane points from the network output. We demonstrate that aligning the lane points with the underlying top-view features in the new coordinate frame is critical towards a generalized method in handling unfamiliar scenes. Second, we present a scalable two-stage framework that decouples the learning of image segmentation subnetwork and geometry encoding subnetwork. Compared to 3D-LaneNet, the proposed Gen-LaneNet drastically reduces the amount of 3D lane labels required to achieve a robust solution in real-world application. Moreover, we release a new synthetic dataset and its construction strategy to encourage the development and evaluation of 3D lane detection methods. In experiments, we conduct extensive ablation study to substantiate the proposed Gen-LaneNet significantly outperforms 3D-LaneNet in average precision(AP) and F-score. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们提出一个广义和可扩展的方法，被称为根LaneNet，从单个图像中检测3D车道。该方法中，通过最新的状态的最先进的启发3D-LaneNet，是一个统一的框架解决图像编码，空间在一个单一的网络变换的特征和3D车道预测。然而，我们提出了根LaneNet独特的设计双倍奉还。首先，我们在新引入一个新的几何导向车道锚表示坐标系，并从网络输出应用特定的几何变换直接计算真正的3D车道分。我们证明对准底层的俯视功能的车道分，在新的坐标系是对在处理不熟悉的场景一个通用的方法是至关重要的。其次，我们提出了一个可扩展的两级架构，解耦图像分割子网和几何编码子网的学习。相较于3D-LaneNet，建议根LaneNet大幅降低，实现在现实世界的应用程序中的强大的解决方案所需的3D车道标签的数量。此外，我们发布了新的合成数据集和鼓励的3D车道检测方法的开发和评估建设战略。在实验中，我们进行了广泛的研究消融证实所提出的根LaneNet显著优于3D-LaneNet平均精度（AP）和F-得分。</font>
+</div>
+
+
+<hr>
+<div id="paper28"> <b>28. KFNet: Learning Temporal Camera Relocalization using Kalman Filtering</b>  <a href="https://arxiv.org/pdf/2003.10629" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title28" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhou%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lei Zhou</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Luo%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zixin Luo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shen%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tianwei Shen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jiahui Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhen%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mingmin Zhen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yao%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yao Yao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Fang%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tian Fang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Quan%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Long Quan</a><br>
+<font size="3">
+Abstract: Temporal camera relocalization estimates the pose with respect to each video frame in sequence, as opposed to one-shot relocalization which focuses on a still image. Even though the time dependency has been taken into account, current temporal relocalization methods still generally underperform the state-of-the-art one-shot approaches in terms of accuracy. In this work, we improve the temporal relocalization method by using a network architecture that incorporates Kalman filtering (KFNet) for online camera relocalization. In particular, KFNet extends the scene coordinate regression problem to the time domain in order to recursively establish 2D and 3D correspondences for the pose determination. The network architecture design and the loss formulation are based on Kalman filtering in the context of Bayesian learning. Extensive experiments on multiple relocalization benchmarks demonstrate the high accuracy of KFNet at the top of both one-shot and temporal relocalization approaches. Our codes are released at this https URL. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：颞相机重新定位估计的姿势相对于在序列中的每个视频帧，而不是一次性的重新定位其重点静止图像上。尽管时间依赖性已经考虑到，当前暂时重新定位方法仍普遍表现不佳的国家的最先进的一次性在准确性方面接近。在这项工作中，我们通过使用结合卡尔曼滤波（KFNet）在线照相机的重定位的网络体系结构改善的时间重定位方法。特别是，KFNet扩展了现场协调回归问题到时域，以递归建立2D和3D对应的姿态确定。的网络体系结构设计和损耗制剂中基于卡尔曼在贝叶斯学习的上下文过滤。在多个重定位基准，大量的实验证明KFNet的高精确度在两个一杆的顶部和时间重新定位接近。我们的代码在此HTTPS URL释放。</font>
+</div>
+
+
+<hr>
+<div id="paper29"> <b>29. UnrealText: Synthesizing Realistic Scene Text Images from the Unreal  World</b>  <a href="https://arxiv.org/pdf/2003.10608" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title29" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Long%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shangbang Long</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yao%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Cong Yao</a><br>
+<font size="3">
+Abstract: Synthetic data has been a critical tool for training scene text detection and recognition models. On the one hand, synthetic word images have proven to be a successful substitute for real images in training scene text recognizers. On the other hand, however, scene text detectors still heavily rely on a large amount of manually annotated real-world images, which are expensive. In this paper, we introduce UnrealText, an efficient image synthesis method that renders realistic images via a 3D graphics engine. 3D synthetic engine provides realistic appearance by rendering scene and text as a whole, and allows for better text region proposals with access to precise scene information, e.g. normal and even object meshes. The comprehensive experiments verify its effectiveness on both scene text detection and recognition. We also generate a multilingual version for future research into multilingual scene text detection and recognition. The code and the generated datasets are released at: this https URL . </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：综合数据一直是训练的场景文字的检测和识别模型的重要工具。在一方面，合成词图像已被证明是在训练现场文字识别真实图像一个成功的替代品。在另一方面，然而，现场的文字探测器仍然在很大程度上依赖于大量的手动注释现实世界的图像，这是昂贵的。在本文中，我们介绍UnrealText，经由3D图形引擎呈现逼真的图像的有效图像合成方法。 3D合成引擎提供通过渲染场景和文本作为一个整体真实的外观，并允许更好的文本区域的建议访问到精确的场景的信息，例如正常和甚至对象网格。综合实验，验证了其在两个场景文字检测与识别的有效性。我们也产生了未来研究会讲多种语言的场景文字检测与识别的多语言版本。此HTTPS URL：代码和生成的数据集在被释放。</font>
+</div>
+
+
+<hr>
+<div id="paper30"> <b>30. Synergic Adversarial Label Learning with DR and AMD for Retinal Image  Grading</b>  <a href="https://arxiv.org/pdf/2003.10607" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title30" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ju%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lie Ju</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xin Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bonnington%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Paul Bonnington</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ge%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zongyuan Ge</a><br>
+<font size="3">
+Abstract: The need for comprehensive and automated screening methods for retinal image classification has long been recognized. Well-qualified doctors annotated images are very expensive and only a limited amount of data is available for various retinal diseases such as age-related macular degeneration (AMD) and diabetic retinopathy (DR). Some studies show that AMD and DR share some common features like hemorrhagic points and exudation but most classification algorithms only train those disease models independently. Inspired by knowledge distillation where additional monitoring signals from various sources is beneficial to train a robust model with much fewer data. We propose a method called synergic adversarial label learning (SALL) which leverages relevant retinal disease labels in both semantic and feature space as additional signals and train the model in a collaborative manner. Our experiments on DR and AMD fundus image classification task demonstrate that the proposed method can significantly improve the accuracy of the model for grading diseases. In addition, we conduct additional experiments to show the effectiveness of SALL from the aspects of reliability and interpretability in the context of medical imaging application. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：需要全面和自动化的筛选方法视网膜图像分类很早就认识。有资格的医生注释的图像是非常昂贵的并且仅有限的数据量是可用于各种视网膜疾病，如年龄相关性黄斑变性（AMD）和糖尿病性视网膜病（DR）。有研究表明，AMD和DR份额像出血点和渗出，但大多数的分类算法一些共同的特点仅培训独立的疾病模型。通过知识蒸馏启发，其中来自各种来源的额外的监控信号是有益的训练稳健的模型与少得多的数据。我们提出了一个名为方法协同对抗标记学习（自主学习），它充分利用了语义和特征空间作为附加信号相关视网膜疾病的标签和训练模型以协作的方式。我们对DR和AMD眼底图像分类任务的实验表明，该方法能显著提高模型的精确度进行分级的疾病。此外，我们进行额外的实验以显示SALL的从可靠性和解释性在医学成像应用的上下文方面的有效性。</font>
+</div>
+
+
+<hr>
+<div id="paper31"> <b>31. Video Object Grounding using Semantic Roles in Language Description</b>  <a href="https://arxiv.org/pdf/2003.10606" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title31" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Sadhu%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Arka Sadhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kan Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nevatia%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ram Nevatia</a><br>
+<font size="3">
+Abstract: We explore the task of Video Object Grounding (VOG), which grounds objects in videos referred to in natural language descriptions. Previous methods apply image grounding based algorithms to address VOG, fail to explore the object relation information and suffer from limited generalization. Here, we investigate the role of object relations in VOG and propose a novel framework VOGNet to encode multi-modal object relations via self-attention with relative position encoding. To evaluate VOGNet, we propose novel contrasting sampling methods to generate more challenging grounding input samples, and construct a new dataset called ActivityNet-SRL (ASRL) based on existing caption and grounding datasets. Experiments on ASRL validate the need of encoding object relations in VOG, and our VOGNet outperforms competitive baselines by a significant margin. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文探讨视频对象的磨砺（VOG）的任务，这在视频理由对象在自然语言的说明。先前的方法适用于基于图像接地算法地址VOG，无法探索的对象相关信息，并从有限的推广受到影响。在这里，我们调查VOG对象关系的作用，并通过自身的关注提出了一种新的框架VOGNet到编码的多模态对象关系相对位置编码。为了评估VOGNet，我们提出了新的对比抽样方法，以产生更多的具有挑战性的接地输入样本，构建一个新的数据集基于现有的标题和接地的数据集称为ActivityNet-SRL（ASRL）。在ASRL实验验证编码VOG客体关系的需要，我们的VOGNet由显著利润率优于竞争力的基线。</font>
+</div>
+
+
+<hr>
+<div id="paper32"> <b>32. First Investigation Into the Use of Deep Learning for Continuous  Assessment of Neonatal Postoperative Pain</b>  <a href="https://arxiv.org/pdf/2003.10601" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title32" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Salekin%2C+M+S" target="_blank" rel="noopener" style="color:#0000EE;">Md Sirajus Salekin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zamzmi%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Ghada Zamzmi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Goldgof%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dmitry Goldgof</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kasturi%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rangachar Kasturi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ho%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thao Ho</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sun%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yu Sun</a><br>
+<font size="3">
+Abstract: This paper presents the first investigation into the use of fully automated deep learning framework for assessing neonatal postoperative pain. It specifically investigates the use of Bilinear Convolutional Neural Network (B-CNN) to extract facial features during different levels of postoperative pain followed by modeling the temporal pattern using Recurrent Neural Network (RNN). Although acute and postoperative pain have some common characteristics (e.g., visual action units), postoperative pain has a different dynamic, and it evolves in a unique pattern over time. Our experimental results indicate a clear difference between the pattern of acute and postoperative pain. They also suggest the efficiency of using a combination of bilinear CNN with RNN model for the continuous assessment of postoperative pain intensity. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文介绍了第一次调查采用全自动深度学习框架的评估新生儿术后疼痛。它具体地研究了使用双线性卷积神经网络（B-CNN）的过程中，随后通过使用建模回归神经网络（RNN）时间模式不同级别的术后疼痛，以提取面部特征。虽然急性和术后疼痛具有一些共同的特征（例如，视觉动作单元），术后疼痛具有不同的动态的，它随时间的独特模式演变。我们的实验结果表明，急性和术后疼痛的模式有着明显的区别。他们还建议使用双线性CNN与RNN模型术后疼痛强度的持续性评估相结合的效率。</font>
+</div>
+
+
+<hr>
+<div id="paper33"> <b>33. Adversarial Perturbations Fool Deepfake Detectors</b>  <a href="https://arxiv.org/pdf/2003.10596" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title33" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gandhi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Apurva Gandhi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jain%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shomik Jain</a><br>
+<font size="3">
+Abstract: This work uses adversarial perturbations to enhance deepfake images and fool common deepfake detectors. We created adversarial perturbations using the Fast Gradient Sign Method and the Carlini and Wagner L2 norm attack in both blackbox and whitebox settings. Detectors achieved over 95% accuracy on unperturbed deepfakes, but less than 27% accuracy on perturbed deepfakes. We also explore two improvements to deepfake detectors: (i) Lipschitz regularization, and (ii) Deep Image Prior (DIP). Lipschitz regularization constrains the gradient of the detector with respect to the input in order to increase robustness to input perturbations. The DIP defense removes perturbations using generative convolutional neural networks in an unsupervised manner. Regularization improved the detection of perturbed deepfakes on average, including a 10% accuracy boost in the blackbox case. The DIP defense achieved 95% accuracy on perturbed deepfakes that fooled the original detector, while retaining 98% accuracy in other cases on a 100 image subsample. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：该作品采用对抗性的扰动，以提高deepfake图像和愚弄共同deepfake探测器。我们创建了使用快速倾斜的符号，它特别适合黑盒和白盒设置卡烈尼和瓦格纳L2规范攻击敌对扰动。探测器在上泰然自若deepfakes 95％的准确率达到，但对扰动deepfakes低于27％的准确率。我们还探索两处改进，deepfake探测器：（ⅰ）李氏正则化，和（ii）深图像之前（DIP）。李氏正规化限制相对于所述输入检测器的梯度，以增加坚固性，以输入扰动。该DIP防御无人监督的方式使用生成卷积神经网络消除干扰。正则化改进平均扰动deepfakes的检测，包括在黑盒情况下的10％的精确度提升。在DIP防御上扰动deepfakes上当原始检测器，同时保持在100中的图像的子样本在其他情况下98％的准确率达到95％的准确度。</font>
+</div>
+
+
+<hr>
+<div id="paper34"> <b>34. Spatio-Temporal Handwriting Imitation</b>  <a href="https://arxiv.org/pdf/2003.10593" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title34" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Mayr%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Martin Mayr</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Stumpf%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Martin Stumpf</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nikolaou%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anguelos Nikolaou</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Seuret%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mathias Seuret</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Maier%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Andreas Maier</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Christlein%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vincent Christlein</a><br>
+<font size="3">
+Abstract: Most people think that their handwriting is unique and cannot be imitated by machines, especially not using completely new content. Current cursive handwriting synthesis is visually limited or needs user interaction. We show that subdividing the process into smaller subtasks makes it possible to imitate someone's handwriting with a high chance to be visually indistinguishable for humans. Therefore, a given handwritten sample will be used as the target style. This sample is transferred to an online sequence. Then, a method for online handwriting synthesis is used to produce a new realistic-looking text primed with the online input sequence. This new text is then rendered and style-adapted to the input pen. We show the effectiveness of the pipeline by generating in- and out-of-vocabulary handwritten samples that are validated in a comprehensive user study. Additionally, we show that also a typical writer identification system can partially be fooled by the created fake handwritings. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：大多数人认为自己的笔迹是唯一的，不能用机器尤其不要使用全新的内容被模仿。当前草书手写合成在视觉上限制或需要用户交互。我们证明了细分过程分成更小的子任务能够模仿别人的高几率的笔迹是人类在视觉上没有什么区别。因此，一个给定的样品手写将被用作目标风格。该样品被转移到在线序列。然后，用于在线手写合成的方法生产与在线输入序列引新逼真的文本。然后，这个新的文本渲染和风格适应输入笔。我们通过生成IN-显示管道的有效性和外的词汇，在一个全面的用户研究被验证手写样本。此外，我们表明，也是典型的笔迹鉴别系统可以部分地通过创建假笔迹上当。</font>
+</div>
+
+
+<hr>
+<div id="paper35"> <b>35. A Simple Fix for Convolutional Neural Network via Coordinate Embedding</b>  <a href="https://arxiv.org/pdf/2003.10589" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title35" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ren%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Liliang Ren</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hao%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhuonan Hao</a><br>
+<font size="3">
+Abstract: Convolutional Neural Networks (CNN) has been widely applied in the realm of computer vision. However, given the fact that CNN models are translation invariant, they are not aware of the coordinate information of each pixel. Thus the generalization ability of CNN will be limited since the coordinate information is crucial for a model to learn affine transformations which directly operate on the coordinate of each pixel. In this project, we proposed a simple approach to incorporate the coordinate information to the CNN model through coordinate embedding. Our approach does not change the downstream model architecture and can be easily applied to the pre-trained models for the task like object detection. Our experiments on the German Traffic Sign Detection Benchmark show that our approach not only significantly improve the model performance but also have better robustness with respect to the affine transformation. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：卷积神经网络（CNN）已被广泛应用于计算机视觉领域。然而，鉴于CNN模型是平移不变的，他们不知道每个像素的坐标信息。因此由于坐标信息是至关重要的一个模型，以了解哪些直接在每个像素的坐标操作仿射变换CNN的泛化能力将受到限制。在这个项目中，我们提出了一种简单的方法来协调信息纳入到了CNN模型通过协调嵌入。我们的做法不会改变下游模型架构，可以方便地应用于预先训练的模型像物体检测任务。我们对德国交通实验标志检测基准表明，我们的方法不仅显著提高模型的性能，而且具有较好的鲁棒性关于仿射变换。</font>
+</div>
+
+
+<hr>
+<div id="paper36"> <b>36. Broad Area Search and Detection of Surface-to-Air Missile Sites Using  Spatial Fusion of Component Object Detections from Deep Neural Networks</b>  <a href="https://arxiv.org/pdf/2003.10566" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title36" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Cannaday%2C+A+B" target="_blank" rel="noopener" style="color:#0000EE;">Alan B. Cannaday II</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Davis%2C+C+H" target="_blank" rel="noopener" style="color:#0000EE;">Curt H. Davis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Scott%2C+G+J" target="_blank" rel="noopener" style="color:#0000EE;">Grant J. Scott</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ruprecht%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Blake Ruprecht</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Anderson%2C+D+T" target="_blank" rel="noopener" style="color:#0000EE;">Derek T. Anderson</a><br>
+<font size="3">
+Abstract: Here we demonstrate how Deep Neural Network (DNN) detections of multiple constitutive or component objects that are part of a larger, more complex, and encompassing feature can be spatially fused to improve the search, detection, and retrieval (ranking) of the larger complex feature. First, scores computed from a spatial clustering algorithm are normalized to a reference space so that they are independent of image resolution and DNN input chip size. Then, multi-scale DNN detections from various component objects are fused to improve the detection and retrieval of DNN detections of a larger complex feature. We demonstrate the utility of this approach for broad area search and detection of Surface-to-Air Missile (SAM) sites that have a very low occurrence rate (only 16 sites) over a ~90,000 km^2 study area in SE China. The results demonstrate that spatial fusion of multi-scale component-object DNN detections can reduce the detection error rate of SAM Sites by $>$85% while still maintaining a 100% recall. The novel spatial fusion approach demonstrated here can be easily extended to a wide variety of other challenging object search and detection problems in large-scale remote sensing image datasets. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在这里，我们将演示如何深层神经网络（DNN）是一部分的多个组成或组件对象检测一个更大，更复杂，并包含功能可以在空间上融合以提高搜索，检测，和检索（排名）更大，更复杂的功能。首先，以使得它们是独立的图像分辨率和DNN输入芯片尺寸的从空间聚类算法计算分数归一化为基准空间。然后，从各个组件对象多尺度DNN检测融合至改善的较大复杂特征的DNN检测的检测和检索。我们证明这种方法进行大面积搜索，并且有一个非常低的发生率（仅16位）在中国东南一〜90000公里^ 2研究区面对空飞弹（SAM）的网站的检测工具。结果表明，多尺度组件对象DNN检测的空间融合可以通过减少$ SAM站点的检测误差率> $ 85％，同时仍保持100％的召回。这里展示的新颖空间融合方法可以容易地扩展到各种各样的大规模遥感图像数据组其他具有挑战性的对象搜索和检测问题。</font>
+</div>
+
+
+<hr>
+<div id="paper37"> <b>37. ScrabbleGAN: Semi-Supervised Varying Length Handwritten Text Generation</b>  <a href="https://arxiv.org/pdf/2003.10557" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title37" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Fogel%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sharon Fogel</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Averbuch-Elor%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hadar Averbuch-Elor</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cohen%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sarel Cohen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mazor%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shai Mazor</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Litman%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Roee Litman</a><br>
+<font size="3">
+Abstract: Optical character recognition (OCR) systems performance have improved significantly in the deep learning era. This is especially true for handwritten text recognition (HTR), where each author has a unique style, unlike printed text, where the variation is smaller by design. That said, deep learning based HTR is limited, as in every other task, by the number of training examples. Gathering data is a challenging and costly task, and even more so, the labeling task that follows, of which we focus here. One possible approach to reduce the burden of data annotation is semi-supervised learning. Semi supervised methods use, in addition to labeled data, some unlabeled samples to improve performance, compared to fully supervised ones. Consequently, such methods may adapt to unseen images during test time. We present ScrabbleGAN, a semi-supervised approach to synthesize handwritten text images that are versatile both in style and lexicon. ScrabbleGAN relies on a novel generative model which can generate images of words with an arbitrary length. We show how to operate our approach in a semi-supervised manner, enjoying the aforementioned benefits such as performance boost over state of the art supervised HTR. Furthermore, our generator can manipulate the resulting text style. This allows us to change, for instance, whether the text is cursive, or how thin is the pen stroke. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：光学字符识别（OCR）系统的性能已经在深度学习时代显著改善。这对于手写文字识别（HTR），在这里每个作者都有独特的风格，不同的印刷文本，其中的变化是由设计更小，尤其如此。这就是说，深学习基础HTR是有限的，因为在所有其他任务，通过训练实例数。收集的数据是一个具有挑战性的和昂贵的任务，更是这样，下面的标签制作任务，其中我们这里集中。一种可能的方法来减少数据注解的负担是半监督学习。半监督的方法使用，除了标签的数据，一些未标记的样本，以提高性能，相比充分监督的。因此，这样的方法可在测试时间适应看不见图像。我们提出ScrabbleGAN，一个半监督的方法来合成是多才多艺无论是在风格和词汇手写文字图像。 ScrabbleGAN依靠其可以具有任意长度生成字的图像的新颖的生成模型。我们展示如何操作的半监督方式我们的方法，享受上述好处，比如性能提升了最先进的技术监督HTR。此外，我们的发电机可以操纵产生的文本样式。这使我们能够改变，例如，文本是否为草书，或有多薄的笔划。</font>
+</div>
+
+
+<hr>
+<div id="paper38"> <b>38. Peeking into occluded joints: A novel framework for crowd pose  estimation</b>  <a href="https://arxiv.org/pdf/2003.10506" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title38" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Qiu%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lingteng Qiu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xuanye Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yanran Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guanbin Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaojun Wu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xiong%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zixiang Xiong</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Han%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaoguang Han</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cui%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shuguang Cui</a><br>
+<font size="3">
+Abstract: Although occlusion widely exists in nature and remains a fundamental challenge for pose estimation, existing heatmap-based approaches suffer serious degradation on occlusions. Their intrinsic problem is that they directly localize the joints based on visual information; however, the invisible joints are lack of that. In contrast to localization, our framework estimates the invisible joints from an inference perspective by proposing an Image-Guided Progressive GCN module which provides a comprehensive understanding of both image context and pose structure. Moreover, existing benchmarks contain limited occlusions for evaluation. Therefore, we thoroughly pursue this problem and propose a novel OPEC-Net framework together with a new Occluded Pose (OCPose) dataset with 9k annotated images. Extensive quantitative and qualitative evaluations on benchmarks demonstrate that OPEC-Net achieves significant improvements over recent leading works. Notably, our OCPose is the most complex occlusion dataset with respect to average IoU between adjacent instances. Source code and OCPose will be publicly available. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：虽然闭塞广泛存在于自然界，并保持姿态估计一个根本性的挑战，现有的基于热图的办法遭受的闭塞严重退化。其内在的问题是，他们基于视觉信息直接定位关节;然而，看不见的关节是缺乏这一点。相较于本地化，我们的框架通过提出一种图像引导进GCN模块，同时提供图像内容和姿态结构的全面了解估计从推理的角度看不见的关节。此外，现有的基准测试包含评估有限闭塞。因此，彻底地追求这个问题，并与9K注解图像的新姿态闭塞（OCPose）数据集一起提出了一个新颖的OPEC-Net的框架。在基准广泛的定量和定性的评估表明，欧佩克网在最近领先的作品达到显著的改善。值得注意的是，我们的OCPose与相邻实例之间的相对于平均IOU最复杂的遮挡数据集。源代码和OCPose将公之于众。</font>
+</div>
+
+
+<hr>
+<div id="paper39"> <b>39. Distillating Knowledge from Graph Convolutional Networks</b>  <a href="https://arxiv.org/pdf/2003.10477" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title39" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yiding Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Qiu%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jiayan Qiu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Song%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mingli Song</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tao%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dacheng Tao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xinchao Wang</a><br>
+<font size="3">
+Abstract: Existing knowledge distillation methods focus on convolutional neural networks~(CNNs), where the input samples like images lie in a grid domain, and have largely overlooked graph convolutional networks~(GCN) that handle non-grid data. In this paper, we propose to our best knowledge the first dedicated approach to {distilling} knowledge from a pre-trained GCN model. To enable the knowledge transfer from the teacher GCN to the student, we propose a local structure preserving module that explicitly accounts for the topological semantics of the teacher. In this module, the local structure information from both the teacher and the student are extracted as distributions, and hence minimizing the distance between these distributions enables topology-aware knowledge transfer from the teacher, yielding a compact yet high-performance student model. Moreover, the proposed approach is readily extendable to dynamic graph models, where the input graphs for the teacher and the student may differ. We evaluate the proposed method on two different datasets using GCN models of different architectures, and demonstrate that our method achieves the state-of-the-art knowledge distillation performance for GCN models. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：现有知识蒸馏方法集中在卷积神经网络〜（细胞神经网络），其中相同的图像的输入的样品位于一个栅格域，并且在很大程度上被忽视图形卷积网络〜（GCN），该手柄的非网格数据。在本文中，我们提出我们所知的第一个专用的方法来从预先训练GCN模型{}蒸馏知识。为了能够从老师GCN对学生的知识转移，我们提出了一种局部结构保护模块，明确列入教师的拓扑语义。在此模块中，从教师和学生双方的局部结构信息被提取为分布，从而最大限度地减少这些分布之间的距离，使得从老师拓扑感知知识转移，产生一个紧凑而高性能的学生模型。此外，该方法很容易扩展到动态图模型，其中对教师和学生的输入图形可能会有所不同。我们评估使用不同架构GCN模式两种不同的数据集所提出的方法，并证明我们的方法实现了GCN车型的国家的最先进的知识蒸馏性能。</font>
+</div>
+
+
+<hr>
+<div id="paper40"> <b>40. Label Noise Types and Their Effects on Deep Learning</b>  <a href="https://arxiv.org/pdf/2003.10471" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title40" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Algan%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Görkem Algan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ulusoy%2C+%C4%B0" target="_blank" rel="noopener" style="color:#0000EE;">İlkay Ulusoy</a><br>
+<font size="3">
+Abstract: The recent success of deep learning is mostly due to the availability of big datasets with clean annotations. However, gathering a cleanly annotated dataset is not always feasible due to practical challenges. As a result, label noise is a common problem in datasets, and numerous methods to train deep neural networks in the presence of noisy labels are proposed in the literature. These methods commonly use benchmark datasets with synthetic label noise on the training set. However, there are multiple types of label noise, and each of them has its own characteristic impact on learning. Since each work generates a different kind of label noise, it is problematic to test and compare those algorithms in the literature fairly. In this work, we provide a detailed analysis of the effects of different kinds of label noise on learning. Moreover, we propose a generic framework to generate feature-dependent label noise, which we show to be the most challenging case for learning. Our proposed method aims to emphasize similarities among data instances by sparsely distributing them in the feature domain. By this approach, samples that are more likely to be mislabeled are detected from their softmax probabilities, and their labels are flipped to the corresponding class. The proposed method can be applied to any clean dataset to synthesize feature-dependent noisy labels. For the ease of other researchers to test their algorithms with noisy labels, we share corrupted labels for the most commonly used benchmark datasets. Our code and generated noisy synthetic labels are available online. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：最近深度学习的成功主要是由于用干净的注释大数据集的可用性。然而，聚集了干净注释数据集并不总是可行的，由于实际的挑战。其结果是，标签噪声是在数据集的一个常见问题，并且许多方法在嘈杂的标签的存在于文献中提出的训练深神经网络。这些方法通常使用标准数据集与训练集合成标签的噪音。不过，也有多种类型标签的噪声，他们每个人都有学习其自身的特点影响。由于每个工作产生不同种类的标签的噪音，是有问题的测试和这些算法在文献中相当比较。在这项工作中，我们提供了学习不同类型的标签噪声的影响进行详细分析。此外，我们提出了一个通用框架噪声产生取决于特征的标签，这是我们展示成为学习的最具挑战性的情况下。我们提出的方法旨在通过在特征域分布稀疏他们强调数据实例之间的相似性。通过这种方法，从它们的SOFTMAX概率检测样本更可能被贴错标签，他们的标签翻转到相应的类。所提出的方法可以应用到任何清洁数据集合成取决于特征的嘈杂的标签。为便于其他研究人员与嘈杂的标签，以测试他们的算法，我们分享了最常用的标准数据集已损坏的标签。我们的代码和生成的嘈杂合成标签可在网上。</font>
+</div>
+
+
+<hr>
+<div id="paper41"> <b>41. Learning Object Permanence from Video</b>  <a href="https://arxiv.org/pdf/2003.10469" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title41" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Shamsian%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Aviv Shamsian</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kleinfeld%2C+O" target="_blank" rel="noopener" style="color:#0000EE;">Ofri Kleinfeld</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Globerson%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Amir Globerson</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chechik%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gal Chechik</a><br>
+<font size="3">
+Abstract: Object Permanence allows people to reason about the location of non-visible objects, by understanding that they continue to exist even when not perceived directly. Object Permanence is critical for building a model of the world, since objects in natural visual scenes dynamically occlude and contain each-other. Intensive studies in developmental psychology suggest that object permanence is a challenging task that is learned through extensive experience. Here we introduce the setup of learning Object Permanence from data. We explain why this learning problem should be dissected into four components, where objects are (1) visible, (2) occluded, (3) contained by another object and (4) carried by a containing object. The fourth subtask, where a target object is carried by a containing object, is particularly challenging because it requires a system to reason about a moving location of an invisible object. We then present a unified deep architecture that learns to predict object location under these four scenarios. We evaluate the architecture and system on a new dataset based on CATER, and find that it outperforms previous localization methods and various baselines. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：对象持久性可以让人们有理由对不可见物体的位置，通过了解他们继续即使不直接感知存在。对象持久性是建立在世界的模型至关重要，因为在自然的视觉场景中的对象动态嵌入和包含每个-等。在发展心理学深入研究表明，持久性对象是一个具有挑战性的任务，是通过广泛的经验教训。这里我们主要介绍从数据中学习对象持久性的设置。我们解释为什么这学习问题应被分解为四个部分，其中的对象是：（1）可见，（2）阻塞，（3）包含在由通过含对象携带另一个目的和（4）。第四子任务，其中一个目标对象是通过含有对象携带，是特别具有挑战性的，因为它需要一个系统，以大约原因的不可见对象的移动位置。然后，我们提出一个统一的深架构，学会了这四种情景下预测对象的位置。我们评估的基础上迎合了新的数据集的架构和系统，并发现它远远超过前定位方法和各种基线。</font>
+</div>
+
+
+<hr>
+<div id="paper42"> <b>42. Tractogram filtering of anatomically non-plausible fibers with geometric  deep learning</b>  <a href="https://arxiv.org/pdf/2003.11013" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title42" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Astolfi%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pietro Astolfi</a>, 
+<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Verhagen%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruben Verhagen</a>, 
+<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Petit%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Laurent Petit</a>, 
+<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Olivetti%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emanuele Olivetti</a>, 
+<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Masci%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jonathan Masci</a>, 
+<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Boscaini%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Davide Boscaini</a>, 
+<a href="https://arxiv.org/search/q-bio?searchtype=author&query=Avesani%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Paolo Avesani</a><br>
+<font size="3">
+Abstract: Tractograms are virtual representations of the white matter fibers of the brain. They are of primary interest for tasks like presurgical planning, and investigation of neuroplasticity or brain disorders. Each tractogram is composed of millions of fibers encoded as 3D polylines. Unfortunately, a large portion of those fibers are not anatomically plausible and can be considered artifacts of the tracking algorithms. Common methods for tractogram filtering are based on signal reconstruction, a principled approach, but unable to consider the knowledge of brain anatomy. In this work, we address the problem of tractogram filtering as a supervised learning problem by exploiting the ground truth annotations obtained with a recent heuristic method, which labels fibers as either anatomically plausible or non-plausible according to well-established anatomical properties. The intuitive idea is to model a fiber as a point cloud and the goal is to investigate whether and how a geometric deep learning model might capture its anatomical properties. Our contribution is an extension of the Dynamic Edge Convolution model that exploits the sequential relations of points in a fiber and discriminates with high accuracy plausible/non-plausible fibers. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：Tractograms是大脑的白质纤维的虚拟表示。他们像手术前设计，以及神经可塑性或脑功能障碍的调查任务的主要兴趣。每个tractogram是由数百万编码为3D折线纤维。不幸的是，这些纤维中的大部分都没有解剖学可行的和可以考虑的跟踪算法的伪影。对于tractogram过滤常用的方法是基于信号重构，有原则的方法，但不能认为大脑解剖知识。在这项工作中，我们要解决的tractogram通过利用与最近的启发式方法，哪些标签纤维作为根据任一解剖学上合理的或非可信的已建立好的解剖特性获得的基础事实注释过滤作为监督学习问题的问题。直观的想法是将光纤作为点云模型和目标是研究几何深度学习模型是否以及如何可能捕获其解剖特性。我们的贡献是一种利用点在纤维的连续关系，判别精度高可信/非可信的纤维动态边缘卷积模型的扩展。</font>
+</div>
+
+
+<hr>
+<div id="paper43"> <b>43. Learning to Reconstruct Confocal Microscopy Stacks from Single Light  Field Images</b>  <a href="https://arxiv.org/pdf/2003.11004" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title43" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Page%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Josue Page</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Saltarin%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Federico Saltarin</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Belyaev%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yury Belyaev</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Lyck%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruth Lyck</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Favaro%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Paolo Favaro</a><br>
+<font size="3">
+Abstract: We present a novel deep learning approach to reconstruct confocal microscopy stacks from single light field images. To perform the reconstruction, we introduce the LFMNet, a novel neural network architecture inspired by the U-Net design. It is able to reconstruct with high-accuracy a 112x112x57.6$\mu m^3$ volume (1287x1287x64 voxels) in 50ms given a single light field image of 1287x1287 pixels, thus dramatically reducing 720-fold the time for confocal scanning of assays at the same volumetric resolution and 64-fold the required storage. To prove the applicability in life sciences, our approach is evaluated both quantitatively and qualitatively on mouse brain slices with fluorescently labelled blood vessels. Because of the drastic reduction in scan time and storage space, our setup and method are directly applicable to real-time in vivo 3D microscopy. We provide analysis of the optical design, of the network architecture and of our training procedure to optimally reconstruct volumes for a given target depth range. To train our network, we built a data set of 362 light field images of mouse brain blood vessels and the corresponding aligned set of 3D confocal scans, which we use as ground truth. The data set will be made available for research purposes. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文提出了一种新的深度学习的方法来重建从单个光场图像共聚焦显微镜堆栈。为了执行重建，我们引入LFMNet，一种新颖的神经网络结构由U-Net的设计的启发。它能够以高精确度的一个112x112x57.6 $ \微米^在给定的1287x1287像素的单个光场图像50ms的3 $体积（1287x1287x64体素），从而显着地减少用于分析的共焦扫描720倍的时间来重建在相同体积的分辨率和64倍所需的存储。为了证明在生命科学的应用，我们的做法是评估定量和定性的小鼠脑片，用荧光标记的血管。因为在扫描时间和存储空间的急剧减少，我们的设置和方法是直接适用于体内的3D显微镜实时性。我们提供的光学设计的分析，网络架构和我们的训练过程中，以最佳重建给定目标深度范围的体积。为了训练我们的网络，我们建立的小鼠脑血管的362个光场图像数据集和相应的对集3D扫描共聚焦，这是我们作为地面实况使用。该数据集将提供用于研究目的。</font>
+</div>
+
+
+<hr>
+<div id="paper44"> <b>44. Hybrid Classification and Reasoning for Image-based Constraint Solving</b>  <a href="https://arxiv.org/pdf/2003.11001" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title44" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Mulamba%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maxime Mulamba</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mandi%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jayanta Mandi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Canoy%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rocsildes Canoy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Guns%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tias Guns</a><br>
+<font size="3">
+Abstract: There is an increased interest in solving complex constrained problems where part of the input is not given as facts but received as raw sensor data such as images or speech. We will use "visual sudoku" as a prototype problem, where the given cell digits are handwritten and provided as an image thereof. In this case, one first has to train and use a classifier to label the images, so that the labels can be used for solving the problem. In this paper, we explore the hybridization of classifying the images with the reasoning of a constraint solver. We show that pure constraint reasoning on predictions does not give satisfactory results. Instead, we explore the possibilities of a tighter integration, by exposing the probabilistic estimates of the classifier to the constraint solver. This allows joint inference on these probabilistic estimates, where we use the solver to find the maximum likelihood solution. We explore the trade-off between the power of the classifier and the power of the constraint reasoning, as well as further integration through the additional use of structural knowledge. Furthermore, we investigate the effect of calibration of the probabilistic estimates on the reasoning. Our results show that such hybrid approaches vastly outperform a separate approach, which encourages a further integration of prediction (probabilities) and constraint solving. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：是解决在输入的部分没有给出事实，而是作为原始传感器数据，例如图像或语音接收的复约束问题的兴趣增加。我们将使用“视觉数独”作为原型的问题，其中该给定小区的数字是手写和作为其图像提供。在这种情况下，首先必须培养和使用分类标记的图像，从而使标签可以用来解决这个问题。在本文中，我们将探讨图像与约束求解的推理分类的杂交。我们给出的预测是纯约束推理没有给出令人满意的结果。相反，我们探索出一条更紧密的整合的可能性，由分类的概率估计暴露在约束求解。这使得这些概率估算，在这里我们使用的求解器找到最大似然解联合推断。我们通过额外使用结构知识的探索权衡分类器的功率和约束推理的力量之间，以及进一步整合。此外，我们调查的推理概率估计的校准的效果。我们的研究结果表明，这种混合方法大大优于单独的方法，其中鼓励预测（概率）的进一步的整合和约束求解。</font>
+</div>
+
+
+<hr>
+<div id="paper45"> <b>45. Automatic Detection of Coronavirus Disease (COVID-19) Using X-ray Images  and Deep Convolutional Neural Networks</b>  <a href="https://arxiv.org/pdf/2003.10849" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title45" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Narin%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Ali Narin</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Kaya%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Ceren Kaya</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Pamuk%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Ziynet Pamuk</a><br>
+<font size="3">
+Abstract: The 2019 novel coronavirus (COVID-19), with a starting point in China, has spread rapidly among people living in other countries, and is approaching approximately 305,275 cases worldwide according to the statistics of European Centre for Disease Prevention and Control. There are a limited number of COVID-19 test kits available in hospitals due to the increasing cases daily. Therefore, it is necessary to implement an automatic detection system as a quick alternative diagnosis option to prevent COVID-19 spreading among people. In this study, three different convolutional neural network based models (ResNet50, InceptionV3 and Inception-ResNetV2) have been proposed for the detection of coronavirus pneumonia infected patient using chest X-ray radiographs. ROC analyses and confusion matrices by these three models are given and analyzed using 5-fold cross validation. Considering the performance results obtained, it is seen that the pre-trained ResNet50 model provides the highest classification performance with 98% accuracy among other two proposed models (97% accuracy for InceptionV3 and 87% accuracy for Inception-ResNetV2). </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：2019年新型冠状病毒（COVID-19），在中国的起点，有生活在其他国家人民之间迅速蔓延，并根据欧洲中心的疾病预防和控制世界范围内的统计数据大约接近305275案件。还有，由于每天增加的情况下在医院提供COVID-19测试包的数量有限。因此，有必要实现自动检测系统作为一种快速诊断的替代选项，以防止COVID，19人之间传播。在这项研究中，三个不同的卷积神经网络的机型为主（ResNet50，InceptionV3和启-ResNetV2）已经提出了检测用胸部X射线摄影肺炎冠状病毒感染者的。 ROC分析和由这三种模式混淆矩阵中给出，并使用进行分析5倍交叉验证。考虑所获得的性能结果，可以看出，预先训练ResNet50模型提供与两个其他提出的模型中98％的准确度（97％准确度InceptionV3和87％的准确度为启-ResNetV2）最高分类性能。</font>
+</div>
+
+
+<hr>
+<div id="paper46"> <b>46. Re-Training StyleGAN -- A First Step Towards Building Large, Scalable  Synthetic Facial Datasets</b>  <a href="https://arxiv.org/pdf/2003.10847" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title46" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Varkarakis%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Viktor Varkarakis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bazrafkan%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shabab Bazrafkan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Corcoran%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peter Corcoran</a><br>
+<font size="3">
+Abstract: StyleGAN is a state-of-art generative adversarial network architecture that generates random 2D high-quality synthetic facial data samples. In this paper, we recap the StyleGAN architecture and training methodology and present our experiences of retraining it on a number of alternative public datasets. Practical issues and challenges arising from the retraining process are discussed. Tests and validation results are presented and a comparative analysis of several different re-trained StyleGAN weightings is provided 1. The role of this tool in building large, scalable datasets of synthetic facial data is also discussed. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：StyleGAN是一个国家的技术生成对抗网络架构，可生成随机2D高品质的合成面部数据样本。在本文中，我们回顾一下StyleGAN结构和训练方法，并提出再培训是对一些替代的公共数据集的经验。从再培训过程中出现的实际问题和挑战进行了讨论。测试和验证结果被呈现，并且提供1的几种不同的重新训练StyleGAN权重进行比较分析该工具的在构建合成的面部数据的大的，可扩展的数据集的作用进行了讨论。</font>
+</div>
+
+
+<hr>
+<div id="paper47"> <b>47. SMArtCast: Predicting soil moisture interpolations into the future using  Earth observation data in a deep learning framework</b>  <a href="https://arxiv.org/pdf/2003.10823" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title47" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Foley%2C+C+J" target="_blank" rel="noopener" style="color:#0000EE;">Conrad James Foley</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Vaze%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sagar Vaze</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Seddiq%2C+M+E+A" target="_blank" rel="noopener" style="color:#0000EE;">Mohamed El Amine Seddiq</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Unagaev%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alexey Unagaev</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Efremova%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Natalia Efremova</a><br>
+<font size="3">
+Abstract: Soil moisture is critical component of crop health and monitoring it can enable further actions for increasing yield or preventing catastrophic die off. As climate change increases the likelihood of extreme weather events and reduces the predictability of weather, and non-optimal soil moistures for crops may become more likely. In this work, we a series of LSTM architectures to analyze measurements of soil moisture and vegetation indiced derived from satellite imagery. The system learns to predict the future values of these measurements. These spatially sparse values and indices are used as input features to an interpolation method that infer spatially dense moisture map for a future time point. This has the potential to provide advance warning for soil moistures that may be inhospitable to crops across an area with limited monitoring capacity. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：土壤水分是作物健康的重要组成部分，监控该技术能够为提高产量或防止灾难性死光了进一步的行动。由于气候变化增加了极端天气事件发生的可能性和减少天气的可预测性，并为作物非最佳土壤水分可能会变得更加容易。在这项工作中，我们一系列LSTM架构来分析土壤水分和植被的测量indiced卫星影像衍生产品。系统学习如何预测这些测量的未来值。这些空间稀疏值和索引被用作输入功能的内插方法，该方法推断未来时间点在空间上稠密湿气地图。这有可能对土壤水分的可以通过与监测能力有限的地区是荒凉作物提供预警的可能性。</font>
+</div>
+
+
+<hr>
+<div id="paper48"> <b>48. Pre-processing Image using Brightening, CLAHE and RETINEX</b>  <a href="https://arxiv.org/pdf/2003.10822" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title48" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Nguyen%2C+T+P+H" target="_blank" rel="noopener" style="color:#0000EE;">Thi Phuoc Hanh Nguyen</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Cai%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zinan Cai</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Nguyen%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Khanh Nguyen</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Keth%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sokuntheariddh Keth</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Shen%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Ningyuan Shen</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Park%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mira Park</a><br>
+<font size="3">
+Abstract: This paper focuses on finding the most optimal pre-processing methods considering three common algorithms for image enhancement: Brightening, CLAHE and Retinex. For the purpose of image training in general, these methods will be combined to find out the most optimal method for image enhancement. We have carried out the research on the different permutation of three methods: Brightening, CLAHE and Retinex. The evaluation is based on Canny Edge detection applied to all processed images. Then the sharpness of objects will be justified by true positive pixels number in comparison between images. After using different number combinations pre-processing functions on images, CLAHE proves to be the most effective in edges improvement, Brightening does not show much effect on the edges enhancement, and the Retinex even reduces the sharpness of images and shows little contribution on images enhancement. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文主要致力于寻找考虑图像增强三种常见的算法最优化的预处理方法：亮白，CLAHE和视网膜皮层。对于一般的形象培训的目的，这些方法将被合并，以找出图像增强的最优化方法。亮肤，CLAHE和视网膜皮层：我们已经在不同的排列的三种方法进行了研究。该评估是基于施加到所有处理的图像Canny边缘检测。然后物体的清晰度将真阳性像素数的图像之间的比较是合理的。使用不同的数字组合后的图像预处理功能，CLAHE被证明是最有效的边缘改善，美白没有显示出对边缘增强太大的影响，以及视网膜皮层甚至降低影像和表演小贡献上的图像增强锐度。</font>
+</div>
+
+
+<hr>
+<div id="paper49"> <b>49. Registration by tracking for sequential 2D MRI</b>  <a href="https://arxiv.org/pdf/2003.10819" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title49" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/physics?searchtype=author&query=Gunnarsson%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Niklas Gunnarsson</a>, 
+<a href="https://arxiv.org/search/physics?searchtype=author&query=Sj%C3%B6lund%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jens Sjölund</a>, 
+<a href="https://arxiv.org/search/physics?searchtype=author&query=Sch%C3%B6n%2C+T+B" target="_blank" rel="noopener" style="color:#0000EE;">Thomas B. Schön</a><br>
+<font size="3">
+Abstract: Our anatomy is in constant motion. With modern MR imaging it is possible to record this motion in real-time during an ongoing radiation therapy session. In this paper we present an image registration method that exploits the sequential nature of 2D MR images to estimate the corresponding displacement field. The method employs several discriminative correlation filters that independently track specific points. Together with a sparse-to-dense interpolation scheme we can then estimate of the displacement field. The discriminative correlation filters are trained online, and our method is modality agnostic. For the interpolation scheme we use a neural network with normalized convolutions that is trained using synthetic diffeomorphic displacement fields. The method is evaluated on a segmented cardiac dataset and when compared to two conventional methods we observe an improved performance. This improvement is especially pronounced when it comes to the detection of larger motions of small objects. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们的解剖是在不断运动。随着现代磁共振成像有可能正在进行的放射治疗会话期间录制实时这项议案。在本文中，我们提出，它利用2D MR图像的顺序性来估计对应的位移场的图像配准方法。该方法采用若干判别相关滤波器独立地跟踪特定点。有稀疏到密集的插值方案我们可以一起然后估计位移场。用户的不相关性过滤器的在线培训，我们的方法是不可知的方式。对于插值方案，我们使用与被使用合成微分同胚的位移场训练的规范化卷积神经网络。该方法是在一个分段的心脏数据集评价和比较两种常规方法，当我们观察改进的性能。当涉及到较大的检测小物体运动的这种改善尤其明显。</font>
+</div>
+
+
+<hr>
+<div id="paper50"> <b>50. PanNuke Dataset Extension, Insights and Baselines</b>  <a href="https://arxiv.org/pdf/2003.10778" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title50" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Gamper%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jevgenij Gamper</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Koohbanani%2C+N+A" target="_blank" rel="noopener" style="color:#0000EE;">Navid Alemi Koohbanani</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Graham%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Simon Graham</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Jahanifar%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mostafa Jahanifar</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Khurram%2C+S+A" target="_blank" rel="noopener" style="color:#0000EE;">Syed Ali Khurram</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Azam%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Ayesha Azam</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Hewitt%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Katherine Hewitt</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Rajpoot%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nasir Rajpoot</a><br>
+<font size="3">
+Abstract: The emerging area of computational pathology (CPath) is ripe ground for the application of deep learning (DL) methods to healthcare due to the sheer volume of raw pixel data in whole-slide images (WSIs) of cancerous tissue slides, generally of the order of $100K{\times}80K$ pixels. However, it is imperative for the DL algorithms relying on nuclei-level details to be able to cope with data from `the clinical wild', which tends to be quite challenging. We study, and extend recently released PanNuke dataset consisting of more than 200,000 nuclei categorized into 5 clinically important classes for the challenging tasks of detecting, segmenting and classifying nuclei in WSIs \footnote{Download dataset here \href{this https URL}{this https URL}} \cite{gamper_pannuke:_2019}. Previous pan-cancer datasets consisted of only up to 9 different tissues and up to 21,000 unlabeled nuclei \cite{kumar2019multi} and just over 24,000 labeled nuclei with segmentation masks \cite{graham_hover-net:_2019}. PanNuke consists of 19 different tissue types from over 20,000 WSIs that have been semi-automatically annotated and quality controlled by clinical pathologists, leading to a dataset with statistics similar to `the clinical wild' and with minimal selection bias. We study the performance of segmentation and classification models when applied to the proposed dataset and demonstrate the application of models trained on PanNuke to whole-slide images. We provide comprehensive statistics about the dataset and outline recommendations and research directions to address the limitations of existing DL tools when applied to real-world CPath applications. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：计算病理学（CPATH）的新兴领域是用于深学习（DL）方法，以医疗保健应用成熟地面由于在全幻灯片图像癌组织切片的原始像素数据的绝对数量（WSIS），一般的的100K $ {\}次80K $像素的顺序。然而，当务之急是对DL算法依靠核级别的细节，以便能够应对来自`临床野”，这往往是相当具有挑战性的数据。我们研究，并扩大近期发布PanNuke数据集，即分为5临床上重要的类在这里检测，分割和信息社会世界峰会分类核\脚注{下载数据集\ HREF {此HTTPS URL} {具有挑战性的任务，超过20万个的细胞核此HTTPS URL}} \ {举gamper_pannuke：_2019}。上一页泛癌症数据集包括了最多只有9个不同的组织和高达21000个未标记的核\ {引用} kumar2019multi，只是超过24000标记的核与分割掩码\ {举graham_hover网：_2019}。 PanNuke由来自超过20,000 WSIS已半自动注释和质量的临床病理学家控制，导致类似于`临床野”并以最小的选择偏差统计数据集19种不同的组织类型。当应用于拟议的数据集和展示培训了PanNuke到全幻灯片图像的应用模式我们研究分割和分类模型的性能。当应用到现实世界的应用CPATH我们提供有关数据集和大纲的建议和研究方向全面的统计数据，以解决现有的DL工具的限制。</font>
+</div>
+
+
+<hr>
+<div id="paper51"> <b>51. Generating Chinese Poetry from Images via Concrete and Abstract  Information</b>  <a href="https://arxiv.org/pdf/2003.10773" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title51" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yusen Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dayiheng Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lv%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jiancheng Lv</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yongsheng Sang</a><br>
+<font size="3">
+Abstract: In recent years, the automatic generation of classical Chinese poetry has made great progress. Besides focusing on improving the quality of the generated poetry, there is a new topic about generating poetry from an image. However, the existing methods for this topic still have the problem of topic drift and semantic inconsistency, and the image-poem pairs dataset is hard to be built when training these models. In this paper, we extract and integrate the Concrete and Abstract information from images to address those issues. We proposed an infilling-based Chinese poetry generation model which can infill the Concrete keywords into each line of poems in an explicit way, and an abstract information embedding to integrate the Abstract information into generated poems. In addition, we use non-parallel data during training and construct separate image datasets and poem datasets to train the different components in our framework. Both automatic and human evaluation results show that our approach can generate poems which have better consistency with images without losing the quality. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：近年来，自动生成中国古典诗歌取得了很大的进步。除了围绕提高所生成的诗的品质，就有关从图像生成诗的新课题。然而，对于这一主题的现有方法仍具有主题漂移和语义不一致的问题，图像诗对数据集是很难培养这些模型时建立。在本文中，我们提取和具体和抽象信息，从图像集成到解决这些问题。我们提出了一个基于充填 - 中国新诗代车型可以填充混凝土的关键字到一个明确的方式诗的每一行，以及一个抽象的信息嵌入到抽象的信息到生成的诗歌整合。此外，我们在训练中使用非并行数据，构建独立的图像数据集和诗歌集训练不同的组件在我们的框架。自动和人工评估结果表明，我们的方法可以生成与图像更好的一致性诗不失品质。</font>
+</div>
+
+
+<hr>
+<div id="paper52"> <b>52. Estimating Uncertainty and Interpretability in Deep Learning for  Coronavirus (COVID-19) Detection</b>  <a href="https://arxiv.org/pdf/2003.10769" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title52" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Ghoshal%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Biraja Ghoshal</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Tucker%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Allan Tucker</a><br>
+<font size="3">
+Abstract: Deep Learning has achieved state of the art performance in medical imaging. However, these methods for disease detection focus exclusively on improving the accuracy of classification or predictions without quantifying uncertainty in a decision. Knowing how much confidence there is in a computer-based medical diagnosis is essential for gaining clinicians trust in the technology and therefore improve treatment. Today, the 2019 Coronavirus (SARS-CoV-2) infections are a major healthcare challenge around the world. Detecting COVID-19 in X-ray images is crucial for diagnosis, assessment and treatment. However, diagnostic uncertainty in the report is a challenging and yet inevitable task for radiologist. In this paper, we investigate how drop-weights based Bayesian Convolutional Neural Networks (BCNN) can estimate uncertainty in Deep Learning solution to improve the diagnostic performance of the human-machine team using publicly available COVID-19 chest X-ray dataset and show that the uncertainty in prediction is highly correlates with accuracy of prediction. We believe that the availability of uncertainty-aware deep learning solution will enable a wider adoption of Artificial Intelligence (AI) in a clinical setting. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：深学习已经实现了在医疗成像的先进的性能。然而，这些方法来检测疾病专注于提高分类或预测的准确度，而不在决定量化的不确定性。知道有多少信任，就在以计算机为基础的医疗诊断是在技术上获得医生的信任，从而提高治疗至关重要。今天，2019冠状病毒（SARS-COV-2）感染是全球主要的医疗挑战。检测COVID-19的X射线图像是诊断，评估和治疗的关键。然而，在报告诊断的不确定性是放射科医生具有挑战性的，但不可避免的任务。在本文中，我们研究如何基于贝叶斯卷积神经网络（BCNN）降权重可在深学习方案估计不确定性使用公开可用的COVID，19胸部X射线数据集，并表明，改善人机团队的诊断性能在预测的不确定性是高度与预测的准确性相关联。我们认为，不确定性感知深度学习解决方案的可用性将在临床环境使更广泛的采用人工智能（AI）的。</font>
+</div>
+
+
+<hr>
+<div id="paper53"> <b>53. TeCNO: Surgical Phase Recognition with Multi-Stage Temporal  Convolutional Networks</b>  <a href="https://arxiv.org/pdf/2003.10751" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title53" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Czempiel%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tobias Czempiel</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Paschali%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Magdalini Paschali</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Keicher%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Matthias Keicher</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Simson%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Walter Simson</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Feussner%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hubertus Feussner</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Kim%2C+S+T" target="_blank" rel="noopener" style="color:#0000EE;">Seong Tae Kim</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Navab%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nassir Navab</a><br>
+<font size="3">
+Abstract: Automatic surgical phase recognition is a challenging and crucial task with the potential to improve patient safety and become an integral part of intra-operative decision-support systems. In this paper, we propose, for the first time in workflow analysis, a Multi-Stage Temporal Convolutional Network (MS-TCN) that performs hierarchical prediction refinement for surgical phase recognition. Causal, dilated convolutions allow for a large receptive field and online inference with smooth predictions even during ambiguous transitions. Our method is thoroughly evaluated on two datasets of laparoscopic cholecystectomy videos with and without the use of additional surgical tool information. Outperforming various state-of-the-art LSTM approaches, we verify the suitability of the proposed causal MS-TCN for surgical phase recognition. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：自动手术阶段承认是改善患者安全，成为手术中的决策支持系统的一个组成部分的潜力充满挑战和重要任务。在本文中，我们提出，对于第一时间在工作流的分析中，多级态卷积网络（MS-TCN），其用于外科相位识别进行分级预测细化。因果，扩张卷积即使在暧昧的过渡允许大量接受现场和在线推理流畅的预测。我们的方法是在使用和不使用额外的手术器械信息腹腔镜胆囊切除术视频两个数据集彻底评估。超越国家的最先进的各种LSTM方法，我们验证了因果MS-TCN的手术阶段认可的适宜性。</font>
+</div>
+
+
+<hr>
+<div id="paper54"> <b>54. Organ Segmentation From Full-size CT Images Using Memory-Efficient FCN</b>  <a href="https://arxiv.org/pdf/2003.10690" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title54" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Wang%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chenglong Wang</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Oda%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Masahiro Oda</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Mori%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kensaku Mori</a><br>
+<font size="3">
+Abstract: In this work, we present a memory-efficient fully convolutional network (FCN) incorporated with several memory-optimized techniques to reduce the run-time GPU memory demand during training phase. In medical image segmentation tasks, subvolume cropping has become a common preprocessing. Subvolumes (or small patch volumes) were cropped to reduce GPU memory demand. However, small patch volumes capture less spatial context that leads to lower accuracy. As a pilot study, the purpose of this work is to propose a memory-efficient FCN which enables us to train the model on full size CT image directly without subvolume cropping, while maintaining the segmentation accuracy. We optimize our network from both architecture and implementation. With the development of computing hardware, such as graphics processing unit (GPU) and tensor processing unit (TPU), now deep learning applications is able to train networks with large datasets within acceptable time. Among these applications, semantic segmentation using fully convolutional network (FCN) also has gained a significant improvement against traditional image processing approaches in both computer vision and medical image processing fields. However, unlike general color images used in computer vision tasks, medical images have larger scales than color images such as 3D computed tomography (CT) images, micro CT images, and histopathological images. For training these medical images, the large demand of computing resource become a severe problem. In this paper, we present a memory-efficient FCN to tackle the high GPU memory demand challenge in organ segmentation problem from clinical CT images. The experimental results demonstrated that our GPU memory demand is about 40% of baseline architecture, parameter amount is about 30% of the baseline. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在这项工作中，我们提出几个内存优化技术结合，以减少在训练阶段的运行时间GPU内存需求内存高效综卷积网络（FCN）。在医学图像分割的任务，亚体裁剪已经成为一种常见的预处理。亚体积（或小片体积）冒出来降低GPU的内存需求。然而，小补丁体积捕获更少的空间背景下，导致较低的精度。作为试点研究，这项工作的目的是提出一个内存效率FCN这使我们能够对培训全尺寸CT图像模型的情况下直接子卷裁切，同时保持了分割精度。我们从两个体系结构和实现优化我们的网络。随着计算硬件，诸如图形处理单元（GPU）和张量处理单元（TPU）的发展，现在深学习应用程序能够与可接受的时间内大的数据集来训练网络。在这些应用中，采用全卷积网络（FCN）语义分割也兑传统图像处理的显著改善两计算机视觉和医学图像处理领域的最新做法。然而，不同于在计算机视觉任务中使用的一般的彩色图像，医学图像具有比彩色图像更大的尺度诸如3D计算机断层扫描（CT）图像，微CT图像，和组织病理学的图像。培训这些医疗图像，计算资源的大量需求成为一个严重的问题。在本文中，我们提出了一个内存效率FCN以解决临床CT图像的器官分割问题高GPU内存需求的挑战。实验结果表明，我们的GPU存储器需求量约为基线架构的40％，参数量为约基线的30％。</font>
+</div>
+
+
+<hr>
+<div id="paper55"> <b>55. Learning regularization and intensity-gradient-based fidelity for single  image super resolution</b>  <a href="https://arxiv.org/pdf/2003.10689" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title55" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Liang%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hu Liang</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Zhao%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shengrong Zhao</a><br>
+<font size="3">
+Abstract: How to extract more and useful information for single image super resolution is an imperative and difficult problem. Learning-based method is a representative method for such task. However, the results are not so stable as there may exist big difference between the training data and the test data. The regularization-based method can effectively utilize the self-information of observation. However, the degradation model used in regularization-based method just considers the degradation in intensity space. It may not reconstruct images well as the degradation reflections in various feature space are not considered. In this paper, we first study the image degradation progress, and establish degradation model both in intensity and gradient space. Thus, a comprehensive data consistency constraint is established for the reconstruction. Consequently, more useful information can be extracted from the observed data. Second, the regularization term is learned by a designed symmetric residual deep neural-network. It can search similar external information from a predefined dataset avoiding the artificial tendency. Finally, the proposed fidelity term and designed regularization term are embedded into the regularization framework. Further, an optimization method is developed based on the half-quadratic splitting method and the pseudo conjugate method. Experimental results indicated that the subjective and the objective metric corresponding to the proposed method were better than those obtained by the comparison methods. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：单幅图像超分辨率如何提取更多的和有用的信息是必要的和困难的问题。基于学习的方法是这样的任务的典型方法。然而，结果并不那么稳定，有可能存在的训练数据和测试数据相差很大。基于正则化法能够有效地利用观察的自信息。然而，在基于正则-方法中使用的劣化模型只考虑在强度空间中的降解。它可能不是重建图像以及在各种特征空间中的降解的反射不考虑。在本文中，我们首先研究了图像退化的进展，并同时建立在强度和梯度空间退化模型。因此，一个全面的数据一致性约束被建立用于重建。因此，更多的有用信息可从所观察到的数据中提取。其次，正则项是由设计对称残留深层神经网络学会。它可以从预定义的数据集，避免了人工搜索的趋势相似的外部信息。最后，所提出的保真项和设计调整项被嵌入到正规化的框架。此外，优化方法是基于半二次分裂法和伪共轭法的发展。实验结果表明，主观和客观度量对应于所提出的方法比通过比较方法获得的那些更好。</font>
+</div>
+
+
+<hr>
+<div id="paper56"> <b>56. Robust and On-the-fly Dataset Denoising for Image Classification</b>  <a href="https://arxiv.org/pdf/2003.10647" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title56" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Song%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jiaming Song</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lunjia Hu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dauphin%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yann Dauphin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Auli%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Auli</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ma%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tengyu Ma</a><br>
+<font size="3">
+Abstract: Memorization in over-parameterized neural networks could severely hurt generalization in the presence of mislabeled examples. However, mislabeled examples are hard to avoid in extremely large datasets collected with weak supervision. We address this problem by reasoning counterfactually about the loss distribution of examples with uniform random labels had they were trained with the real examples, and use this information to remove noisy examples from the training set. First, we observe that examples with uniform random labels have higher losses when trained with stochastic gradient descent under large learning rates. Then, we propose to model the loss distribution of the counterfactual examples using only the network parameters, which is able to model such examples with remarkable success. Finally, we propose to remove examples whose loss exceeds a certain quantile of the modeled loss distribution. This leads to On-the-fly Data Denoising (ODD), a simple yet effective algorithm that is robust to mislabeled examples, while introducing almost zero computational overhead compared to standard training. ODD is able to achieve state-of-the-art results on a wide range of datasets including real-world ones such as WebVision and Clothing1M. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：背诵过度参数在贴错标签的例子存在神经网络可能会严重伤害概括。然而，贴错标签的例子是很难避免与监管不力收集非常大的数据集。我们应对反事实推理与均匀随机标签的例子损失分布这个问题已经将它们与实际例子的训练，并利用这些信息来从训练集中移除嘈杂的例子。首先，我们观察到，当在大学习速率随机梯度下降训练了与均匀随机标签的例子有更高的损耗。然后，我们建议仅使用网络参数的反例损失分布，这是能够这样的例子是显着的成功范型。最后，我们建议撤销其例子损失超过了模拟损失分布有一定的位数。这导致对即时数据降噪（ODD），简单而有效的算法，具有较强的抗贴错标签的例子，同时相对于标准的培训引入几乎为零的计算开销。 ODD是能够实现在宽范围的数据集，包括现实世界的如WebVision和Clothing1M的状态的最先进的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper57"> <b>57. Automated Detection of Cribriform Growth Patterns in Prostate Histology  Images</b>  <a href="https://arxiv.org/pdf/2003.10543" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title57" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Ambrosini%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pierre Ambrosini</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Hollemans%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Eva Hollemans</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Kweldam%2C+C+F" target="_blank" rel="noopener" style="color:#0000EE;">Charlotte F. Kweldam</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=van+Leenders%2C+G+J+L+H" target="_blank" rel="noopener" style="color:#0000EE;">Geert J. L. H. van Leenders</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Stallinga%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sjoerd Stallinga</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Vos%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Frans Vos</a><br>
+<font size="3">
+Abstract: Cribriform growth patterns in prostate carcinoma are associated with poor prognosis. We aimed to introduce a deep learning method to detect such patterns automatically. To do so, convolutional neural network was trained to detect cribriform growth patterns on 128 prostate needle biopsies. Ensemble learning taking into account other tumor growth patterns during training was used to cope with heterogeneous and limited tumor tissue occurrences. ROC and FROC analyses were applied to assess network performance regarding detection of biopsies harboring cribriform growth pattern. The ROC analysis yielded an area under the curve up to 0.82. FROC analysis demonstrated a sensitivity of 0.9 for regions larger than 0.0150 mm2 with on average 6.8 false positives. To benchmark method performance for intra-observer annotation variability, false positive and negative detections were re-evaluated by the pathologists. Pathologists considered 9% of the false positive regions as cribriform, and 11% as possibly cribriform; 44% of the false negative regions were not annotated as cribriform. As a final experiment, the network was also applied on a dataset of 60 biopsy regions annotated by 23 pathologists. With the cut-off reaching highest sensitivity, all images annotated as cribriform by at least 7/23 of the pathologists, were all detected as cribriform by the network. In conclusion, the proposed deep learning method has high sensitivity for detecting cribriform growth patterns at the expense of a limited number of false positives. It can detect cribriform regions that are labelled as such by at least a minority of pathologists. Therefore, it could assist clinical decision making by suggesting suspicious regions. </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：前列腺癌筛状的增长模式与预后较差。我们的目的是引进了深刻的学习方法来自动检测这样的模式。要做到这一点，卷积神经网络进行训练，以检测128个前列腺穿刺活检筛状的增长模式。集成学习考虑到其他肿瘤生长模式训练期间使用，以应付异构和有限的肿瘤组织的发生。 ROC和FROC分析是用于评估关于检测活检窝藏筛状生长方式的网络性能。 ROC分析曲线下高达0.82产生的区域。 FROC分析证明的0.9比0.0150平方毫米平均为6.8误报较大区域灵敏度。到用于帧内观察者注释变性，假阳性和阴性的检测基准的方法的性能是由病理学家重新评估。病理学家认为是假阳性区域为筛状的9％，而为可能的筛状11％;假阴性区域的44％的未标注为筛状。作为最后的实验中，网络也适用于由23个病理学家注释60个活检区域的数据集。与截止达到最高的灵敏度，所有图像注释为筛状由病理学家的至少7/23，均检测到由网络筛状。总之，所提出的深学习方法具有用于在假阳性的数量有限的费用检测筛状生长方式高灵敏度。它可以检测到由至少病理学家的少数打成这样筛状区域。因此，它可以通过建议的可疑地区协助临床决策。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/03/25/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-25/" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-03-25">https://procjx.github.io/2020/03/25/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-03-25/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/03/25/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-03-25/" rel="next" title="【arxiv论文】 Computation and Language 2020-03-25">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computation and Language 2020-03-25
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translation/" rel="tag">Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Translation/" rel="tag">Word Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: 'ea796a568aa84ef0cee6cd5eb8348ce7',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
