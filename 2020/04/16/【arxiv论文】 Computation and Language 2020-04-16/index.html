@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Entities as Experts: Sparse Memory Access with Entity Supervision [PDF] 摘要  2. Document-level Representation Learning using Citation-informed  Transformers [PDF] 摘要  3. PALM: Pre-training an Au">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-04-16">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;04&#x2F;16&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-04-16&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Entities as Experts: Sparse Memory Access with Entity Supervision [PDF] 摘要  2. Document-level Representation Learning using Citation-informed  Transformers [PDF] 摘要  3. PALM: Pre-training an Au">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-16T05:00:04.161Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/04/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-04-16/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-04-16 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/04/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-04-16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-04-16
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-16 11:30:42 / 修改时间：13:00:04" itemprop="dateCreated datePublished" datetime="2020-04-16T11:30:42+08:00">2020-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>27k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>45 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Entities as Experts: Sparse Memory Access with Entity Supervision <a href="https://arxiv.org/pdf/2004.07202" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> Document-level Representation Learning using Citation-informed  Transformers <a href="https://arxiv.org/pdf/2004.07180" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> PALM: Pre-training an Autoencoding&amp;Autoregressive Language Model for  Context-conditioned Generation <a href="https://arxiv.org/pdf/2004.07159" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Bayesian Hierarchical Words Representation Learning <a href="https://arxiv.org/pdf/2004.07126" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Analyzing analytical methods: The case of phonology in neural models of  spoken language <a href="https://arxiv.org/pdf/2004.07070" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> Gestalt: a Stacking Ensemble for SQuAD2.0 <a href="https://arxiv.org/pdf/2004.07067" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Exploring Probabilistic Soft Logic as a framework for integrating  top-down and bottom-up processing of language in a task context <a href="https://arxiv.org/pdf/2004.07000" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Framing COVID-19: How we conceptualize and discuss the pandemic on  Twitter <a href="https://arxiv.org/pdf/2004.06986" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> ToD-BERT: Pre-trained Natural Language Understanding for Task-Oriented  Dialogues <a href="https://arxiv.org/pdf/2004.06871" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> Coreferential Reasoning Learning for Language Representation <a href="https://arxiv.org/pdf/2004.06870" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> On the Linguistic Capacity of Real-Time Counter Automata <a href="https://arxiv.org/pdf/2004.06866" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+<div id="title12">
+<b>12.</b> A Human Evaluation of AMR-to-English Generation Systems <a href="https://arxiv.org/pdf/2004.06814" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper12" style="color:#0000EE;">摘要</a><br></div>
+<div id="title13">
+<b>13.</b> Mining Coronavirus (COVID-19) Posts in Social Media <a href="https://arxiv.org/pdf/2004.06778" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper13" style="color:#0000EE;">摘要</a><br></div>
+<div id="title14">
+<b>14.</b> A Simple Yet Strong Pipeline for HotpotQA <a href="https://arxiv.org/pdf/2004.06753" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper14" style="color:#0000EE;">摘要</a><br></div>
+<div id="title15">
+<b>15.</b> Balancing Training for Multilingual Neural Machine Translation <a href="https://arxiv.org/pdf/2004.06748" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper15" style="color:#0000EE;">摘要</a><br></div>
+<div id="title16">
+<b>16.</b> lamBERT: Language and Action Learning Using Multimodal BERT <a href="https://arxiv.org/pdf/2004.07093" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper16" style="color:#0000EE;">摘要</a><br></div>
+<div id="title17">
+<b>17.</b> A hybrid classical-quantum workflow for natural language processing <a href="https://arxiv.org/pdf/2004.06800" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper17" style="color:#0000EE;">摘要</a><br></div>
+<div id="title18">
+<b>18.</b> Probabilistic Model of Narratives Over Topical Trends in Social Media: A  Discrete Time Model <a href="https://arxiv.org/pdf/2004.06793" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper18" style="color:#0000EE;">摘要</a><br></div>
+<div id="title19">
+<b>19.</b> Speaker Diarization with Lexical Information <a href="https://arxiv.org/pdf/2004.06756" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper19" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Entities as Experts: Sparse Memory Access with Entity Supervision</b>  <a href="https://arxiv.org/pdf/2004.07202" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=F%C3%A9vry%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thibault Févry</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Soares%2C+L+B" target="_blank" rel="noopener" style="color:#0000EE;">Livio Baldini Soares</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=FitzGerald%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nicholas FitzGerald</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Choi%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Eunsol Choi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kwiatkowski%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tom Kwiatkowski</a><br>
+<font size="3">
+ Abstract: We focus on the problem of capturing declarative knowledge in the learned parameters of a language model. We introduce a new model, Entities as Experts (EaE), that can access distinct memories of the entities mentioned in a piece of text. Unlike previous efforts to integrate entity knowledge into sequence models, EaE's entity representations are learned directly from text. These representations capture sufficient knowledge to answer TriviaQA questions such as "Which Dr. Who villain has been played by Roger Delgado, Anthony Ainley, Eric Roberts?". EaE outperforms a Transformer model with $30\times$ the parameters on this task. According to the Lama knowledge probes, EaE also contains more factual knowledge than a similar sized Bert. We show that associating parameters with specific entities means that EaE only needs to access a fraction of its parameters at inference time, and we show that the correct identification, and representation, of entities is essential to EaE's performance. We also argue that the discrete and independent entity representations in EaE make it more modular and interpretable than the Transformer architecture on which it is based.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们专注于语言模型的参数了解到捕捉陈述性知识的问题。我们推出了新的模式，实体为专家（EAE），可以访问在一段文字中提到的实体的独特记忆。不同于以往的努力，实体知识融入序列模型，EAE的实体表示是直接从课文中学到了。这些表示捕获足够的知识来回答TriviaQA问题，如“哪个医生谁小人已经被罗杰·德尔加多，安东尼·阿利，埃里克·罗伯茨扮演？”。 EAE胜过一个变压器模型，以$ 30 \次美元这一任务的参数。据喇嘛知识探头，EAE还含有比类似规模的伯特更实际知识。我们发现，与相关联的特定实体的手段参数EAE只需要在推理时间来访问它的参数的一小部分，我们表明，正确识别，并表示，实体是EAE的性能至关重要。我们也认为，在EAE分立的独立实体时表示使它比变压器的架构上，它是基于更加模块化和解释。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Document-level Representation Learning using Citation-informed  Transformers</b>  <a href="https://arxiv.org/pdf/2004.07180" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Cohan%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Arman Cohan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Feldman%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sergey Feldman</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Beltagy%2C+I" target="_blank" rel="noopener" style="color:#0000EE;">Iz Beltagy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Downey%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Doug Downey</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Weld%2C+D+S" target="_blank" rel="noopener" style="color:#0000EE;">Daniel S. Weld</a><br>
+<font size="3">
+ Abstract: Representation learning is a critical ingredient for natural language processing systems. Recent Transformer language models like BERT learn powerful textual representations, but these models are targeted towards token- and sentence-level training objectives and do not leverage information on inter-document relatedness, which limits their document-level representation power. For applications on scientific documents, such as classification and recommendation, the embeddings power strong performance on end tasks. We propose SPECTER, a new method to generate document-level embedding of scientific documents based on pretraining a Transformer language model on a powerful signal of document-level relatedness: the citation graph. Unlike existing pretrained language models, SPECTER can be easily applied to downstream applications without task-specific fine-tuning. Additionally, to encourage further research on document-level models, we introduce SciDocs, a new evaluation benchmark consisting of seven document-level tasks ranging from citation prediction, to document classification and recommendation. We show that SPECTER outperforms a variety of competitive baselines on the benchmark.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：表示学习是自然语言处理系统中的关键因素。最近变压器语言模型，如BERT学习功能强大的文本表示，但这些模型是针对令牌的走向和句子层次的培训目标，并没有对文档间关联性，这限制了它们的文档级表现力利用信息。有关科学文档的应用程序，如分类和推荐，在结束任务的嵌入功率强劲的性能。我们建议幽灵，一种新的方法来生成基于文档级关联的一个强有力的信号预训练变压器语言模型科学文件文档级嵌入：引用图。与现有的预训练的语言模型，幽灵可以很容易地应用到下游应用，而无需特定任务的微调。此外，为了鼓励在文件级别车型的进一步研究，我们引入SciDocs，新的评价标准由七文档级的任务，从引文预测，到文档分类和推荐。我们发现，幽灵优于各种基准的有竞争力的基线。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. PALM: Pre-training an Autoencoding&amp;Autoregressive Language Model for  Context-conditioned Generation</b>  <a href="https://arxiv.org/pdf/2004.07159" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Bi%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bin Bi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chenliang Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wu%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chen Wu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yan%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Ming Yan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wei Wang</a><br>
+<font size="3">
+ Abstract: Self-supervised pre-training has emerged as a powerful technique for natural language understanding and generation, such as BERT, MASS and BART. The existing pre-training techniques employ autoencoding and/or autoregressive objectives to train Transformer-based models by recovering original word tokens from corrupted text with some masked tokens. In this work, we present PALM which pre-trains an autoencoding and autoregressive language model on a large unlabeled corpus especially for downstream generation conditioned on context, such as generative question answering and conversational response generation. PALM minimizes the mismatch introduced by the existing denoising scheme between pre-training and fine-tuning where generation is more than reconstructing original text. With a novel pre-training scheme, PALM achieves new state-of-the-art results on a variety of language generation benchmarks covering generative question answering (Rank 1 on the official MARCO leaderboard), abstractive summarization on Gigaword and conversational response generation on Cornell Movie Dialogues.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：自监督前培训已经成为了自然语言理解和生成，如BERT，质量和BART的强大技术。现有的预培训技术采用autoencoding和/或自回归目标由一些蒙面令牌损坏的文本恢复原来的字令牌来训练基于变压器的模型。在这项工作中，我们本PALM哪个预列车上的大的未标记的语料库尤其对于下游代空调上下文，诸如生成问答和会话响应生成一个autoencoding和自回归语言模型。 PALM可以最小化前的训练和微调。发电量超过重构原始文本之间现有的降噪方案出台的不匹配。具有新颖预培养方案，PALM实现对各种语言生成基准覆盖生成问答（等级1上的官方MARCO横幅），上Gigaword抽象总结和会话响应生成上康奈尔的状态的最先进的新的结果电影的对话。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Bayesian Hierarchical Words Representation Learning</b>  <a href="https://arxiv.org/pdf/2004.07126" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Barkan%2C+O" target="_blank" rel="noopener" style="color:#0000EE;">Oren Barkan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rejwan%2C+I" target="_blank" rel="noopener" style="color:#0000EE;">Idan Rejwan</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Caciularu%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Avi Caciularu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Koenigstein%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Noam Koenigstein</a><br>
+<font size="3">
+ Abstract: This paper presents the Bayesian Hierarchical Words Representation (BHWR) learning algorithm. BHWR facilitates Variational Bayes word representation learning combined with semantic taxonomy modeling via hierarchical priors. By propagating relevant information between related words, BHWR utilizes the taxonomy to improve the quality of such representations. Evaluation of several linguistic datasets demonstrates the advantages of BHWR over suitable alternatives that facilitate Bayesian modeling with or without semantic priors. Finally, we further show that BHWR produces better representations for rare words.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文介绍了分层贝叶斯词表示（BHWR）学习算法。 BHWR有利于变贝叶斯字表示学习通过分层先验语义分类模型相结合。通过传播相关的词之间的相关信息，BHWR利用改善这种表示的质量分类。几种语言的数据集的评估表明在促进有或无语义先验贝叶斯模型合适的替代BHWR的优势。最后，我们进一步的研究表明BHWR的生僻字能产生更好的表示。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Analyzing analytical methods: The case of phonology in neural models of  spoken language</b>  <a href="https://arxiv.org/pdf/2004.07070" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chrupa%C5%82a%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Grzegorz Chrupała</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Higy%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bertrand Higy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Alishahi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Afra Alishahi</a><br>
+<font size="3">
+ Abstract: Given the fast development of analysis techniques for NLP and speech processing systems, few systematic studies have been conducted to compare the strengths and weaknesses of each method. As a step in this direction we study the case of representations of phonology in neural network models of spoken language. We use two commonly applied analytical techniques, diagnostic classifiers and representational similarity analysis, to quantify to what extent neural activation patterns encode phonemes and phoneme sequences. We manipulate two factors that can affect the outcome of analysis. First, we investigate the role of learning by comparing neural activations extracted from trained versus randomly-initialized models. Second, we examine the temporal scope of the activations by probing both local activations corresponding to a few milliseconds of the speech signal, and global activations pooled over the whole utterance. We conclude that reporting analysis results with randomly initialized models is crucial, and that global-scope methods tend to yield more consistent results and we recommend their use as a complement to local-scope diagnostic methods.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：鉴于对NLP分析技术和语音处理系统的快速发展，很少有系统的研究已进行了比较每种方法的长处和短处。由于在此方向迈出的一步，我们研究语言的神经网络模型的音韵申述的情况。我们使用两种通常应用的分析技术，诊断分类器和代表性相似性分析，以量化到什么程度的神经激活模式编码音素和音素序列。我们操纵两个因素会影响分析的结果。首先，我们调查通过比较提取从训练的对比随机初始化模型神经激活学习的作用。其次，我们考察通过探测对应于语音信号的几毫秒，并汇集在整个话语全球激活本地激活的激活的时间范围。我们得出结论，报告分析结果与随机初始化模式是至关重要的，而全球范围的方法往往会产生更一致的结果，我们建议他们以补充本地范围的诊断方法。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. Gestalt: a Stacking Ensemble for SQuAD2.0</b>  <a href="https://arxiv.org/pdf/2004.07067" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=El-Geish%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mohamed El-Geish</a><br>
+<font size="3">
+ Abstract: We propose a deep-learning system -- for the SQuAD2.0 task -- that finds, or indicates the lack of, a correct answer to a question in a context paragraph. Our goal is to learn an ensemble of heterogeneous SQuAD2.0 models that, when blended properly, outperforms the best model in the ensemble per se. We created a stacking ensemble that combines top-N predictions from two models, based on ALBERT and RoBERTa, into a multiclass classification task to pick the best answer out of their predictions. We explored various ensemble configurations, input representations, and model architectures. For evaluation, we examined test-set EM and F1 scores; our best-performing ensemble incorporated a CNN-based meta-model and scored 87.117 and 90.306, respectively -- a relative improvement of 0.55% for EM and 0.61% for F1 scores, compared to the baseline performance of the best model in the ensemble, an ALBERT-based model, at 86.644 for EM and 89.760 for F1.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们提出了一个深刻的学习系统 - 为SQuAD2.0任务 - 即认定，或表明缺乏，一个正确的答案，在上下文段落的问题。我们的目标是要学会异质SQuAD2.0车型的集合，当适当混合，优于在乐团本身的最佳模式。我们创建了一个堆叠合奏，从两种模式结合了前N个预测的基础上，阿尔伯特和罗伯塔，为多类分类任务要挑最好的答案了他们的预测。我们探讨不同的合奏配置，输入表示，与模型架构。对于评价，我们检测测试组EM和F1分数;我们成立一个基于CNN-元模型和最佳表演合奏拿下87.117和90.306，分别为 -  0.55％，为EM和F1分数0.61％的相对改善，相比于最佳模式在合奏的基准性能，一个ALBERT为基础的模式，以86.644的EM和89.760的F1。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Exploring Probabilistic Soft Logic as a framework for integrating  top-down and bottom-up processing of language in a task context</b>  <a href="https://arxiv.org/pdf/2004.07000" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Dellert%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Johannes Dellert</a><br>
+<font size="3">
+ Abstract: This technical report describes a new prototype architecture designed to integrate top-down and bottom-up analysis of non-standard linguistic input, where a semantic model of the context of an utterance is used to guide the analysis of the non-standard surface forms, including their automated normalization in context. While the architecture is generally applicable, as a concrete use case of the architecture we target the generation of semantically-informed target hypotheses for answers written by German learners in response to reading comprehension questions, where the reading context and possible target answers are given. The architecture integrates existing NLP components to produce candidate analyses on eight levels of linguistic modeling, all of which are broken down into atomic statements and connected into a large graphical model using Probabilistic Soft Logic (PSL) as a framework. Maximum a posteriori inference on the resulting graphical model then assigns a belief distribution to candidate target hypotheses. The current version of the architecture builds on Universal Dependencies (UD) as its representation formalism on the form level and on Abstract Meaning Representations (AMRs) to represent semantic analyses of learner answers and the context information provided by the target answers. These general choices will make it comparatively straightforward to apply the architecture to other tasks and other languages.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：该技术报告描述了一个新的原型架构，旨在整合非标准语言输入，在话语的上下文的语义模型被用来引导非标面的分析，自上而下和自下而上的分析形式，包括在上下文中它们的自动规格化。虽然架构是普遍适用的，因为建筑的具体使用情况下，我们的目标语义知情目标假设的生成由德国学生在响应写入到阅读理解题，这里的阅读环境和可能的目标答案给出答案。现有NLP组件架构集成，以产生八个水平语言建模的，所有这些都被分解成原子语句和连接成使用概率软逻辑（PSL），为框架大图形模型候选分析。最大对所得图形模型的后验推理然后分配一个置信度分布到候选目标假设。该体系结构的当前版本建立在通用依赖性（UD）上的形式水平其代表性形式主义，在抽象意义交涉（AMRS）来表示学习者的答案和由目标答案提供的上下文信息的语义分析。这些一般选择将使其比较简单的架构应用到其他任务和其他语言。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Framing COVID-19: How we conceptualize and discuss the pandemic on  Twitter</b>  <a href="https://arxiv.org/pdf/2004.06986" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Wicke%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Philipp Wicke</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bolognesi%2C+M+M" target="_blank" rel="noopener" style="color:#0000EE;">Marianna M. Bolognesi</a><br>
+<font size="3">
+ Abstract: Doctors and nurses in these weeks are busy in the trenches, fighting against a new invisible enemy: Covid-19. Cities are locked down and civilians are besieged in their own homes, to prevent the spreading of the virus. War-related terminology is commonly used to frame the discourse around epidemics and diseases. Arguably the discourse around the current epidemic will make use of war-related metaphors too,not only in public discourse and the media, but also in the tweets written by non-experts of mass communication. We hereby present an analysis of the discourse around #Covid-19, based on a corpus of 200k tweets posted on Twitter during March and April 2020. Using topic modelling we first analyze the topics around which the discourse can be classified. Then, we show that the WAR framing is used to talk about specific topics, such as the virus treatment, but not others, such as the effects of social distancing on the population. We then measure and compare the popularity of the WAR frame to three alternative figurative frames (MONSTER, STORM and TSUNAMI) and a literal frame used as control (FAMILY). The results show that while the FAMILY literal frame covers a wider portion of the corpus, among the figurative framings WAR is the most frequently used, and thus arguably the most conventional one. However, we conclude, this frame is not apt to elaborate the discourse around many aspects involved in the current situation. Therefore, we conclude, in line with previous suggestions, a plethora of framing options, or a metaphor menu, may facilitate the communication of various aspects involved in the Covid-19-related discourse on the social media, and thus support civilians in the expression of their feelings, opinions and ideas during the current pandemic.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：医生和护士在这周都在忙着在战壕里，对一个新的看不见的敌人战斗：Covid-19。城市被锁定，并且平民在自己的家包围，以防止病毒的传播。战争相关的术语是常用的框架周围流行病和疾病的话语。可以说，围绕当前流行的话语会利用战争有关的隐喻太多，不仅在公共话语和媒体，也是通过大众传播的非专家撰写的tweet。在此，我们提出围绕＃Covid-19的话语进行分析的基础上，三月和四月2020年使用主题建模我们首先分析其周围的话语可以分为主题期间Twitter上发布200K鸣叫语料库。然后，我们表明，战争框架来谈谈具体的主题，如病毒治疗，而不是其他人，如对居民社会距离的影响。然后，我们测量和WAR帧的普及比较三种替代形象化帧（怪物，STORM海啸）和用作对照（家庭）字面帧。结果表明，而家庭字面框架覆盖语料库的较宽部分，所述具象之间的构架WAR是最经常使用的，并且因此可以说是最常规的。然而，我们认为，这个框架是不容易细说围绕涉及当前局势的许多方面的话语权。因此，我们得出结论，与先前建议的框架选项过多，或比喻菜单线，可以方便的参与对社会化媒体的Covid-19相关的话语各方面的沟通，从而支持平民表达目前大流行期间，他们的感受，意见和想法。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. ToD-BERT: Pre-trained Natural Language Understanding for Task-Oriented  Dialogues</b>  <a href="https://arxiv.org/pdf/2004.06871" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Wu%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chien-Sheng Wu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hoi%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Steven Hoi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Socher%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Richard Socher</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xiong%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Caiming Xiong</a><br>
+<font size="3">
+ Abstract: The use of pre-trained language models has emerged as a promising direction for improving dialogue systems. However, the underlying difference of linguistic patterns between conversational data and general text makes the existing pre-trained language models not as effective as they have been shown to be. Recently, there are some pre-training approaches based on open-domain dialogues, leveraging large-scale social media data such as Twitter or Reddit. Pre-training for task-oriented dialogues, on the other hand, is rarely discussed because of the long-standing and crucial data scarcity problem. In this work, we combine nine English-based, human-human, multi-turn and publicly available task-oriented dialogue datasets to conduct language model pre-training. The experimental results show that our pre-trained task-oriented dialogue BERT (ToD-BERT) surpasses BERT and other strong baselines in four downstream task-oriented dialogue applications, including intention detection, dialogue state tracking, dialogue act prediction, and response selection. Moreover, in the simulated limited data experiments, we show that ToD-BERT has stronger few-shot capacity that can mitigate the data scarcity problem in task-oriented dialogues.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：采用预训练的语言模型已经成为了提高对话系统有前途的方向。然而，会话数据和一般的文本之间的语言模式的根本区别，使现有的预训练的语言模型不是有效，因为他们已经被证明是。近来，有一些前培训方法的基础上开放域的对话，充分利用大型的社交媒体数据如Twitter或reddit的。面向任务的对话前培训，另一方面，很少因为长期和重要数据匮乏问题的讨论。在这项工作中，我们结合基于英语的九人 - 人，多圈并公布了面向任务的对话数据集进行语言模型前培训。实验结果表明，我们的预先训练的面向任务的对话BERT（TOD-BERT）超过BERT和四个下游面向任务的对话应用等强大的基线，包括意图识别，对话状态跟踪，对话行为预测和响应的选择。此外，在模拟的有限的实验数据，我们发现的ToD-BERT具有可以在面向任务的对话解决数据匮乏问题更强一些拍能力。</font>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. Coreferential Reasoning Learning for Language Representation</b>  <a href="https://arxiv.org/pdf/2004.06870" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ye%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Deming Ye</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yankai Lin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Du%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jiaju Du</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhenghao Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sun%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maosong Sun</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhiyuan Liu</a><br>
+<font size="3">
+ Abstract: Language representation models such as BERT could effectively capture contextual semantic information from plain text, and have been proved to achieve promising results in lots of downstream NLP tasks with appropriate fine-tuning. However, existing language representation models seldom consider coreference explicitly, the relationship between noun phrases referring to the same entity, which is essential to a coherent understanding of the whole discourse. To address this issue, we present CorefBERT, a novel language representation model designed to capture the relations between noun phrases that co-refer to each other. According to the experimental results, compared with existing baseline models, the CorefBERT model has made significant progress on several downstream NLP tasks that require coreferential reasoning, while maintaining comparable performance to previous models on other common NLP tasks.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：语言表达等车型BERT能有效地从纯文本捕捉上下文语义信息，并且已经证明，以实现大量的适当的微调下游NLP任务可喜的成果。然而，现有的语言表示模型很少考虑共指明确，名词短语指的是同一实体，这是整个语篇的连贯理解至关重要的关系。为了解决这个问题，我们目前CorefBERT，一种新的语言表达模型用来捕捉名词短语之间的关系是合作，相互引用。根据实验结果，用现有的基准模型相比，CorefBERT模式使得在需要共指推理几个下游NLP任务显著的进步，同时保持相当的性能以往机型的其他常见NLP任务。</font>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. On the Linguistic Capacity of Real-Time Counter Automata</b>  <a href="https://arxiv.org/pdf/2004.06866" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Merrill%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">William Merrill</a><br>
+<font size="3">
+ Abstract: Counter machines have achieved a newfound relevance to the field of natural language processing (NLP): recent work suggests some strong-performing recurrent neural networks utilize their memory as counters. Thus, one potential way to understand the success of these networks is to revisit the theory of counter computation. Therefore, we study the abilities of real-time counter machines as formal grammars, focusing on formal properties that are relevant for NLP models. We first show that several variants of the counter machine converge to express the same class of formal languages. We also prove that counter languages are closed under complement, union, intersection, and many other common set operations. Next, we show that counter machines cannot evaluate boolean expressions, even though they can weakly validate their syntax. This has implications for the interpretability and evaluation of neural network systems: successfully matching syntactic patterns does not guarantee that counter memory accurately encodes compositional semantics. Finally, we consider whether counter languages are semilinear. This work makes general contributions to the theory of formal languages that are of potential interest for understanding recurrent neural networks.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：计数器机器都取得了新发现的相关性自然语言处理（NLP）领域：最近的工作提出了一些表现强劲的回归神经网络利用他们的内存计数器。因此，要了解这些网络的成功一个潜在方法是重新审视计数器计算理论。因此，我们研究的实时计数器机作为正式语法的能力，重点是相关的NLP模型形式特征。我们首先展示柜台机收敛的几个变体来表达同一类形式语言。我们也证明了反语言下的补充，并，交，和许多其他常见的一组操作关闭。接下来，我们表明，反机器不能评价布尔表达式，即使他们可以弱验证其语法。这对神经网络系统的可解释性和评价的影响：成功匹配句法模式并不能保证内存计数器准确编码组合语义学。最后，我们认为反语言是否是半线性。这个工作对对理解回归神经网络的潜在利益的形式语言的一般理论贡献。</font>
+</div>
+
+
+<hr>
+<div id="paper12"> <b>12. A Human Evaluation of AMR-to-English Generation Systems</b>  <a href="https://arxiv.org/pdf/2004.06814" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title12" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Manning%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emma Manning</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wein%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shira Wein</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Schneider%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nathan Schneider</a><br>
+<font size="3">
+ Abstract: Most current state-of-the art systems for generating English text from Abstract Meaning Representation (AMR) have been evaluated only using automated metrics, such as BLEU, which are known to be problematic for natural language generation. In this work, we present the results of a new human evaluation which collects fluency and adequacy scores, as well as categorization of error types, for several recent AMR generation systems. We discuss the relative quality of these systems and how our results compare to those of automatic metrics, finding that while the metrics are mostly successful in ranking systems overall, collecting human judgments allows for more nuanced comparisons. We also analyze common errors made by these systems.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：用于从抽象意义表示（AMR）生成英文文本大多数当前的国家的本领域的系统已经使用自动化度量，诸如BLEU，其已知是对自然语言生成问题仅评价。在这项工作中，我们提出它收集的流畅度和充足的得分，以及错误类型进行分类，对最近的几个AMR代系统的新的人评价的结果。我们讨论了这些系统的相对质量和我们的结果如何比较这些自动生成的指标，发现，虽然指标是总排名系统大多成功，收集人的判断允许更细致的比较。我们还分析了这些系统进行的常见错误。</font>
+</div>
+
+
+<hr>
+<div id="paper13"> <b>13. Mining Coronavirus (COVID-19) Posts in Social Media</b>  <a href="https://arxiv.org/pdf/2004.06778" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title13" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Karisani%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Negin Karisani</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Karisani%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Payam Karisani</a><br>
+<font size="3">
+ Abstract: World Health Organization (WHO) characterized the novel coronavirus (COVID-19) as a global pandemic on March 11th, 2020. Before this and in late January, more specifically on January 27th, while the majority of the infection cases were still reported in China and a few cruise ships, we began crawling social media user postings using the Twitter search API. Our goal was to leverage machine learning and linguistic tools to better understand the impact of the outbreak in China. Unlike our initial expectation to monitor a local outbreak, COVID-19 rapidly spread across the globe. In this short article we report the preliminary results of our study on automatically detecting the positive reports of COVID-19 from social media user postings using state-of-the-art machine learning models.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：世界卫生组织（WHO）表征了新型冠状病毒（COVID-19）3月11日，2020年全球大流行在此之前和在一月下旬，更具体地说1月27日，而大多数的感染病例仍报在中国和一些游船，我们开始爬行使用Twitter搜索API的社交媒体用户的帖子。我们的目标是利用机器学习和语言工具，以更好地了解中国爆发的影响。不像我们最初的预期监视本地爆发，COVID-19迅速蔓延全球。在这短短的文章中，我们报告自动检测到来自社交媒体用户帖子采用先进设备，最先进的机器学习模型COVID-19的正面报道我们研究的初步结果。</font>
+</div>
+
+
+<hr>
+<div id="paper14"> <b>14. A Simple Yet Strong Pipeline for HotpotQA</b>  <a href="https://arxiv.org/pdf/2004.06753" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title14" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Groeneveld%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dirk Groeneveld</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Khot%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tushar Khot</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mausam" target="_blank" rel="noopener" style="color:#0000EE;">Mausam</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sabharwal%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Ashish Sabharwal</a><br>
+<font size="3">
+ Abstract: State-of-the-art models for multi-hop question answering typically augment large-scale language models like BERT with additional, intuitively useful capabilities such as named entity recognition, graph-based reasoning, and question decomposition. However, does their strong performance on popular multi-hop datasets really justify this added design complexity? Our results suggest that the answer may be no, because even our simple pipeline based on BERT, named Quark, performs surprisingly well. Specifically, on HotpotQA, Quark outperforms these models on both question answering and support identification (and achieves performance very close to a RoBERTa model). Our pipeline has three steps: 1) use BERT to identify potentially relevant sentences independently of each other; 2) feed the set of selected sentences as context into a standard BERT span prediction model to choose an answer; and 3) use the sentence selection model, now with the chosen answer, to produce supporting sentences. The strong performance of Quark resurfaces the importance of carefully exploring simple model designs before using popular benchmarks to justify the value of complex techniques.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：国家的最先进的机型多跳的问题通常回答扩充大型语言模型，如BERT额外的，直观实用的功能，如命名实体识别，基于图形的推理和问题分解。然而，他们确实对流行的多跳数据集强劲的性能真的证明这种添加设计的复杂性？我们的研究结果表明，因为即使我们简单的管道基础上BERT，命名为夸克，执行出奇地好答案可能是否定的，。具体来说，在HotpotQA，夸克优于两个问题回答和支持识别这些模型（和达到性能非常接近罗伯塔模型）。我们的管道有三个步骤：1）使用BERT来识别潜在的相关句子互不影响; 2）进料的组中选择的句子作为上下文的成标准BERT寿命预测模型，选择答案; 3）用句子选择模型，现在所选择的答案，生产配套的句子。夸克性能强劲复出的使用流行的基准测试来证明的复杂技术的价值之前，仔细探索简单的模型设计的重要性。</font>
+</div>
+
+
+<hr>
+<div id="paper15"> <b>15. Balancing Training for Multilingual Neural Machine Translation</b>  <a href="https://arxiv.org/pdf/2004.06748" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title15" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xinyi Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tsvetkov%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yulia Tsvetkov</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Neubig%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Graham Neubig</a><br>
+<font size="3">
+ Abstract: When training multilingual machine translation (MT) models that can translate to/from multiple languages, we are faced with imbalanced training sets: some languages have much more training data than others. Standard practice is to up-sample less resourced languages to increase representation, and the degree of up-sampling has a large effect on the overall performance. In this paper, we propose a method that instead automatically learns how to weight training data through a data scorer that is optimized to maximize performance on all test languages. Experiments on two sets of languages under both one-to-many and many-to-one MT settings show our method not only consistently outperforms heuristic baselines in terms of average performance, but also offers flexible control over the performance of which languages are optimized.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：当训练多语言机器翻译（MT）的模型，可以从多语言翻译成/，我们面临着不平衡的训练集：有些语言有更多的训练数据比其他人。标准的做法是将上采样较贫穷的语言，以增加代表性，和上采样的程度对整体性能有很大的影响。在本文中，我们提出，而不是自动通过优化在所有测试语言性能最大化数据的得分手如何学习重量训练数据的方法。同时根据一个一对多和多对一一个MT设置两套语言实验证明我们的方法不仅一致优于启发式基线的平均性能方面，而且还提供了其中的语言进行了优化性能的灵活控制。</font>
+</div>
+
+
+<hr>
+<div id="paper16"> <b>16. lamBERT: Language and Action Learning Using Multimodal BERT</b>  <a href="https://arxiv.org/pdf/2004.07093" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title16" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Miyazawa%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kazuki Miyazawa</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Aoki%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tatsuya Aoki</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Horii%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Takato Horii</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nagai%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Takayuki Nagai</a><br>
+<font size="3">
+ Abstract: Recently, the bidirectional encoder representations from transformers (BERT) model has attracted much attention in the field of natural language processing, owing to its high performance in language understanding-related tasks. The BERT model learns language representation that can be adapted to various tasks via pre-training using a large corpus in an unsupervised manner. This study proposes the language and action learning using multimodal BERT (lamBERT) model that enables the learning of language and actions by 1) extending the BERT model to multimodal representation and 2) integrating it with reinforcement learning. To verify the proposed model, an experiment is conducted in a grid environment that requires language understanding for the agent to act properly. As a result, the lamBERT model obtained higher rewards in multitask settings and transfer settings when compared to other models, such as the convolutional neural network-based model and the lamBERT model without pre-training.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：近日，从变压器（BERT）模式，双向编码表示备受关注的自然语言处理领域，由于在语言理解相关的任务，它的高性能。该BERT模型获悉语言表示，可以通过前培训在无人监督的方式使用大型语料库适应各种任务。本研究提出利用扩展BERT模式，多表示，2例强化学习它整合多BERT（兰伯特）模式，由1使语言和动作的学习））的语言和行动学习。为了验证该模型，实验用在需要语言理解为使代理正常行为网格环境中进行。其结果是，相比其他车型，如卷积基于神经网络的模型，并没有预先训练兰伯特模型兰伯特模型得到的多任务设置和传输设置更高的回报。</font>
+</div>
+
+
+<hr>
+<div id="paper17"> <b>17. A hybrid classical-quantum workflow for natural language processing</b>  <a href="https://arxiv.org/pdf/2004.06800" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title17" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=O%27Riordan%2C+L+J" target="_blank" rel="noopener" style="color:#0000EE;">Lee J. O'Riordan</a>, 
+<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Doyle%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Myles Doyle</a>, 
+<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Baruffa%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Fabio Baruffa</a>, 
+<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Kannan%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Venkatesh Kannan</a><br>
+<font size="3">
+ Abstract: Natural language processing (NLP) problems are ubiquitous in classical computing, where they often require significant computational resources to infer sentence meanings. With the appearance of quantum computing hardware and simulators, it is worth developing methods to examine such problems on these platforms. In this manuscript we demonstrate the use of quantum computing models to perform NLP tasks, where we represent corpus meanings, and perform comparisons between sentences of a given structure. We develop a hybrid workflow for representing small and large scale corpus data sets to be encoded, processed, and decoded using a quantum circuit model. In addition, we provide our results showing the efficacy of the method, and release our developed toolkit as an open software suite.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：自然语言处理（NLP）问题在传统的计算，他们往往需要显著的计算资源来推断句子的含义无处不在。随着量子计算的硬件和模拟器的出现，这是值得开发的方法来研究这些平台上的此类问题。在这份手稿，我们展示了使用量子计算模型来执行任务NLP，在这里我们代表语料库的意义，给定结构的句子之间进行比较。我们开发用于表示小规模和大规模语料库数据集要被编码，处理和使用量子电路模型解码的混合工作流程。此外，我们提供我们的研究结果显示该方法的有效性，并释放我们的开发工具包，作为一个开放的软件套件。</font>
+</div>
+
+
+<hr>
+<div id="paper18"> <b>18. Probabilistic Model of Narratives Over Topical Trends in Social Media: A  Discrete Time Model</b>  <a href="https://arxiv.org/pdf/2004.06793" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title18" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Oghaz%2C+T+A" target="_blank" rel="noopener" style="color:#0000EE;">Toktam A. Oghaz</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mutlu%2C+E+C" target="_blank" rel="noopener" style="color:#0000EE;">Ece C. Mutlu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jasser%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jasser Jasser</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yousefi%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Niloofar Yousefi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Garibay%2C+I" target="_blank" rel="noopener" style="color:#0000EE;">Ivan Garibay</a><br>
+<font size="3">
+ Abstract: Online social media platforms are turning into the prime source of news and narratives about worldwide events. However,a systematic summarization-based narrative extraction that can facilitate communicating the main underlying events is lacking. To address this issue, we propose a novel event-based narrative summary extraction framework. Our proposed framework is designed as a probabilistic topic model, with categorical time distribution, followed by extractive text summarization. Our topic model identifies topics' recurrence over time with a varying time resolution. This framework not only captures the topic distributions from the data, but also approximates the user activity fluctuations over time. Furthermore, we define significance-dispersity trade-off (SDT) as a comparison measure to identify the topic with the highest lifetime attractiveness in a timestamped corpus. We evaluate our model on a large corpus of Twitter data, including more than one million tweets in the domain of the disinformation campaigns conducted against the White Helmets of Syria. Our results indicate that the proposed framework is effective in identifying topical trends, as well as extracting narrative summaries from text corpus with timestamped data.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在线社交媒体平台正在成为新闻和有关全球事件的叙述主要来源。然而，基于系统的总结叙事提取，可以方便沟通的主要潜在事件缺乏。为了解决这个问题，我们提出了一种新的基于事件的叙述总结提取框架。我们提出的框架被设计成一个概率主题模型，与分类时间分布，然后提取文本摘要。我们的话题模型确定主题复发随时间变化的时间分辨率。这个框架不仅捕获来自数据的话题分布，而且随着时间的推移接近用户活动的波动。此外，我们定义的意义分散度权衡（SDT）作为比较指标，以确定在时间戳语料库最高寿命吸引力的话题。我们评估我们在大语料库Twitter的数据，其中包括对叙利亚的白盔进行的造谣运动的域名超过一个百万鸣叫模型。我们的研究结果表明，该框架是有效地识别局部趋势，以及从时间戳数据文本语料库中提取的叙述总结。</font>
+</div>
+
+
+<hr>
+<div id="paper19"> <b>19. Speaker Diarization with Lexical Information</b>  <a href="https://arxiv.org/pdf/2004.06756" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title19" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Park%2C+T+J" target="_blank" rel="noopener" style="color:#0000EE;">Tae Jin Park</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Han%2C+K+J" target="_blank" rel="noopener" style="color:#0000EE;">Kyu J. Han</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Huang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jing Huang</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=He%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaodong He</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Zhou%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bowen Zhou</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Georgiou%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Panayiotis Georgiou</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Narayanan%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shrikanth Narayanan</a><br>
+<font size="3">
+ Abstract: This work presents a novel approach for speaker diarization to leverage lexical information provided by automatic speech recognition. We propose a speaker diarization system that can incorporate word-level speaker turn probabilities with speaker embeddings into a speaker clustering process to improve the overall diarization accuracy. To integrate lexical and acoustic information in a comprehensive way during clustering, we introduce an adjacency matrix integration for spectral clustering. Since words and word boundary information for word-level speaker turn probability estimation are provided by a speech recognition system, our proposed method works without any human intervention for manual transcriptions. We show that the proposed method improves diarization performance on various evaluation datasets compared to the baseline diarization system using acoustic information only in speaker embeddings.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：这项工作提出了扬声器diarization一种新的方法来通过自动语音识别提供杠杆词汇信息。我们提出了一个扬声器diarization系统，该系统可以将字级扬声器转概率与扬声器的嵌入到扬声器聚类处理以提高整体diarization准确性。聚类过程中的综合集成方法词汇和声音信息，我们介绍谱聚类邻接矩阵整合。由于对字级扬声器的拐弯可能性估计词与词边界信息是通过语音识别系统提供的，我们提出的方法工作没有任何人为干预的手工抄录。我们表明，该方法提高相比，只扬声器的嵌入使用声学信息基线diarization系统上的各种评价数据集diarization性能。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/04/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-04-16/" title="【arxiv论文】 Computation and Language 2020-04-16">https://procjx.github.io/2020/04/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-04-16/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/04/15/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-04-15/" rel="next" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-04-15">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computer Vision and Pattern Recognition 2020-04-15
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/04/16/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-04-16/" rel="prev" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-04-16">
+                  【arxiv论文】 Computer Vision and Pattern Recognition 2020-04-16 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translation/" rel="tag">Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Translation/" rel="tag">Word Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" rel="tag">斐波那契数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%89%E8%AF%BA%E5%A1%94/" rel="tag">汉诺塔</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: '5153649b6db3448b29f87fee3519799d',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
