@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Autoencoding Pixies: Amortised Variational Inference with Graph  Convolutions for Functional Distributional Semantics [PDF] 摘要  2. PeTra: A Sparsely Supervised Memory Model for People Tracking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-05-07">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;05&#x2F;07&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-05-07&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Autoencoding Pixies: Amortised Variational Inference with Graph  Convolutions for Functional Distributional Semantics [PDF] 摘要  2. PeTra: A Sparsely Supervised Memory Model for People Tracking">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-07T05:00:05.904Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/05/07/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-05-07/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-05-07 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/05/07/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-05-07/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-05-07
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-07 11:33:14 / 修改时间：13:00:05" itemprop="dateCreated datePublished" datetime="2020-05-07T11:33:14+08:00">2020-05-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>42k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>1:10</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Autoencoding Pixies: Amortised Variational Inference with Graph  Convolutions for Functional Distributional Semantics <a href="https://arxiv.org/pdf/2005.02991" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> PeTra: A Sparsely Supervised Memory Model for People Tracking <a href="https://arxiv.org/pdf/2005.02990" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> What are the Goals of Distributional Semantics? <a href="https://arxiv.org/pdf/2005.02982" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Seeing the Forest and the Trees: Detection and Cross-Document  Coreference Resolution of Militarized Interstate Disputes <a href="https://arxiv.org/pdf/2005.02966" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Multitask Models for Supervised Protests Detection in Texts <a href="https://arxiv.org/pdf/2005.02954" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> Harvesting and Refining Question-Answer Pairs for Unsupervised QA <a href="https://arxiv.org/pdf/2005.02925" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Review of text style transfer based on deep learning <a href="https://arxiv.org/pdf/2005.02914" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> TripPy: A Triple Copy Strategy for Value Independent Neural Dialog State  Tracking <a href="https://arxiv.org/pdf/2005.02877" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> TAG : Type Auxiliary Guiding for Code Comment Generation <a href="https://arxiv.org/pdf/2005.02835" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> Digraphie des langues ouest africaines : Latin2Ajami : un algorithme de  translitteration automatique <a href="https://arxiv.org/pdf/2005.02827" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> An Empirical Study of Multi-Task Learning on BERT for Biomedical Text  Mining <a href="https://arxiv.org/pdf/2005.02799" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+<div id="title12">
+<b>12.</b> Unsupervised Neural Aspect Search with Related Terms Extraction <a href="https://arxiv.org/pdf/2005.02771" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper12" style="color:#0000EE;">摘要</a><br></div>
+<div id="title13">
+<b>13.</b> Learning to Understand Child-directed and Adult-directed Speech <a href="https://arxiv.org/pdf/2005.02721" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper13" style="color:#0000EE;">摘要</a><br></div>
+<div id="title14">
+<b>14.</b> Shape of synth to come: Why we should use synthetic data for English  surface realization <a href="https://arxiv.org/pdf/2005.02693" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper14" style="color:#0000EE;">摘要</a><br></div>
+<div id="title15">
+<b>15.</b> A Top-Down Neural Architecture towards Text-Level Parsing of Discourse  Rhetorical Structure <a href="https://arxiv.org/pdf/2005.02680" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper15" style="color:#0000EE;">摘要</a><br></div>
+<div id="title16">
+<b>16.</b> Building A User-Centric and Content-Driven Socialbot <a href="https://arxiv.org/pdf/2005.02623" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper16" style="color:#0000EE;">摘要</a><br></div>
+<div id="title17">
+<b>17.</b> Moving Down the Long Tail of Word Sense Disambiguation with  Gloss-Informed Biencoders <a href="https://arxiv.org/pdf/2005.02590" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper17" style="color:#0000EE;">摘要</a><br></div>
+<div id="title18">
+<b>18.</b> Crossing Variational Autoencoders for Answer Retrieval <a href="https://arxiv.org/pdf/2005.02557" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper18" style="color:#0000EE;">摘要</a><br></div>
+<div id="title19">
+<b>19.</b> Speak to your Parser: Interactive Text-to-SQL with Natural Language  Feedback <a href="https://arxiv.org/pdf/2005.02539" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper19" style="color:#0000EE;">摘要</a><br></div>
+<div id="title20">
+<b>20.</b> The Cascade Transformer: an Application for Efficient Answer Sentence  Selection <a href="https://arxiv.org/pdf/2005.02534" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper20" style="color:#0000EE;">摘要</a><br></div>
+<div id="title21">
+<b>21.</b> Phonetic and Visual Priors for Decipherment of Informal Romanization <a href="https://arxiv.org/pdf/2005.02517" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper21" style="color:#0000EE;">摘要</a><br></div>
+<div id="title22">
+<b>22.</b> MultiReQA: A Cross-Domain Evaluation for Retrieval Question Answering  Models <a href="https://arxiv.org/pdf/2005.02507" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper22" style="color:#0000EE;">摘要</a><br></div>
+<div id="title23">
+<b>23.</b> Efficient strategies for hierarchical text classification: External  knowledge and auxiliary tasks <a href="https://arxiv.org/pdf/2005.02473" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper23" style="color:#0000EE;">摘要</a><br></div>
+<div id="title24">
+<b>24.</b> Russian Natural Language Generation: Creation of a Language Modelling  Dataset and Evaluation with Modern Neural Architectures <a href="https://arxiv.org/pdf/2005.02470" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper24" style="color:#0000EE;">摘要</a><br></div>
+<div id="title25">
+<b>25.</b> Contextualizing Hate Speech Classifiers with Post-hoc Explanation <a href="https://arxiv.org/pdf/2005.02439" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper25" style="color:#0000EE;">摘要</a><br></div>
+<div id="title26">
+<b>26.</b> Automated Personalized Feedback Improves Learning Gains in an  Intelligent Tutoring System <a href="https://arxiv.org/pdf/2005.02431" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper26" style="color:#0000EE;">摘要</a><br></div>
+<div id="title27">
+<b>27.</b> Graph-Embedding Empowered Entity Retrieval <a href="https://arxiv.org/pdf/2005.02843" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper27" style="color:#0000EE;">摘要</a><br></div>
+<div id="title28">
+<b>28.</b> A Large-scale Industrial and Professional Occupation Dataset <a href="https://arxiv.org/pdf/2005.02780" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper28" style="color:#0000EE;">摘要</a><br></div>
+<div id="title29">
+<b>29.</b> Learning Architectures from an Extended Search Space for Language  Modeling <a href="https://arxiv.org/pdf/2005.02593" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper29" style="color:#0000EE;">摘要</a><br></div>
+<div id="title30">
+<b>30.</b> Probing the Natural Language Inference Task with Automated Reasoning  Tools <a href="https://arxiv.org/pdf/2005.02573" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper30" style="color:#0000EE;">摘要</a><br></div>
+<div id="title31">
+<b>31.</b> ESG2Risk: A Deep Learning Framework from ESG News to Stock Volatility  Prediction <a href="https://arxiv.org/pdf/2005.02527" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper31" style="color:#0000EE;">摘要</a><br></div>
+<div id="title32">
+<b>32.</b> Cross-media Structured Common Space for Multimedia Event Extraction <a href="https://arxiv.org/pdf/2005.02472" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper32" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Autoencoding Pixies: Amortised Variational Inference with Graph  Convolutions for Functional Distributional Semantics</b>  <a href="https://arxiv.org/pdf/2005.02991" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Emerson%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guy Emerson</a><br>
+<font size="3">
+ Abstract: Functional Distributional Semantics provides a linguistically interpretable framework for distributional semantics, by representing the meaning of a word as a function (a binary classifier), instead of a vector. However, the large number of latent variables means that inference is computationally expensive, and training a model is therefore slow to converge. In this paper, I introduce the Pixie Autoencoder, which augments the generative model of Functional Distributional Semantics with a graph-convolutional neural network to perform amortised variational inference. This allows the model to be trained more effectively, achieving better results on two tasks (semantic similarity in context and semantic composition), and outperforming BERT, a large pre-trained language model.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：功能分布式语义提供了一种语言可解释框架分配语义，由表示字作为函数（二元分类）的意义，而不是一个矢量。然而，大量的潜在变量意味着推理的计算成本高昂，并培养了模型因此收敛速度慢。在本文中，我介绍精灵自动编码器，这增强了功能性分布式语义的生成模型与图的卷积神经网络来执行摊销变推理。这使得该模型能更有效地锻炼，实现了两个任务，更好的结果（在上下文和语义成分语义相似），并跑赢BERT，大型预训练语言模型。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. PeTra: A Sparsely Supervised Memory Model for People Tracking</b>  <a href="https://arxiv.org/pdf/2005.02990" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Toshniwal%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shubham Toshniwal</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ettinger%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Allyson Ettinger</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gimpel%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kevin Gimpel</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Livescu%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Karen Livescu</a><br>
+<font size="3">
+ Abstract: We propose PeTra, a memory-augmented neural network designed to track entities in its memory slots. PeTra is trained using sparse annotation from the GAP pronoun resolution dataset and outperforms a prior memory model on the task while using a simpler architecture. We empirically compare key modeling choices, finding that we can simplify several aspects of the design of the memory module while retaining strong performance. To measure the people tracking capability of memory models, we (a) propose a new diagnostic evaluation based on counting the number of unique entities in text, and (b) conduct a small scale human evaluation to compare evidence of people tracking in the memory logs of PeTra relative to a previous approach. PeTra is highly effective in both evaluations, demonstrating its ability to track people in its memory despite being trained with limited annotation.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文提出佩特拉，内存增加了的神经网络，旨在跟踪在其内存插槽实体。佩特拉使用从GAP代词分辨率数据集疏注释培训，并同时使用更简单的架构上的任务优于先前的内存模型。我们经验比较关键的造型选择，发现，我们可以简化内存模块的设计等几个方面，同时保持强劲的性能。为了测量人跟踪的内存模型的能力，我们（一）提出了一种基于统计的文本独特的实体的数量新的诊断评估，以及（b）进行了小规模人工评估来比较的人在内存中的日志跟踪证据佩特拉相对于以前的方法。佩特拉是在这两个评价高效，展示了其跟踪的人在它的记忆，尽管有限的注释被训练的能力。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. What are the Goals of Distributional Semantics?</b>  <a href="https://arxiv.org/pdf/2005.02982" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Emerson%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guy Emerson</a><br>
+<font size="3">
+ Abstract: Distributional semantic models have become a mainstay in NLP, providing useful features for downstream tasks. However, assessing long-term progress requires explicit long-term goals. In this paper, I take a broad linguistic perspective, looking at how well current models can deal with various semantic challenges. Given stark differences between models proposed in different subfields, a broad perspective is needed to see how we could integrate them. I conclude that, while linguistic insights can guide the design of model architectures, future progress will require balancing the often conflicting demands of linguistic expressiveness and computational tractability.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：分布式语义模型已成为NLP的中流砥柱，为下游任务提供有用的功能。然而，评估长期进展，需要明确的长期目标。在本文中，我采取广泛语言学的角度，看目前的模型可以如何应对各种语义的挑战。不同分支学科中提出的模型之间给出明显的差异，需要广阔的视野，看看我们如何能够整合他们。我的结论是，虽然语言的见解可以指导模型架构的设计，未来的进步需要平衡的语言表达能力和计算易处理的往往相互冲突的需求。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Seeing the Forest and the Trees: Detection and Cross-Document  Coreference Resolution of Militarized Interstate Disputes</b>  <a href="https://arxiv.org/pdf/2005.02966" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Radford%2C+B+J" target="_blank" rel="noopener" style="color:#0000EE;">Benjamin J. Radford</a><br>
+<font size="3">
+ Abstract: Previous efforts to automate the detection of social and political events in text have primarily focused on identifying events described within single sentences or documents. Within a corpus of documents, these automated systems are unable to link event references -- recognize singular events across multiple sentences or documents. A separate literature in computational linguistics on event coreference resolution attempts to link known events to one another within (and across) documents. I provide a data set for evaluating methods to identify certain political events in text and to link related texts to one another based on shared events. The data set, Headlines of War, is built on the Militarized Interstate Disputes data set and offers headlines classified by dispute status and headline pairs labeled with coreference indicators. Additionally, I introduce a model capable of accomplishing both tasks. The multi-task convolutional neural network is shown to be capable of recognizing events and event coreferences given the headlines' texts and publication dates.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：以前的努力来自动文本的社会和政治事件的检测主要集中于识别单个句子或文档中描述的事件。在文档文集，这些自动化系统无法链接事件的引用 - 认识到跨越多个句子或文档奇异事件。计算语言学一个单独的文学事件指代消解尝试内（和整个）文件已知事件链接到彼此。我的评价方法来识别文本的某些政治事件和相关文本，以基于共享事件彼此链接提供的数据集。该数据集，战争的标题，是建立在军事化州际争端通过标记的共参照指标纠纷状态和标题对分类数据集，并提供头条新闻。此外，我介绍能够完成这两个任务的典范。多任务卷积神经网络如图都能够识别给予头条新闻的文本和出版日期，事件和事件coreferences的。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Multitask Models for Supervised Protests Detection in Texts</b>  <a href="https://arxiv.org/pdf/2005.02954" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Radford%2C+B+J" target="_blank" rel="noopener" style="color:#0000EE;">Benjamin J. Radford</a><br>
+<font size="3">
+ Abstract: The CLEF 2019 ProtestNews Lab tasks participants to identify text relating to political protests within larger corpora of news data. Three tasks include article classification, sentence detection, and event extraction. I apply multitask neural networks capable of producing predictions for two and three of these tasks simultaneously. The multitask framework allows the model to learn relevant features from the training data of all three tasks. This paper demonstrates performance near or above the reported state-of-the-art for automated political event coding though noted differences in research design make direct comparisons difficult.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：CLEF 2019 ProtestNews实验室任务参与者找出更大的新闻数据的语料库中关于政治抗议文字。三个任务包括文章分类，句子检测和事件提取。我申请多任务能力生产预测的神经网络的两个和三个同时这些任务。多任务框架允许模型从三个任务的训练数据学习相关功能。本文阐述了接近或高于业绩报告自动化的政治事件编码尽管在研究设计注意区别先进国家的进行直接的比较困难。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. Harvesting and Refining Question-Answer Pairs for Unsupervised QA</b>  <a href="https://arxiv.org/pdf/2005.02925" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhongli Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wenhui Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dong%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Li Dong</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wei%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Furu Wei</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Ke Xu</a><br>
+<font size="3">
+ Abstract: Question Answering (QA) has shown great success thanks to the availability of large-scale datasets and the effectiveness of neural models. Recent research works have attempted to extend these successes to the settings with few or no labeled data available. In this work, we introduce two approaches to improve unsupervised QA. First, we harvest lexically and syntactically divergent questions from Wikipedia to automatically construct a corpus of question-answer pairs (named as RefQA). Second, we take advantage of the QA model to extract more appropriate answers, which iteratively refines data over RefQA. We conduct experiments on SQuAD 1.1, and NewsQA by fine-tuning BERT without access to manually annotated data. Our approach outperforms previous unsupervised approaches by a large margin and is competitive with early supervised models. We also show the effectiveness of our approach in the few-shot learning setting.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：问答系统（QA）表现出了极大的成功得益于大规模数据集的可用性和神经模型的有效性。最近的研究工作已经尝试这些成功扩大到具有可用很少或没有标注数据的设置。在这项工作中，我们将介绍两种方法，以提高监督的质量保证。首先，我们收获维基百科词汇语法和发散问题，自动构建问答对的语料库（命名为RefQA）。其次，我们采取的质量保证模式的优势，以提取更合适的答案，这反复提炼过RefQA数据。我们进行的微调BERT的阵容1.1，NewsQA实验得不到手动注释的数据。我们的方法优于大幅度以前无人监督的办法，并与早期型号监督竞争力。我们还表明我们在几拍学习设置方法的有效性。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Review of text style transfer based on deep learning</b>  <a href="https://arxiv.org/pdf/2005.02914" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiangyang Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Pu%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guo Pu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ming%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Keyu Ming</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pu Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jie Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuxuan Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sujian Li</a><br>
+<font size="3">
+ Abstract: Text style transfer is a hot issue in recent natural language processing,which mainly studies the text to adapt to different specific situations, audiences and purposes by making some changes. The style of the text usually includes many aspects such as morphology, grammar, emotion, complexity, fluency, tense, tone and so on. In the traditional text style transfer model, the text style is generally relied on by experts knowledge and hand-designed rules, but with the application of deep learning in the field of natural language processing, the text style transfer method based on deep learning Started to be heavily researched. In recent years, text style transfer is becoming a hot issue in natural language processing research. This article summarizes the research on the text style transfer model based on deep learning in recent years, and summarizes, analyzes and compares the main research directions and progress. In addition, the article also introduces public data sets and evaluation indicators commonly used for text style transfer. Finally, the existing characteristics of the text style transfer model are summarized, and the future development trend of the text style transfer model based on deep learning is analyzed and forecasted.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：文本样式转移是近年来自然语言处理，其主要研究文本通过做一些修改，以适应不同的具体情况，读者和目的的一个热点问题。文本的风格通常包括很多方面，如形态，语法，情感，复杂性，流畅性，紧张，语调等。在传统的文本样式传递模型，文字样式一般是依靠专家的知识和手工设计的规则，但深学习的自然语言处理领域的应用的基础上，开始深度学习的文本样式转移法被大量研究。近年来，文本样式转移正在成为自然语言处理研究的热点问题。本文总结了基于深度学习的文本样式传输模型的研究，近年来，总结，分析和研究的主要方向和进展进行比较。此外，文章还介绍了常用的文本样式传输公共数据集和评价指标。最后，文本样式传递模型的现有特征进行了总结，并基于深度学习的文本样式传输模式的未来发展趋势进行了分析和预测。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. TripPy: A Triple Copy Strategy for Value Independent Neural Dialog State  Tracking</b>  <a href="https://arxiv.org/pdf/2005.02877" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Heck%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Heck</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=van+Niekerk%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Carel van Niekerk</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lubis%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nurul Lubis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Geishauser%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Christian Geishauser</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hsien-Chin Lin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Moresi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Marco Moresi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ga%C5%A1i%C4%87%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Milica Gašić</a><br>
+<font size="3">
+ Abstract: Task-oriented dialog systems rely on dialog state tracking (DST) to monitor the user's goal during the course of an interaction. Multi-domain and open-vocabulary settings complicate the task considerably and demand scalable solutions. In this paper we present a new approach to DST which makes use of various copy mechanisms to fill slots with values. Our model has no need to maintain a list of candidate values. Instead, all values are extracted from the dialog context on-the-fly. A slot is filled by one of three copy mechanisms: (1) Span prediction may extract values directly from the user input; (2) a value may be copied from a system inform memory that keeps track of the system's inform operations; (3) a value may be copied over from a different slot that is already contained in the dialog state to resolve coreferences within and across domains. Our approach combines the advantages of span-based slot filling methods with memory methods to avoid the use of value picklists altogether. We argue that our strategy simplifies the DST task while at the same time achieving state of the art performance on various popular evaluation sets including Multiwoz 2.1, where we achieve a joint goal accuracy beyond 55%.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：面向任务的对话系统依靠对话状态跟踪（DST）相互作用的过程中，监视用户的目标。多域和开放词汇设置的任务变得相当复杂和需要可扩展解决方案。在本文中，我们向DST的新方法，这使得利用各种复制机制，以填补插槽值。我们的模型没有必要保持候选值的列表。取而代之的是，所有的值都从即时的对话情境提取。中的时隙由三个拷贝机制之一填充：（1）寿命预测可提取直接从用户输入值; （2）的值可以由系统中复制的通知存储器，用于跟踪系统的通知操作; （3）的值可以从已经包含在对话状态向内和跨域决心coreferences不同时隙复制过来。我们的方法结合了与存储器的方法基于整体范围的槽填充方法的优点是避免使用值选取列表的完全。我们认为，我们的策略简化了DST的任务，而在同一时间实现对各种流行的评价集，包括Multiwoz 2.1，我们实现一个共同的目标精确度超过55％的先进的性能。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. TAG : Type Auxiliary Guiding for Code Comment Generation</b>  <a href="https://arxiv.org/pdf/2005.02835" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Cai%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruichu Cai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liang%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhihao Liang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Boyan Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zijian Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hao%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuexing Hao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yao Chen</a><br>
+<font size="3">
+ Abstract: Existing leading code comment generation approaches with the structure-to-sequence framework ignores the type information of the interpretation of the code, e.g., operator, string, etc. However, introducing the type information into the existing framework is non-trivial due to the hierarchical dependence among the type information. In order to address the issues above, we propose a Type Auxiliary Guiding encoder-decoder framework for the code comment generation task which considers the source code as an N-ary tree with type information associated with each node. Specifically, our framework is featured with a Type-associated Encoder and a Type-restricted Decoder which enables adaptive summarization of the source code. We further propose a hierarchical reinforcement learning method to resolve the training difficulties of our proposed framework. Extensive evaluations demonstrate the state-of-the-art performance of our framework with both the auto-evaluated metrics and case studies.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：现有主导代码注释生成与该结构对序列框架忽略的代码的解释，例如，操作者，串等的类型的信息。然而，引入的类型的信息到现有框架是不平凡的，由于接近到类型信息之间的层次关系。为了解决上述问题，我们提出了它参考的源代码与与每个节点关联类型信息的N叉树的代码注释生成任务A型辅助导编码器 - 解码器的框架。具体地，我们的框架的特征与类型相关编码器和一个类型限制的解码器这使得源代码的自适应总结。我们进一步提出了一个分层强化学习方法来解决我们提出的框架的培训困难。广泛的评估表明我们既自动评估的度量和案例研究框架的国家的最先进的性能。</font>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. Digraphie des langues ouest africaines : Latin2Ajami : un algorithme de  translitteration automatique</b>  <a href="https://arxiv.org/pdf/2005.02827" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Fall%2C+E+h+M" target="_blank" rel="noopener" style="color:#0000EE;">El hadji M. Fall</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nguer%2C+E+h+M" target="_blank" rel="noopener" style="color:#0000EE;">El hadji M. Nguer</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sokhna%2C+B+D" target="_blank" rel="noopener" style="color:#0000EE;">Bao Diop Sokhna</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Khoule%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mouhamadou Khoule</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mangeot%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mathieu Mangeot</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cisse%2C+M+T" target="_blank" rel="noopener" style="color:#0000EE;">Mame T. Cisse</a><br>
+<font size="3">
+ Abstract: The national languages of Senegal, like those of West Africa country in general, are written with two alphabets : the Latin alphabet that draws its strength from official decreesm and the completed Arabic script (Ajami), widespread and well integrated, that has little institutional support. This digraph created two worlds ignoring each other. Indeed, Ajami writing is generally used daily by populations from Koranic schools, while writing with the Latin alphabet is used by people from the public school. To solve this problem, it is useful to establish transliteration tools between these two scriptures. Preliminary work (Nguer, Bao-Diop, Fall, khoule, 2015) was performed to locate the problems, challenges and prospects. This present work, making it subsequently fell into this. Its objective is the study and creation of a transliteration algorithm from latin towards Ajami.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：塞内加尔的国家的语言，像一般的西非国家，都写有两个字母：从官方decreesm和完成阿拉伯文字（阿贾米），广泛和很好的整合汲取力量的拉丁字母，有小制度上的支持。这有向图创造了两个世界忽略对方。事实上，阿贾米写作一般是每天从古兰经学校的人群使用，而用拉丁字母书写从公立学校的人用的。为了解决这个问题，它是建立这两个经文之间音译有用的工具。前期工作（Nguer，保迪奥普，秋季，khoule，2015年）进行定位的问题，挑战和前景。目前这个工作，使其随之下跌到这一点。它的目标是从拉丁文音译算法对阿贾米的研究和创作。</font>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. An Empirical Study of Multi-Task Learning on BERT for Biomedical Text  Mining</b>  <a href="https://arxiv.org/pdf/2005.02799" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Peng%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yifan Peng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chen%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qingyu Chen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lu%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhiyong Lu</a><br>
+<font size="3">
+ Abstract: Multi-task learning (MTL) has achieved remarkable success in natural language processing applications. In this work, we study a multi-task learning model with multiple decoders on varieties of biomedical and clinical natural language processing tasks such as text similarity, relation extraction, named entity recognition, and text inference. Our empirical results demonstrate that the MTL fine-tuned models outperform state-of-the-art transformer models (e.g., BERT and its variants) by 2.0% and 1.3% in biomedical and clinical domains, respectively. Pairwise MTL further demonstrates more details about which tasks can improve or decrease others. This is particularly helpful in the context that researchers are in the hassle of choosing a suitable model for new problems. The code and models are publicly available at this https URL </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：多任务学习（MTL）已经实现了自然语言处理的应用显着的成功。在这项工作中，我们研究与品种的生物医学和临床自然语言处理任务，如文本相似性，关系抽取，命名实体识别和文本推理多个解码器多任务学习模式。我们的经验结果表明，MTL微调模型由2.0％和1.3％优于国家的最先进的变压器模型（例如，BERT及其变种）在生物医学和临床领域，分别。成对MTL进一步表明了更多的细节哪些任务可以提高或降低等。这是在背景下，研究人员在选择新的问题一个合适的模型的麻烦特别有帮助。代码和模式是公开的，在此HTTPS URL</font>
+</div>
+
+
+<hr>
+<div id="paper12"> <b>12. Unsupervised Neural Aspect Search with Related Terms Extraction</b>  <a href="https://arxiv.org/pdf/2005.02771" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title12" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Sokhin%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Timur Sokhin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Khodorchenko%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maria Khodorchenko</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Butakov%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nikolay Butakov</a><br>
+<font size="3">
+ Abstract: The tasks of aspect identification and term extraction remain challenging in natural language processing. While supervised methods achieve high scores, it is hard to use them in real-world applications due to the lack of labelled datasets. Unsupervised approaches outperform these methods on several tasks, but it is still a challenge to extract both an aspect and a corresponding term, particularly in the multi-aspect setting. In this work, we present a novel unsupervised neural network with convolutional multi-attention mechanism, that allows extracting pairs (aspect, term) simultaneously, and demonstrate the effectiveness on the real-world dataset. We apply a special loss aimed to improve the quality of multi-aspect extraction. The experimental study demonstrates, what with this loss we increase the precision not only on this joint setting but also on aspect prediction only.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：纵横识别和术语提取的任务留在自然语言处理的挑战。虽然监督方法实现高分，这是很难用它们在实际应用中，由于缺乏标记数据集。无监督的办法跑赢上几个任务这些方法，但它仍然是提取既是一个方面和相应的期限，尤其是在多方位设置一个挑战。在这项工作中，我们提出用卷积多注意机制，即允许提取对（方面，术语）同时一种新的无监督神经网络，并证明在真实世界的数据集的有效性。我们采用一种特殊的损失旨在提高多方位提取的质量。实验研究表明，这种损失我们不仅增加在这一联合设置，但也仅方面的预测精度。</font>
+</div>
+
+
+<hr>
+<div id="paper13"> <b>13. Learning to Understand Child-directed and Adult-directed Speech</b>  <a href="https://arxiv.org/pdf/2005.02721" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title13" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gelderloos%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lieke Gelderloos</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chrupa%C5%82a%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Grzegorz Chrupała</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Alishahi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Afra Alishahi</a><br>
+<font size="3">
+ Abstract: Speech directed to children differs from adult-directed speech in linguistic aspects such as repetition, word choice, and sentence length, as well as in aspects of the speech signal itself, such as prosodic and phonemic variation. Human language acquisition research indicates that child-directed speech helps language learners. This study explores the effect of child-directed speech when learning to extract semantic information from speech directly. We compare the task performance of models trained on adult-directed speech (ADS) and child-directed speech (CDS). We find indications that CDS helps in the initial stages of learning, but eventually, models trained on ADS reach comparable task performance, and generalize better. The results suggest that this is at least partially due to linguistic rather than acoustic properties of the two registers, as we see the same pattern when looking at models trained on acoustically comparable synthetic speech.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：语音针对儿童不同于成人的指导演讲语言等方面的重复，词语的选择，句子长度，以及语音信号本身的问题，如韵律和音位变体。人类的语言习得研究表明，儿童的言语有助于学习者。学习从语音直接提取语义信息时，本研究探讨儿童的语音效果。我们比较的训练有素的成人导向的讲话（ADS）和儿童的讲话（CDS）模型任务性能。我们发现迹象表明CDS有助于学习的初始阶段，但最终，培训了ADS模型达到相当的任务绩效，更好地推广。结果表明，这至少部分是由于这两个寄存器的语言，而不是声学特性，因为我们看到同样的模式在看训练的声学上可比合成语音模型时。</font>
+</div>
+
+
+<hr>
+<div id="paper14"> <b>14. Shape of synth to come: Why we should use synthetic data for English  surface realization</b>  <a href="https://arxiv.org/pdf/2005.02693" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title14" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Elder%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Henry Elder</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Burke%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Robert Burke</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=O%27Connor%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alexander O'Connor</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Foster%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jennifer Foster</a><br>
+<font size="3">
+ Abstract: The Surface Realization Shared Tasks of 2018 and 2019 were Natural Language Generation shared tasks with the goal of exploring approaches to surface realization from Universal-Dependency-like trees to surface strings for several languages. In the 2018 shared task there was very little difference in the absolute performance of systems trained with and without additional, synthetically created data, and a new rule prohibiting the use of synthetic data was introduced for the 2019 shared task. Contrary to the findings of the 2018 shared task, we show, in experiments on the English 2018 dataset, that the use of synthetic data can have a substantial positive effect - an improvement of almost 8 BLEU points for a previously state-of-the-art system. We analyse the effects of synthetic data, and we argue that its use should be encouraged rather than prohibited so that future research efforts continue to explore systems that can take advantage of such data.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：2018年至2019年表面实现共享任务是自然语言生成共享任务，探索从方法面目标的顺利实现通用的依赖般树木表面字符串几种语言。在2018年共同任务有在有和无其它，合成产生的数据训练系统的绝对性能相差无几，而新规则禁止使用合成数据的引入为2019共享任务。相反，2018年共享任务的结果，我们表明，在英国2018数据集的实验，即使用合成的数据可以有实质性的积极作用 - 近8 BLEU点以前国家的the-改善艺术体系。我们分析了合成数据的影响，我们认为，它的使用应该鼓励而不是禁止，这样未来的研究工作继续探索，可以采取这样的数据的优势系统。</font>
+</div>
+
+
+<hr>
+<div id="paper15"> <b>15. A Top-Down Neural Architecture towards Text-Level Parsing of Discourse  Rhetorical Structure</b>  <a href="https://arxiv.org/pdf/2005.02680" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title15" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Longyin Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xing%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuqing Xing</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kong%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Fang Kong</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Peifeng Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhou%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guodong Zhou</a><br>
+<font size="3">
+ Abstract: Due to its great importance in deep natural language understanding and various down-stream applications, text-level parsing of discourse rhetorical structure (DRS) has been drawing more and more attention in recent years. However, all the previous studies on text-level discourse parsing adopt bottom-up approaches, which much limit the DRS determination on local information and fail to well benefit from global information of the overall discourse. In this paper, we justify from both computational and perceptive points-of-view that the top-down architecture is more suitable for text-level DRS parsing. On the basis, we propose a top-down neural architecture toward text-level DRS parsing. In particular, we cast discourse parsing as a recursive split point ranking task, where a split point is classified to different levels according to its rank and the elementary discourse units (EDUs) associated with it are arranged accordingly. In this way, we can determine the complete DRS as a hierarchical tree structure via an encoder-decoder with an internal stack. Experimentation on both the English RST-DT corpus and the Chinese CDTB corpus shows the great effectiveness of our proposed top-down approach towards text-level DRS parsing.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：由于深自然语言理解和各种下游应用，话语修辞结构的文本层次分析它的重要性（DRS）已经引起了越来越多的关注，近年来。然而，所有的文字级别的话语分析以往的研究采用自下而上的方法，其中大部分限制在本地信息的DRS决心，从整体话语的全球信息不能很好地受益。在本文中，我们从两个计算和感知点的视图理由是，自上而下的架构更适合文本级DRS解析。在此基础上，我们提出了对文本的水平DRS分析自上而下的神经结构。特别是，我们投话语解析为递归分割点排名任务，其中一个分割点是根据其与它相关秩和基本话语单元（EDU）被相应地设置分类为不同等级。以这种方式，我们可以通过一个编码器 - 解码器具有内部堆栈确定完整的DRS为分层树结构。实验对英语RST-DT语料库和中国的CdtB语料库显示了我们对文本的水平DRS解析提出自上而下的的巨大效力两者。</font>
+</div>
+
+
+<hr>
+<div id="paper16"> <b>16. Building A User-Centric and Content-Driven Socialbot</b>  <a href="https://arxiv.org/pdf/2005.02623" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title16" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Fang%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hao Fang</a><br>
+<font size="3">
+ Abstract: To build Sounding Board, we develop a system architecture that is capable of accommodating dialog strategies that we designed for socialbot conversations. The architecture consists of a multi-dimensional language understanding module for analyzing user utterances, a hierarchical dialog management framework for dialog context tracking and complex dialog control, and a language generation process that realizes the response plan and makes adjustments for speech synthesis. Additionally, we construct a new knowledge base to power the socialbot by collecting social chat content from a variety of sources. An important contribution of the system is the synergy between the knowledge base and the dialog management, i.e., the use of a graph structure to organize the knowledge base that makes dialog control very efficient in bringing related content to the discussion. Using the data collected from Sounding Board during the competition, we carry out in-depth analyses of socialbot conversations and user ratings which provide valuable insights in evaluation methods for socialbots. We additionally investigate a new approach for system evaluation and diagnosis that allows scoring individual dialog segments in the conversation. Finally, observing that socialbots suffer from the issue of shallow conversations about topics associated with unstructured data, we study the problem of enabling extended socialbot conversations grounded on a document. To bring together machine reading and dialog control techniques, a graph-based document representation is proposed, together with methods for automatically constructing the graph. Using the graph-based representation, dialog control can be carried out by retrieving nodes or moving along edges in the graph. To illustrate the usage, a mixed-initiative dialog strategy is designed for socialbot conversations on news articles.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：为了建立传声筒，我们开发的系统架构，能够容纳对话的战略，我们设计了socialbot对话。该架构包含用于分析用户话语，用于对话上下文跟踪和复杂的对话控制，而实现响应计划并进行调整用于语音合成的语言生成处理的分层对话管理框架的多维语言理解模块的。此外，我们构造了一个新的知识库通过从各种来源收集社会聊天内容到socialbot供电。该系统的一个重要贡献是知识库和对话管理之间的协同作用，即，使用图形结构来组织的知识基础，使对话控制在把相关内容的讨论非常有效的。利用比赛期间从传声筒收集到的数据，我们进行了深入的交谈socialbot和用户评级，其提供了socialbots评价方法有价值的见解的分析。我们还调查了系统评估和诊断，使打进谈话个体对话框段的新方法。最后，指出socialbots由浅谈话有关与非结构化数据相关主题的问题受到影响，我们研究使接地上的文档扩展socialbot对话的问题。汇集机器阅读和对话控制技术中，基于图形的文档表示提出，连同用于自动构建图形的方法。使用基于图形的表示，对话控制可以通过检索节点或沿图中边移动来进行。为了说明用法，混合主动对话的策略是专为新闻文章socialbot对话。</font>
+</div>
+
+
+<hr>
+<div id="paper17"> <b>17. Moving Down the Long Tail of Word Sense Disambiguation with  Gloss-Informed Biencoders</b>  <a href="https://arxiv.org/pdf/2005.02590" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title17" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Blevins%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Terra Blevins</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zettlemoyer%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Luke Zettlemoyer</a><br>
+<font size="3">
+ Abstract: A major obstacle in Word Sense Disambiguation (WSD) is that word senses are not uniformly distributed, causing existing models to generally perform poorly on senses that are either rare or unseen during training. We propose a bi-encoder model that independently embeds (1) the target word with its surrounding context and (2) the dictionary definition, or gloss, of each sense. The encoders are jointly optimized in the same representation space, so that sense disambiguation can be performed by finding the nearest sense embedding for each target word embedding. Our system outperforms previous state-of-the-art models on English all-words WSD; these gains predominantly come from improved performance on rare senses, leading to a 31.1% error reduction on less frequent senses over prior work. This demonstrates that rare senses can be more effectively disambiguated by modeling their definitions.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：词义消歧（WSD）的主要障碍是这个词的感觉是不是均匀分布，造成现有模型一般上是在训练期间无论是罕见的或看不见的感官表现不佳。我们建议，独立地嵌入双编码器模型（1），其周围的上下文和（2）字典的定义，或光泽目标字，每个感。编码器在相同的表示空间联合优化，以便消歧可以通过寻找最近的感嵌入每个目标字嵌入来进行。我们的系统优于英语所有词WSD国家的最先进的以往机型;这些收益主要来自于罕见的感官改进的性能，导致31.1％的误差减少超过先前的工作频率较低的感官。这表明，罕见的感官可以通过模拟它们的定义更有效地消除歧义的是。</font>
+</div>
+
+
+<hr>
+<div id="paper18"> <b>18. Crossing Variational Autoencoders for Answer Retrieval</b>  <a href="https://arxiv.org/pdf/2005.02557" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title18" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Yu%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wenhao Yu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wu%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lingfei Wu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zeng%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qingkai Zeng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Deng%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yu Deng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tao%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shu Tao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jiang%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Meng Jiang</a><br>
+<font size="3">
+ Abstract: Answer retrieval is to find the most aligned answer from a large set of candidates given a question. Learning vector representations of questions/answers is the key factor. Question-answer alignment and question/answer semantics are two important signals for learning the representations. Existing methods learned semantic representations with dual encoders or dual variational auto-encoders. The semantic information was learned from language models or question-to-question (answer-to-answer) generative processes. However, the alignment and semantics were too separate to capture the aligned semantics between question and answer. In this work, we propose to cross variational auto-encoders by generating questions with aligned answers and generating answers with aligned questions. Experiments show that our method outperforms the state-of-the-art answer retrieval method on SQuAD.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：答检索是要找到一个给定的问题一大组候选人的最一致的答案。学习的问题/解答的矢量表示是关键因素。问答对齐和提问/回答的语义是学习的申述两个重要的信号。现有的方法学会了双编码器或双变自动编码器的语义表示。语义信息是从语言模型或问题到问题（答案 - 反馈）生成过程的经验教训。然而，对准和语义太独立捕捉问题和答案之间的对准语义。在这项工作中，我们提出通过产生具有一致的回答问题，并产生对准问题的答案交叉变自动编码器。实验表明，我们的方法优于在队内的国家的最先进的答案检索方法。</font>
+</div>
+
+
+<hr>
+<div id="paper19"> <b>19. Speak to your Parser: Interactive Text-to-SQL with Natural Language  Feedback</b>  <a href="https://arxiv.org/pdf/2005.02539" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title19" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Elgohary%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Ahmed Elgohary</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hosseini%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Saghar Hosseini</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Awadallah%2C+A+H" target="_blank" rel="noopener" style="color:#0000EE;">Ahmed Hassan Awadallah</a><br>
+<font size="3">
+ Abstract: We study the task of semantic parse correction with natural language feedback. Given a natural language utterance, most semantic parsing systems pose the problem as one-shot translation where the utterance is mapped to a corresponding logical form. In this paper, we investigate a more interactive scenario where humans can further interact with the system by providing free-form natural language feedback to correct the system when it generates an inaccurate interpretation of an initial utterance. We focus on natural language to SQL systems and construct, SPLASH, a dataset of utterances, incorrect SQL interpretations and the corresponding natural language feedback. We compare various reference models for the correction task and show that incorporating such a rich form of feedback can significantly improve the overall semantic parsing accuracy while retaining the flexibility of natural language interaction. While we estimated human correction accuracy is 81.5%, our best model achieves only 25.1%, which leaves a large gap for improvement in future research. SPLASH is publicly available at this https URL.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们研究自然语言的语义反馈校正解析的任务。给定一个自然语言语句，最语义分析系统所构成的问题，因为在那里话语被映射到相应的逻辑形式一次性转换。在本文中，我们研究了更多的互动场景，人类可以进一步与系统通过提供自由形式的自然语言的反馈时，它产生的初始发音的不准确的解释来修正系统进行交互。我们专注于自然语言SQL系统和结构，SPLASH，话语中的数据集，SQL不正确的解释和相应的自然语言的反馈。我们比较了各种参考模型的修正任务，并表明结合的反馈如此丰富的形式可以显著提升整体语义分析的精度，同时保留自然语言交互方式的灵活性。虽然我们估计人类校正精度是81.5％，我们的最好的模式只能达到25.1％，这留下了在今后的研究改进有很大的差距。 SPLASH是公开的，在此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper20"> <b>20. The Cascade Transformer: an Application for Efficient Answer Sentence  Selection</b>  <a href="https://arxiv.org/pdf/2005.02534" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title20" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Soldaini%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Luca Soldaini</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Moschitti%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alessandro Moschitti</a><br>
+<font size="3">
+ Abstract: Large transformer-based language models have been shown to be very effective in many classification tasks. However, their computational complexity prevents their use in applications requiring the classification of a large set of candidates. While previous works have investigated approaches to reduce model size, relatively little attention has been paid to techniques to improve batch throughput during inference. In this paper, we introduce the Cascade Transformer, a simple yet effective technique to adapt transformer-based models into a cascade of rankers. Each ranker is used to prune a subset of candidates in a batch, thus dramatically increasing throughput at inference time. Partial encodings from the transformer model are shared among rerankers, providing further speed-up. When compared to a state-of-the-art transformer model, our approach reduces computation by 37% with almost no impact on accuracy, as measured on two English Question Answering datasets.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：大型变压器为基础的语言模型已被证明在很多分类任务非常有效。然而，他们的计算复杂度防止需要大组候选的分类应用中的使用。虽然以前的作品已经调查的方法，以减少模型的大小，相对较少的受到人们的重视，以技术的推理过程，提高批量吞吐量。在本文中，我们介绍了级联变压器，一个简单而基于变压器模型改编成rankers级联的有效方法。每个分级器可以滤除候选人的一个子集批处理，从而大大的推理时间增加产量。从变压器模型部分编码保rerankers之间共享，从而提供进一步高速化。相较于一个国家的最先进的变压器模型，我们的方法37％作为两个英文问答系统数据集测量减少了计算上的精度几乎没有影响。</font>
+</div>
+
+
+<hr>
+<div id="paper21"> <b>21. Phonetic and Visual Priors for Decipherment of Informal Romanization</b>  <a href="https://arxiv.org/pdf/2005.02517" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title21" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ryskina%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maria Ryskina</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gormley%2C+M+R" target="_blank" rel="noopener" style="color:#0000EE;">Matthew R. Gormley</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Berg-Kirkpatrick%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Taylor Berg-Kirkpatrick</a><br>
+<font size="3">
+ Abstract: Informal romanization is an idiosyncratic process used by humans in informal digital communication to encode non-Latin script languages into Latin character sets found on common keyboards. Character substitution choices differ between users but have been shown to be governed by the same main principles observed across a variety of languages---namely, character pairs are often associated through phonetic or visual similarity. We propose a noisy-channel WFST cascade model for deciphering the original non-Latin script from observed romanized text in an unsupervised fashion. We train our model directly on romanized data from two languages: Egyptian Arabic and Russian. We demonstrate that adding inductive bias through phonetic and visual priors on character mappings substantially improves the model's performance on both languages, yielding results much closer to the supervised skyline. Finally, we introduce a new dataset of romanized Russian, collected from a Russian social network website and partially annotated for our experiments.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：非正式罗马是在对编码非拉丁文字语言译成拉丁文字符集的非正式数字通信人类使用的特质过程共同键盘找到。字符替换的选择的用户之间不同，但已经显示出通过跨各种语言---即，字符对通常通过语音或视觉相似性相关的观察到的相同的主要原则的管辖。我们提出了破译从观察到的罗马文本原有的非拉丁字符在无人监督的方式嘈杂的通道WFST级联模式。埃及阿拉伯语和俄语：我们对罗马化数据从两种语言直接训练我们的模型。我们证明通过对字符映射语音和视觉先验，加入归纳偏置显着改善模型对两种语言的性能，得到的结果更接近监督的天际线。最后，我们介绍了罗马化俄语的新的数据集，从俄罗斯的社交网络网站收集和部分注释，以便于我们的实验。</font>
+</div>
+
+
+<hr>
+<div id="paper22"> <b>22. MultiReQA: A Cross-Domain Evaluation for Retrieval Question Answering  Models</b>  <a href="https://arxiv.org/pdf/2005.02507" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title22" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Guo%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mandy Guo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yinfei Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cer%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Daniel Cer</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shen%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qinlan Shen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Constant%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Noah Constant</a><br>
+<font size="3">
+ Abstract: Retrieval question answering (ReQA) is the task of retrieving a sentence-level answer to a question from an open corpus (Ahmad et al.,2019).This paper presents MultiReQA, anew multi-domain ReQA evaluation suite com-posed of eight retrieval QA tasks drawn from publicly available QA datasets. We provide the first systematic retrieval based evaluation over these datasets using two supervised neural models, based on fine-tuning BERT andUSE-QA models respectively, as well as a surprisingly strong information retrieval baseline,BM25. Five of these tasks contain both train-ing and test data, while three contain test data only. Performance on the five tasks with train-ing data shows that while a general model covering all domains is achievable, the best performance is often obtained by training exclusively on in-domain data.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：检索问答（REQA）是一个开放的语料库检索语句级问题的答案的任务（Ahmad等，2019）。本文礼物MultiReQA，重新多域REQA评估套件融为一体，带来的从公开的数据集QA绘制8个检索QA任务。我们提供了使用两种监督的神经车型，分别基于微调BERT andUSE-QA车型这些数据集的第一个系统的检索基础的评估，以及意外强劲的信息检索基线，BM25。这些任务中的五个同时包含列车ING和测试数据，而3只包含测试数据。性能与训练数据显示了五个任务，虽然涵盖了所有领域的一般模型是可以实现的，最好的性能往往是由专门在域数据训练获得。</font>
+</div>
+
+
+<hr>
+<div id="paper23"> <b>23. Efficient strategies for hierarchical text classification: External  knowledge and auxiliary tasks</b>  <a href="https://arxiv.org/pdf/2005.02473" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title23" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Rojas%2C+K+R" target="_blank" rel="noopener" style="color:#0000EE;">Kervy Rivas Rojas</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bustamante%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gina Bustamante</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cabezudo%2C+M+A+S" target="_blank" rel="noopener" style="color:#0000EE;">Marco A. Sobrevilla Cabezudo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Oncevay%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Arturo Oncevay</a><br>
+<font size="3">
+ Abstract: In hierarchical text classification, we perform a sequence of inference steps to predict the category of a document from top to bottom of a given class taxonomy. Most of the studies have focused on developing novels neural network architectures to deal with the hierarchical structure, but we prefer to look for efficient ways to strengthen a baseline model. We first define the task as a sequence-to-sequence problem. Afterwards, we propose an auxiliary synthetic task of bottom-up-classification. Then, from external dictionaries, we retrieve textual definitions for the classes of all the hierarchy's layers, and map them into the word vector space. We use the class-definition embeddings as an additional input to condition the prediction of the next layer and in an adapted beam search. Whereas the modified search did not provide large gains, the combination of the auxiliary task and the additional input of class-definitions significantly enhance the classification accuracy. With our efficient approaches, we outperform previous studies, using a drastically reduced number of parameters, in two well-known English datasets.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在层次文本分类，我们进行推断的顺序步骤到文档的类别预测从上给定的类分类的底部。大部分的研究都集中于开发的小说神经网络结构来处理层次结构，但我们更愿意寻找有效的方法来加强基线模型。我们首先定义任务作为序列到序列问题。随后，我们提出自下而上分类的辅助合成任务。然后，从外部字典，我们检索所有层次结构的层的类文本定义，并将其映射到词汇向量空间。我们使用类定义的嵌入作为附加输入以调节下一层的预测，并在适于波束搜索。而修改后的搜索没有提供大的收益，辅助任务的组合的类定义额外的输入显著提高分类准确度。随着我们的有效途径，我们超越以往的研究中，使用的参数的急剧减少数量，在两个著名的英语数据集。</font>
+</div>
+
+
+<hr>
+<div id="paper24"> <b>24. Russian Natural Language Generation: Creation of a Language Modelling  Dataset and Evaluation with Modern Neural Architectures</b>  <a href="https://arxiv.org/pdf/2005.02470" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title24" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Shaheen%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zein Shaheen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wohlgenannt%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gerhard Wohlgenannt</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zaity%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bassel Zaity</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mouromtsev%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dmitry Mouromtsev</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Pak%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vadim Pak</a><br>
+<font size="3">
+ Abstract: Generating coherent, grammatically correct, and meaningful text is very challenging, however, it is crucial to many modern NLP systems. So far, research has mostly focused on English language, for other languages both standardized datasets, as well as experiments with state-of-the-art models, are rare. In this work, we i) provide a novel reference dataset for Russian language modeling, ii) experiment with popular modern methods for text generation, namely variational autoencoders, and generative adversarial networks, which we trained on the new dataset. We evaluate the generated text regarding metrics such as perplexity, grammatical correctness and lexical diversity.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：生成连贯，语法正确，有意义的文本很有挑战性，但是，它是许多现代NLP系统是至关重要的。到目前为止，研究主要集中在英语，其他语言都标准化的数据集，以及与国家的最先进的模型的实验，是罕见的。在这项工作中，我们一）提供俄语造型新颖的参考数据集，II）实验流行的现代方法文本生成，即变自动编码，和生成对抗性的网络，这是我们培训了新的数据集。我们评估有关指标，如困惑，语法的正确性和词汇的多样性生成的文本。</font>
+</div>
+
+
+<hr>
+<div id="paper25"> <b>25. Contextualizing Hate Speech Classifiers with Post-hoc Explanation</b>  <a href="https://arxiv.org/pdf/2005.02439" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title25" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Kennedy%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Brendan Kennedy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jin%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xisen Jin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Davani%2C+A+M" target="_blank" rel="noopener" style="color:#0000EE;">Aida Mostafazadeh Davani</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dehghani%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Morteza Dehghani</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ren%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiang Ren</a><br>
+<font size="3">
+ Abstract: Hate speech classifiers trained on imbalanced datasets struggle to determine if group identifiers like "gay" or "black" are used in offensive or prejudiced ways. Such biases manifest in false positives when these identifiers are present, due to models' inability to learn the contexts which constitute a hateful usage of identifiers. We extract post-hoc explanations from fine-tuned BERT classifiers to detect bias towards identity terms. Then, we propose a novel regularization technique based on these explanations that encourages models to learn from the context of group identifiers in addition to the identifiers themselves. Our approach improved over baselines in limiting false positives on out-of-domain data while maintaining or improving in-domain performance.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：经过培训的不平衡数据集仇恨言论分类的斗争，以确定是否喜欢“同性恋”或“黑色”的组标识符进攻或偏见的方式被使用。清单误报这样的偏见时，这些标识符目前，由于模型无力学习构成标识符的可恶使用的上下文。我们提取微调BERT分类事后解释，检测对身份方面的偏见。然后，我们提出了一种基于这些解释，鼓励模型从组标识符除了标识自己的上下文来学习一种新的正则化技术。我们的方法在限制对域外的数据误报，同时保持或提高域性能提高了基准。</font>
+</div>
+
+
+<hr>
+<div id="paper26"> <b>26. Automated Personalized Feedback Improves Learning Gains in an  Intelligent Tutoring System</b>  <a href="https://arxiv.org/pdf/2005.02431" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title26" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Kochmar%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Ekaterina Kochmar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Vu%2C+D+D" target="_blank" rel="noopener" style="color:#0000EE;">Dung Do Vu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Belfer%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Robert Belfer</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Gupta%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Varun Gupta</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Serban%2C+I+V" target="_blank" rel="noopener" style="color:#0000EE;">Iulian Vlad Serban</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Pineau%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Joelle Pineau</a><br>
+<font size="3">
+ Abstract: We investigate how automated, data-driven, personalized feedback in a large-scale intelligent tutoring system (ITS) improves student learning outcomes. We propose a machine learning approach to generate personalized feedback, which takes individual needs of students into account. We utilize state-of-the-art machine learning and natural language processing techniques to provide the students with personalized hints, Wikipedia-based explanations, and mathematical hints. Our model is used in Korbit, a large-scale dialogue-based ITS with thousands of students launched in 2019, and we demonstrate that the personalized feedback leads to considerable improvement in student learning outcomes and in the subjective evaluation of the feedback.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们研究如何自动化，数据驱动的，个性化的反馈在大型智能教学系统（ITS），提高了学生的学习成果。我们提出一种机器学习方法来生成个性化的反馈，这需要学生的个性化需求考虑在内。我们利用国家的最先进的机器学习和自然语言处理技术，为学生提供个性化的提示，根据维基百科的解释，和数学提示。我们的模型是在Korbit使用，大规模的对话为基础与数千名在2019年推出的学生，我们证明了个性化的反馈导致相当大的改进学生的学习成果和反馈的主观评价。</font>
+</div>
+
+
+<hr>
+<div id="paper27"> <b>27. Graph-Embedding Empowered Entity Retrieval</b>  <a href="https://arxiv.org/pdf/2005.02843" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title27" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gerritse%2C+E+J" target="_blank" rel="noopener" style="color:#0000EE;">Emma J. Gerritse</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hasibi%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Faegheh Hasibi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=de+Vries%2C+A+P" target="_blank" rel="noopener" style="color:#0000EE;">Arjen P. de Vries</a><br>
+<font size="3">
+ Abstract: In this research, we improve upon the current state of the art in entity retrieval by re-ranking the result list using graph embeddings. The paper shows that graph embeddings are useful for entity-oriented search tasks. We demonstrate empirically that encoding information from the knowledge graph into (graph) embeddings contributes to a higher increase in effectiveness of entity retrieval results than using plain word embeddings. We analyze the impact of the accuracy of the entity linker on the overall retrieval effectiveness. Our analysis further deploys the cluster hypothesis to explain the observed advantages of graph embeddings over the more widely used word embeddings, for user tasks involving ranking entities.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本研究中，我们在该领域的实体检索的当前状态由重排序使用图嵌入结果列表提高。该文件显示，图嵌入是面向实体的搜索任务非常有用。我们凭经验证实编码来自知识图信息转换成（图形）的嵌入有助于实体检索结果比使用普通的字的嵌入的有效性更高的增​​加。我们分析的实体连接的精度对整体检索效率的影响。我们的分析进一步部署集群假说来解释图嵌入的观测优势，在更广泛的词的嵌入，涉及排名实体的用户任务。</font>
+</div>
+
+
+<hr>
+<div id="paper28"> <b>28. A Large-scale Industrial and Professional Occupation Dataset</b>  <a href="https://arxiv.org/pdf/2005.02780" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title28" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Junhua Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ng%2C+Y+C" target="_blank" rel="noopener" style="color:#0000EE;">Yung Chuen Ng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lim%2C+K+H" target="_blank" rel="noopener" style="color:#0000EE;">Kwan Hui Lim</a><br>
+<font size="3">
+ Abstract: There has been growing interest in utilizing occupational data mining and analysis. In today's job market, occupational data mining and analysis is growing in importance as it enables companies to predict employee turnover, model career trajectories, screen through resumes and perform other human resource tasks. A key requirement to facilitate these tasks is the need for an occupation-related dataset. However, most research use proprietary datasets or do not make their dataset publicly available, thus impeding development in this area. To solve this issue, we present the Industrial and Professional Occupation Dataset (IPOD), which comprises 192k job titles belonging to 56k LinkedIn users. In addition to making IPOD publicly available, we also: (i) manually annotate each job title with its associated level of seniority, domain of work and location; and (ii) provide embedding for job titles and discuss various use cases. This dataset is publicly available at this https URL.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：一直在利用职业数据挖掘和分析越来越感兴趣。在当今的就业市场，职业数据挖掘和分析的重要性与日俱增，因为它可以让企业通过简历来预测员工离职，型号职业轨迹，屏幕和执行其他人力资源的任务。促进这些任务的一个关键要求是职业相关的数据集的需要。然而，大多数研究使用专有的数据集或不使他们的数据集可公开获得的，因此在这方面的阻碍发展。为了解决这个问题，我们提出了工业和专业职业数据集（IPOD），其中包括属于56K LinkedIn用户192K职称。除了使IPOD公开的，我们也：（一）手动标注与其相关的资历，工作和位置域的级别每个职位;及（ii）提供用于嵌入职称和讨论各种用例。此数据集是公开的，在此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper29"> <b>29. Learning Architectures from an Extended Search Space for Language  Modeling</b>  <a href="https://arxiv.org/pdf/2005.02593" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title29" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yinqiao Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chi Hu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuhao Zhang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nuo Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jiang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yufan Jiang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xiao%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tong Xiao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhu%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jingbo Zhu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tongran Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Changliang Li</a><br>
+<font size="3">
+ Abstract: Neural architecture search (NAS) has advanced significantly in recent years but most NAS systems restrict search to learning architectures of a recurrent or convolutional cell. In this paper, we extend the search space of NAS. In particular, we present a general approach to learn both intra-cell and inter-cell architectures (call it ESS). For a better search result, we design a joint learning method to perform intra-cell and inter-cell NAS simultaneously. We implement our model in a differentiable architecture search system. For recurrent neural language modeling, it outperforms a strong baseline significantly on the PTB and WikiText data, with a new state-of-the-art on PTB. Moreover, the learned architectures show good transferability to other systems. E.g., they improve state-of-the-art systems on the CoNLL and WNUT named entity recognition (NER) tasks and CoNLL chunking task, indicating a promising line of research on large-scale pre-learned architectures.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：神经结构搜索（NAS）最近几年显著先进的，但大多数NAS系统限制搜索到学习复发或卷积单元的架构。在本文中，我们扩展NAS的搜索空间。特别是，我们提出了一个通用的方法来学习这两个小区内和小区间的架构（称之为ESS）。为了更好的搜索结果，我们设计了一个共同学习的方法来同时执行小区内和小区间NAS。我们实现我们的微架构检索系统模型。对于反复发作的神经语言模型，它显著优于强大的基线上的PTB和wikitext的数据，对PTB一个新的国家的最先进的。此外，学习结构表现出良好的可转让给其他系统。例如，他们提高了CoNLL和WNUT命名实体识别（NER）任务和CoNLL组块的任务，这表明对大型预了解到架构的研究有前途的线路状态的最先进的系统。</font>
+</div>
+
+
+<hr>
+<div id="paper30"> <b>30. Probing the Natural Language Inference Task with Automated Reasoning  Tools</b>  <a href="https://arxiv.org/pdf/2005.02573" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title30" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Marji%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zaid Marji</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Nighojkar%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Animesh Nighojkar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Licato%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">John Licato</a><br>
+<font size="3">
+ Abstract: The Natural Language Inference (NLI) task is an important task in modern NLP, as it asks a broad question to which many other tasks may be reducible: Given a pair of sentences, does the first entail the second? Although the state-of-the-art on current benchmark datasets for NLI are deep learning-based, it is worthwhile to use other techniques to examine the logical structure of the NLI task. We do so by testing how well a machine-oriented controlled natural language (Attempto Controlled English) can be used to parse NLI sentences, and how well automated theorem provers can reason over the resulting formulae. To improve performance, we develop a set of syntactic and semantic transformation rules. We report their performance, and discuss implications for NLI and logic-based NLP.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：自然语言推理（NLI）的任务是在现代NLP的一项重要任务，因为它要求到许多其他任务可以还原一个宽泛的问题：给定一对的句子，并在第一继承权的第二次？虽然目前的基准数据集进行NLI的国家的最先进的深学习为主，这是值得使用其他技术来检查NLI任务的逻辑结构。我们通过测试如何面向机器控制的自然语言（Attempto控制英文）可以用来解析NLI句子，自动定理证明可以如何产生的公式理智战胜这样做。为了提高性能，我们开发了一套句法和语义转换规则。我们报告他们的表现，并讨论NLI和基于逻辑的NLP影响。</font>
+</div>
+
+
+<hr>
+<div id="paper31"> <b>31. ESG2Risk: A Deep Learning Framework from ESG News to Stock Volatility  Prediction</b>  <a href="https://arxiv.org/pdf/2005.02527" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title31" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/q-fin?searchtype=author&query=Guo%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tian Guo</a>, 
+<a href="https://arxiv.org/search/q-fin?searchtype=author&query=Jamet%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nicolas Jamet</a>, 
+<a href="https://arxiv.org/search/q-fin?searchtype=author&query=Betrix%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Valentin Betrix</a>, 
+<a href="https://arxiv.org/search/q-fin?searchtype=author&query=Piquet%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Louis-Alexandre Piquet</a>, 
+<a href="https://arxiv.org/search/q-fin?searchtype=author&query=Hauptmann%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emmanuel Hauptmann</a><br>
+<font size="3">
+ Abstract: Incorporating environmental, social, and governance (ESG) considerations into systematic investments has drawn numerous attention recently. In this paper, we focus on the ESG events in financial news flow and exploring the predictive power of ESG related financial news on stock volatility. In particular, we develop a pipeline of ESG news extraction, news representations, and Bayesian inference of deep learning models. Experimental evaluation on real data and different markets demonstrates the superior predicting performance as well as the relation of high volatility prediction to stocks with potential high risk and low return. It also shows the prospect of the proposed pipeline as a flexible predicting framework for various textual data and target variables.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：将环境，社会和治理（ESG）考虑到系统的投资已经引起众多关注最近。在本文中，我们专注于财经新闻流的ESG事件和探索ESG的预测能力相关的股票波动性的财经新闻。特别是，我们开发ESG新闻提取，新闻表示，与深学习模型的贝叶斯推理的管道。实际的数据以及不同的市场实验的评价体现了卓越的性能预测以及高波动性预测到股市的关系具有潜在的高风险和低回报。这也显示了该管道作为各种文本数据与目标变量灵活的预测框架的前景。</font>
+</div>
+
+
+<hr>
+<div id="paper32"> <b>32. Cross-media Structured Common Space for Multimedia Event Extraction</b>  <a href="https://arxiv.org/pdf/2005.02472" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title32" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Manling Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zareian%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alireza Zareian</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zeng%2C+Q" target="_blank" rel="noopener" style="color:#0000EE;">Qi Zeng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Whitehead%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Spencer Whitehead</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lu%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Di Lu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ji%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Heng Ji</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chang%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shih-Fu Chang</a><br>
+<font size="3">
+ Abstract: We introduce a new task, MultiMedia Event Extraction (M2E2), which aims to extract events and their arguments from multimedia documents. We develop the first benchmark and collect a dataset of 245 multimedia news articles with extensively annotated events and arguments. We propose a novel method, Weakly Aligned Structured Embedding (WASE), that encodes structured representations of semantic information from textual and visual data into a common embedding space. The structures are aligned across modalities by employing a weakly supervised training strategy, which enables exploiting available resources without explicit cross-media annotation. Compared to uni-modal state-of-the-art methods, our approach achieves 4.0% and 9.8% absolute F-score gains on text event argument role labeling and visual event extraction. Compared to state-of-the-art multimedia unstructured representations, we achieve 8.3% and 5.0% absolute F-score gains on multimedia event extraction and argument role labeling, respectively. By utilizing images, we extract 21.4% more event mentions than traditional text-only methods.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们推出了新的任务，多媒体事件提取（M2E2），其目的是提取事件和多媒体文件的参数。我们开发的第一个基准测试，并收集与广泛的注释事件和参数245篇多媒体新闻文章的数据集。我们提出了一个新颖的方法，弱对齐结构嵌入（早生），其编码结构化的文本从和可视数据的语义信息表示成一个共同嵌入的空间。该结构是通过采用弱指导训练策略，这使得利用现有资源没有明确的跨媒体跨标注方式排列。相较于国家的最先进的单峰的方法，我们的方法实现对文本事件的说法角色标注和视觉事件提取4.0％和9.8％的绝对F-得分收益。相较于国家的最先进的多媒体非结构化表示，我们分别实现多媒体事件的提取和论证角色标注为8.3％和5.0％的绝对F-得分收益。通过利用图片，我们提取更多的21.4％提到的事件比传统的纯文本的方法。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/05/07/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-05-07/" title="【arxiv论文】 Computation and Language 2020-05-07">https://procjx.github.io/2020/05/07/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-05-07/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/05/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-05-05/" rel="next" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-05-05">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computer Vision and Pattern Recognition 2020-05-05
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/05/07/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-05-07/" rel="prev" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-05-07">
+                  【arxiv论文】 Computer Vision and Pattern Recognition 2020-05-07 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translation/" rel="tag">Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Translation/" rel="tag">Word Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" rel="tag">斐波那契数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%89%E8%AF%BA%E5%A1%94/" rel="tag">汉诺塔</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: '9efa1f6abd25d23fe3b38de568736d21',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
