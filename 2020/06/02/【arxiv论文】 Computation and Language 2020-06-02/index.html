@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. NSTM: Real-Time Query-Driven News Overview Composition at Bloomberg [PDF] 摘要  2. Cascaded Text Generation with Markov Transformers [PDF] 摘要  3. Emergence of Separable Manifolds in Deep Language">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-06-02">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;06&#x2F;02&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-02&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. NSTM: Real-Time Query-Driven News Overview Composition at Bloomberg [PDF] 摘要  2. Cascaded Text Generation with Markov Transformers [PDF] 摘要  3. Emergence of Separable Manifolds in Deep Language">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-02T06:06:05.161Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/06/02/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-06-02 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/06/02/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-06-02
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-02 11:38:40 / 修改时间：14:06:05" itemprop="dateCreated datePublished" datetime="2020-06-02T11:38:40+08:00">2020-06-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>86k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>2:23</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> NSTM: Real-Time Query-Driven News Overview Composition at Bloomberg <a href="https://arxiv.org/pdf/2006.01117" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> Cascaded Text Generation with Markov Transformers <a href="https://arxiv.org/pdf/2006.01112" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> Emergence of Separable Manifolds in Deep Language Representations <a href="https://arxiv.org/pdf/2006.01095" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> Is 42 the Answer to Everything in Subtitling-oriented Speech  Translation? <a href="https://arxiv.org/pdf/2006.01080" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Aligning Faithful Interpretations with their Social Attribution <a href="https://arxiv.org/pdf/2006.01067" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> DocBank: A Benchmark Dataset for Document Layout Analysis <a href="https://arxiv.org/pdf/2006.01038" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> A Neural Network Model of Lexical Competition during Infant Spoken Word  Recognition <a href="https://arxiv.org/pdf/2006.00999" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Toxicity Detection: Does Context Really Matter? <a href="https://arxiv.org/pdf/2006.00998" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> When Bert Forgets How To POS: Amnesic Probing of Linguistic Properties  and MLM Predictions <a href="https://arxiv.org/pdf/2006.00995" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> Attention Word Embedding <a href="https://arxiv.org/pdf/2006.00988" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> Sarcasm Detection using Context Separators in Online Discourse <a href="https://arxiv.org/pdf/2006.00850" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+<div id="title12">
+<b>12.</b> Distilling Neural Networks for Greener and Faster Dependency Parsing <a href="https://arxiv.org/pdf/2006.00844" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper12" style="color:#0000EE;">摘要</a><br></div>
+<div id="title13">
+<b>13.</b> Rhetoric, Logic, and Dialectic: Advancing Theory-based Argument Quality  Assessment in Natural Language Processing <a href="https://arxiv.org/pdf/2006.00843" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper13" style="color:#0000EE;">摘要</a><br></div>
+<div id="title14">
+<b>14.</b> Efficient EUD Parsing <a href="https://arxiv.org/pdf/2006.00838" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper14" style="color:#0000EE;">摘要</a><br></div>
+<div id="title15">
+<b>15.</b> Online Versus Offline NMT Quality: An In-depth Analysis on  English-German and German-English <a href="https://arxiv.org/pdf/2006.00814" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper15" style="color:#0000EE;">摘要</a><br></div>
+<div id="title16">
+<b>16.</b> Stance in Replies and Quotes (SRQ): A New Dataset For Learning Stance in  Twitter Conversations <a href="https://arxiv.org/pdf/2006.00691" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper16" style="color:#0000EE;">摘要</a><br></div>
+<div id="title17">
+<b>17.</b> Conversational Machine Comprehension: a Literature Review <a href="https://arxiv.org/pdf/2006.00671" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper17" style="color:#0000EE;">摘要</a><br></div>
+<div id="title18">
+<b>18.</b> A Unified Feature Representation for Lexical Connotations <a href="https://arxiv.org/pdf/2006.00635" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper18" style="color:#0000EE;">摘要</a><br></div>
+<div id="title19">
+<b>19.</b> Neural Unsupervised Domain Adaptation in NLP---A Survey <a href="https://arxiv.org/pdf/2006.00632" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper19" style="color:#0000EE;">摘要</a><br></div>
+<div id="title20">
+<b>20.</b> CNRL at SemEval-2020 Task 5: Modelling Causal Reasoning in Language with  Multi-Head Self-Attention Weights based Counterfactual Detection <a href="https://arxiv.org/pdf/2006.00609" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper20" style="color:#0000EE;">摘要</a><br></div>
+<div id="title21">
+<b>21.</b> LRG at SemEval-2020 Task 7: Assessing the Ability of BERT and Derivative  Models to Perform Short-Edits based Humor Grading <a href="https://arxiv.org/pdf/2006.00607" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper21" style="color:#0000EE;">摘要</a><br></div>
+<div id="title22">
+<b>22.</b> BPGC at SemEval-2020 Task 11: Propaganda Detection in News Articles with  Multi-Granularity Knowledge Sharing and Linguistic Features based Ensemble  Learning <a href="https://arxiv.org/pdf/2006.00593" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper22" style="color:#0000EE;">摘要</a><br></div>
+<div id="title23">
+<b>23.</b> Efficient Deployment ofConversational Natural Language Interfaces over  Databases <a href="https://arxiv.org/pdf/2006.00591" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper23" style="color:#0000EE;">摘要</a><br></div>
+<div id="title24">
+<b>24.</b> "Judge me by my size (noun), do you?'' YodaLib: A Demographic-Aware  Humor Generation Framework <a href="https://arxiv.org/pdf/2006.00578" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper24" style="color:#0000EE;">摘要</a><br></div>
+<div id="title25">
+<b>25.</b> Neural Entity Linking: A Survey of Models based on Deep Learning <a href="https://arxiv.org/pdf/2006.00575" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper25" style="color:#0000EE;">摘要</a><br></div>
+<div id="title26">
+<b>26.</b> Improve Document Embedding for Text Categorization Through Deep Siamese  Neural Network <a href="https://arxiv.org/pdf/2006.00572" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper26" style="color:#0000EE;">摘要</a><br></div>
+<div id="title27">
+<b>27.</b> Benchmarking BioRelEx for Entity Tagging and Relation Extraction <a href="https://arxiv.org/pdf/2006.00533" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper27" style="color:#0000EE;">摘要</a><br></div>
+<div id="title28">
+<b>28.</b> Learning to Recognise Words using Visually Grounded Speech <a href="https://arxiv.org/pdf/2006.00512" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper28" style="color:#0000EE;">摘要</a><br></div>
+<div id="title29">
+<b>29.</b> BiERU: Bidirectional Emotional Recurrent Unit for Conversational  Sentiment Analysis <a href="https://arxiv.org/pdf/2006.00492" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper29" style="color:#0000EE;">摘要</a><br></div>
+<div id="title30">
+<b>30.</b> Detecting Group Beliefs Related to 2018's Brazilian Elections in Tweets  A Combined Study on Modeling Topics and Sentiment Analysis <a href="https://arxiv.org/pdf/2006.00490" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper30" style="color:#0000EE;">摘要</a><br></div>
+<div id="title31">
+<b>31.</b> Recognizing Chinese Judicial Named Entity using BiLSTM-CRF <a href="https://arxiv.org/pdf/2006.00464" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper31" style="color:#0000EE;">摘要</a><br></div>
+<div id="title32">
+<b>32.</b> SANA : Sentiment Analysis on Newspapers comments in Algeria <a href="https://arxiv.org/pdf/2006.00459" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper32" style="color:#0000EE;">摘要</a><br></div>
+<div id="title33">
+<b>33.</b> Learning to refer informatively by amortizing pragmatic reasoning <a href="https://arxiv.org/pdf/2006.00418" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper33" style="color:#0000EE;">摘要</a><br></div>
+<div id="title34">
+<b>34.</b> Linguistic Features for Readability Assessment <a href="https://arxiv.org/pdf/2006.00377" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper34" style="color:#0000EE;">摘要</a><br></div>
+<div id="title35">
+<b>35.</b> Data Augmentation for Learning Bilingual Word Embeddings with  Unsupervised Machine Translation <a href="https://arxiv.org/pdf/2006.00262" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper35" style="color:#0000EE;">摘要</a><br></div>
+<div id="title36">
+<b>36.</b> Dynamic Masking for Improved Stability in Spoken Language Translation <a href="https://arxiv.org/pdf/2006.00249" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper36" style="color:#0000EE;">摘要</a><br></div>
+<div id="title37">
+<b>37.</b> A Sentiment Analysis Dataset for Code-Mixed Malayalam-English <a href="https://arxiv.org/pdf/2006.00210" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper37" style="color:#0000EE;">摘要</a><br></div>
+<div id="title38">
+<b>38.</b> Corpus Creation for Sentiment Analysis in Code-Mixed Tamil-English Text <a href="https://arxiv.org/pdf/2006.00206" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper38" style="color:#0000EE;">摘要</a><br></div>
+<div id="title39">
+<b>39.</b> User Memory Reasoning for Conversational Recommendation <a href="https://arxiv.org/pdf/2006.00184" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper39" style="color:#0000EE;">摘要</a><br></div>
+<div id="title40">
+<b>40.</b> Topic Detection and Summarization of User Reviews <a href="https://arxiv.org/pdf/2006.00148" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper40" style="color:#0000EE;">摘要</a><br></div>
+<div id="title41">
+<b>41.</b> ExplainIt: Explainable Review Summarization with Opinion Causality  Graphs <a href="https://arxiv.org/pdf/2006.00119" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper41" style="color:#0000EE;">摘要</a><br></div>
+<div id="title42">
+<b>42.</b> Design and Implementation of a Virtual 3D Educational Environment to  improve Deaf Education <a href="https://arxiv.org/pdf/2006.00114" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper42" style="color:#0000EE;">摘要</a><br></div>
+<div id="title43">
+<b>43.</b> A frame semantics based approach to comparative study of digitized  corpus <a href="https://arxiv.org/pdf/2006.00113" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper43" style="color:#0000EE;">摘要</a><br></div>
+<div id="title44">
+<b>44.</b> iCapsNets: Towards Interpretable Capsule Networks for Text  Classification <a href="https://arxiv.org/pdf/2006.00075" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper44" style="color:#0000EE;">摘要</a><br></div>
+<div id="title45">
+<b>45.</b> Stance Prediction for Contemporary Issues: Data and Experiments <a href="https://arxiv.org/pdf/2006.00052" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper45" style="color:#0000EE;">摘要</a><br></div>
+<div id="title46">
+<b>46.</b> A Comparative Study of Lexical Substitution Approaches based on Neural  Language Models <a href="https://arxiv.org/pdf/2006.00031" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper46" style="color:#0000EE;">摘要</a><br></div>
+<div id="title47">
+<b>47.</b> Encoding formulas as deep networks: Reinforcement learning for zero-shot  execution of LTL formulas <a href="https://arxiv.org/pdf/2006.01110" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper47" style="color:#0000EE;">摘要</a><br></div>
+<div id="title48">
+<b>48.</b> Probing Emergent Semantics in Predictive Agents via Question Answering <a href="https://arxiv.org/pdf/2006.01016" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper48" style="color:#0000EE;">摘要</a><br></div>
+<div id="title49">
+<b>49.</b> Quantum Accelerated Estimation of Algorithmic Information <a href="https://arxiv.org/pdf/2006.00987" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper49" style="color:#0000EE;">摘要</a><br></div>
+<div id="title50">
+<b>50.</b> CoAID: COVID-19 Healthcare Misinformation Dataset <a href="https://arxiv.org/pdf/2006.00885" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper50" style="color:#0000EE;">摘要</a><br></div>
+<div id="title51">
+<b>51.</b> COVID-19: Social Media Sentiment Analysis on Reopening <a href="https://arxiv.org/pdf/2006.00804" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper51" style="color:#0000EE;">摘要</a><br></div>
+<div id="title52">
+<b>52.</b> Transcription-Enriched Joint Embeddings for Spoken Descriptions of  Images and Videos <a href="https://arxiv.org/pdf/2006.00785" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper52" style="color:#0000EE;">摘要</a><br></div>
+<div id="title53">
+<b>53.</b> Learning to Recognize Code-switched Speech Without Forgetting  Monolingual Speech Recognition <a href="https://arxiv.org/pdf/2006.00782" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper53" style="color:#0000EE;">摘要</a><br></div>
+<div id="title54">
+<b>54.</b> Influence via Ethos: On the Persuasive Power of Reputation in  Deliberation Online <a href="https://arxiv.org/pdf/2006.00707" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper54" style="color:#0000EE;">摘要</a><br></div>
+<div id="title55">
+<b>55.</b> Streaming Language Identification using Combination of Acoustic  Representations and ASR Hypotheses <a href="https://arxiv.org/pdf/2006.00703" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper55" style="color:#0000EE;">摘要</a><br></div>
+<div id="title56">
+<b>56.</b> Translating Natural Language Instructions for Behavioral Robot  Navigation with a Multi-Head Attention Mechanism <a href="https://arxiv.org/pdf/2006.00697" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper56" style="color:#0000EE;">摘要</a><br></div>
+<div id="title57">
+<b>57.</b> Residual Excitation Skewness for Automatic Speech Polarity Detection <a href="https://arxiv.org/pdf/2006.00525" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper57" style="color:#0000EE;">摘要</a><br></div>
+<div id="title58">
+<b>58.</b> Maximum Voiced Frequency Estimation: Exploiting Amplitude and Phase  Spectra <a href="https://arxiv.org/pdf/2006.00521" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper58" style="color:#0000EE;">摘要</a><br></div>
+<div id="title59">
+<b>59.</b> Data-driven Detection and Analysis of the Patterns of Creaky Voice <a href="https://arxiv.org/pdf/2006.00518" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper59" style="color:#0000EE;">摘要</a><br></div>
+<div id="title60">
+<b>60.</b> Variational Reward Estimator Bottleneck: Learning Robust Reward  Estimator for Multi-Domain Task-Oriented Dialog <a href="https://arxiv.org/pdf/2006.00417" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper60" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. NSTM: Real-Time Query-Driven News Overview Composition at Bloomberg</b>  <a href="https://arxiv.org/pdf/2006.01117" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Bambrick%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Joshua Bambrick</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Minjie Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Almonte%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Andy Almonte</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Malioutov%2C+I" target="_blank" rel="noopener" style="color:#0000EE;">Igor Malioutov</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Perarnau%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guim Perarnau</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Selo%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vittorio Selo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chan%2C+I+C" target="_blank" rel="noopener" style="color:#0000EE;">Iat Chong Chan</a><br>
+<font size="3">
+ Abstract: Millions of news articles from hundreds of thousands of sources around the globe appear in news aggregators every day. Consuming such a volume of news presents an almost insurmountable challenge. For example, a reader searching on Bloomberg's system for news about the U.K. would find 10,000 articles on a typical day. Apple Inc., the world's most journalistically covered company, garners around 1,800 news articles a day. We realized that a new kind of summarization engine was needed, one that would condense large volumes of news into short, easy to absorb points. The system would filter out noise and duplicates to identify and summarize key news about companies, countries or markets. When given a user query, Bloomberg's solution, Key News Themes (or NSTM), leverages state-of-the-art semantic clustering techniques and novel summarization methods to produce comprehensive, yet concise, digests to dramatically simplify the news consumption process. NSTM is available to hundreds of thousands of readers around the world and serves thousands of requests daily with sub-second latency. At ACL 2020, we will present a demo of NSTM.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：从百万成千上万的世界各地的来源的新闻文章，每天出现在新闻聚合器。消费新闻呈现一个几乎无法逾越的挑战，这样的体积。例如，彭博的系统有关英国的新闻在读者搜索会发现在一个典型的一天10,000多篇文章。苹果公司，是世界上最journalistically覆盖的公司，一天大约1800条相关新闻。仓。我们意识到，需要一种新的汇总引擎，一会凝结大量的消息为短，易吸收点。该系统将噪声过滤掉，并复制识别和总结了有关公司，国家或市场的重点新闻。当给用户查询，彭博的解决方案，主要新闻主题（或NSTM），充分利用国家的最先进的语义聚合技术和新总结的方法来产生全面而简洁，消化，大大简化了新闻消费过程。 NSTM是提供给成千上万的世界各地的读者和日常用亚秒级时延提供成千上万的请求的。在ACL 2020年，我们将提出NSTM的演示。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Cascaded Text Generation with Markov Transformers</b>  <a href="https://arxiv.org/pdf/2006.01112" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Deng%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuntian Deng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rush%2C+A+M" target="_blank" rel="noopener" style="color:#0000EE;">Alexander M. Rush</a><br>
+<font size="3">
+ Abstract: The two dominant approaches to neural text generation are fully autoregressive models, using serial beam search decoding, and non-autoregressive models, using parallel decoding with no output dependencies. This work proposes an autoregressive model with sub-linear parallel time generation. Noting that conditional random fields with bounded context can be decoded in parallel, we propose an efficient cascaded decoding approach for generating high-quality output. To parameterize this cascade, we introduce a Markov transformer, a variant of the popular fully autoregressive model that allows us to simultaneously decode with specific autoregressive context cutoffs. This approach requires only a small modification from standard autoregressive training, while showing competitive accuracy/speed tradeoff compared to existing methods on five machine translation datasets.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：两个主要途径神经文本生成完全自回归模型，采用串行波束搜索解码，和非自回归模型，采用并行解码没有输出的依赖关系。这项工作提出了与子直线平行时产生的自回归模型。注意到与界上下文条件随机场可以并行解码，我们提出了用于产生高品质的输出的有效级联解码的方法。为了这个参数级联，我们引入一个马尔可夫变压器，流行的完全自回归模型，使我们能够同时与特定的自回归语境截止解码的变体。这种方法只需要从标准自回归训练一个小的修改，同时表现出相比于五个机器翻译的数据集现有方法的竞争精度/速度的权衡。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Emergence of Separable Manifolds in Deep Language Representations</b>  <a href="https://arxiv.org/pdf/2006.01095" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Mamou%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jonathan Mamou</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Le%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hang Le</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Del+Rio%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Miguel Del Rio</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Stephenson%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Cory Stephenson</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tang%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hanlin Tang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kim%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yoon Kim</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chung%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">SueYeon Chung</a><br>
+<font size="3">
+ Abstract: Artificial neural networks (ANNS have shown much empirical success in solving perceptual tasks across various cognitive modalities. While they are only loosely inspired by the biological brain, recent studies report considerable similarities between representation extracted from task-optimized ANNS and neural populations in the brain. ANNS have subsequently become a popular model class to infer computational principles underlying complex cognitive functions, and in turn they have also emerged as a natural testbed for applying methods originally developed to probe information in neural populations. In this work, we utilize mean-field theoretic manifold analysis, a recent technique from computational neuroscience, to analyze the high dimensional geometry of language representations from large-scale contextual embedding models. We explore representations from different model families (BERT, RoBERTa, GPT-2, etc. ) and find evidence for emergence of linguistic manifold across layer depth (e.g., manifolds for part-of-speech and combinatory categorical grammar tags). We further observe that different encoding schemes used to obtain the representations lead to differences in whether these linguistic manifolds emerge in earlier or later layers of the network. In addition, we find that the emergence of linear separability in these manifolds is driven by a combined reduction of manifolds radius, dimensionality and inter-manifold correlations.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：人工神经网络（人工神经网络显示，在解决跨不同的认知方式感知任务太多经验的成功虽然他们只是松散地由生物大脑的启发，最近的研究报告从任务优化的人工神经网络和神经元群中提取表示之间有相当大的相似性大脑。人工神经网络已随之成为一种流行的模型类来推断计算原理复杂的认知功能根本，反过来，他们也成为了应用最初开发于神经元群探测信息的方法自然的实验平台。在这项工作中，我们利用均值场理论歧管分析，从计算神经科学最近的技术，来分析从大型情境嵌入模型语言表示的高维几何体。我们在探索不同模式的家庭（BERT，罗伯塔，GPT-2等），并找到交涉跨语言Laye的歧管的出现证据r切削深度（例如，用于部分的语音和组合子​​范畴语法标记歧管）。我们进一步观察用于获取表示不同的编码方案导致这些语言歧管无论是在网络的较早或较晚出现的层差。此外，我们发现，线性可分的在这些歧管的出现是通过组合歧管减少半径，维数和帧间相关性歧管的驱动。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. Is 42 the Answer to Everything in Subtitling-oriented Speech  Translation?</b>  <a href="https://arxiv.org/pdf/2006.01080" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Karakanta%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alina Karakanta</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Negri%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Matteo Negri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Turchi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Marco Turchi</a><br>
+<font size="3">
+ Abstract: Subtitling is becoming increasingly important for disseminating information, given the enormous amounts of audiovisual content becoming available daily. Although Neural Machine Translation (NMT) can speed up the process of translating audiovisual content, large manual effort is still required for transcribing the source language, and for spotting and segmenting the text into proper subtitles. Creating proper subtitles in terms of timing and segmentation highly depends on information present in the audio (utterance duration, natural pauses). In this work, we explore two methods for applying Speech Translation (ST) to subtitling: a) a direct end-to-end and b) a classical cascade approach. We discuss the benefit of having access to the source language speech for improving the conformity of the generated subtitles to the spatial and temporal subtitling constraints and show that length is not the answer to everything in the case of subtitling-oriented ST.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：字幕给出巨额的视听内容成为可成为日常信息传播越来越重要。虽然神经机器翻译（NMT）可以加快翻译视听内容的过程中，大的手动工作仍然需要转录源语言，并为发现和分割文本字幕正确。在定时和分割方面创造适当的字幕高度取决于存在信息在音频（发声持续时间，自然停顿）。在这项工作中，我们探索运用语音翻译（ST）以字幕两种方法：A）直接端 - 端和b）经典级联的方式。我们讨论具有用于提高所生成的字幕符合时间和空间的限制字幕访问源语讲话的利益，并表明长度不回答中的字幕为本ST的情况下，一切。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Aligning Faithful Interpretations with their Social Attribution</b>  <a href="https://arxiv.org/pdf/2006.01067" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Jacovi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alon Jacovi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Goldberg%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yoav Goldberg</a><br>
+<font size="3">
+ Abstract: We find that the requirement of model interpretations to be faithful is vague and incomplete. Indeed, recent work refers to interpretations as unfaithful despite adhering to the available definition. Similarly, we identify several critical failures with the notion of textual highlights as faithful interpretations, although they adhere to the faithfulness definition. With textual highlights as a case-study, and borrowing concepts from social science, we identify that the problem is a misalignment between the causal chain of decisions (causal attribution) and social attribution of human behavior to the interpretation. We re-formulate faithfulness as an accurate attribution of causality to the model, and introduce the concept of "aligned faithfulness": faithful causal chains that are aligned with their expected social behavior. The two steps of causal attribution and social attribution *together* complete the process of explaining behavior, making the alignment of faithful interpretations a requirement. With this formalization, we characterize the observed failures of misaligned faithful highlight interpretations, and propose an alternative causal chain to remedy the issues. Finally, we the implement highlight explanations of proposed causal format using contrastive explanations.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们发现，模型解释的要求，忠实是模糊的，不完整的。事实上，最近的工作是指作为解释不忠尽管秉承可用的定义。同样，我们认同文本亮点就在忠实诠释的概念一些严重故障，虽然他们坚持忠诚的定义。随着文字的亮点作为案例研究，并从社会科学的借用概念，我们确定这个问题是决策的因果链（因果归因）和人类行为的解释的社会属性之间的错位。我们重新制订信实作为因果关系的准确归属到模型，并引入“排列忠诚”的概念：这与他们的预期的社会行为取向忠实的因果链。因果归因和社会属性的两个步骤一起* *完成解释的行为，使忠实诠释的要求比对的过程。有了这个形式化，我们刻画错位忠实亮点解释所观察到的故障，并提出替代因果链来补救问题。最后，我们将实现使用对比说明提出的因果格式的亮点解释。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. DocBank: A Benchmark Dataset for Document Layout Analysis</b>  <a href="https://arxiv.org/pdf/2006.01038" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Minghao Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yiheng Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cui%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lei Cui</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shaohan Huang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wei%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Furu Wei</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhoujun Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhou%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Ming Zhou</a><br>
+<font size="3">
+ Abstract: Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufficient. In this paper, we present \textbf{DocBank}, a benchmark dataset with fine-grained token-level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the \LaTeX{} documents available on the this http URL. With DocBank, models from different modalities can be compared fairly and multi-modal approaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Experiment results show that models trained on DocBank accurately recognize the layout information for a variety of documents. The DocBank dataset will be publicly available at \url{this https URL}.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：文档布局分析通常依赖于计算机视觉模型来理解文件而忽略文本信息也就是捕获至关重要。同时，高品质的标有视觉和文本信息数据集仍然不足。在本文中，我们提出了\ textbf {} DocBank，一个基准数据集中细粒度标记级别的注释文档布局分析。 DocBank使用简单而从\ LaTeX {}的文件，监管不力的有效途径可在这个HTTP URL构成。随着DocBank，来自不同模态模型可以相当比较和多模态的方法将进一步调查，并提升文档布局分析的性能。我们建立一些强有力的基线和手动分离火车/开发/测试组进行评估。实验结果表明，经过训练的DocBank模型准确地识别布局信息，各种文档。该DocBank数据集将公布于\ {URL这HTTPS URL}。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. A Neural Network Model of Lexical Competition during Infant Spoken Word  Recognition</b>  <a href="https://arxiv.org/pdf/2006.00999" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Duta%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mihaela Duta</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Plunkett%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kim Plunkett</a><br>
+<font size="3">
+ Abstract: Visual world studies show that upon hearing a word in a target-absent visual context containing related and unrelated items, toddlers and adults briefly direct their gaze towards phonologically related items, before shifting towards semantically and visually related ones. We present a neural network model that processes dynamic unfolding phonological representations and maps them to static internal semantic and visual representations. The model, trained on representations derived from real corpora, simulates this early phonological over semantic/visual preference. Our results support the hypothesis that incremental unfolding of a spoken word is in itself sufficient to account for the transient preference for phonological competitors over both unrelated and semantically and visually related ones. Phonological representations mapped dynamically in a bottom-up fashion to semantic-visual representations capture the early phonological preference effects reported in a visual world task. The semantic-visual preference observed later in such a trial does not require top-down feedback from a semantic or visual system.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：视觉世界的研究表明，在含有相关和无关的项目，幼儿和成人的简单指导他们的目光转向音位相关项目的目标，不存在视觉方面听到这个词，对语义和视觉相关的那些移前。我们提出了处理动态展开语音表征并将它们映射到静态内部语义和可视化表示神经网络模型。该模型，培养从实际语料来源的陈述，模拟了语义/视觉偏好早期音韵。我们的研究结果支持这一假设增量展开所讲单词本身足以帐户用于在两个不相关和语义与视觉相关的那些语音的竞争对手瞬间偏好。语音表征的自下而上的方式语义的可视化表示动态映射捕捉视觉世界任务报告了早期的语音偏好的影响。语义-视觉偏好在这样的试验后观察到不需要自上而下从语义或视觉系统的反馈。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Toxicity Detection: Does Context Really Matter?</b>  <a href="https://arxiv.org/pdf/2006.00998" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Pavlopoulos%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">John Pavlopoulos</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sorensen%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jeffrey Sorensen</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dixon%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lucas Dixon</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Thain%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nithum Thain</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Androutsopoulos%2C+I" target="_blank" rel="noopener" style="color:#0000EE;">Ion Androutsopoulos</a><br>
+<font size="3">
+ Abstract: Moderation is crucial to promoting healthy on-line discussions. Although several `toxicity' detection datasets and models have been published, most of them ignore the context of the posts, implicitly assuming that comments maybe judged independently. We investigate this assumption by focusing on two questions: (a) does context affect the human judgement, and (b) does conditioning on context improve performance of toxicity detection systems? We experiment with Wikipedia conversations, limiting the notion of context to the previous post in the thread and the discussion title. We find that context can both amplify or mitigate the perceived toxicity of posts. Moreover, a small but significant subset of manually labeled posts (5% in one of our experiments) end up having the opposite toxicity labels if the annotators are not provided with context. Surprisingly, we also find no evidence that context actually improves the performance of toxicity classifiers, having tried a range of classifiers and mechanisms to make them context aware. This points to the need for larger datasets of comments annotated in context. We make our code and data publicly available.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：适度是促进健康的网上讨论是至关重要的。虽然有几个'毒”检测的数据集和模型已经公布，他们大多忽略了岗位的情况下，隐含假设意见可以独立判断。我们正在调查这个假设，通过专注于两个问题：（1）做背景影响人的判断力，以及（b）没有上下文调理改善毒性检测系统的性能？我们与维基百科的谈话实验，限制了上下文的概念在以前的帖子在线程和讨论主题。我们发现这种情况下既可以放大或减轻职位的感知毒性。此外，手动标记的帖子的一个小而显著子集（在我们的实验中的一个5％）最终如果不提供上下文的注释具有相反毒性标签。出人意料的是，我们还没有发现证据表明上下文实际上提高了毒性分类器的性能，尝试过各种分类和机制，使它们情境感知。这点需要更大的上下文注解注释的数据集。我们使我们的代码和数据公开。</font>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. When Bert Forgets How To POS: Amnesic Probing of Linguistic Properties  and MLM Predictions</b>  <a href="https://arxiv.org/pdf/2006.00995" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Elazar%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yanai Elazar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ravfogel%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shauli Ravfogel</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jacovi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alon Jacovi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Goldberg%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yoav Goldberg</a><br>
+<font size="3">
+ Abstract: A growing body of work makes use of probing in order to investigate the working of neural models, often considered black boxes. Recently, an ongoing debate emerged surrounding the limitations of the probing paradigm. In this work, we point out the inability to infer behavioral conclusions from probing results, and offer an alternative method which is focused on how the information is being used, rather than on what information is encoded. Our method, Amnesic Probing, follows the intuition that the utility of a property for a given task can be assessed by measuring the influence of a causal intervention which removes it from the representation. Equipped with this new analysis tool, we can now ask questions that were not possible before, e.g. is part-of-speech information important for word prediction? We perform a series of analyses on BERT to answer these types of questions. Our findings demonstrate that conventional probing performance is not correlated to task importance, and we call for increased scrutiny of claims that draw behavioral or causal conclusions from probing results.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：越来越多的工作身体利用，以研究神经模型的工作，常常被认为是黑盒探测的。近日，正在进行的辩论中出现了周边探测范式的局限性。在这项工作中，我们指出无法从探测结果推断行为的结论，并提供其重点是如何被使用的信息，而不是什么样的信息进行编码的替代方法。我们的方法中，记忆缺失探测，随后的直觉，对于给定的任务的属性的效用可以通过测量一个因果干预从表示中删除的影响进行评估。配备这一新的分析工具，我们现在可以问以前不可能实现的问题，例如是部分的语音信息的字预测很重要？我们进行了一系列BERT分析来回答这些类型的问题。我们的研究结果表明，传统的探测性能不相关的任务的重要性，我们呼吁增加，从探测结果得出的行为或因果关系的结论的权利要求的审查。</font>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. Attention Word Embedding</b>  <a href="https://arxiv.org/pdf/2006.00988" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Sonkar%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shashank Sonkar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Waters%2C+A+E" target="_blank" rel="noopener" style="color:#0000EE;">Andrew E. Waters</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Baraniuk%2C+R+G" target="_blank" rel="noopener" style="color:#0000EE;">Richard G. Baraniuk</a><br>
+<font size="3">
+ Abstract: Word embedding models learn semantically rich vector representations of words and are widely used to initialize natural processing language (NLP) models. The popular continuous bag-of-words (CBOW) model of word2vec learns a vector embedding by masking a given word in a sentence and then using the other words as a context to predict it. A limitation of CBOW is that it equally weights the context words when making a prediction, which is inefficient, since some words have higher predictive value than others. We tackle this inefficiency by introducing the Attention Word Embedding (AWE) model, which integrates the attention mechanism into the CBOW model. We also propose AWE-S, which incorporates subword information. We demonstrate that AWE and AWE-S outperform the state-of-the-art word embedding models both on a variety of word similarity datasets and when used for initialization of NLP models.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：Word中嵌入模型学习单词的语义丰富的矢量表示，被广泛用于初始化自然语言处理（NLP）模型。流行的连续袋的字（CBOW）word2vec获悉通过在一个句子中掩蔽一个给定的字，然后使用换言之作为上下文来预测它嵌入向量的模型。 CBOW的一个限制是进行预测，这是低效的，因为有些字具有高于其他预测值时，它同样权重的上下文单词。我们通过引入关注词嵌入（AWE）模式，它集成了注意力机制引入CBOW模型解决这种低效率。我们还建议AWE-S，其中包含字信息。我们证明AWE和AWE-S跑赢上的各种文字相似的数据集，并在用于NLP模型的初始状态的最先进的字嵌入模型两者。</font>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. Sarcasm Detection using Context Separators in Online Discourse</b>  <a href="https://arxiv.org/pdf/2006.00850" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Pant%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kartikey Pant</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dadu%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tanvi Dadu</a><br>
+<font size="3">
+ Abstract: Sarcasm is an intricate form of speech, where meaning is conveyed implicitly. Being a convoluted form of expression, detecting sarcasm is an assiduous problem. The difficulty in recognition of sarcasm has many pitfalls, including misunderstandings in everyday communications, which leads us to an increasing focus on automated sarcasm detection. In the second edition of the Figurative Language Processing (FigLang 2020) workshop, the shared task of sarcasm detection released two datasets, containing responses along with their context sampled from Twitter and Reddit. In this work, we use RoBERTa_large to detect sarcasm in both the datasets. We further assert the importance of context in improving the performance of contextual word embedding based models by using three different types of inputs - Response-only, Context-Response, and Context-Response (Separated). We show that our proposed architecture performs competitively for both the datasets. We also show that the addition of a separation token between context and target response results in an improvement of 5.13% in the F1-score in the Reddit dataset.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：讽刺是演讲，其中的含义是隐式传达的一个复杂的形式。作为表达的卷积形式，检测讽刺是刻苦的问题。在识别讽刺的困难有很多缺陷，包括在日常通信的误解，这使我们越来越关注自动检测嘲讽。在比喻语言处理（FigLang 2020）车间的第二版，讽刺检测的共享任务释放两个数据集，包含具有从Twitter和Reddit采样它们的上下文沿着响应。在这项工作中，我们使用RoBERTa_large检测两个数据集讽刺。我们进一步断言上下文中使用三种不同类型的输入上下文改善嵌入一词基于模型的性能的重要性 - 响应只，上下文响应和上下文响应（分居）。我们证明了我们提出的架构进行竞争两个数据集。我们还表明，添加在5.13％的F1-得分在reddit的数据集的改善环境和目标响应结果之间令牌的分离。</font>
+</div>
+
+
+<hr>
+<div id="paper12"> <b>12. Distilling Neural Networks for Greener and Faster Dependency Parsing</b>  <a href="https://arxiv.org/pdf/2006.00844" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title12" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Anderson%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mark Anderson</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=G%C3%B3mez-Rodr%C3%ADguez%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Carlos Gómez-Rodríguez</a><br>
+<font size="3">
+ Abstract: The carbon footprint of natural language processing research has been increasing in recent years due to its reliance on large and inefficient neural network implementations. Distillation is a network compression technique which attempts to impart knowledge from a large model to a smaller one. We use teacher-student distillation to improve the efficiency of the Biaffine dependency parser which obtains state-of-the-art performance with respect to accuracy and parsing speed (Dozat and Manning, 2017). When distilling to 20\% of the original model's trainable parameters, we only observe an average decrease of $\sim$1 point for both UAS and LAS across a number of diverse Universal Dependency treebanks while being 2.30x (1.19x) faster than the baseline model on CPU (GPU) at inference time. We also observe a small increase in performance when compressing to 80\% for some treebanks. Finally, through distillation we attain a parser which is not only faster but also more accurate than the fastest modern parser on the Penn Treebank.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：自然语言处理研究的碳足迹已经在最近几年由于其对大和低效的神经网络实现的依赖越来越大。蒸馏是一种网络压缩技术，其试图传授知识从一个大的模型，以一个较小的一个。我们使用教师与学生蒸馏以提高Biaffine依存句法分析器，用于获得相对于精度和速度解析（Dozat和曼宁，2017）状态的先进性能的效率。当蒸馏原始模型的可训练参数的20 \％，我们只观察到跨多个不同的通用依存树库的$ \卡$ 1点，两个UAS和LAS的平均降幅，同时2.30x（1.19x）比基线快对模型在推理时间CPU（GPU）。压缩到80 \％，对于一些树库时，我们也观察到在性能上略有增加。最后，通过蒸馏我们获得一个解析器它不仅速度更快，而且比在宾州树库最快的现代解析器更准确。</font>
+</div>
+
+
+<hr>
+<div id="paper13"> <b>13. Rhetoric, Logic, and Dialectic: Advancing Theory-based Argument Quality  Assessment in Natural Language Processing</b>  <a href="https://arxiv.org/pdf/2006.00843" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title13" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lauscher%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anne Lauscher</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ng%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lily Ng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Napoles%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Courtney Napoles</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tetreault%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Joel Tetreault</a><br>
+<font size="3">
+ Abstract: Argumentative quality is an important feature of everyday writing in many textual domains, such as online reviews and question-and-answer (Q&A) forums. Authors can improve their writing with feedback targeting individual aspects of argument quality (AQ), even though preceding work has mostly focused on assessing the overall AQ. These individual aspects are reflected in theory-based dimensions of argument quality, but automatic assessment in real-world texts is still in its infancy -- a large-scale corpus and computational models are missing. In this work, we advance theory-based argument quality research by conducting an extensive analysis covering three diverse domains of online argumentative writing: Q&A forums, debate forums, and review forums. We start with an annotation study with linguistic experts and crowd workers, resulting in the first large-scale English corpus annotated with theory-based argument quality scores, dubbed AQCorpus. Next, we propose the first computational approaches to theory-based argument quality assessment, which can serve as strong baselines for future work. Our research yields interesting findings including the feasibility of large-scale theory-based argument quality annotations, the fact that relations between theory-based argument quality dimensions can be exploited to yield performance improvements, and demonstrates the usefulness of theory-based argument quality predictions with respect to the practical AQ assessment view.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：议论文的质量是日常写作中许多文字领域，如在线评论和提问和回答（Q＆A）论坛的一个重要特征。作者可以改善与反馈定位参数的质量（AQ）的各个方面，即使前面的工作主要集中在评估整体AQ写作。这些单独的方面反映在争论质量的理论基础的尺寸，但在现实世界中的文本自动评估尚处于起步阶段 - 大规模语料库和计算模型失踪。 Q＆A论坛，辩论论坛和审查论坛：在这项工作中，我们通过开展广泛的分析涵盖网上议论文写作三个不同领域推进理论为基础的论点品质的研究。我们开始用语言专家和观众的工人，导致首个大型英语语料库与基于理论的论点质量分数注解，被称为AQCorpus注释研究。接下来，我们提出了第一个计算方法，以理论为基础的论点质量评估，可作为今后工作的强大的基线。我们的研究得出了有趣的发现，包括大型理论为基础的论点品质的注解，但事实上，基于理论的论点质量维度之间的关系可以被利用来获得性能改进的可行性，并演示了基于理论的论点质量预测与实用性尊重实际AQ评估视图。</font>
+</div>
+
+
+<hr>
+<div id="paper14"> <b>14. Efficient EUD Parsing</b>  <a href="https://arxiv.org/pdf/2006.00838" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title14" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Dehouck%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mathieu Dehouck</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Anderson%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mark Anderson</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=G%C3%B3mez-Rodr%C3%ADguez%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Carlos Gómez-Rodríguez</a><br>
+<font size="3">
+ Abstract: We present the system submission from the FASTPARSE team for the EUD Shared Task at IWPT 2020. We engaged with the task by focusing on efficiency. For this we considered training costs and inference efficiency. Our models are a combination of distilled neural dependency parsers and a rule-based system that projects UD trees into EUD graphs. We obtained an average ELAS of 74.04 for our official submission, ranking 4th overall.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们从FASTPARSE团队为EUD共享任务在2020年IWPT我们专注于效率的任务从事目前的系统提交。为此，我们认为培训费用和推理效率。我们的模型是蒸馏水神经依赖解析器的组合和以规则为基础的系统，项目UD树木成EUD图。我们获得了74.04的平均ELAS为我们的正式提交，排名第4的整体。</font>
+</div>
+
+
+<hr>
+<div id="paper15"> <b>15. Online Versus Offline NMT Quality: An In-depth Analysis on  English-German and German-English</b>  <a href="https://arxiv.org/pdf/2006.00814" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title15" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Elbayad%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maha Elbayad</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ustaszewski%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Michael Ustaszewski</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Esperan%C3%A7a-Rodier%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emmanuelle Esperança-Rodier</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Manquat%2C+F+B" target="_blank" rel="noopener" style="color:#0000EE;">Francis Brunet Manquat</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Besacier%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Laurent Besacier</a><br>
+<font size="3">
+ Abstract: We conduct in this work an evaluation study comparing offline and online neural machine translation architectures. Two sequence-to-sequence models: convolutional Pervasive Attention (Elbayad et al. 2018) and attention-based Transformer (Vaswani et al. 2017) are considered. We investigate, for both architectures, the impact of online decoding constraints on the translation quality through a carefully designed human evaluation on English-German and German-English language pairs, the latter being particularly sensitive to latency constraints. The evaluation results allow us to identify the strengths and shortcomings of each model when we shift to the online setup.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们在这项工作进行一次评价研究在线和离线比较神经机器翻译架构。两个序列到序列模型：（Elbayad等2018）卷积普适关注和基于注意变压器（瓦斯瓦尼等人2017年）被认为是。我们调查，这两种体系结构，对翻译质量的在线解码限制通过英语，德语和英语的语言对，后者对延迟的限制特别敏感，一个精心设计的人工评估的影响。评价结果允许我们，当我们转移到网上设置确定的长处和每个模型的缺点。</font>
+</div>
+
+
+<hr>
+<div id="paper16"> <b>16. Stance in Replies and Quotes (SRQ): A New Dataset For Learning Stance in  Twitter Conversations</b>  <a href="https://arxiv.org/pdf/2006.00691" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title16" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Villa-Cox%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ramon Villa-Cox</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kumar%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sumeet Kumar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Babcock%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Matthew Babcock</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Carley%2C+K+M" target="_blank" rel="noopener" style="color:#0000EE;">Kathleen M. Carley</a><br>
+<font size="3">
+ Abstract: Automated ways to extract stance (denying vs. supporting opinions) from conversations on social media are essential to advance opinion mining research. Recently, there is a renewed excitement in the field as we see new models attempting to improve the state-of-the-art. However, for training and evaluating the models, the datasets used are often small. Additionally, these small datasets have uneven class distributions, i.e., only a tiny fraction of the examples in the dataset have favoring or denying stances, and most other examples have no clear stance. Moreover, the existing datasets do not distinguish between the different types of conversations on social media (e.g., replying vs. quoting on Twitter). Because of this, models trained on one event do not generalize to other events. In the presented work, we create a new dataset by labeling stance in responses to posts on Twitter (both replies and quotes) on controversial issues. To the best of our knowledge, this is currently the largest human-labeled stance dataset for Twitter conversations with over 5200 stance labels. More importantly, we designed a tweet collection methodology that favors the selection of denial-type responses. This class is expected to be more useful in the identification of rumors and determining antagonistic relationships between users. Moreover, we include many baseline models for learning the stance in conversations and compare the performance of various models. We show that combining data from replies and quotes decreases the accuracy of models indicating that the two modalities behave differently when it comes to stance learning.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：从社交媒体对话自动化的方式来提取姿态（否认与支持的意见）是提前意见挖掘的研究是必不可少的。最近，在我们看到新车型试图改善国家的最先进领域的新技术的激情。然而，培训和评估模型，使用的数据集通常很小。此外，这些小的数据集具有不均匀的类分布，即，只在该数据集的例子中一小部分已经有利于或拒绝的立场，最其它实例中没有明确的立场。此外，现有的数据集不不同类型的社交媒体会话之间进行区分（例如，回复与引述在Twitter）。正因为如此，在训练的一个事件模型不推广到其他事件。在所提出的工作中，我们创建通过在Twitter上的帖子回复标签姿态的新数据集（包括回复和报价）就有争议的问题。据我们所知，这是目前Twitter的谈话有超过5200的姿态标签最大的人工标记的姿态数据集。更重要的是，我们设计了一个推特收集方法有利于拒绝型反应的选择。这个类预计将在传闻的识别更为有用，并且确定用户的对立关系。此外，我们包括许多基线模型学习对话的立场和比较各种车型的性能。我们发现，从数据回复和报价相结合的降低表明两种模态行为不同，当涉及到的姿态学习模型的准确性。</font>
+</div>
+
+
+<hr>
+<div id="paper17"> <b>17. Conversational Machine Comprehension: a Literature Review</b>  <a href="https://arxiv.org/pdf/2006.00671" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title17" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gupta%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Somil Gupta</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rawat%2C+B+P+S" target="_blank" rel="noopener" style="color:#0000EE;">Bhanu Pratap Singh Rawat</a><br>
+<font size="3">
+ Abstract: Conversational Machine Comprehension (CMC) is a research track in conversational AI which expects the machine to understand an open-domain text and thereafter engage in a multi-turn conversation to answer questions related to the text. While most of the research in Machine Reading Comprehension (MRC) revolves around single-turn question answering, multi-turn CMC has recently gained prominence, thanks to the advancement in natural language understanding via neural language models like BERT and the introduction of large-scale conversational datasets like CoQA and QuAC. The rise in interest has, however, led to a flurry of concurrent publications, each with a different yet structurally similar modeling approach and an inconsistent view of the surrounding literature. With the volume of model submissions to conversational datasets increasing every year, there exists a need to consolidate the scattered knowledge in this domain to streamline future research. This literature review, therefore, is a first-of-its-kind attempt at providing a holistic overview of CMC, with an emphasis on the common trends across recently published models, specifically in their approach to tackling conversational history. It focuses on synthesizing a generic framework for CMC models, rather than describing the models individually. The review is intended to serve as a compendium for future researchers in this domain.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：谈话机器理解（CMC）在对话AI研究跟踪哪些期望机器了解开放域文本，然后搞一个多圈谈话与上述文字答题。虽然大多数的机器阅读理解（MRC）围绕单圈问答牯的研究，通过神经语言模型，如BERT和引进大型多转CMC最近颇具知名度，得益于自然语言理解的进步会话数据集像CoQA和QuAC。在利益的兴起，然而，导致并发出版物乱舞，每一个不同但结构相似的建模方法及周边文献不一致的看法。随着每年模型提交到会话数据集的量增加，存在需要巩固在这一领域，以简化未来的研究将零散的知识。该文献综述，因此，在CMC提供一个全面的概述，跨最近公布的车型共同趋势的重点，特别是在他们的方法来解决会话历史上的首个，其独一无二的尝试。它侧重于合成的通用框架CMC模型，而不是单独描述模型。审查的目的是作为在这一领域未来的研究者汇编。</font>
+</div>
+
+
+<hr>
+<div id="paper18"> <b>18. A Unified Feature Representation for Lexical Connotations</b>  <a href="https://arxiv.org/pdf/2006.00635" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title18" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Allaway%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emily Allaway</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=McKeown%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kathleen McKeown</a><br>
+<font size="3">
+ Abstract: Ideological attitudes and stance are often expressed through subtle meanings of words and phrases. Understanding these connotations is critical to recognizing the cultural and emotional perspectives of the speaker. In this paper, we use distant labeling to create a new lexical resource representing connotation aspects for nouns and adjectives. Our analysis shows that it aligns well with human judgments. Additionally, we present a method for creating lexical representations that captures connotations within the embedding space and show that using the embeddings provides a statistically significant improvement on the task of stance detection when data is limited.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：思想的态度和立场往往是通过词和短语的含义微妙的表达。了解这些内涵是要认识到扬声器的文化和情感的角度是至关重要的。在本文中，我们使用遥远的标签来创建一个表示为名词和形容词的内涵方面的新词汇资源。我们的分析显示，它与人类的判断正相符合。此外，我们提出了创建词汇表示，该嵌入空间，并表明使用的嵌入提供了有关立场检测任务统计学显著改善内捕获的内涵时，数据被限制的方法。</font>
+</div>
+
+
+<hr>
+<div id="paper19"> <b>19. Neural Unsupervised Domain Adaptation in NLP---A Survey</b>  <a href="https://arxiv.org/pdf/2006.00632" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title19" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ramponi%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alan Ramponi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Plank%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Barbara Plank</a><br>
+<font size="3">
+ Abstract: Deep neural networks excel at learning from labeled data and achieve state-of-the-art results on a wide array of Natural Language Processing tasks. In contrast, learning from unlabeled data, especially under domain shift, remains a challenge. Motivated by the latest advances, in this survey we review neural unsupervised domain adaptation techniques which do not require labeled target domain data. This is a more challenging yet a more widely applicable setup. We outline methods, from early approaches in traditional non-neural methods to pre-trained model transfer. We also revisit the notion of domain, and we uncover a bias in the type of Natural Language Processing tasks which received most attention. Lastly, we outline future directions, particularly the broader need for out-of-distribution generalization of future intelligent NLP.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：深层神经网络，善于从标记数据中学习，实现各种各样的自然语言处理任务的国家的最先进的成果。相比之下，无标签数据中学习，特别是在域转变，仍然是一个挑战。由最新进展的启发，在这次调查中，我们审查不要求有标签的目标域数据神经无监督域自适应技术。这是一个更具挑战性又一个更广泛适用的设置。我们概括的方法，从传统的非神经的方法来预先训练模式转移早期的研究。我们也重温域的概念，我们揭开其中最受关注的自然语言处理任务的类型偏差。最后，我们勾勒出未来的发展方向，尤其是对未来的智能NLP的失分布推广更广泛的需求。</font>
+</div>
+
+
+<hr>
+<div id="paper20"> <b>20. CNRL at SemEval-2020 Task 5: Modelling Causal Reasoning in Language with  Multi-Head Self-Attention Weights based Counterfactual Detection</b>  <a href="https://arxiv.org/pdf/2006.00609" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title20" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Patil%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rajaswa Patil</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Baths%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Veeky Baths</a><br>
+<font size="3">
+ Abstract: In this paper, we describe an approach for modelling causal reasoning in natural language by detecting counterfactuals in text using multi-head self-attention weights. We use pre-trained transformer models to extract contextual embeddings and self-attention weights from the text. We show the use of convolutional layers to extract task-specific features from these self-attention weights. Further, we describe a fine-tuning approach with a common base model for knowledge sharing between the two closely related sub-tasks for counterfactual detection. We analyze and compare the performance of various transformer models in our experiments. Finally, we perform a qualitative analysis with the multi-head self-attention weights to interpret our models' dynamics.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本文中，我们描述了使用多头自我关注权重检测文本的反事实模拟自然语言因果推理的方法。我们使用预先训练变压器模型，从文本中提取的嵌入语境和自我关注权重。我们展示了使用卷积层的这些自我关注权重来提取任务的特定功能。此外，我们描述与这两个密切相关的子任务为反检测之间的知识共享一个共同的基础模型微调的做法。我们分析，并在我们的实验中比较各种变压器模型的性能。最后，我们执行与多头的自我关注权重定性分析来解释我们的模型的动态。</font>
+</div>
+
+
+<hr>
+<div id="paper21"> <b>21. LRG at SemEval-2020 Task 7: Assessing the Ability of BERT and Derivative  Models to Perform Short-Edits based Humor Grading</b>  <a href="https://arxiv.org/pdf/2006.00607" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title21" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Mahurkar%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Siddhant Mahurkar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Patil%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rajaswa Patil</a><br>
+<font size="3">
+ Abstract: In this paper, we assess the ability of BERT and its derivative models (RoBERTa, DistilBERT, and ALBERT) for short-edits based humor grading. We test these models for humor grading and classification tasks on the Humicroedit and the FunLines dataset. We perform extensive experiments with these models to test their language modeling and generalization abilities via zero-shot inference and cross-dataset inference based approaches. Further, we also inspect the role of self-attention layers in humor-grading by performing a qualitative analysis over the self-attention weights from the final layer of the trained BERT model. Our experiments show that all the pre-trained BERT derivative models show significant generalization capabilities for humor-grading related tasks.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本文中，我们评估BERT和它的衍生车型（罗伯塔，DistilBERT，和阿尔伯特）的基于幽默分级短编辑的能力。我们幽默分级和对Humicroedit分类任务和FunLines数据集测试这些模型。我们进行了广泛的实验与这些模型通过零射门推理和跨数据集的推理基础的方法来测试他们的语言模型和概括能力。此外，我们还考察的自我关注层在幽默分级从训练的BERT模型的最终层进行过自我关注权重定性分析中的作用。我们的实验显示，所有预先训练BERT衍生车型显示了幽默定级相关任务显著泛化能力。</font>
+</div>
+
+
+<hr>
+<div id="paper22"> <b>22. BPGC at SemEval-2020 Task 11: Propaganda Detection in News Articles with  Multi-Granularity Knowledge Sharing and Linguistic Features based Ensemble  Learning</b>  <a href="https://arxiv.org/pdf/2006.00593" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title22" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Patil%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rajaswa Patil</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Singh%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Somesh Singh</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Agarwal%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Swati Agarwal</a><br>
+<font size="3">
+ Abstract: Propaganda spreads the ideology and beliefs of like-minded people, brainwashing their audiences, and sometimes leading to violence. SemEval 2020 Task-11 aims to design automated systems for news propaganda detection. Task-11 consists of two sub-tasks, namely, Span Identification - given any news article, the system tags those specific fragments which contain at least one propaganda technique; and Technique Classification - correctly classify a given propagandist statement amongst 14 propaganda techniques. For sub-task 1, we use contextual embeddings extracted from pre-trained transformer models to represent the text data at various granularities and propose a multi-granularity knowledge sharing approach. For sub-task 2, we use an ensemble of BERT and logistic regression classifiers with linguistic features. Our results reveal that the linguistic features are the strong indicators for covering minority classes in a highly imbalanced dataset.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：宣传传播的思想和志同道合的人，洗脑他们的观众，有时导致暴力的信仰。 SemEval 2020任务-11旨在设计用于新闻宣传检测的自动化系统。任务-11由两个子任务，即，跨度识别 - 给出任何新闻文章，系统标签含有至少一种宣传手法那些特定的片段;与技术分类 - 正确分类给定的宣传语句当中14个宣传技巧。对于子任务1，我们使用了预先训练变压器模型中提取代表在各种粒度的文本数据上下文的嵌入，提出了一种多粒度的知识共享的方式。对于子任务2，我们使用BERT的合奏和Logistic回归分类与语言特点。我们的研究结果表明，语言的特点是覆盖在一个高度不平衡数据集中少数类的强指标。</font>
+</div>
+
+
+<hr>
+<div id="paper23"> <b>23. Efficient Deployment ofConversational Natural Language Interfaces over  Databases</b>  <a href="https://arxiv.org/pdf/2006.00591" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title23" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Colas%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Anthony Colas</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bui%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Trung Bui</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dernoncourt%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Franck Dernoncourt</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sinha%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Moumita Sinha</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kim%2C+D+S" target="_blank" rel="noopener" style="color:#0000EE;">Doo Soon Kim</a><br>
+<font size="3">
+ Abstract: Many users communicate with chatbots and AI assistants in order to help them with various tasks. A key component of the assistant is the ability to understand and answer a user's natural language questions for question-answering (QA). Because data can be usually stored in a structured manner, an essential step involves turning a natural language question into its corresponding query language. However, in order to train most natural language-to-query-language state-of-the-art models, a large amount of training data is needed first. In most domains, this data is not available and collecting such datasets for various domains can be tedious and time-consuming. In this work, we propose a novel method for accelerating the training dataset collection for developing the natural language-to-query-language machine learning models. Our system allows one to generate conversational multi-term data, where multiple turns define a dialogue session, enabling one to better utilize chatbot interfaces. We train two current state-of-the-art NL-to-QL models, on both an SQL and SPARQL-based datasets in order to showcase the adaptability and efficacy of our created data.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：许多用户与聊天机器人和人工智能助理，以帮助他们与各种任务通信。助理的一个关键组成部分是理解和回答问题回答（QA）用户的自然语言问题的能力。因为数据可以通常存储在结构化的方式，一个重要的步骤包括转动一个自然语言问题成其相应的查询语言。然而，为了培养最自然的语言 - 查询语言的国家的最先进的机型，首先需要大量的训练数据。在大多数结构域，该数据不可用，并收集这种数据集关于各种结构域可以是乏味且耗时的。在这项工作中，我们提出了加快训练数据集用于开发自然语言 - 查询语言的机器学习模型的新方法。我们的系统允许一个会话生成多项数据，其中多圈定义进行对话，使一个更好地利用聊天机器人接口。我们培养两个电流状态的最先进的NL-到QL机型，两者的SQL和基于SPARQL的数据集，以展示我们创建的数据的适应性和有效性。</font>
+</div>
+
+
+<hr>
+<div id="paper24"> <b>24. "Judge me by my size (noun), do you?'' YodaLib: A Demographic-Aware  Humor Generation Framework</b>  <a href="https://arxiv.org/pdf/2006.00578" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title24" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Garimella%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Aparna Garimella</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Banea%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Carmen Banea</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hossain%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nabil Hossain</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mihalcea%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rada Mihalcea</a><br>
+<font size="3">
+ Abstract: The subjective nature of humor makes computerized humor generation a challenging task. We propose an automatic humor generation framework for filling the blanks in Mad Libs stories, while accounting for the demographic backgrounds of the desired audience. We collect a dataset consisting of such stories, which are filled in and judged by carefully selected workers on Amazon Mechanical Turk. We build upon the BERT platform to predict location-biased word fillings in incomplete sentences, and we fine tune BERT to classify location-specific humor in a sentence. We leverage these components to produce YodaLib, a fully-automated Mad Libs style humor generation framework, which selects and ranks appropriate candidate words and sentences in order to generate a coherent and funny story tailored to certain demographics. Our experimental results indicate that YodaLib outperforms a previous semi-automated approach proposed for this task, while also surpassing human annotators in both qualitative and quantitative analyses.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：幽默的主观性质使得电脑幽默一代一项艰巨的任务。我们提出了一个自动生成的幽默框架填充填字故事的空白，同时考虑所期望的观众的人口背景。我们收集由这样的故事，这是在亚马逊的Mechanical Turk填写，并通过精心挑选的工人判断的数据集。我们建立在BERT平台来预测位置偏置字馅料不完整的句子，我们微调BERT到句子中的位置分类特定的幽默。我们充分利用这些组件生产YodaLib，完全自动化的填字式的幽默生成框架，其选择和适当的排名候选词和句子，以产生一个连贯的和有趣的故事，针对特定的人群。我们的实验结果表明，YodaLib优于提出了这个任务之前的半自动化的方法，而在定性和定量分析也超越人工注释。</font>
+</div>
+
+
+<hr>
+<div id="paper25"> <b>25. Neural Entity Linking: A Survey of Models based on Deep Learning</b>  <a href="https://arxiv.org/pdf/2006.00575" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title25" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Sevgili%2C+O" target="_blank" rel="noopener" style="color:#0000EE;">Ozge Sevgili</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shelmanov%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Artem Shelmanov</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Arkhipov%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mikhail Arkhipov</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Panchenko%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alexander Panchenko</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Biemann%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chris Biemann</a><br>
+<font size="3">
+ Abstract: In this survey, we provide a comprehensive description of recent neural entity linking (EL) systems. We distill their generic architecture that includes candidate generation, entity ranking, and unlinkable mention prediction components. For each of them, we summarize the prominent methods and models, including approaches to mention encoding based on the self-attention architecture. Since many EL models take advantage of entity embeddings to improve their generalization capabilities, we provide an overview of the widely-used entity embedding techniques. We group the variety of EL approaches by several common research directions: joint entity recognition and linking, models for global EL, domain-independent techniques including zero-shot and distant supervision methods, and cross-lingual approaches. We also discuss the novel application of EL for enhancing word representation models like BERT. We systemize the critical design features of EL systems and provide their reported evaluation results.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本次调查中，我们提供最近的神经实体链接（EL）系统的全面描述。我们提炼他们的通用架构，包括候选人的产生，实体排序和不可链接提预测组件。对于每个人，我们总结了突出的方法和模型，包括了编码方法基础上的自我关注架构就更不用说了。由于许多EL机型采取实体的嵌入的优势来提高自己的概括能力，我们提供的广泛使用实体嵌入技术的概述。我们组的各种EL的几个共同的研究方向办法：联合实体识别和连接，机型为全球EL，独立于域技术，包括零次和遥远的监督方法，以及跨语言的方法。我们还讨论EL的新的应用增强像BERT单词表示模型。我们系统化EL系统的关键设计特性，并提供其报告的评估结果。</font>
+</div>
+
+
+<hr>
+<div id="paper26"> <b>26. Improve Document Embedding for Text Categorization Through Deep Siamese  Neural Network</b>  <a href="https://arxiv.org/pdf/2006.00572" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title26" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Gharavi%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Erfaneh Gharavi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Veisi%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hadi Veisi</a><br>
+<font size="3">
+ Abstract: Due to the increasing amount of data on the internet, finding a highly-informative, low-dimensional representation for text is one of the main challenges for efficient natural language processing tasks including text classification. This representation should capture the semantic information of the text while retaining their relevance level for document classification. This approach maps the documents with similar topics to a similar space in vector space representation. To obtain representation for large text, we propose the utilization of deep Siamese neural networks. To embed document relevance in topics in the distributed representation, we use a Siamese neural network to jointly learn document representations. Our Siamese network consists of two sub-network of multi-layer perceptron. We examine our representation for the text categorization task on BBC news dataset. The results show that the proposed representations outperform the conventional and state-of-the-art representations in the text classification task on this dataset.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：由于互联网上的数据，发现文本一个高度信息，低维表示的增加量是高效的自然语言处理任务，包括文本分类的主要挑战之一。这表示应该捕获文本的语义信息，同时保留对文件分类的相关度。这种方法具有类似的话题在向量空间表示了类似的空间的文件映射。为了获得表现为较大的文本，我们提出了深刻的连体神经网络的利用率。要在分布式表示话题嵌入文档相关性，我们采用了连体神经网络，共同学习文档表示。我们的连体网络由多层感知的两个子网络。我们审视我们对BBC新闻数据集的文本分类任务表示。结果表明，所提出的交涉优于传统的和国家的最先进的表示在该数据集的文本分类的任务。</font>
+</div>
+
+
+<hr>
+<div id="paper27"> <b>27. Benchmarking BioRelEx for Entity Tagging and Relation Extraction</b>  <a href="https://arxiv.org/pdf/2006.00533" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title27" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Bhatt%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Abhinav Bhatt</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dhole%2C+K+D" target="_blank" rel="noopener" style="color:#0000EE;">Kaustubh D. Dhole</a><br>
+<font size="3">
+ Abstract: Extracting relationships and interactions between different biological entities is still an extremely challenging problem but has not received much attention as much as extraction in other generic domains. In addition to the lack of annotated data, low benchmarking is still a major reason for slow progress. In order to fill this gap, we compare multiple existing entity and relation extraction models over a recently introduced public dataset, BioRelEx of sentences annotated with biological entities and relations. Our straightforward benchmarking shows that span-based multi-task architectures like DYGIE show 4.9% and 6% absolute improvements in entity tagging and relation extraction respectively over the previous state-of-art and that incorporating domain-specific information like embeddings pre-trained over related domains boosts performance.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：不同的生物实体之间的关系提取和互动仍然是一个极具挑战性的问题，但一直没有得到重视不亚于其他通用域名提取。除了缺少注释的数据，低基准仍是进展缓慢的重要原因之一。为了填补这一空白，我们在最近推出的公共数据集比较多个现有实体和关系抽取模型，生物实体和关系注释语句的BioRelEx。我们简单的基准测试显示，基于整体范围的多任务架构类似DYGIE显示4.9％和6％，比上年状态的最先进的分别实体标记和关系抽取绝对的改进和类似的嵌入结合特定领域的信息预先训练过相关领域提升性能。</font>
+</div>
+
+
+<hr>
+<div id="paper28"> <b>28. Learning to Recognise Words using Visually Grounded Speech</b>  <a href="https://arxiv.org/pdf/2006.00512" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title28" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Scholten%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sebastiaan Scholten</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Merkx%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Danny Merkx</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Scharenborg%2C+O" target="_blank" rel="noopener" style="color:#0000EE;">Odette Scharenborg</a><br>
+<font size="3">
+ Abstract: We investigated word recognition in a Visually Grounded Speech model. The model has been trained on pairs of images and spoken captions to create visually grounded embeddings which can be used for speech to image retrieval and vice versa. We investigate whether such a model can be used to recognise words by embedding isolated words and using them to retrieve images of their visual referents. We investigate the time-course of word recognition using a gating paradigm and perform a statistical analysis to see whether well known word competition effects in human speech processing influence word recognition. Our experiments show that the model is able to recognise words, and the gating paradigm reveals that words can be recognised from partial input as well and that recognition is negatively influenced by word competition from the word initial cohort.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们研究了字识别的视觉接地语音模型。该模型已被训练成对的图像和语音字幕创造视觉上的嵌入接地可用于讲话图像检索，反之亦然。我们调查这种模式是否可以使用嵌入孤立的单词，并用它们来获取他们的视觉参照物的图像识别单词。我们调查使用门控模式认字的时间进程并进行统计分析，看是否众所周知的人类语音处理影响字识别单词的竞争效应。我们的实验表明，该模型能够识别的话，和门控模式揭示了的话可以从部分输入识别以及和识别是通过从字最初的队列字竞争负面影响。</font>
+</div>
+
+
+<hr>
+<div id="paper29"> <b>29. BiERU: Bidirectional Emotional Recurrent Unit for Conversational  Sentiment Analysis</b>  <a href="https://arxiv.org/pdf/2006.00492" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title29" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wei Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shao%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wei Shao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ji%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shaoxiong Ji</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cambria%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Erik Cambria</a><br>
+<font size="3">
+ Abstract: Sentiment analysis in conversations has gained increasing attention in recent years for the growing amount of applications it can serve, e.g., sentiment analysis, recommender systems, and human-robot interaction. The main difference between conversational sentiment analysis and single sentence sentiment analysis is the existence of context information which may influence the sentiment of an utterance in a dialogue. How to effectively encode contextual information in dialogues, however, remains a challenge. Existing approaches employ complicated deep learning structures to distinguish different parties in a conversation and then model the context information. In this paper, we propose a fast, compact and parameter-efficient party-ignorant framework named bidirectional emotional recurrent unit for conversational sentiment analysis. In our system, a generalized neural tensor block followed by a two-channel classifier is designed to perform context compositionality and sentiment classification, respectively. Extensive experiments on three standard datasets demonstrate that our model outperforms the state of the art in most cases.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在谈话中情绪分析已经获得了越来越多的关注，近年来对应用程序它可以起到，例如，情感分析，推荐系统和人机交互的数量不断增加。会话情绪分析和单句情绪分析之间的主要区别是其可以影响一个发声的情绪的对话的上下文信息的存在。如何有效编码在对话的上下文信息，但是，仍然是一个挑战。现有的方法使用复杂深学结构的对话来区分不同的政党，然后选择上下文信息模型。在本文中，我们提出了一个名为双向情感的重复单元的对话情感分析快速，结构紧凑，参数高效党无知的框架。在我们的系统中，广义神经张量块后跟一个双通道分类器设计成执行上下文组合性和情感分类，分别。在三个标准数据集大量的实验表明，我们的模型优于在大多数情况下，技术状态。</font>
+</div>
+
+
+<hr>
+<div id="paper30"> <b>30. Detecting Group Beliefs Related to 2018's Brazilian Elections in Tweets  A Combined Study on Modeling Topics and Sentiment Analysis</b>  <a href="https://arxiv.org/pdf/2006.00490" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title30" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Santana%2C+B+S" target="_blank" rel="noopener" style="color:#0000EE;">Brenda Salenave Santana</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Vanin%2C+A+A" target="_blank" rel="noopener" style="color:#0000EE;">Aline Aver Vanin</a><br>
+<font size="3">
+ Abstract: 2018's Brazilian presidential elections highlighted the influence of alternative media and social networks, such as Twitter. In this work, we perform an analysis covering politically motivated discourses related to the second round in Brazilian elections. In order to verify whether similar discourses reinforce group engagement to personal beliefs, we collected a set of tweets related to political hashtags at that moment. To this end, we have used a combination of topic modeling approach with opinion mining techniques to analyze the motivated political discourses. Using SentiLex-PT, a Portuguese sentiment lexicon, we extracted from the dataset the top 5 most frequent group of words related to opinions. Applying a bag-of-words model, the cosine similarity calculation was performed between each opinion and the observed groups. This study allowed us to observe an exacerbated use of passionate discourses in the digital political scenario as a form of appreciation and engagement to the groups which convey similar beliefs.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：2018的巴西总统选举中强调了其他媒体和社交网络，如Twitter的影响力。在这项工作中，我们执行涉及与第二轮巴西大选政治动机的话语进行分析。为了验证类似的话语是否加强集团参与到个人信仰，我们收集了一组在那一刻与政治的井号标签的tweets。为此，我们已经使用了与意见挖掘技术主题建模方法相结合来分析动机政治话语。使用SentiLex-PT，葡萄牙情感词典，我们从数据集中提取相关意见的话的前5个最频繁的群体。施加袋的字的模型，每一个意见和所观察到的组之间进行的余弦相似度计算。这项研究使我们能够观察到数字的政治情况的加剧用热情的话语作为欣赏和参与的形式来传达类似信仰的群体。</font>
+</div>
+
+
+<hr>
+<div id="paper31"> <b>31. Recognizing Chinese Judicial Named Entity using BiLSTM-CRF</b>  <a href="https://arxiv.org/pdf/2006.00464" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title31" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Tang%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pin Tang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pinli Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shi%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuang Shi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhou%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yi Zhou</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Feng Lin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yan Wang</a><br>
+<font size="3">
+ Abstract: Named entity recognition (NER) plays an essential role in natural language processing systems. Judicial NER is a fundamental component of judicial information retrieval, entity relation extraction, and knowledge map building. However, Chinese judicial NER remains to be more challenging due to the characteristics of Chinese and high accuracy requirements in the judicial filed. Thus, in this paper, we propose a deep learning-based method named BiLSTM-CRF which consists of bi-directional long short-term memory (BiLSTM) and conditional random fields (CRF). For further accuracy promotion, we propose to use Adaptive moment estimation (Adam) for optimization of the model. To validate our method, we perform experiments on judgment documents including commutation, parole and temporary service outside prison, which is acquired from China Judgments Online. Experimental results achieve the accuracy of 0.876, recall of 0.856 and F1 score of 0.855, which suggests the superiority of the proposed BiLSTM-CRF with Adam optimizer.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：命名实体识别（NER）起到自然语言处理系统中的重要作用。司法NER是司法信息检索，实体关系抽取，知识地图构建的一个基本组成部分。然而，中国的司法NER还有待更由于中国和精度要求比较高的司法提交的特性挑战。因此，在本文中，我们提出了一个名为BiLSTM-CRF深基础的学习方法，其中包括双向长短期记忆（BiLSTM）和条件随机域（CRF）。为了进一步提升准确度，我们建议使用自适应矩估计（亚当）为模型的优化。为了验证我们的方法，我们对执行裁判文书实验包括减刑，假释和临时服务监狱外，这是来自中国的判决在线收购。实验结果达到0.876 0.856和F1值的0.855，这表明所提出的BiLSTM-CRF与亚当优化优势的准确性，召回。</font>
+</div>
+
+
+<hr>
+<div id="paper32"> <b>32. SANA : Sentiment Analysis on Newspapers comments in Algeria</b>  <a href="https://arxiv.org/pdf/2006.00459" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title32" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Rahab%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hichem Rahab</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zitouni%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Abdelhafid Zitouni</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Djoudi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mahieddine Djoudi</a><br>
+<font size="3">
+ Abstract: It is very current in today life to seek for tracking the people opinion from their interaction with occurring events. A very common way to do that is comments in articles published in newspapers web sites dealing with contemporary events. Sentiment analysis or opinion mining is an emergent field who is the purpose is finding the behind phenomenon masked in opinionated texts. We are interested in our work by comments in Algerian newspaper websites. For this end, two corpora were used SANA and OCA. SANA corpus is created by collection of comments from three Algerian newspapers, and annotated by two Algerian Arabic native speakers, while OCA is a freely available corpus for sentiment analysis. For the classification we adopt Supports vector machines, naive Bayes and knearest neighbors. Obtained results are very promising and show the different effects of stemming in such domain, also knearest neighbors give important improvement comparing to other classifiers unlike similar works where SVM is the most dominant. From this study we observe the importance of dedicated resources and methods the newspaper comments sentiment analysis which we look forward in future works.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在今天的生活非常当前寻求与发生的事件，从他们的互动跟踪人的意见。做一个非常普遍的方法是发表在处理当代事件的报纸网站的文章评论。情感分析或意见挖掘是一个新兴的领域谁是目的是寻找在自以为是的文本掩盖背后的现象。我们在阿尔及利亚的报纸网站的评论对我们的工作。为此目的，两个语料库使用SANA和OCA。 SANA语料库是由三个阿尔及利亚报纸评论集合创建，并注明由两个阿尔及利亚阿拉伯语母语，而OCA是情感分析免费提供的语料库。对于分类，我们采用支架向量机，朴素贝叶斯和knearest邻居。得到的结果是非常有前途的，并显示在这样的领域所产生的不同影响，也knearest邻居给重要的改进比较不像同类作品，其中SVM是最主要的其它分类。从这个研究中，我们观察到专门的资源和方法，我们期待着在今后的作品中的报纸评论情感分析的重要性。</font>
+</div>
+
+
+<hr>
+<div id="paper33"> <b>33. Learning to refer informatively by amortizing pragmatic reasoning</b>  <a href="https://arxiv.org/pdf/2006.00418" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title33" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=White%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Julia White</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mu%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jesse Mu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Goodman%2C+N+D" target="_blank" rel="noopener" style="color:#0000EE;">Noah D. Goodman</a><br>
+<font size="3">
+ Abstract: A hallmark of human language is the ability to effectively and efficiently convey contextually relevant information. One theory for how humans reason about language is presented in the Rational Speech Acts (RSA) framework, which captures pragmatic phenomena via a process of recursive social reasoning (Goodman & Frank, 2016). However, RSA represents ideal reasoning in an unconstrained setting. We explore the idea that speakers might learn to amortize the cost of RSA computation over time by directly optimizing for successful communication with an internal listener model. In simulations with grounded neural speakers and listeners across two communication game datasets representing synthetic and human-generated data, we find that our amortized model is able to quickly generate language that is effective and concise across a range of contexts, without the need for explicit pragmatic reasoning.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：人类语言的一个特点就是能够有效地传达上下文相关的信息。有一种理论对人类如何推理语言在Rational言语行为（RSA）的框架，它通过递归社会推理（古德曼和弗兰克，2016）的过程中捕获的语用现象呈现。然而，RSA表示在不受约束的环境非常的推理。我们探索的扬声器可以通过学习与内部侦听器模型直接优化成功通信摊销RSA计算的成本随着时间的想法。在跨越代表的合成和人为两个数据通信的游戏数据集接地神经扬声器和监听器模拟，我们发现我们的摊销模型能够快速生成语言，在一系列环境的有效和简洁，而不需要明确的务实推理。</font>
+</div>
+
+
+<hr>
+<div id="paper34"> <b>34. Linguistic Features for Readability Assessment</b>  <a href="https://arxiv.org/pdf/2006.00377" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title34" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Deutsch%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tovly Deutsch</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jasbi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Masoud Jasbi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shieber%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Stuart Shieber</a><br>
+<font size="3">
+ Abstract: Readability assessment aims to automatically classify text by the level appropriate for learning readers. Traditional approaches to this task utilize a variety of linguistically motivated features paired with simple machine learning models. More recent methods have improved performance by discarding these features and utilizing deep learning models. However, it is unknown whether augmenting deep learning models with linguistically motivated features would improve performance further. This paper combines these two approaches with the goal of improving overall model performance and addressing this question. Evaluating on two large readability corpora, we find that, given sufficient training data, augmenting deep learning models with linguistically motivated features does not improve state-of-the-art performance. Our results provide preliminary evidence for the hypothesis that the state-of-the-art deep learning models represent linguistic features of the text related to readability. Future research on the nature of representations formed in these models can shed light on the learned features and their relations to linguistically motivated ones hypothesized in traditional approaches.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：可读性评估旨在通过适当的学习读者水平自动分类文本。传统的方法把这个任务使用各种简单的机器学习模型配对语言激励功能。最近的方法已经通过丢弃这些功能，并利用深度学习模型提高了性能。然而，它是未知是否增强深度学习模型用语言激励功能将进一步提高性能。本文结合提高了整体性能的模型和解决这一问题的目标，这两种方法。评估在两个大的可读性语料库，我们发现，如果有足够的训练数据，增强深度学习模型用语言激励功能并不能改善国家的最先进的性能。我们的研究结果提供了假设初步证据表明在国家的最先进的深度学习模型代表与可读性文本的语言特征。形成这些模型表示的性质未来的研究能够在学习的特点及其对传统方法假设语言动机的人的关系线索。</font>
+</div>
+
+
+<hr>
+<div id="paper35"> <b>35. Data Augmentation for Learning Bilingual Word Embeddings with  Unsupervised Machine Translation</b>  <a href="https://arxiv.org/pdf/2006.00262" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title35" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Nishikawa%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sosuke Nishikawa</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ri%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ryokan Ri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tsuruoka%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yoshimasa Tsuruoka</a><br>
+<font size="3">
+ Abstract: Unsupervised bilingual word embedding (BWE) methods learn a linear transformation matrix that maps two monolingual embedding spaces that are separately trained with monolingual corpora. This method assumes that the two embedding spaces are structurally similar, which does not necessarily hold true in general. In this paper, we propose using a pseudo-parallel corpus generated by an unsupervised machine translation model to facilitate structural similarity of the two embedding spaces and improve the quality of BWEs in the mapping method. We show that our approach substantially outperforms baselines and other alternative approaches given the same amount of data, and, through detailed analysis, we argue that data augmentation with the pseudo data from unsupervised machine translation is especially effective for BWEs because (1) the pseudo data makes the source and target corpora (partially) parallel; (2) the pseudo data reflects some nature of the original language that helps learning similar embedding spaces between the source and target languages.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：无监督双语词嵌入（BWE）方法学线性变换矩阵的地图，分别与单语语料训练的两名单语嵌入空间。这种方法假设两个嵌入空间结构相似，这并不一定普遍适用。在本文中，我们提议使用通过无监督机器翻译模型生成的伪平行语料库促进两个嵌入空间的结构相似性，提高BWEs在映射方法的质量。我们证明了我们的方法显着优于基准和其他替代办法给出相同的数据量，并通过详细的分析，我们认为，数据增强与无监督的机器翻译伪数据特别有效的BWEs因为：（1）伪数据使源和目标语料库（部分地）平行; （2）伪数据反映了原始的语言，有助于学习的源语言和目标语言之间类似的嵌入空间的一些性质。</font>
+</div>
+
+
+<hr>
+<div id="paper36"> <b>36. Dynamic Masking for Improved Stability in Spoken Language Translation</b>  <a href="https://arxiv.org/pdf/2006.00249" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title36" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Yao%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuekun Yao</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Haddow%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Barry Haddow</a><br>
+<font size="3">
+ Abstract: For spoken language translation (SLT) in live scenarios such as conferences, lectures and meetings, it is desirable to show the translation to the user as quickly as possible, avoiding an annoying lag between speaker and translated captions. In other words, we would like low-latency, online SLT. If we assume a pipeline of automatic speech recognition (ASR) and machine translation (MT) then a viable approach to online SLT is to pair an online ASR system, with a a retranslation strategy, where the MT system re-translates every update received from ASR. However this can result in annoying "flicker" as the MT system updates its translation. A possible solution is to add a fixed delay, or "mask" to the the output of the MT system, but a fixed global mask introduces undesirable latency to the output. We show how this mask can be set dynamically, improving the latency-flicker trade-off without sacrificing translation quality.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在现场的场景，如会议，讲座和会议口语翻译（SLT），希望显示翻译给用户尽可能快地，避免了扬声器和翻译字幕之间恼人的滞后。换句话说，我们希望低延迟，在线SLT。如果我们假设自动语音识别（ASR）和机器翻译（MT），那么一个可行的办法，以网上SLT是配对在线ASR系统，与AA重译策略，其中MT系统重新翻译从ASR收到的每一个更新的管道。然而，这可能会导致恼人的“闪烁”作为MT系统更新它的翻译。一种可能的解决方案是一个固定的延迟，或“掩模”添加到MT系统的输出，而是一个固定全局掩码引入不期望的等待时间到输出。我们展示如何这个面膜可以动态设置，提高了延迟闪烁权衡不牺牲翻译质量。</font>
+</div>
+
+
+<hr>
+<div id="paper37"> <b>37. A Sentiment Analysis Dataset for Code-Mixed Malayalam-English</b>  <a href="https://arxiv.org/pdf/2006.00210" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title37" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chakravarthi%2C+B+R" target="_blank" rel="noopener" style="color:#0000EE;">Bharathi Raja Chakravarthi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Jose%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Navya Jose</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Suryawanshi%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shardul Suryawanshi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sherly%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Elizabeth Sherly</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=McCrae%2C+J+P" target="_blank" rel="noopener" style="color:#0000EE;">John P. McCrae</a><br>
+<font size="3">
+ Abstract: There is an increasing demand for sentiment analysis of text from social media which are mostly code-mixed. Systems trained on monolingual data fail for code-mixed data due to the complexity of mixing at different levels of the text. However, very few resources are available for code-mixed data to create models specific for this data. Although much research in multilingual and cross-lingual sentiment analysis has used semi-supervised or unsupervised methods, supervised methods still performs better. Only a few datasets for popular languages such as English-Spanish, English-Hindi, and English-Chinese are available. There are no resources available for Malayalam-English code-mixed data. This paper presents a new gold standard corpus for sentiment analysis of code-mixed text in Malayalam-English annotated by voluntary annotators. This gold standard corpus obtained a Krippendorff's alpha above 0.8 for the dataset. We use this new corpus to provide the benchmark for sentiment analysis in Malayalam-English code-mixed texts.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：有从基本都是代码混合社交媒体文本的情感分析的需求不断增加。训练有素的单语数据的系统故障代码混合数据由于不同层次的文本混合的复杂性。然而，很少有资源可用于代码混合数据创建模型专用于此数据。虽然在多语言和跨语言的情感分析很多研究都使用半监督或无监督方法，监督方法仍然执行得更好。只有流行的语言，如英语，西班牙语，英语，印地文，英文，中国的几个数据集是可用的。有没有可用的马拉雅拉姆语英文代码混合数据资源。本文介绍了在德拉威语，英语码混和文本的情感分析的一个新的黄金标准语料库注释自愿注释。此金标准语料得到0.8以上为所述数据集的克里彭多夫的alpha。我们使用这个新的语料库提供马拉雅拉姆语英文代码混合文本情感分析的基准。</font>
+</div>
+
+
+<hr>
+<div id="paper38"> <b>38. Corpus Creation for Sentiment Analysis in Code-Mixed Tamil-English Text</b>  <a href="https://arxiv.org/pdf/2006.00206" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title38" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Chakravarthi%2C+B+R" target="_blank" rel="noopener" style="color:#0000EE;">Bharathi Raja Chakravarthi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Muralidaran%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vigneshwaran Muralidaran</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Priyadharshini%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Ruba Priyadharshini</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=McCrae%2C+J+P" target="_blank" rel="noopener" style="color:#0000EE;">John P. McCrae</a><br>
+<font size="3">
+ Abstract: Understanding the sentiment of a comment from a video or an image is an essential task in many applications. Sentiment analysis of a text can be useful for various decision-making processes. One such application is to analyse the popular sentiments of videos on social media based on viewer comments. However, comments from social media do not follow strict rules of grammar, and they contain mixing of more than one language, often written in non-native scripts. Non-availability of annotated code-mixed data for a low-resourced language like Tamil also adds difficulty to this problem. To overcome this, we created a gold standard Tamil-English code-switched, sentiment-annotated corpus containing 15,744 comment posts from YouTube. In this paper, we describe the process of creating the corpus and assigning polarities. We present inter-annotator agreement and show the results of sentiment analysis trained on this corpus as a benchmark.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：从视频了解注释的情绪或图像是在许多应用中的一项重要任务。文本的情感分析可以为各种决策过程中非常有用。一个这样的应用是分析的基础上对观众评论的社交媒体视频的民心。然而，从社会媒体的评论不遵循语法严格的规则，它们包含混合一种以上的语言，常常写在非本地脚本。像泰米尔一个资源不足地区语言注释的代码混合数据的非可用性也增加了难度这个问题。为了克服这个问题，我们创建了一个黄金标准泰米尔英文代码交换，包含从YouTube 15744个评论帖子情绪标注语料库。在本文中，我们描述了创建语料库和分配极性的过程。我们目前的注释间协议，并表明培训了这个语料库为基准情感分析的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper39"> <b>39. User Memory Reasoning for Conversational Recommendation</b>  <a href="https://arxiv.org/pdf/2006.00184" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title39" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hu Xu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Moon%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Seungwhan Moon</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Honglei Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bing Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Shah%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pararth Shah</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bing Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yu%2C+P+S" target="_blank" rel="noopener" style="color:#0000EE;">Philip S. Yu</a><br>
+<font size="3">
+ Abstract: We study a conversational recommendation model which dynamically manages users' past (offline) preferences and current (online) requests through a structured and cumulative user memory knowledge graph, to allow for natural interactions and accurate recommendations. For this study, we create a new Memory Graph (MG) <--> Conversational Recommendation parallel corpus called MGConvRex with 7K+ human-to-human role-playing dialogs, grounded on a large-scale user memory bootstrapped from real-world user scenarios. MGConvRex captures human-level reasoning over user memory and has disjoint training/testing sets of users for zero-shot (cold-start) reasoning for recommendation. We propose a simple yet expandable formulation for constructing and updating the MG, and a reasoning model that predicts optimal dialog policies and recommendation items in unconstrained graph space. The prediction of our proposed model inherits the graph structure, providing a natural way to explain the model's recommendation. Experiments are conducted for both offline metrics and online simulation, showing competitive results.   </--></font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们研究它通过一个结构化的和累积用户记忆知识图动态地管理用户的过去（离线）偏好和当前（在线）请求对话的建议模式，允许自然的交流和准确的建议。在这项研究中，我们创建了一个新的内存图（MG）< - >对话并行推荐语料库称为MGConvRex有7K +人对人的角色扮演对话，接地从现实世界的用户的情况下自举一个大型用户内存。 MGConvRex捕捉人类水平的推理在用户内存，并具有不相交的训练/测试集用户对零拍（冷启动）推理的建议。我们提出了一个简单而构建和更新MG扩张配方，并预测在不受约束的图形空间的最佳对话的政策和建议项的推理模型。我们提出的模型的预测继承了图形结构，提供了一个自然的方式来解释模型的建议。实验两个指标离线和在线模拟进行的，显示竞争力的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper40"> <b>40. Topic Detection and Summarization of User Reviews</b>  <a href="https://arxiv.org/pdf/2006.00148" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title40" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Pengyuan Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Huang%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Lei Huang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ren%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Guang-jie Ren</a><br>
+<font size="3">
+ Abstract: A massive amount of reviews are generated daily from various platforms. It is impossible for people to read through tons of reviews and to obtain useful information. Automatic summarizing customer reviews thus is important for identifying and extracting the essential information to help users to obtain the gist of the data. However, as customer reviews are typically short, informal, and multifaceted, it is extremely challenging to generate topic-wise summarization.While there are several studies aims to solve this issue, they are heuristic methods that are developed only utilizing customer reviews. Unlike existing method, we propose an effective new summarization method by analyzing both reviews and this http URL do that, we first segment reviews and summaries into individual sentiments. As the sentiments are typically short, we combine sentiments talking about the same aspect into a single document and apply topic modeling method to identify hidden topics among customer reviews and summaries. Sentiment analysis is employed to distinguish positive and negative opinions among each detected topic. A classifier is also introduced to distinguish the writing pattern of summaries and that of customer reviews. Finally, sentiments are selected to generate the summarization based on their topic relevance, sentiment analysis score and the writing pattern. To test our method, a new dataset comprising product reviews and summaries about 1028 products are collected from Amazon and CNET. Experimental results show the effectiveness of our method compared with other methods.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：从各种平台每天产生的评论的巨量。这是不可能的人阅读过万吨的评论，并获得有用的信息。因此，自动摘要顾客评论是识别和提取，以帮助用户必要的信息，以获得数据的要点重要。然而，由于顾客评论一般很短，非正式的，多方面的，它是极具挑战性的产生话题明智summarization.While有几项研究的目的是解决这个问题，他们是被开发利用只有顾客评论启发式方法。与现有的方法中，我们通过分析评论，这HTTP URL办提出了一个有效的新摘要方法，我们第一部分的评论和总结成单独的情绪。由于情绪一般很短，我们结合情绪谈论同样的方式到一个单一的文件和应用主题建模方法来识别客户之间的评价和总结隐藏的主题。采用情绪分析以区分每个检测到的主题之间的积极和消极的意见。分类器也被引入到区分摘要的写作模式和客户评论。最后，情绪被选择为基于他们的主题相关，情感分析得分和写入模式的总结。为了测试我们的方法，包括约1028种产品的产品评价和总结新的数据集从亚马逊和CNET收集。实验结果表明，与其他方法相比，我们的方法的有效性。</font>
+</div>
+
+
+<hr>
+<div id="paper41"> <b>41. ExplainIt: Explainable Review Summarization with Opinion Causality  Graphs</b>  <a href="https://arxiv.org/pdf/2006.00119" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title41" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Carmeli%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nofar Carmeli</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiaolan Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Suhara%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yoshihiko Suhara</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Angelidis%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Stefanos Angelidis</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuliang Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jinfeng Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tan%2C+W" target="_blank" rel="noopener" style="color:#0000EE;">Wang-Chiew Tan</a><br>
+<font size="3">
+ Abstract: We present ExplainIt, a review summarization system centered around opinion explainability: the simple notion of high-level opinions (e.g. "noisy room") being explainable by lower-level ones (e.g., "loud fridge"). ExplainIt utilizes a combination of supervised and unsupervised components to mine the opinion phrases from reviews and organize them in an Opinion Causality Graph (OCG), a novel semi-structured representation which summarizes causal relations. To construct an OCG, we cluster semantically similar opinions in single nodes, thus canonicalizing opinion paraphrases, and draw directed edges between node pairs that are likely connected by a causal relation. OCGs can be used to generate structured summaries at different levels of granularity and for certain aspects of interest, while simultaneously providing explanations. In this paper, we present the system's individual components and evaluate their effectiveness on their respective sub-tasks, where we report substantial improvements over baselines across two domains. Finally, we validate these results with a user study, showing that ExplainIt produces reasonable opinion explanations according to human judges.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们目前ExplainIt，回顾总结系统围绕着舆论explainability：高层意见简单的概念（例如“吵房”）由较低级别的方法（例如，“大声冰箱”）是可以解释的。 ExplainIt利用监督和无监督部件的组合，以矿认为短语从评价和在一个意见因果图（OCG），一种新型的半结构化的表示，其总结了因果关系进行整理。为了构建一个OCG，我们集群中的单个节点语义相似的观点，因此认为进行规范化释义，并绘制其可能是由一个因果关系连接在节点对之间的有向边。有组织犯罪集团可以用来产生在不同的粒度级别和用于感兴趣的某些方面构造的摘要中，并同时提供解释。在本文中，我们提出了系统的各个组件，并评估其对各自的子任务，在这里我们报告了横跨两个领域的基线实质性的改善效果。最后，我们验证这些结果与用户研究，显示出ExplainIt根据人体法官产生合理的意见解释。</font>
+</div>
+
+
+<hr>
+<div id="paper42"> <b>42. Design and Implementation of a Virtual 3D Educational Environment to  improve Deaf Education</b>  <a href="https://arxiv.org/pdf/2006.00114" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title42" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lakhfif%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Abdelaziz Lakhfif</a><br>
+<font size="3">
+ Abstract: Advances in NLP, knowledge representation and computer graphic technologies can provide us insights into the development of educational tool for Deaf people. Actual education materials and tools for deaf pupils present several problems, since textbooks are designed to support normal students in the classroom and most of them are not suitable for people with hearing disabilities. Virtual Reality (VR) technologies appear to be a good tool and a promising framework in the education of pupils with hearing disabilities. In this paper, we present a current research tasks surrounding the design and implementation of a virtual 3D educational environment based on X3D and H-Anim standards. The system generates and animates automatically Sign language sentence from a semantic representation that encode the whole meaning of the Arabic input text. Some aspects and issues in Sign language generation will be discussed, including the model of Sign representation that facilitate reuse and reduces the time of Sign generation, conversion of semantic components to sign features representation with regard to Sign language linguistics characteristics and how to generate realistic smooth gestural sequences using X3D content to performs transition between signs for natural-looking of animated avatar. Sign language sentences were evaluated by Algerian native Deaf people. The goal of the project is the development of a machine translation system from Arabic to Algerian Sign Language that can be used as educational tool for Deaf children in algerian primary schools.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：进展NLP，知识表示和计算机图形技术可以提供我们洞察聋人教育工具的发展。实际的教育材料，并为聋哑学生的工具存在一些问题，因为教科书旨在支持正常的学生在课堂上和他们大多是不适合听障人士。虚拟现实（VR）技术的出现是一个很好的工具，并在学生的教育有听力障碍的有前途的框架。在本文中，我们提出围绕设计和实现了基于X3D和H-动画标准的虚拟3D教育环境的当前研究任务。系统生成和动画自动登录语言句子从编码阿拉伯语输入文本的全部意义的语义表示。注册语言生成某些方面和问题进行讨论，包括符号表示的促进再利用并降低注册生成的时间模型，语义成分来标志转换功能表示关于手语语言学特性以及如何生成逼真流畅使用X3D内容进行过渡迹象之间手势序列自然的动画化身。手语的句子是由阿尔及利亚本土聋人评估。该项目的目标是从阿拉伯语到阿尔及利亚手语机器翻译系统，该系统可作为聋儿在阿尔及利亚小学教育工具的发展。</font>
+</div>
+
+
+<hr>
+<div id="paper43"> <b>43. A frame semantics based approach to comparative study of digitized  corpus</b>  <a href="https://arxiv.org/pdf/2006.00113" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title43" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Lakhfif%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Abdelaziz Lakhfif</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Laskri%2C+M+T" target="_blank" rel="noopener" style="color:#0000EE;">Mohamed Tayeb Laskri</a><br>
+<font size="3">
+ Abstract: in this paper, we present a corpus linguistics based approach applied to analyzing digitized classical multilingual novels and narrative texts, from a semantic point of view. Digitized novels such as "the hobbit (Tolkien J. R. R., 1937)" and "the hound of the Baskervilles (Doyle A. C. 1901-1902)", which were widely translated to dozens of languages, provide rich materials for analyzing languages differences from several perspectives and within a number of disciplines like linguistics, philosophy and cognitive science. Taking motion events conceptualization as a case study, this paper, focus on the morphologic, syntactic, and semantic annotation process of English-Arabic aligned corpus created from a digitized novels, in order to re-examine the linguistic encodings of motion events in English and Arabic in terms of Frame Semantics. The present study argues that differences in motion events conceptualization across languages can be described with frame structure and frame-to-frame relations.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在本文中，我们提出了适用于分析基于语料库语言学的方法进行数字化多语种古典小说和叙事文本，从语义点。数字化的小说如“霍比特人（JRR托尔金1937年）”和，这被广泛地翻译成数十种语言“巴斯克维尔（多伊尔AC 1901-1902）的猎犬”，用于分析从几个方面语言的差异提供了丰富的资料，一些学科内喜欢语言学，哲学和认知科学。拍摄动态事件概念化作为个案研究，本文重点形态，句法和语义标注过程从一个数字化的小说中创造了英语，阿拉伯语对齐的文集中，以重新审视运动赛事的语言编码中英文在阿拉伯框架语义学的条款。本研究中认为，在运动赛事的差异概念化跨语言可以用帧结构和帧到帧的关系进行说明。</font>
+</div>
+
+
+<hr>
+<div id="paper44"> <b>44. iCapsNets: Towards Interpretable Capsule Networks for Text  Classification</b>  <a href="https://arxiv.org/pdf/2006.00075" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title44" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhengyang Wang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xia Hu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ji%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shuiwang Ji</a><br>
+<font size="3">
+ Abstract: Many text classification applications require models with satisfying performance as well as good interpretability. Traditional machine learning methods are easy to interpret but have low accuracies. The development of deep learning models boosts the performance significantly. However, deep learning models are typically hard to interpret. In this work, we propose interpretable capsule networks (iCapsNets) to bridge this gap. iCapsNets use capsules to model semantic meanings and explore novel methods to increase interpretability. The design of iCapsNets is consistent with human intuition and enables it to produce human-understandable interpretation results. Notably, iCapsNets can be interpreted both locally and globally. In terms of local interpretability, iCapsNets offer a simple yet effective method to explain the predictions for each data sample. On the other hand, iCapsNets explore a novel way to explain the model's general behavior, achieving global interpretability. Experimental studies show that our iCapsNets yield meaningful local and global interpretation results, without suffering from significant performance loss compared to non-interpretable methods.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：许多文本分类的应用都需要满足的性能以及良好的可解释性模型。传统的机器学习方法是很容易理解，但具有低精度。深学习模式提升发展的表现显著。然而，深学习模型通常很难解释。在这项工作中，我们提出可解释胶囊网络（iCapsNets）来弥补这一差距。 iCapsNets用胶囊来模拟语义和探索新的方法，以提高可解释性。 iCapsNets的设计很符合人的直觉相一致，并使其能够产生人类可理解的解释结果。值得注意的是，iCapsNets可以在本地和全球的解释两者。在本地解释性方面，提供iCapsNets一个简单而有效的方法来解释每个数据样本的预测。在另一方面，iCapsNets探索了一种新的方法来解释模型的一般行为，实现全球可解释性。实验研究表明，我们的iCapsNets产生有意义的局部和全局解释结果，而不显著的性能损失的痛苦相比，不可解释的方法。</font>
+</div>
+
+
+<hr>
+<div id="paper45"> <b>45. Stance Prediction for Contemporary Issues: Data and Experiments</b>  <a href="https://arxiv.org/pdf/2006.00052" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title45" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Hosseinia%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Marjan Hosseinia</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Dragut%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Eduard Dragut</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Mukherjee%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Arjun Mukherjee</a><br>
+<font size="3">
+ Abstract: We investigate whether pre-trained bidirectional transformers with sentiment and emotion information improve stance detection in long discussions of contemporary issues. As a part of this work, we create a novel stance detection dataset covering 419 different controversial issues and their related pros and cons collected by this http URL in nonpartisan format. Experimental results show that a shallow recurrent neural network with sentiment or emotion information can reach competitive results compared to fine-tuned BERT with 20x fewer parameters. We also use a simple approach that explains which input phrases contribute to stance detection.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们调查预先训练与情绪和情感信息的双向变压器是否提高的当代问题的长期讨论的姿态检测。作为此项工作的一部分，我们创建了占地419个不同的有争议的问题及其相关的优点，并通过该HTTP URL在无党派格式收集利弊一个新的姿态检测数据集。实验结果表明，与情绪或情感信息浅回归神经网络相比可以用较少的20个参数微调BERT达到竞争的结果。我们还使用一种简单的方法来解释其输入的短语有助于姿态检测。</font>
+</div>
+
+
+<hr>
+<div id="paper46"> <b>46. A Comparative Study of Lexical Substitution Approaches based on Neural  Language Models</b>  <a href="https://arxiv.org/pdf/2006.00031" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title46" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Arefyev%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nikolay Arefyev</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sheludko%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Boris Sheludko</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Podolskiy%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alexander Podolskiy</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Panchenko%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alexander Panchenko</a><br>
+<font size="3">
+ Abstract: Lexical substitution in context is an extremely powerful technology that can be used as a backbone of various NLP applications, such as word sense induction, lexical relation extraction, data augmentation, etc. In this paper, we present a large-scale comparative study of popular neural language and masked language models (LMs and MLMs), such as context2vec, ELMo, BERT, XLNet, applied to the task of lexical substitution. We show that already competitive results achieved by SOTA LMs/MLMs can be further improved if information about the target word is injected properly, and compare several target injection methods. In addition, we provide analysis of the types of semantic relations between the target and substitutes generated by different models providing insights into what kind of words are really generated or given by annotators as substitutes.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在上下文词汇取代是可以用来作为各种NLP应用，如字感感应，词汇关系抽取，数据扩张等。在本文的主链一个非常强大的技术，提出了一种大规模比较研究流行的神经语言和掩盖语言模型（LMS和多层次营销），如context2vec的，ELMO，BERT，XLNet，适用于词汇替代的任务。我们通过展示SOTA LM的实现已经有竞争力的结果/多层次营销可以进一步，如果对目标词的信息被正确注射改善，比较数个目标的注射方法。此外，我们提供的各类目标，并通过不同的模式提供见解产生的替代品之间的语义关系的分析成什么样的话真的产生或注释作为替代给出。</font>
+</div>
+
+
+<hr>
+<div id="paper47"> <b>47. Encoding formulas as deep networks: Reinforcement learning for zero-shot  execution of LTL formulas</b>  <a href="https://arxiv.org/pdf/2006.01110" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title47" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Kuo%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yen-Ling Kuo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Katz%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Boris Katz</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Barbu%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Andrei Barbu</a><br>
+<font size="3">
+ Abstract: We demonstrate a reinforcement learning agent which uses a compositional recurrent neural network that takes as input an LTL formula and determines satisfying actions. The input LTL formulas have never been seen before, yet the network performs zero-shot generalization to satisfy them. This is a novel form of multi-task learning for RL agents where agents learn from one diverse set of tasks and generalize to a new set of diverse tasks. The formulation of the network enables this capacity to generalize. We demonstrate this ability in two domains. In a symbolic domain, the agent finds a sequence of letters in that are accepted. In a Minecraft-like environment, the agent finds a sequence of actions that conform to the formula. While prior work could learn to execute one formula reliably given examples of that formula, we demonstrate how to encode all formulas reliably. This could form the basis of new multi-task agents that discover sub-tasks and execute them without any additional training, as well as the agents which follow more complex linguistic commands. The structures required for this generalization are specific to LTL formulas, which opens up an interesting theoretical question: what structures are required in neural networks for zero-shot generalization to different logics?   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们证明它使用的输入是LTL公式，确定满足操作的成分回归神经网络的强化学习剂。输入LTL公式以前从未见过，但是网络执行零射门推广，以满足他们。这是多任务学习的地方代理商从一组不同的任务，学习和推广到一组新的不同的任务RL代理的新形式。网络的制剂使该容量一概而论。我们证明在两个域这种能力。在一个符号域中，代理发现的在被接受字母序列。在一个的Minecraft样环境中，代理发现的符合下式的动作的序列。虽然以前的工作可以学习到执行一个公式可靠地给出该公式的例子中，我们阐述了如何可靠编码所有公式。这可能形成的是发现子任务，没有任何额外的培训执行这些新的多任务代理，以及随后更加复杂的语言命令代理的基础。这个概括所需要的结构是特定的LTL公式，这带来了一个有趣的理论问题：需要什么样的结构，神经网络的零次推广到不同的逻辑？</font>
+</div>
+
+
+<hr>
+<div id="paper48"> <b>48. Probing Emergent Semantics in Predictive Agents via Question Answering</b>  <a href="https://arxiv.org/pdf/2006.01016" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title48" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Das%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Abhishek Das</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Carnevale%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Federico Carnevale</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Merzic%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hamza Merzic</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rimell%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Laura Rimell</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Schneider%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Rosalia Schneider</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Abramson%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Josh Abramson</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hung%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alden Hung</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Ahuja%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Arun Ahuja</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Clark%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Stephen Clark</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wayne%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gregory Wayne</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hill%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Felix Hill</a><br>
+<font size="3">
+ Abstract: Recent work has shown how predictive modeling can endow agents with rich knowledge of their surroundings, improving their ability to act in complex environments. We propose question-answering as a general paradigm to decode and understand the representations that such agents develop, applying our method to two recent approaches to predictive modeling -action-conditional CPC (Guo et al., 2018) and SimCore (Gregor et al., 2019). After training agents with these predictive objectives in a visually-rich, 3D environment with an assortment of objects, colors, shapes, and spatial configurations, we probe their internal state representations with synthetic (English) questions, without backpropagating gradients from the question-answering decoder into the agent. The performance of different agents when probed this way reveals that they learn to encode factual, and seemingly compositional, information about objects, properties and spatial relations from their physical environment. Our approach is intuitive, i.e. humans can easily interpret responses of the model as opposed to inspecting continuous vectors, and model-agnostic, i.e. applicable to any modeling approach. By revealing the implicit knowledge of objects, quantities, properties and relations acquired by agents as they learn, question-conditional agent probing can stimulate the design and development of stronger predictive learning objectives.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：最近的工作表明造型如何预测系统可以让代理商具有丰富他们的环境知识，提高他们在复杂环境中的行动能力。我们提出问题回答作为一般范式解码和理解，这样的代理商发展表示，将我们的方法近来两种方法来预测建模 - 动作 - 有条件的CPC（Guo等，2018）和SimCore（格里高尔等。 ，2019）。与对象，颜色，形状和空间结构的分类在视觉丰富的3D环境与这些预测目标培养代理商后，我们探索其内部状态交涉合成（英文）的问题，不从问题回答backpropagating梯度解码器到代理。不同药物的探测这样，当业绩显示，他们学会了编码的事实，貌似组成，约对象，属性和空间关系从物理环境的信息。我们的方法是直观的，即人类可以容易地解释适用于任何建模方法，而不是检查连续矢量的模型，并且模型无关，即响应。通过揭示的对象，数量，性质和收购代理关系中的隐性知识，因为他们学习，问题，有条件的代理探测能激发更强的预测学习目标的设计和开发。</font>
+</div>
+
+
+<hr>
+<div id="paper49"> <b>49. Quantum Accelerated Estimation of Algorithmic Information</b>  <a href="https://arxiv.org/pdf/2006.00987" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title49" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Sarkar%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Aritra Sarkar</a>, 
+<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Al-Ars%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zaid Al-Ars</a>, 
+<a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Bertels%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Koen Bertels</a><br>
+<font size="3">
+ Abstract: In this research we present a quantum circuit for estimating algorithmic information metrics like the universal prior distribution. This accelerates inferring algorithmic structure in data for discovering causal generative models. The computation model is restricted in time and space resources to make it computable in approximating the target metrics. A classical exhaustive enumeration is shown for a few examples. The precise quantum circuit design that allows executing a superposition of automata is presented. As a use-case, an application framework for experimenting on DNA sequences for meta-biology is proposed. To our knowledge, this is the first time approximating algorithmic information is implemented for quantum computation. Our implementation on the OpenQL quantum programming language and the QX Simulator is copy-left and can be found on this https URL.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本研究，我们提出用于估计等通用的先验分布算法信息度量量子电路。这加速了推断的数据结构算法，用于发现因果生成模型。该计算模型在时间和空间资源的限制，使其在接近目标指标可计算的。一个经典的穷举示出了用于几个例子。被呈现在精确量子电路设计，其允许执行自动机的叠加。作为一个用例，用于实验上用于元生物学DNA序列的应用程序框架提出。据我们所知，这是第一次近似算法信息用于量子计算的实现。我们对OpenQL量子编程语言和QX模拟器实现复制左，可以在此HTTPS URL中找到。</font>
+</div>
+
+
+<hr>
+<div id="paper50"> <b>50. CoAID: COVID-19 Healthcare Misinformation Dataset</b>  <a href="https://arxiv.org/pdf/2006.00885" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title50" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Cui%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Limeng Cui</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lee%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dongwon Lee</a><br>
+<font size="3">
+ Abstract: As the COVID-19 virus quickly spreads around the world, unfortunately, misinformation related to COVID-19 also gets created and spreads like wild fire. Such misinformation has caused confusion among people, disruptions in society, and even deadly consequences in health problems. To be able to understand, detect, and mitigate such COVID-19 misinformation, therefore, has not only deep intellectual values but also huge societal impacts. To help researchers combat COVID-19 health misinformation, therefore, we present CoAID (Covid-19 heAlthcare mIsinformation Dataset), with diverse COVID-19 healthcare misinformation, including fake news on websites and social platforms, along with users' social engagement about such news. CoAID includes 1,896 news, 183,564 related user engagements, 516 social platform posts about COVID-19, and ground truth labels. The dataset is available at: this https URL.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：随着世界各地的COVID-19病毒迅速蔓延，不幸的是，误传有关COVID-19也被创建和象野火般蔓延。这样的误传引起了混乱的人群，社会混乱，并在健康问题甚至是致命的后果。为了能够了解，检测和缓解此类COVID-19误传，因此，不仅具有深刻的思想价值也是巨大的社会影响。为了帮助研究人员作战COVID-19健康误传，因此，我们目前CoAID（Covid-19的医疗误传数据集），具有不同COVID-19的医疗错误信息，包括网站和社交平台的假新闻，与用户对这类新闻的社会参与一起。 CoAID包括1896的消息，183564个相关用户约定，516发约COVID-19社交平台的帖子，和地面实况标签。该数据集，请访问：此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper51"> <b>51. COVID-19: Social Media Sentiment Analysis on Reopening</b>  <a href="https://arxiv.org/pdf/2006.00804" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title51" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Ahmed%2C+M+E" target="_blank" rel="noopener" style="color:#0000EE;">Mohammed Emtiaz Ahmed</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rabin%2C+M+R+I" target="_blank" rel="noopener" style="color:#0000EE;">Md Rafiqul Islam Rabin</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Chowdhury%2C+F+N" target="_blank" rel="noopener" style="color:#0000EE;">Farah Naz Chowdhury</a><br>
+<font size="3">
+ Abstract: The novel coronavirus (COVID-19) pandemic is the most talked topic in social media platforms in 2020. People are using social media such as Twitter to express their opinion and share information on a number of issues related to the COVID-19 in this stay at home order. In this paper, we investigate the sentiment and emotion of peoples in the United States on the subject of reopening. We choose the social media platform Twitter for our analysis and study the Tweets to discover the sentimental perspective, emotional perspective, and triggering words towards the reopening. During this COVID-19 pandemic, researchers have made some analysis on various social media dataset regarding lockdown and stay at home. However, in our analysis, we are particularly interested to analyse public sentiment on reopening. Our major finding is that when all states resorted to lockdown in March, people showed dominant emotion of fear, but as reopening starts people have less fear. While this may be true, due to this reopening phase daily positive cases are rising compared to the lockdown situation. Overall, people have a less negative sentiment towards the situation of reopening.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：新型冠状病毒（COVID-19）的流行是在社会化媒体平台在2020年人们谈论最多的话题正在使用社交媒体如Twitter来表达对一些相关的COVID-19的问题发表意见，分享信息该呆在家里顺序。在本文中，我们研究了美国人民对重新开放这一主题的情绪和情感。我们选择社会化媒体平台，Twitter的我们的分析和研究鸣叫发现感情角度来说，情感的角度来看，并朝着重启触发的话。在此COVID-19大流行，研究者们提出关于数据集，并锁定留在家里的各种社会媒体的一些分析。然而，在我们的分析中，我们特别感兴趣的分析开张大吉公众情绪。我们的主要发现是，当所有状态使出三月锁定，人们表现出的恐惧情绪占主导地位，但作为重启开始人少的恐惧。虽然这可能是真的，因为这个阶段重新开放日常阳性病例不断上升相比，锁定的情况。总体而言，人对重启的情况较少负面情绪。</font>
+</div>
+
+
+<hr>
+<div id="paper52"> <b>52. Transcription-Enriched Joint Embeddings for Spoken Descriptions of  Images and Videos</b>  <a href="https://arxiv.org/pdf/2006.00785" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title52" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Oriol%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Benet Oriol</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Luque%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jordi Luque</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Diego%2C+F" target="_blank" rel="noopener" style="color:#0000EE;">Ferran Diego</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Giro-i-Nieto%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xavier Giro-i-Nieto</a><br>
+<font size="3">
+ Abstract: In this work, we propose an effective approach for training unique embedding representations by combining three simultaneous modalities: image and spoken and textual narratives. The proposed methodology departs from a baseline system that spawns a embedding space trained with only spoken narratives and image cues. Our experiments on the EPIC-Kitchen and Places Audio Caption datasets show that introducing the human-generated textual transcriptions of the spoken narratives helps to the training procedure yielding to get better embedding representations. The triad speech, image and words allows for a better estimate of the point embedding and show an improving of the performance within tasks like image and speech retrieval, even when text third modality, text, is not present in the task.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：在这项工作中，我们提出了结合三种同时训练方式嵌入独特交涉的有效途径：图像和口语和文字叙述。从基线系统所提出的方法的出发会派生只有口头叙述和图像线索培养了嵌入空间。我们对EPIC-厨房和地点语音说明数据集实验表明，引入口语叙述的人类生成的文本改编有助于训练过程产生，以获得更好的嵌入表示。黑社会讲话，图像和文字允许嵌入点的更好的估计，并显示像图像和语音检索任务中表现的提高，即使文字第三种方式，文本中不存在的任务。</font>
+</div>
+
+
+<hr>
+<div id="paper53"> <b>53. Learning to Recognize Code-switched Speech Without Forgetting  Monolingual Speech Recognition</b>  <a href="https://arxiv.org/pdf/2006.00782" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title53" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Shah%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sanket Shah</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Abraham%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Basil Abraham</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=M%2C+G+R" target="_blank" rel="noopener" style="color:#0000EE;">Gurunath Reddy M</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Sitaram%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sunayana Sitaram</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Joshi%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vikas Joshi</a><br>
+<font size="3">
+ Abstract: Recently, there has been significant progress made in Automatic Speech Recognition (ASR) of code-switched speech, leading to gains in accuracy on code-switched datasets in many language pairs. Code-switched speech co-occurs with monolingual speech in one or both languages being mixed. In this work, we show that fine-tuning ASR models on code-switched speech harms performance on monolingual speech. We point out the need to optimize models for code-switching while also ensuring that monolingual performance is not sacrificed. Monolingual models may be trained on thousands of hours of speech which may not be available for re-training a new model. We propose using the Learning Without Forgetting (LWF) framework for code-switched ASR when we only have access to a monolingual model and do not have the data it was trained on. We show that it is possible to train models using this framework that perform well on both code-switched and monolingual test sets. In cases where we have access to monolingual training data as well, we propose regularization strategies for fine-tuning models for code-switching without sacrificing monolingual accuracy. We report improvements in Word Error Rate (WER) in monolingual and code-switched test sets compared to baselines that use pooled data and simple fine-tuning.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：最近，一直在代码交换语音自动语音识别（ASR）取得显著的进展，导致许多语言对中精度收益上的代码交换数据集。代码交换演讲和英语演讲共发生于一种或两种语言混合。在这项工作中，我们表现出对一种语言的语音代码交换语音危害表现是微调ASR模型。我们指出了需要优化模型的语码转换，同时确保单语的表现不牺牲。单语模型可能对成千上万的讲话小时，这可能不适合再培训的新模式提供培训。我们建议使用学习没有代码交换ASR遗忘（LWF）框架时，我们只能访问一个单一语言模型，没有它是在训练数据。我们表明，有可能利用这一框架内，在两个码开关和多语测试集表现良好训练的模型。在我们有机会获得单语训练数据以及情况下，我们提出了微调模型正规化战略码转换不牺牲精度单语。我们报告中的单语和代码交换测试套词错误率（WER）的改进相比，使用汇总数据和简单的微调基线。</font>
+</div>
+
+
+<hr>
+<div id="paper54"> <b>54. Influence via Ethos: On the Persuasive Power of Reputation in  Deliberation Online</b>  <a href="https://arxiv.org/pdf/2006.00707" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title54" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/econ?searchtype=author&query=Manzoor%2C+E" target="_blank" rel="noopener" style="color:#0000EE;">Emaad Manzoor</a>, 
+<a href="https://arxiv.org/search/econ?searchtype=author&query=Chen%2C+G+H" target="_blank" rel="noopener" style="color:#0000EE;">George H. Chen</a>, 
+<a href="https://arxiv.org/search/econ?searchtype=author&query=Lee%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dokyun Lee</a>, 
+<a href="https://arxiv.org/search/econ?searchtype=author&query=Smith%2C+M+D" target="_blank" rel="noopener" style="color:#0000EE;">Michael D. Smith</a><br>
+<font size="3">
+ Abstract: Deliberation among individuals online plays a key role in shaping the opinions that drive votes, purchases, donations and other critical offline behavior. Yet, the determinants of opinion-change via persuasion in deliberation online remain largely unexplored. Our research examines the persuasive power of $\textit{ethos}$ -- an individual's "reputation" -- using a 7-year panel of over a million debates from an argumentation platform containing explicit indicators of successful persuasion. We identify the causal effect of reputation on persuasion by constructing an instrument for reputation from a measure of past debate competition, and by controlling for unstructured argument text using neural models of language in the double machine-learning framework. We find that an individual's reputation significantly impacts their persuasion rate above and beyond the validity, strength and presentation of their arguments. In our setting, we find that having 10 additional reputation points causes a 31% increase in the probability of successful persuasion over the platform average. We also find that the impact of reputation is moderated by characteristics of the argument content, in a manner consistent with a theoretical model that attributes the persuasive power of reputation to heuristic information-processing under cognitive overload. We discuss managerial implications for platforms that facilitate deliberative decision-making for public and private organizations online.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：个人之间的网上评议起着塑造驱动票，购买，捐赠和其他关键离线行为的意见了关键作用。然而，通过在审议说服舆论变化的决定因素在网上基本上还未。我们的研究考察了$ \ {textit风气} $说服力 - 个人的“美誉”  - 使用超过一百万的辩论了7年的面板从包含成功说服的明确指标的论证平台。我们确定信誉的因果关系上说服通过构建从过去的辩论赛的衡量声誉的工具，并通过控制使用语言的神经模型在双机器学习框架非结构化文本的说法。我们发现，一个人的信誉显著影响他们的劝说率超出他们的论据的有效性，强度和演示。在我们的设置，我们发现，有10个额外的点名誉造成成功的说服了该平台的平均概率增加了31％。我们还发现，声誉的影响是通过参数内容的特性主持，在与为在认知超载属性的声誉启发式信息处理的说服力的理论模型相一致的方式。我们讨论管理问题对于促进平台的审议决策的公共和私营机构在网上。</font>
+</div>
+
+
+<hr>
+<div id="paper55"> <b>55. Streaming Language Identification using Combination of Acoustic  Representations and ASR Hypotheses</b>  <a href="https://arxiv.org/pdf/2006.00703" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title55" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Chandak%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chander Chandak</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Raeesy%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zeynab Raeesy</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Rastrow%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Ariya Rastrow</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Liu%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuzong Liu</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Huang%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xiangyang Huang</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Wang%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Siyu Wang</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Joo%2C+D+K" target="_blank" rel="noopener" style="color:#0000EE;">Dong Kwon Joo</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Maas%2C+R" target="_blank" rel="noopener" style="color:#0000EE;">Roland Maas</a><br>
+<font size="3">
+ Abstract: This paper presents our modeling and architecture approaches for building a highly accurate low-latency language identification system to support multilingual spoken queries for voice assistants. A common approach to solve multilingual speech recognition is to run multiple monolingual ASR systems in parallel and rely on a language identification (LID) component that detects the input language. Conventionally, LID relies on acoustic only information to detect input language. We propose an approach that learns and combines acoustic level representations with embeddings estimated on ASR hypotheses resulting in up to 50% relative reduction of identification error rate, compared to a model that uses acoustic only features. Furthermore, to reduce the processing cost and latency, we exploit a streaming architecture to identify the spoken language early when the system reaches a predetermined confidence level, alleviating the need to run multiple ASR systems until the end of input query. The combined acoustic and text LID, coupled with our proposed streaming runtime architecture, results in an average of 1500ms early identification for more than 50% of utterances, with almost no degradation in accuracy. We also show improved results by adopting a semi-supervised learning (SSL) technique using the newly proposed model architecture as a teacher model.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文介绍了我们的建模和架构建设高精度低延迟语言识别系统，支持语音助理多语种语音查询方法。一种常见的方法来解决多语言语音识别是并行运行的多个单语ASR系统和依赖于语言的识别，其检测所述输入语言（LID）组件。按照惯例，LID依靠声学仅供参考，以检测输入语言。我们提出了一种方法，学习和联合收割机声级表示与估计的ASR的嵌入假设导致识别错误率高达50％，相对减少，相比于一个模型，使用传音才有的功能。此外，为了降低处理成本和延迟，我们利用流式结构，当系统达到预定置信水平，减轻需要运行多个ASR系统，直到输入查询月底至5月初识别语言。合并声音和文字LID，再加上我们提出的流运行时架构，结果平均的1500毫秒早期识别的话语的50％以上，在精确度几乎没有下降。我们还表明，采用采用新提出的模型架构作为一个教师模型半监督学习（SSL）技术改进的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper56"> <b>56. Translating Natural Language Instructions for Behavioral Robot  Navigation with a Multi-Head Attention Mechanism</b>  <a href="https://arxiv.org/pdf/2006.00697" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title56" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Cerda-Mardini%2C+P" target="_blank" rel="noopener" style="color:#0000EE;">Patricio Cerda-Mardini</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Araujo%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Vladimir Araujo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Soto%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alvaro Soto</a><br>
+<font size="3">
+ Abstract: We propose a multi-head attention mechanism as a blending layer in a neural network model that translates natural language to a high level behavioral language for indoor robot navigation. We follow the framework established by (Zang et al., 2018a) that proposes the use of a navigation graph as a knowledge base for the task. Our results show significant performance gains when translating instructions on previously unseen environments, therefore, improving the generalization capabilities of the model.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们建议多头关注机制，在转换自然语言到高水平的行为语言室内机器人导航神经网络模型的混合层。我们按照既定的框架（臧等人，2018A），其提出了使用导航图作为该任务的知识基础。我们的研究结果上前所未见的环境翻译时的指令，因此，提高了模型的泛化能力展现显著的性能提升。</font>
+</div>
+
+
+<hr>
+<div id="paper57"> <b>57. Residual Excitation Skewness for Automatic Speech Polarity Detection</b>  <a href="https://arxiv.org/pdf/2006.00525" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title57" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Drugman%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thomas Drugman</a><br>
+<font size="3">
+ Abstract: Detecting the correct speech polarity is a necessary step prior to several speech processing techniques. An error on its determination could have a dramatic detrimental impact on their performance. As current systems have to deal with increasing amounts of data stemming from multiple devices, the automatic detection of speech polarity has become a crucial problem. For this purpose, we here propose a very simple algorithm based on the skewness of two excitation signals. The method is shown on 10 speech corpora (8545 files) to lead to an error rate of only 0.06% in clean conditions and to clearly outperform four state-of-the-art methods. Besides it significantly reduces the computational load through its simplicity and is observed to exhibit the strongest robustness in both noisy and reverberant environments.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：检测正确的语音极性是前几个语音处理技术的一个必要步骤。其确定的错误可能对他们的性能有着很大的不利影响。由于目前的系统必须处理增加从多个设备而造成的数据量，言语极性自动检测已成为一个关键的问题。为此，我们在这里提出了一种基于两个激励信号的偏度一个非常简单的算法。该方法被示出在10语音语料库（8545个文件）导致的只有0.06％在清洁的条件错误率，并清楚地优于四状态的最先进的方法。除了它显著通过其简单性降低的计算负荷，并观察到显示出在两个嘈杂和回响环境最强的鲁棒性。</font>
+</div>
+
+
+<hr>
+<div id="paper58"> <b>58. Maximum Voiced Frequency Estimation: Exploiting Amplitude and Phase  Spectra</b>  <a href="https://arxiv.org/pdf/2006.00521" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title58" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Drugman%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thomas Drugman</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Stylianou%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yannis Stylianou</a><br>
+<font size="3">
+ Abstract: Maximum Voiced Frequency (MVF) is used in various speech models as the spectral boundary separating periodic and aperiodic components during the production of voiced sounds. Recent studies have shown that its proper estimation and modeling enhance the quality of statistical parametric speech synthesizers. Contrastingly, these same methods of MVF estimation have been reported to degrade the performance of singing voice synthesizers. This paper proposes a new approach for MVF estimation which exploits both amplitude and phase spectra. It is shown that phase conveys relevant information about the harmonicity of the voice signal, and that it can be jointly used with features derived from the amplitude spectrum. This information is further integrated into a maximum likelihood criterion which provides a decision about the MVF estimate. The proposed technique is compared to two state-of-the-art methods, and shows a superior performance in both objective and subjective evaluations. Perceptual tests indicate a drastic improvement in high-pitched voices.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：最大浊音频率（MVF）在各种语音模型用作频谱边界生产浊音的分离期间周期性和非周期性分量。最近的研究表明，其正确的估计和建模加强统计参数语音合成器的质量。与此相反，据报道这些相同的MVF估计方法可能会降低歌声合成器的性能。本文提出了一种利用其振幅和相位谱MVF估计的新方法。结果表明，相传送关于语音信号的谐相关的信息，并且它可以与来自振幅谱导出的特征联合使用。该信息被进一步集成到最大似然准则这提供了关于MVF估计的决定。所提出的技术是与两个国家的最先进的方法，以及示出了客观和主观评价一个优越的性能。感知测试表明在高分贝的声音，一个显着改善。</font>
+</div>
+
+
+<hr>
+<div id="paper59"> <b>59. Data-driven Detection and Analysis of the Patterns of Creaky Voice</b>  <a href="https://arxiv.org/pdf/2006.00518" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title59" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/eess?searchtype=author&query=Drugman%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Thomas Drugman</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Kane%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">John Kane</a>, 
+<a href="https://arxiv.org/search/eess?searchtype=author&query=Gobl%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Christer Gobl</a><br>
+<font size="3">
+ Abstract: This paper investigates the temporal excitation patterns of creaky voice. Creaky voice is a voice quality frequently used as a phrase-boundary marker, but also as a means of portraying attitude, affective states and even social status. Consequently, the automatic detection and modelling of creaky voice may have implications for speech technology applications. The acoustic characteristics of creaky voice are, however, rather distinct from modal phonation. Further, several acoustic patterns can bring about the perception of creaky voice, thereby complicating the strategies used for its automatic detection, analysis and modelling. The present study is carried out using a variety of languages, speakers, and on both read and conversational data and involves a mutual information-based assessment of the various acoustic features proposed in the literature for detecting creaky voice. These features are then exploited in classification experiments where we achieve an appreciable improvement in detection accuracy compared to the state of the art. Both experiments clearly highlight the presence of several creaky patterns. A subsequent qualitative and quantitative analysis of the identified patterns is provided, which reveals a considerable speaker-dependent variability in the usage of these creaky patterns. We also investigate how creaky voice detection systems perform across creaky patterns.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：本文研究叽叽嘎嘎的声音的时间激励模式。叽叽嘎嘎的声音经常用作短语边界标记语音质量，也为塑造态度，情感状态，甚至社会地位的一种手段。因此，叽叽嘎嘎的声音的自动检测和建模可以对语音技术的应用意义。叽叽嘎嘎的声音的声学特性，不过，从模式发声而不同。此外，几个声模式可以带来叽叽嘎嘎的声音的感知，从而复杂用于其自动检测，分析和建模策略。本研究是通过使用各种语言，扬声器和两个读和会话数据，涉及的文献检测叽叽嘎嘎的声音提出了不同的声学特征相互信息化评估。这些特征随后在分类实验，其中我们实现检测精度的明显改善相比于现有技术的状态利用。这两个实验中明确强调的几个摇摇欲坠的模式存在。所识别的模式的后续的定性和定量分析被提供，其揭示了在这些叽叽嘎嘎图案的用法相当说话者相关的可变性。我们还调查检测系统跨越叽叽嘎嘎的声音模式如何摇摇欲坠执行。</font>
+</div>
+
+
+<hr>
+<div id="paper60"> <b>60. Variational Reward Estimator Bottleneck: Learning Robust Reward  Estimator for Multi-Domain Task-Oriented Dialog</b>  <a href="https://arxiv.org/pdf/2006.00417" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title60" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Park%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jeiyoon Park</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lee%2C+C" target="_blank" rel="noopener" style="color:#0000EE;">Chanhee Lee</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Kim%2C+K" target="_blank" rel="noopener" style="color:#0000EE;">Kuekyeng Kim</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lim%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Heuiseok Lim</a><br>
+<font size="3">
+ Abstract: Despite its notable success in adversarial learning approaches to multi-domain task-oriented dialog system, training the dialog policy via adversarial inverse reinforcement learning often fails to balance the performance of the policy generator and reward estimator. During optimization, the reward estimator often overwhelms the policy generator and produces excessively uninformative gradients. We proposes the Variational Reward estimator Bottleneck (VRB), which is an effective regularization method that aims to constrain unproductive information flows between inputs and the reward estimator. The VRB focuses on capturing discriminative features, by exploiting information bottleneck on mutual information. Empirical results on a multi-domain task-oriented dialog dataset demonstrate that the VRB significantly outperforms previous methods.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：尽管在对抗学习其显着的成功接近多域面向任务的对话系统，通过训练对抗性逆强化学习往往对话框政策未能平衡策略生成和报酬估计的性能。在优化过程中，报酬估计往往压倒政策发生器，产生过度不提供信息的梯度。我们提出了变报酬估计瓶颈（VRB），这是一种有效的正则化方法，其目的是限制输入和报酬估计之间非生产性的信息流。该VRB专注于捕捉判别特征，通过互信息的利用信息瓶颈。在多域面向任务的对话集实证结果表明，VRB显著优于以前的方法。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/06/02/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-02/" title="【arxiv论文】 Computation and Language 2020-06-02">https://procjx.github.io/2020/06/02/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-02/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/06/01/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-06-01/" rel="next" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-06-01">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computer Vision and Pattern Recognition 2020-06-01
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/06/02/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-06-02/" rel="prev" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-06-02">
+                  【arxiv论文】 Computer Vision and Pattern Recognition 2020-06-02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translation/" rel="tag">Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Translation/" rel="tag">Word Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" rel="tag">斐波那契数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%89%E8%AF%BA%E5%A1%94/" rel="tag">汉诺塔</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: 'f59dd424b5d488fa378a8cd3d65a1490',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
