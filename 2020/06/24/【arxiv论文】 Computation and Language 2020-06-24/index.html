@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Combining Neural Language Models for WordSense Induction [PDF] 摘要  2. Domain Adaptation for Semantic Parsing [PDF] 摘要  3. Can you tell? SSNet -- a Sagittal Stratum-inspired Neural Network  Fram">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【arxiv论文】 Computation and Language 2020-06-24">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;06&#x2F;24&#x2F;%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-24&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Combining Neural Language Models for WordSense Induction [PDF] 摘要  2. Domain Adaptation for Semantic Parsing [PDF] 摘要  3. Can you tell? SSNet -- a Sagittal Stratum-inspired Neural Network  Fram">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-24T12:43:45.455Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/06/24/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-24/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【arxiv论文】 Computation and Language 2020-06-24 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/06/24/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【arxiv论文】 Computation and Language 2020-06-24
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-24 11:28:38 / 修改时间：20:43:45" itemprop="dateCreated datePublished" datetime="2020-06-24T11:28:38+08:00">2020-06-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/" itemprop="url" rel="index">
+                    <span itemprop="name">arxiv</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arxiv/CL/" itemprop="url" rel="index">
+                    <span itemprop="name">CL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>18 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Combining Neural Language Models for WordSense Induction <a href="https://arxiv.org/pdf/2006.13200" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> Domain Adaptation for Semantic Parsing <a href="https://arxiv.org/pdf/2006.13071" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> Can you tell? SSNet -- a Sagittal Stratum-inspired Neural Network  Framework for Sentiment Analysis <a href="https://arxiv.org/pdf/2006.12958" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> NLPContributions: An Annotation Scheme for Machine Reading of Scholarly  Contributions in Natural Language Processing Literature <a href="https://arxiv.org/pdf/2006.12870" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> Inductive Unsupervised Domain Adaptation for Few-Shot Classification via  Clustering <a href="https://arxiv.org/pdf/2006.12816" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> Keyframe Segmentation and Positional Encoding for Video-guided Machine  Translation Challenge 2020 <a href="https://arxiv.org/pdf/2006.12799" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Unsupervised Evaluation of Interactive Dialog with DialoGPT <a href="https://arxiv.org/pdf/2006.12719" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> Exploring Software Naturalness throughNeural Language Models <a href="https://arxiv.org/pdf/2006.12641" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- procjx-wenzhang2 --> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins> <script>      (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Combining Neural Language Models for WordSense Induction</b>  <a href="https://arxiv.org/pdf/2006.13200" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Arefyev%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Nikolay Arefyev</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Sheludko%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Boris Sheludko</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Aleksashina%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tatiana Aleksashina</a><br>
+<font size="3">
+ Abstract: Word sense induction (WSI) is the problem of grouping occurrences of an ambiguous word according to the expressed sense of this word. Recently a new approach to this task was proposed, which generates possible substitutes for the ambiguous word in a particular context using neural language models, and then clusters sparse bag-of-words vectors built from these substitutes. In this work, we apply this approach to the Russian language and improve it in two ways. First, we propose methods of combining left and right contexts, resulting in better substitutes generated. Second, instead of fixed number of clusters for all ambiguous words we propose a technique for selecting individual number of clusters for each word. Our approach established new state-of-the-art level, improving current best results of WSI for the Russian language on two RUSSE 2018 datasets by a large margin.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：词义归纳（WSI）是根据这个词所表达的意义分组歧义词出现的问题。最近提出了这一任务的新方法，利用神经语言模型产生了歧义词可能的替代品在特定环境下，然后从聚类这些替代内置稀疏袋的词向量。在这项工作中，我们将这种方法用于俄罗斯语言和提高它在两个方面。首先，我们建议结合左右环境中，导致产生更好的替代方法。其次，代替固定数量的集群为所有暧昧的话，我们建议选择集群的个体数为每个单词的技术。我们的方法建立的国家的最先进的新水平，大幅度提高了两个RUSSE 2018个数据集WSI俄罗斯语言目前最好的结果。</font>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Domain Adaptation for Semantic Parsing</b>  <a href="https://arxiv.org/pdf/2006.13071" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Li%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zechang Li</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Lai%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yuxuan Lai</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Feng%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yansong Feng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao%2C+D" target="_blank" rel="noopener" style="color:#0000EE;">Dongyan Zhao</a><br>
+<font size="3">
+ Abstract: Recently, semantic parsing has attracted much attention in the community. Although many neural modeling efforts have greatly improved the performance, it still suffers from the data scarcity issue. In this paper, we propose a novel semantic parser for domain adaptation, where we have much fewer annotated data in the target domain compared to the source domain. Our semantic parser benefits from a two-stage coarse-to-fine framework, thus can provide different and accurate treatments for the two stages, i.e., focusing on domain invariant and domain specific information, respectively. In the coarse stage, our novel domain discrimination component and domain relevance attention encourage the model to learn transferable domain general structures. In the fine stage, the model is guided to concentrate on domain related details. Experiments on a benchmark dataset show that our method consistently outperforms several popular domain adaptation strategies. Additionally, we show that our model can well exploit limited target data to capture the difference between the source and target domain, even when the target domain has far fewer training instances.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：近日，语义分析备受关注的社区。虽然许多神经建模工作极大地提高了性能，它仍然从数据匮乏的问题受到影响。在本文中，我们提出了一个新的语义解析域调整，其中我们比较源域在目标域少得多注释的数据。从两阶段粗到细的框架提供了语义解析器好处，从而可以分别用于两个阶段提供不同和准确的治疗，即，着眼于域不变和域特定信息。在粗阶段，我们的新领域歧视成分和域相关性的重视鼓励模型学习转让域名的一般结构。在精细阶段，该模型被引导专心域相关的详细信息。在基准数据集显示，我们的方法始终优于几种流行的域名适应战略的实验。此外，我们表明，我们的模型可以很好地利用有限的目标数据采集源和目标域之间的差异，即使在目标域有少得多的训练实例。</font>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Can you tell? SSNet -- a Sagittal Stratum-inspired Neural Network  Framework for Sentiment Analysis</b>  <a href="https://arxiv.org/pdf/2006.12958" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Vassilev%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Apostol Vassilev</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Hasan%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Munawar Hasan</a><br>
+<font size="3">
+ Abstract: When people try to understand nuanced language they typically process multiple input sensor modalities to complete this cognitive task. It turns out the human brain has even a specialized neuron formation, called sagittal stratum, to help us understand sarcasm. We use this biological formation as the inspiration for designing a neural network architecture that combines predictions of different models on the same text to construct a robust, accurate and computationally efficient classifier for sentiment analysis. Experimental results on representative benchmark datasets and comparisons to other methods1show the advantages of the new network architecture.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：当人们试着去理解细致入微的语言，但通常处理多个输入传感器方式来完成这个认知任务。原来，人的大脑有甚至专门的神经元的形成，叫矢状阶层，来帮助我们理解讽刺。我们用这个生物的形成为灵感设计的神经网络结构上相同的文字不同机型的联合预测，以构建情感分析一个可靠，精确和高效计算的分类。有代表性的基准数据集和比较实验结果到其他methods1show新的网络架构的优势。</font>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. NLPContributions: An Annotation Scheme for Machine Reading of Scholarly  Contributions in Natural Language Processing Literature</b>  <a href="https://arxiv.org/pdf/2006.12870" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=D%27Souza%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jennifer D'Souza</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Auer%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Sören Auer</a><br>
+<font size="3">
+ Abstract: We describe an annotation initiative to capture the scholarly contributions in natural language processing (NLP) articles, particularly, for the articles that discuss machine learning (ML) approaches for various information extraction tasks. We develop the annotation task based on a pilot annotation exercise on 50 NLP-ML scholarly articles presenting contributions to the five information extraction tasks 1. machine translation, 2. named entity recognition, 3. question answering, 4. relation classification, and 5. text classification. In this article, we describe the outcomes of this pilot annotation phase. Through the exercise we have obtained an annotation methodology; and found eight core information units that reflect the contribution of the NLP-ML scholarly investigations. The resulting annotation scheme we developed based on these information units is called NLPContributions. The overarching goal of our endeavor is: 1) to find a systematic set of patterns of subject-predicate-object statements for the semantic structuring of scholarly contributions that are more or less generically applicable for NLP-ML research articles; 2) to apply the discovered patterns in the creation of a larger annotated dataset for training machine readers of research contributions; 3) to ingest the dataset into the Open Research Knowledge Graph (ORKG) infrastructure as a showcase for creating user-friendly state-of-the-art overviews; 4) to integrate the machine readers into the ORKG to assist users in the manual curation of their respective article contributions. We envision that the NLPContributions methodology engenders a wider discussion on the topic toward its further refinement and development. Our pilot annotated dataset of 50 NLP-ML scholarly articles per the NLPContributions scheme is available at this https URL.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：我们描述一个注释主动捕捉自然语言处理（NLP）的文章，对学术贡献特别，对于讨论机器学习（ML）方法对各种信息提取的任务物品。我们开发了基于50 NLP-ML学术文章提出五个信息提取的任务1.机器翻译2.命名实体识别，3答疑，4关系分类，5贡献试点注释锻炼注解任务。文本分类。在这篇文章中，我们描述了这个试点注释阶段的成果。通过锻炼，我们已经获得了注释的方法;并且发现，反映了NLP-ML学术研究的贡献八大核心信息单元。我们开发了基于这些信息单元产生的注解方案被称为NLPContributions。我们努力的总体目标是：1）找到一个系统的一套那或多或少一般适用于NLP-ML研究论文学术贡献的语义结构主谓对象语句的模式; 2）应用在创造训练的研究贡献机器的读者一个更大的数据集注释的发现的模式; 3）摄取数据集到开放研究知识图（ORKG）基础设施作为用于创建用户友好的状态的最先进的概述的展示; 4）机器读者融入ORKG帮助用户在各自的文章贡献的人工管理。我们设想，在NLPContributions方法论上滋生朝其进一步改进和发展议题的更广泛的讨论。我们的飞行员注释50 NLP-ML学术每NLPContributions方案的文章数据集可在此HTTPS URL。</font>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. Inductive Unsupervised Domain Adaptation for Few-Shot Classification via  Clustering</b>  <a href="https://arxiv.org/pdf/2006.12816" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Cong%2C+X" target="_blank" rel="noopener" style="color:#0000EE;">Xin Cong</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yu%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bowen Yu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tingwen Liu</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Cui%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shiyao Cui</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Tang%2C+H" target="_blank" rel="noopener" style="color:#0000EE;">Hengzhu Tang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Wang%2C+B" target="_blank" rel="noopener" style="color:#0000EE;">Bin Wang</a><br>
+<font size="3">
+ Abstract: Few-shot classification tends to struggle when it needs to adapt to diverse domains. Due to the non-overlapping label space between domains, the performance of conventional domain adaptation is limited. Previous work tackles the problem in a transductive manner, by assuming access to the full set of test data, which is too restrictive for many real-world applications. In this paper, we set out to tackle this issue by introducing a inductive framework, DaFeC, to improve Domain adaptation performance for Few-shot classification via Clustering. We first build a representation extractor to derive features for unlabeled data from the target domain (no test data is necessary) and then group them with a cluster miner. The generated pseudo-labeled data and the labeled source-domain data are used as supervision to update the parameters of the few-shot classifier. In order to derive high-quality pseudo labels, we propose a Clustering Promotion Mechanism, to learn better features for the target domain via Similarity Entropy Minimization and Adversarial Distribution Alignment, which are combined with a Cosine Annealing Strategy. Experiments are performed on the FewRel 2.0 dataset. Our approach outperforms previous work with absolute gains (in classification accuracy) of 4.95%, 9.55%, 3.99% and 11.62%, respectively, under four few-shot settings.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：很少拍分类趋向时，它需要适应不同的领域奋斗。由于域之间的非重叠标签空间，常规域适应的性能的限制。以前的工作铲球的转导方式的问题，假设获得了全套的测试数据，这是过于严格了许多现实世界的应用。在本文中，我们设置了通过引入感应框架，DaFeC，以提高通过聚类为数不多的镜头分类域自适应性能来解决这个问题。我们首先建立一个表示提取器，用于从目标域中未标记的数据派生特征（无测试数据是必要的），然后将它们与群集矿工基。所生成的伪标记的数据和标记源域数据被用作监督更新少数次分类器的参数。为了导出高品质的伪标签，我们提出了一个集群推进机制，更好地学习功能对于通过相似熵极小和对抗式分布对齐，这是结合了余弦退火战略目标域。实验在FewRel 2.0数据集进行的。我们的方法优于与绝对收益（在分类准确度）分别为4.95％，9.55％，3.99％和11.62％，以前的工作，在四为数不多的拍摄设置。</font>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. Keyframe Segmentation and Positional Encoding for Video-guided Machine  Translation Challenge 2020</b>  <a href="https://arxiv.org/pdf/2006.12799" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Hirasawa%2C+T" target="_blank" rel="noopener" style="color:#0000EE;">Tosho Hirasawa</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+Z" target="_blank" rel="noopener" style="color:#0000EE;">Zhishen Yang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Komachi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mamoru Komachi</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Okazaki%2C+N" target="_blank" rel="noopener" style="color:#0000EE;">Naoaki Okazaki</a><br>
+<font size="3">
+ Abstract: Video-guided machine translation as one of multimodal neural machine translation tasks targeting on generating high-quality text translation by tangibly engaging both video and text. In this work, we presented our video-guided machine translation system in approaching the Video-guided Machine Translation Challenge 2020. This system employs keyframe-based video feature extractions along with the video feature positional encoding. In the evaluation phase, our system scored 36.60 corpus-level BLEU-4 and achieved the 1st place on the Video-guided Machine Translation Challenge 2020.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：视频引导机器翻译的对，确实地从事视频和文本生成高质量的文本翻译瞄准多式联运神经机器翻译的任务之一。在这项工作中，我们提出我们的视频指导的机器翻译系统在接近视频引导机器翻译挑战2020年该系统采用基于关键帧的视频特征提取与视频功能位置编码一起。在评估阶段，我们的系统拿下36.60语料库级BLEU-4和视频引导机器翻译挑战2020获得第一名。</font>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Unsupervised Evaluation of Interactive Dialog with DialoGPT</b>  <a href="https://arxiv.org/pdf/2006.12719" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Mehri%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Shikib Mehri</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Eskenazi%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Maxine Eskenazi</a><br>
+<font size="3">
+ Abstract: It is important to define meaningful and interpretable automatic evaluation metrics for open-domain dialog research. Standard language generation metrics have been shown to be ineffective for dialog. This paper introduces the FED metric (fine-grained evaluation of dialog), an automatic evaluation metric which uses DialoGPT, without any fine-tuning or supervision. It also introduces the FED dataset which is constructed by annotating a set of human-system and human-human conversations with eighteen fine-grained dialog qualities. The FED metric (1) does not rely on a ground-truth response, (2) does not require training data and (3) measures fine-grained dialog qualities at both the turn and whole dialog levels. FED attains moderate to strong correlation with human judgement at both levels.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：定义为开放域对话框的研究意义和解释的自动评估指标是非常重要的。标准语言生成的指标已被证明是无效的对话框。本文介绍了FED度量（对话的细粒度评价），自动评估度量其使用DialoGPT，没有任何微调或监督。它还介绍了一种通过注释的一组人的系统和人 - 人交谈的用十八细粒对话框素质构成的FED数据集。美联储指标（1）不依赖于地面实况响应，（2）不需要之交和整个对话两级训练数据和（3）措施细粒度对话框品质。 FED温和无所获在这两个级别与人的判断密切相关。</font>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. Exploring Software Naturalness throughNeural Language Models</b>  <a href="https://arxiv.org/pdf/2006.12641" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;<a href="https://arxiv.org/search/cs?searchtype=author&query=Buratti%2C+L" target="_blank" rel="noopener" style="color:#0000EE;">Luca Buratti</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Pujar%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Saurabh Pujar</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Bornea%2C+M" target="_blank" rel="noopener" style="color:#0000EE;">Mihaela Bornea</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=McCarley%2C+S" target="_blank" rel="noopener" style="color:#0000EE;">Scott McCarley</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zheng%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yunhui Zheng</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Rossiello%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Gaetano Rossiello</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Morari%2C+A" target="_blank" rel="noopener" style="color:#0000EE;">Alessandro Morari</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Laredo%2C+J" target="_blank" rel="noopener" style="color:#0000EE;">Jim Laredo</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Thost%2C+V" target="_blank" rel="noopener" style="color:#0000EE;">Veronika Thost</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Zhuang%2C+Y" target="_blank" rel="noopener" style="color:#0000EE;">Yufan Zhuang</a>, 
+<a href="https://arxiv.org/search/cs?searchtype=author&query=Domeniconi%2C+G" target="_blank" rel="noopener" style="color:#0000EE;">Giacomo Domeniconi</a><br>
+<font size="3">
+ Abstract: The Software Naturalness hypothesis argues that programming languages can be understood through the same techniques used in natural language processing. We explore this hypothesis through the use of a pre-trained transformer-based language model to perform code analysis tasks.   </font>
+<br>
+<font size="2" style="line-height:30px;">
+摘要：软件自然性假说认为，编程语言可以通过自然语言处理中使用的相同的技术来理解。我们通过使用预先训练的基于变压器的语言模型的探索这一假设进行代码分析任务。</font>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：中文为机器翻译结果！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/06/24/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-24/" title="【arxiv论文】 Computation and Language 2020-06-24">https://procjx.github.io/2020/06/24/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-24/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/06/23/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computation%20and%20Language%202020-06-23/" rel="next" title="【arxiv论文】 Computation and Language 2020-06-23">
+                  <i class="fa fa-chevron-left"></i> 【arxiv论文】 Computation and Language 2020-06-23
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/06/24/%E3%80%90arxiv%E8%AE%BA%E6%96%87%E3%80%91%20Computer%20Vision%20and%20Pattern%20Recognition%202020-06-24/" rel="prev" title="【arxiv论文】 Computer Vision and Pattern Recognition 2020-06-24">
+                  【arxiv论文】 Computer Vision and Pattern Recognition 2020-06-24 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">242</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translation/" rel="tag">Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Translation/" rel="tag">Word Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" rel="tag">斐波那契数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%89%E8%AF%BA%E5%A1%94/" rel="tag">汉诺塔</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: '74218b983f8f33573d3f976324f0d737',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
