@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/procjx.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/procjxfavicon32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/procjxfavicon16x16.ico">
+  <link rel="mask-icon" href="/images/procjx.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+<!-- Google Adsense -->
+<!--
+<script async src="//pagead2.googlesyndication.com/
+pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "pub-1179774715076800",
+enable_page_level_ads: true
+});
+</script>
+-->
+
+<script data-ad-client="ca-pub-1179774715076800" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<meta name="google-site-verification" content="cEiGwg0T8Rj5msmuEcGYZTh5nnf05EhCXy0gp2Ml5BI" />
+<meta name="baidu-site-verification" content="noSKHe8MJs" />
+
+  <meta name="description" content="目录  1. Multi-View Consistency for Relation Extraction via Mutual Information and Structure Prediction, AAAI 2020 [PDF] 摘要  2. Integrating Deep Learning with Logic Fusion for Information Extraction, AA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【NLP】 2014-2020 Information Extraction 信息抽取相关论文整理">
+<meta property="og:url" content="https:&#x2F;&#x2F;procjx.github.io&#x2F;2020&#x2F;12&#x2F;09&#x2F;%E3%80%90NLP%E3%80%91%202014-2020%20Information%20Extraction%20%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="PROCJX&#39;s BLOGS">
+<meta property="og:description" content="目录  1. Multi-View Consistency for Relation Extraction via Mutual Information and Structure Prediction, AAAI 2020 [PDF] 摘要  2. Integrating Deep Learning with Logic Fusion for Information Extraction, AA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-12-09T13:39:03.009Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://procjx.github.io/2020/12/09/%E3%80%90NLP%E3%80%91%202014-2020%20Information%20Extraction%20%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【NLP】 2014-2020 Information Extraction 信息抽取相关论文整理 | PROCJX's BLOGS</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PROCJX's BLOGS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">WITH LOVE OF WORLD</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-download"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-arxiv">
+
+    <a href="/arxiv/" rel="section"><i class="fa fa-fw fa-file-pdf-o"></i>arxiv论文</a>
+
+  </li>
+        <li class="menu-item menu-item-deadline">
+
+    <a href="/deadline/" rel="section"><i class="fa fa-fw fa-calendar"></i>会议截稿</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://procjx.github.io/2020/12/09/%E3%80%90NLP%E3%80%91%202014-2020%20Information%20Extraction%20%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/procjx.png">
+      <meta itemprop="name" content="PROCJX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PROCJX's BLOGS">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          【NLP】 2014-2020 Information Extraction 信息抽取相关论文整理
+        </h2>
+
+        <div class="post-meta">
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-09 21:38:36 / 修改时间：21:39:03" itemprop="dateCreated datePublished" datetime="2020-12-09T21:38:36+08:00">2020-12-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AC%E8%AE%BA%E6%96%87/" itemprop="url" rel="index">
+                    <span itemprop="name">AC论文</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AC%E8%AE%BA%E6%96%87/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>92k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>2:33</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><div style="color:red;">目录</div></h1><font size="4">
+<div id="title1">
+<b>1.</b> Multi-View Consistency for Relation Extraction via Mutual Information and Structure Prediction, AAAI 2020 <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6445/6301" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper1" style="color:#0000EE;">摘要</a><br></div>
+<div id="title2">
+<b>2.</b> Integrating Deep Learning with Logic Fusion for Information Extraction, AAAI 2020 <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6460/6316" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper2" style="color:#0000EE;">摘要</a><br></div>
+<div id="title3">
+<b>3.</b> Span Model for Open Information Extraction on Accurate Corpus, AAAI 2020 <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6497/6353" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper3" style="color:#0000EE;">摘要</a><br></div>
+<div id="title4">
+<b>4.</b> A System for Medical Information Extraction and Verification from Unstructured Text, AAAI 2020 <a href="https://aaai.org/ojs/index.php/AAAI/article/view/7042/6896" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper4" style="color:#0000EE;">摘要</a><br></div>
+<div id="title5">
+<b>5.</b> The SOFC-Exp Corpus and Neural Approaches to Information Extraction in the Materials Science Domain, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.acl-main.116.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper5" style="color:#0000EE;">摘要</a><br></div>
+<div id="title6">
+<b>6.</b> IMoJIE: Iterative Memory-Based Joint Open Information Extraction, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.acl-main.521.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper6" style="color:#0000EE;">摘要</a><br></div>
+<div id="title7">
+<b>7.</b> Representation Learning for Information Extraction from Form-like Documents, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.acl-main.580.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper7" style="color:#0000EE;">摘要</a><br></div>
+<div id="title8">
+<b>8.</b> SciREX: A Challenge Dataset for Document-Level Information Extraction, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.acl-main.670.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper8" style="color:#0000EE;">摘要</a><br></div>
+<div id="title9">
+<b>9.</b> A Joint Neural Model for Information Extraction with Global Features, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.acl-main.713.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper9" style="color:#0000EE;">摘要</a><br></div>
+<div id="title10">
+<b>10.</b> Multi-modal Information Extraction from Text, Semi-structured, and Tabular Data on the Web, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.acl-tutorials.6.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper10" style="color:#0000EE;">摘要</a><br></div>
+<div id="title11">
+<b>11.</b> Information Retrieval and Extraction on COVID-19 Clinical Articles Using Graph Community Detection and Bio-BERT Embeddings, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.nlpcovid19-acl.7.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper11" style="color:#0000EE;">摘要</a><br></div>
+<div id="title12">
+<b>12.</b> NLP-based Feature Extraction for the Detection of COVID-19 Misinformation Videos on YouTube, ACL 2020 <a href="https://www.aclweb.org/anthology/2020.nlpcovid19-acl.17.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper12" style="color:#0000EE;">摘要</a><br></div>
+<div id="title13">
+<b>13.</b> Incorporating Multimodal Information in Open-Domain Web Keyphrase Extraction, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.emnlp-main.140.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper13" style="color:#0000EE;">摘要</a><br></div>
+<div id="title14">
+<b>14.</b> Systematic Comparison of Neural Architectures and Training Approaches for Open Information Extraction, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.emnlp-main.690.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper14" style="color:#0000EE;">摘要</a><br></div>
+<div id="title15">
+<b>15.</b> An Information Bottleneck Approach for Controlling Conciseness in Rationale Extraction, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.emnlp-main.153.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper15" style="color:#0000EE;">摘要</a><br></div>
+<div id="title16">
+<b>16.</b> Constrained Iterative Labeling for Open Information Extraction, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.emnlp-main.306.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper16" style="color:#0000EE;">摘要</a><br></div>
+<div id="title17">
+<b>17.</b> An Empirical Study of Pre-trained Transformers for Arabic Information Extraction, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.emnlp-main.382.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper17" style="color:#0000EE;">摘要</a><br></div>
+<div id="title18">
+<b>18.</b> Syntactic and Semantic-driven Learning for Open Information Extraction, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.findings-emnlp.69.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper18" style="color:#0000EE;">摘要</a><br></div>
+<div id="title19">
+<b>19.</b> Multiˆ2OIE: Multilingual Open Information Extraction based on Multi-Head Attention with BERT, EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.findings-emnlp.99.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper19" style="color:#0000EE;">摘要</a><br></div>
+<div id="title20">
+<b>20.</b> A Survey on Temporal Reasoning for Temporal Information Extraction from Text (Extended Abstract), IJCAI 2020 <a href="https://www.ijcai.org/proceedings/2020/0712.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper20" style="color:#0000EE;">摘要</a><br></div>
+<div id="title21">
+<b>21.</b> Unsupervised Information Extraction: Regularizing Discriminative Approaches with Relation Distribution Losses, ACL 2019 <a href="https://www.aclweb.org/anthology/P19-1133.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper21" style="color:#0000EE;">摘要</a><br></div>
+<div id="title22">
+<b>22.</b> Chinese Relation Extraction with Multi-Grained Information and External Linguistic Knowledge, ACL 2019 <a href="https://www.aclweb.org/anthology/P19-1430.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper22" style="color:#0000EE;">摘要</a><br></div>
+<div id="title23">
+<b>23.</b> Improving Open Information Extraction via Iterative Rank-Aware Learning, ACL 2019 <a href="https://www.aclweb.org/anthology/P19-1523.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper23" style="color:#0000EE;">摘要</a><br></div>
+<div id="title24">
+<b>24.</b> WiRe57 : A Fine-Grained Benchmark for Open Information Extraction, ACL 2019 <a href="https://www.aclweb.org/anthology/W19-4002.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper24" style="color:#0000EE;">摘要</a><br></div>
+<div id="title25">
+<b>25.</b> Supervising Unsupervised Open Information Extraction Models, EMNLP 2019 <a href="https://www.aclweb.org/anthology/D19-1067.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper25" style="color:#0000EE;">摘要</a><br></div>
+<div id="title26">
+<b>26.</b> Easy First Relation Extraction with Information Redundancy, EMNLP 2019 <a href="https://www.aclweb.org/anthology/D19-1398.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper26" style="color:#0000EE;">摘要</a><br></div>
+<div id="title27">
+<b>27.</b> Coverage of Information Extraction from Sentences and Paragraphs, EMNLP 2019 <a href="https://www.aclweb.org/anthology/D19-1583.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper27" style="color:#0000EE;">摘要</a><br></div>
+<div id="title28">
+<b>28.</b> Conceptualisation and Annotation of Drug Nonadherence Information for Knowledge Extraction from Patient-Generated Texts, EMNLP 2019 <a href="https://www.aclweb.org/anthology/D19-5526.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper28" style="color:#0000EE;">摘要</a><br></div>
+<div id="title29">
+<b>29.</b> Multi-View Multi-Label Learning with View-Specific Information Extraction, IJCAI 2019 <a href="https://www.ijcai.org/proceedings/2019/0539.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper29" style="color:#0000EE;">摘要</a><br></div>
+<div id="title30">
+<b>30.</b> Improving Cross-Domain Performance for Relation Extraction via Dependency Prediction and Information Flow Control, IJCAI 2019 <a href="https://www.ijcai.org/proceedings/2019/0716.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper30" style="color:#0000EE;">摘要</a><br></div>
+<div id="title31">
+<b>31.</b> GraphIE: A Graph-Based Framework for Information Extraction, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1082.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper31" style="color:#0000EE;">摘要</a><br></div>
+<div id="title32">
+<b>32.</b> OpenKI: Integrating Open Information Extraction and Knowledge Bases with Relation Inference, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1083.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper32" style="color:#0000EE;">摘要</a><br></div>
+<div id="title33">
+<b>33.</b> Predicting Annotation Difficulty to Improve Task Routing and Model Performance for Biomedical Information Extraction, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1150.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper33" style="color:#0000EE;">摘要</a><br></div>
+<div id="title34">
+<b>34.</b> Glocal: Incorporating Global Information in Local Convolution for Keyphrase Extraction, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1182.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper34" style="color:#0000EE;">摘要</a><br></div>
+<div id="title35">
+<b>35.</b> Open Information Extraction from Question-Answer Pairs, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1239.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper35" style="color:#0000EE;">摘要</a><br></div>
+<div id="title36">
+<b>36.</b> A general framework for information extraction using dynamic span graphs, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1308.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper36" style="color:#0000EE;">摘要</a><br></div>
+<div id="title37">
+<b>37.</b> OpenCeres: When Open Information Extraction Meets the Semi-Structured Web, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-1309.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper37" style="color:#0000EE;">摘要</a><br></div>
+<div id="title38">
+<b>38.</b> Graph Convolution for Multimodal Information Extraction from Visually Rich Documents, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-2005.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper38" style="color:#0000EE;">摘要</a><br></div>
+<div id="title39">
+<b>39.</b> TOI-CNN: a Solution of Information Extraction on Chinese Insurance Policy, NAACL 2019 <a href="https://www.aclweb.org/anthology/N19-2022.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper39" style="color:#0000EE;">摘要</a><br></div>
+<div id="title40">
+<b>40.</b> Scalable, Semi-Supervised Extraction of Structured Information from Scientific Literature, NAACL 2019 <a href="https://www.aclweb.org/anthology/W19-2602.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper40" style="color:#0000EE;">摘要</a><br></div>
+<div id="title41">
+<b>41.</b> Browsing Health: Information Extraction to Support New Interfaces for Accessing Medical Evidence, NAACL 2019 <a href="https://www.aclweb.org/anthology/W19-2606.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper41" style="color:#0000EE;">摘要</a><br></div>
+<div id="title42">
+<b>42.</b> Assertion-Based QA With Question-Aware Open Information Extraction, AAAI 2018 <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16705/16170" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper42" style="color:#0000EE;">摘要</a><br></div>
+<div id="title43">
+<b>43.</b> Context-Aware Neural Model for Temporal Information Extraction, ACL 2018 <a href="https://www.aclweb.org/anthology/P18-1049.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper43" style="color:#0000EE;">摘要</a><br></div>
+<div id="title44">
+<b>44.</b> Adaptive Scaling for Sparse Detection in Information Extraction, ACL 2018 <a href="https://www.aclweb.org/anthology/P18-1095.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper44" style="color:#0000EE;">摘要</a><br></div>
+<div id="title45">
+<b>45.</b> Neural Open Information Extraction, ACL 2018 <a href="https://www.aclweb.org/anthology/P18-2065.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper45" style="color:#0000EE;">摘要</a><br></div>
+<div id="title46">
+<b>46.</b> Enhancing Drug-Drug Interaction Extraction from Texts by Molecular Structure Information, ACL 2018 <a href="https://www.aclweb.org/anthology/P18-2108.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper46" style="color:#0000EE;">摘要</a><br></div>
+<div id="title47">
+<b>47.</b> Last Words: What Can Be Accomplished with the State of the Art in Information Extraction? A Personal View, CL 2018 <a href="https://www.aclweb.org/anthology/J18-4004.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper47" style="color:#0000EE;">摘要</a><br></div>
+<div id="title48">
+<b>48.</b> Open Information Extraction from Conjunctive Sentences, COLING 2018 <a href="https://www.aclweb.org/anthology/C18-1194.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper48" style="color:#0000EE;">摘要</a><br></div>
+<div id="title49">
+<b>49.</b> Graphene: Semantically-Linked Propositions in Open Information Extraction, COLING 2018 <a href="https://www.aclweb.org/anthology/C18-1195.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper49" style="color:#0000EE;">摘要</a><br></div>
+<div id="title50">
+<b>50.</b> Open Information Extraction on Scientific Text: An Evaluation, COLING 2018 <a href="https://www.aclweb.org/anthology/C18-1289.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper50" style="color:#0000EE;">摘要</a><br></div>
+<div id="title51">
+<b>51.</b> A Survey on Open Information Extraction, COLING 2018 <a href="https://www.aclweb.org/anthology/C18-1326.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper51" style="color:#0000EE;">摘要</a><br></div>
+<div id="title52">
+<b>52.</b> Graphene: a Context-Preserving Open Information Extraction System, COLING 2018 <a href="https://www.aclweb.org/anthology/C18-2021.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper52" style="color:#0000EE;">摘要</a><br></div>
+<div id="title53">
+<b>53.</b> An Evaluation of Information Extraction Tools for Identifying Health Claims in News Headlines, COLING 2018 <a href="https://www.aclweb.org/anthology/W18-4305.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper53" style="color:#0000EE;">摘要</a><br></div>
+<div id="title54">
+<b>54.</b> Temporal Information Extraction by Predicting Relative Time-lines, EMNLP 2018 <a href="https://www.aclweb.org/anthology/D18-1155.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper54" style="color:#0000EE;">摘要</a><br></div>
+<div id="title55">
+<b>55.</b> Jointly Multiple Events Extraction via Attention-based Graph Information Aggregation, EMNLP 2018 <a href="https://www.aclweb.org/anthology/D18-1156.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper55" style="color:#0000EE;">摘要</a><br></div>
+<div id="title56">
+<b>56.</b> RESIDE: Improving Distantly-Supervised Neural Relation Extraction using Side Information, EMNLP 2018 <a href="https://www.aclweb.org/anthology/D18-1157.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper56" style="color:#0000EE;">摘要</a><br></div>
+<div id="title57">
+<b>57.</b> Visual Supervision in Bootstrapped Information Extraction, EMNLP 2018 <a href="https://www.aclweb.org/anthology/D18-1229.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper57" style="color:#0000EE;">摘要</a><br></div>
+<div id="title58">
+<b>58.</b> A Multilingual Information Extraction Pipeline for Investigative Journalism, EMNLP 2018 <a href="https://www.aclweb.org/anthology/D18-2014.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper58" style="color:#0000EE;">摘要</a><br></div>
+<div id="title59">
+<b>59.</b> Joint Modeling for Query Expansion and Information Extraction with Reinforcement Learning, EMNLP 2018 <a href="https://www.aclweb.org/anthology/W18-5506.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper59" style="color:#0000EE;">摘要</a><br></div>
+<div id="title60">
+<b>60.</b> Improving Information Extraction from Images with Learned Semantic Models, IJCAI 2018 <a href="https://www.ijcai.org/proceedings/2018/0724.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper60" style="color:#0000EE;">摘要</a><br></div>
+<div id="title61">
+<b>61.</b> Supervised Open Information Extraction, NAACL 2018 <a href="https://www.aclweb.org/anthology/N18-1081.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper61" style="color:#0000EE;">摘要</a><br></div>
+<div id="title62">
+<b>62.</b> Keep Your Bearings: Lightly-Supervised Information Extraction with Ladder Networks That Avoids Semantic Drift, NAACL 2018 <a href="https://www.aclweb.org/anthology/N18-2057.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper62" style="color:#0000EE;">摘要</a><br></div>
+<div id="title63">
+<b>63.</b> Syntactic Patterns Improve Information Extraction for Medical Search, NAACL 2018 <a href="https://www.aclweb.org/anthology/N18-2060.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper63" style="color:#0000EE;">摘要</a><br></div>
+<div id="title64">
+<b>64.</b> Automatic Emphatic Information Extraction from Aligned Acoustic Data and Its Application on Sentence Compression, AAAI 2017 <a href="https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14779/14127" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper64" style="color:#0000EE;">摘要</a><br></div>
+<div id="title65">
+<b>65.</b> Answering Complex Questions Using Open Information Extraction, ACL 2017 <a href="https://www.aclweb.org/anthology/P17-2049.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper65" style="color:#0000EE;">摘要</a><br></div>
+<div id="title66">
+<b>66.</b> Temporal Information Extraction for Question Answering Using Syntactic Dependencies in an LSTM-based Architecture, EMNLP 2017 <a href="https://www.aclweb.org/anthology/D17-1092.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper66" style="color:#0000EE;">摘要</a><br></div>
+<div id="title67">
+<b>67.</b> MinIE: Minimizing Facts in Open Information Extraction, EMNLP 2017 <a href="https://www.aclweb.org/anthology/D17-1278.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper67" style="color:#0000EE;">摘要</a><br></div>
+<div id="title68">
+<b>68.</b> Scientific Information Extraction with Semi-supervised Neural Tagging, EMNLP 2017 <a href="https://www.aclweb.org/anthology/D17-1279.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper68" style="color:#0000EE;">摘要</a><br></div>
+<div id="title69">
+<b>69.</b> Speeding up Reinforcement Learning-based Information Extraction Training using Asynchronous Methods, EMNLP 2017 <a href="https://www.aclweb.org/anthology/D17-1281.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper69" style="color:#0000EE;">摘要</a><br></div>
+<div id="title70">
+<b>70.</b> Joint Inference over a Lightly Supervised Information Extraction Pipeline: Towards Event Coreference Resolution for Resource-Scarce Languages, AAAI 2016 <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12413/12041" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper70" style="color:#0000EE;">摘要</a><br></div>
+<div id="title71">
+<b>71.</b> Aggregating Inter-Sentence Information to Enhance Relation Extraction, AAAI 2016 <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12042/12068" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper71" style="color:#0000EE;">摘要</a><br></div>
+<div id="title72">
+<b>72.</b> On the Extraction of One Maximal Information Subset That Does Not Conflict with Multiple Contexts, AAAI 2016 <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11751/12108" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper72" style="color:#0000EE;">摘要</a><br></div>
+<div id="title73">
+<b>73.</b> new/s/leak – Information Extraction and Visualization for Investigative Data Journalists, ACL 2016 <a href="https://www.aclweb.org/anthology/P16-4028.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper73" style="color:#0000EE;">摘要</a><br></div>
+<div id="title74">
+<b>74.</b> OCR++: A Robust Framework For Information Extraction from Scholarly Articles, COLING 2016 <a href="https://www.aclweb.org/anthology/C16-1320.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper74" style="color:#0000EE;">摘要</a><br></div>
+<div id="title75">
+<b>75.</b> Multilingual Information Extraction with PolyglotIE, COLING 2016 <a href="https://www.aclweb.org/anthology/C16-2056.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper75" style="color:#0000EE;">摘要</a><br></div>
+<div id="title76">
+<b>76.</b> Nested Propositions in Open Information Extraction, EMNLP 2016 <a href="https://www.aclweb.org/anthology/D16-1006.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper76" style="color:#0000EE;">摘要</a><br></div>
+<div id="title77">
+<b>77.</b> Porting an Open Information Extraction System from English to German, EMNLP 2016 <a href="https://www.aclweb.org/anthology/D16-1086.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper77" style="color:#0000EE;">摘要</a><br></div>
+<div id="title78">
+<b>78.</b> Toward Socially-Infused Information Extraction: Embedding Authors, Mentions, and Entities, EMNLP 2016 <a href="https://www.aclweb.org/anthology/D16-1152.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper78" style="color:#0000EE;">摘要</a><br></div>
+<div id="title79">
+<b>79.</b> Creating a Large Benchmark for Open Information Extraction, EMNLP 2016 <a href="https://www.aclweb.org/anthology/D16-1252.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper79" style="color:#0000EE;">摘要</a><br></div>
+<div id="title80">
+<b>80.</b> Improving Information Extraction by Acquiring External Evidence with Reinforcement Learning, EMNLP 2016 <a href="https://www.aclweb.org/anthology/D16-1261.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper80" style="color:#0000EE;">摘要</a><br></div>
+<div id="title81">
+<b>81.</b> Automated Narrative Information Extraction Using Non-Linear Pipelines, IJCAI 2016 <a href="https://www.ijcai.org/Proceedings/16/Papers/592.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper81" style="color:#0000EE;">摘要</a><br></div>
+<div id="title82">
+<b>82.</b> Open Information Extraction Systems and Downstream Applications, IJCAI 2016 <a href="https://www.ijcai.org/Proceedings/16/Papers/604.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper82" style="color:#0000EE;">摘要</a><br></div>
+<div id="title83">
+<b>83.</b> Ontology-Based Information Extraction with a Cognitive Agent, AAAI 2015 <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9787/9294" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper83" style="color:#0000EE;">摘要</a><br></div>
+<div id="title84">
+<b>84.</b> Leveraging Linguistic Structure For Open Domain Information Extraction, ACL 2015 <a href="https://www.aclweb.org/anthology/P15-1034.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper84" style="color:#0000EE;">摘要</a><br></div>
+<div id="title85">
+<b>85.</b> Joint Information Extraction and Reasoning: A Scalable Statistical Relational Learning Approach, ACL 2015 <a href="https://www.aclweb.org/anthology/P15-1035.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper85" style="color:#0000EE;">摘要</a><br></div>
+<div id="title86">
+<b>86.</b> Leveraging Linguistic Structure For Open Domain Information Extraction, ACL 2015 <a href="https://www.aclweb.org/anthology/P15-1034.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper86" style="color:#0000EE;">摘要</a><br></div>
+<div id="title87">
+<b>87.</b> Joint Information Extraction and Reasoning: A Scalable Statistical Relational Learning Approach, ACL 2015 <a href="https://www.aclweb.org/anthology/P15-1035.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper87" style="color:#0000EE;">摘要</a><br></div>
+<div id="title88">
+<b>88.</b> A Lexicalized Tree Kernel for Open Information Extraction, ACL 2015 <a href="https://www.aclweb.org/anthology/P15-2046.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper88" style="color:#0000EE;">摘要</a><br></div>
+<div id="title89">
+<b>89.</b> Improving Distant Supervision for Information Extraction Using Label Propagation Through Lists, EMNLP 2015 <a href="https://www.aclweb.org/anthology/D15-1060.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper89" style="color:#0000EE;">摘要</a><br></div>
+<div id="title90">
+<b>90.</b> Inferring Binary Relation Schemas for Open Information Extraction, EMNLP 2015 <a href="https://www.aclweb.org/anthology/D15-1065.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper90" style="color:#0000EE;">摘要</a><br></div>
+<div id="title91">
+<b>91.</b> Abstractive Multi-document Summarization with Semantic Information Extraction, EMNLP 2015 <a href="https://www.aclweb.org/anthology/D15-1219.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper91" style="color:#0000EE;">摘要</a><br></div>
+<div id="title92">
+<b>92.</b> Transparent Machine Learning for Information Extraction: State-of-the-Art and the Future, EMNLP 2015 <a href style="color:#0000EE;">[PDF]</a> <a href="#paper92" style="color:#0000EE;">摘要</a><br></div>
+<div id="title93">
+<b>93.</b> Information Extraction of Texts in the Biomedical Domain, IJCAI 2015 <a href="https://www.ijcai.org/Proceedings/15/Papers/626.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper93" style="color:#0000EE;">摘要</a><br></div>
+<div id="title94">
+<b>94.</b> Automatic Extraction of References to Future Events from News Articles Using Semantic and Morphological Information, IJCAI 2015 <a href="https://www.ijcai.org/Proceedings/15/Papers/640.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper94" style="color:#0000EE;">摘要</a><br></div>
+<div id="title95">
+<b>95.</b> Exploring Relational Features and Learning under Distant Supervision for Information Extraction Tasks, NAACL 2015 <a href="https://www.aclweb.org/anthology/N15-2006.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper95" style="color:#0000EE;">摘要</a><br></div>
+<div id="title96">
+<b>96.</b> ICE: Rapid Information Extraction Customization for NLP Novices, NAACL 2015 <a href="https://www.aclweb.org/anthology/N15-3007.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper96" style="color:#0000EE;">摘要</a><br></div>
+<div id="title97">
+<b>97.</b> Large-Scale Information Extraction from Textual Definitions through Deep Syntactic and Semantic Analysis, TACL 2015 <a href="https://www.aclweb.org/anthology/Q15-1038.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper97" style="color:#0000EE;">摘要</a><br></div>
+<div id="title98">
+<b>98.</b> Experiments on Visual Information Extraction with the Faces of Wikipedia, AAAI 2014 <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI14/paper/view/8570/8398" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper98" style="color:#0000EE;">摘要</a><br></div>
+<div id="title99">
+<b>99.</b> Information Extraction over Structured Data: Question Answering with Freebase, ACL 2014 <a href="https://www.aclweb.org/anthology/P14-1090.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper99" style="color:#0000EE;">摘要</a><br></div>
+<div id="title100">
+<b>100.</b> Open Information Extraction for Spanish Language based on Syntactic Constraints, ACL 2014 <a href="https://www.aclweb.org/anthology/P14-3011.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper100" style="color:#0000EE;">摘要</a><br></div>
+<div id="title101">
+<b>101.</b> Cross-Lingual Information to the Rescue in Keyword Extraction, ACL 2014 <a href="https://www.aclweb.org/anthology/P14-5001.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper101" style="color:#0000EE;">摘要</a><br></div>
+<div id="title102">
+<b>102.</b> Single Document Keyphrase Extraction Using Label Information, COLING 2014 <a href="https://www.aclweb.org/anthology/C14-1139.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper102" style="color:#0000EE;">摘要</a><br></div>
+<div id="title103">
+<b>103.</b> Combining Visual and Textual Features for Information Extraction from Online Flyers, EMNLP 2014 <a href="https://www.aclweb.org/anthology/D14-1206.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a> <a href="#paper103" style="color:#0000EE;">摘要</a><br></div>
+</font><a id="more"></a>
+
+
+<hr>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>                    <!-- procjx-wenzhang2 -->                     <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1179774715076800" data-ad-slot="5367332398"></ins>                     <script>                         (adsbygoogle = window.adsbygoogle || []).push({});                     </script>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><div style="color:red;">摘要</div></h1><div id="paper1"> <b>1. Multi-View Consistency for Relation Extraction via Mutual Information and Structure Prediction</b>  <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6445/6301" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title1" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2020. AAAI Technical Track: Natural Language Processing<br>&nbsp;&nbsp;<i>Amir Pouran Ben Veyseh, Franck Dernoncourt, My Tra Thai, Dejing Dou, Thien Huu Nguyen</i><br>
+<font size="3">
+Relation Extraction (RE) is one of the fundamental tasks in Information Extraction. The goal of this task is to find the semantic relations between entity mentions in text. It has been shown in many previous work that the structure of the sentences (i.e., dependency trees) can provide important information/features for the RE models. However, the common limitation of the previous work on RE is the reliance on some external parsers to obtain the syntactic trees for the sentence structures. On the one hand, it is not guaranteed that the independent external parsers can offer the optimal sentence structures for RE and the customized structures for RE might help to further improve the performance. On the other hand, the quality of the external parsers might suffer when applied to different domains, thus also affecting the performance of the RE models on such domains. In order to overcome this issue, we introduce a novel method for RE that simultaneously induces the structures and predicts the relations for the input sentences, thus avoiding the external parsers and potentially leading to better sentence structures for RE. Our general strategy to learn the RE-specific structures is to apply two different methods to infer the structures for the input sentences (i.e., two views). We then introduce several mechanisms to encourage the structure and semantic consistencies between these two views so the effective structure and semantic representations for RE can emerge. We perform extensive experiments on the ACE 2005 and SemEval 2010 datasets to demonstrate the advantages of the proposed method, leading to the state-of-the-art performance on such datasets.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper2"> <b>2. Integrating Deep Learning with Logic Fusion for Information Extraction</b>  <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6460/6316" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title2" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2020. AAAI Technical Track: Natural Language Processing<br>&nbsp;&nbsp;<i>Wenya Wang, Sinno Jialin Pan</i><br>
+<font size="3">
+Information extraction (IE) aims to produce structured information from an input text, e.g., Named Entity Recognition and Relation Extraction. Various attempts have been proposed for IE via feature engineering or deep learning. However, most of them fail to associate the complex relationships inherent in the task itself, which has proven to be especially crucial. For example, the relation between 2 entities is highly dependent on their entity types. These dependencies can be regarded as complex constraints that can be efficiently expressed as logical rules. To combine such logic reasoning capabilities with learning capabilities of deep neural networks, we propose to integrate logical knowledge in the form of first-order logic into a deep learning system, which can be trained jointly in an end-to-end manner. The integrated framework is able to enhance neural outputs with knowledge regularization via logic rules, and at the same time update the weights of logic rules to comply with the characteristics of the training data. We demonstrate the effectiveness and generalization of the proposed model on multiple IE tasks.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper3"> <b>3. Span Model for Open Information Extraction on Accurate Corpus</b>  <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6497/6353" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title3" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2020. AAAI Technical Track: Natural Language Processing<br>&nbsp;&nbsp;<i>Junlang Zhan, Hai Zhao</i><br>
+<font size="3">
+Open Information Extraction (Open IE) is a challenging task especially due to its brittle data basis. Most of Open IE systems have to be trained on automatically built corpus and evaluated on inaccurate test set. In this work, we first alleviate this difficulty from both sides of training and test sets. For the former, we propose an improved model design to more sufficiently exploit training dataset. For the latter, we present our accurately re-annotated benchmark test set (Re-OIE2016) according to a series of linguistic observation and analysis. Then, we introduce a span model instead of previous adopted sequence labeling formulization for n-ary Open IE. Our newly introduced model achieves new state-of-the-art performance on both benchmark evaluation datasets.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper4"> <b>4. A System for Medical Information Extraction and Verification from Unstructured Text</b>  <a href="https://aaai.org/ojs/index.php/AAAI/article/view/7042/6896" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title4" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2020. IAAI Technical Track: Emerging Papers<br>&nbsp;&nbsp;<i>Damir Juric, Giorgos Stoilos, André Melo, Jonathan Moore, Mohammad Khodadadi</i><br>
+<font size="3">
+A wealth of medical knowledge has been encoded in terminologies like SNOMED CT, NCI, FMA, and more. However, these resources are usually lacking information like relations between diseases, symptoms, and risk factors preventing their use in diagnostic or other decision making applications. In this paper we present a pipeline for extracting such information from unstructured text and enriching medical knowledge bases. Our approach uses Semantic Role Labelling and is unsupervised. We show how we dealt with several deficiencies of SRL-based extraction, like copula verbs, relations expressed through nouns, and assigning scores to extracted triples. The system have so far extracted about 120K relations and in-house doctors verified about 5k relationships. We compared the output of the system with a manually constructed network of diseases, symptoms and risk factors build by doctors in the course of a year. Our results show that our pipeline extracts good quality and precise relations and speeds up the knowledge acquisition process considerably.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper5"> <b>5. The SOFC-Exp Corpus and Neural Approaches to Information Extraction in the Materials Science Domain</b>  <a href="https://www.aclweb.org/anthology/2020.acl-main.116.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title5" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. <br>&nbsp;&nbsp;<i>Annemarie Friedrich, Heike Adel, Federico Tomazic, Johannes Hingerl, Renou Benteau, Anika Marusczyk, Lukas Lange</i><br>
+<font size="3">
+This paper presents a new challenging information extraction task in the domain of materials science. We develop an annotation scheme for marking information on experiments related to solid oxide fuel cells in scientific publications, such as involved materials and measurement conditions. With this paper, we publish our annotation guidelines, as well as our SOFC-Exp corpus consisting of 45 open-access scholarly articles annotated by domain experts. A corpus and an inter-annotator agreement study demonstrate the complexity of the suggested named entity recognition and slot filling tasks as well as high annotation quality. We also present strong neural-network based models for a variety of tasks that can be addressed on the basis of our new data set. On all tasks, using BERT embeddings leads to large performance gains, but with increasing task complexity, adding a recurrent neural network on top seems beneficial. Our models will serve as competitive baselines in future work, and analysis of their performance highlights difficult cases when modeling the data and suggests promising research directions.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper6"> <b>6. IMoJIE: Iterative Memory-Based Joint Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.acl-main.521.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title6" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. <br>&nbsp;&nbsp;<i>Keshav Kolluru, Samarth Aggarwal, Vipul Rathore, Mausam, Soumen Chakrabarti</i><br>
+<font size="3">
+While traditional systems for Open Information Extraction were statistical and rule-based, recently neural models have been introduced for the task. Our work builds upon CopyAttention, a sequence generation OpenIE model (Cui et. al. 18). Our analysis reveals that CopyAttention produces a constant number of extractions per sentence, and its extracted tuples often express redundant information. We present IMoJIE, an extension to CopyAttention, which produces the next extraction conditioned on all previously extracted tuples. This approach overcomes both shortcomings of CopyAttention, resulting in a variable number of diverse extractions per sentence. We train IMoJIE on training data bootstrapped from extractions of several non-neural systems, which have been automatically filtered to reduce redundancy and noise. IMoJIE outperforms CopyAttention by about 18 F1 pts, and a BERT-based strong baseline by 2 F1 pts, establishing a new state of the art for the task.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper7"> <b>7. Representation Learning for Information Extraction from Form-like Documents</b>  <a href="https://www.aclweb.org/anthology/2020.acl-main.580.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title7" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. <br>&nbsp;&nbsp;<i>Bodhisattwa Prasad Majumder, Navneet Potti, Sandeep Tata, James Bradley Wendt, Qi Zhao, Marc Najork</i><br>
+<font size="3">
+We propose a novel approach using representation learning for tackling the problem of extracting structured information from form-like document images. We propose an extraction system that uses knowledge of the types of the target fields to generate extraction candidates and a neural network architecture that learns a dense representation of each candidate based on neighboring words in the document. These learned representations are not only useful in solving the extraction task for unseen document templates from two different domains but are also interpretable, as we show using loss cases.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper8"> <b>8. SciREX: A Challenge Dataset for Document-Level Information Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.acl-main.670.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title8" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. <br>&nbsp;&nbsp;<i>Sarthak Jain, Madeleine van Zuylen, Hannaneh Hajishirzi, Iz Beltagy</i><br>
+<font size="3">
+Extracting information from full documents is an important problem in many domains, but most previous work focus on identifying relationships within a sentence or a paragraph. It is challenging to create a large-scale information extraction (IE) dataset at the document level since it requires an understanding of the whole document to annotate entities and their document-level relationships that usually span beyond sentences or even sections. In this paper, we introduce SciREX, a document level IE dataset that encompasses multiple IE tasks, including salient entity identification and document level N-ary relation identification from scientific articles. We annotate our dataset by integrating automatic and human annotations, leveraging existing scientific knowledge resources. We develop a neural model as a strong baseline that extends previous state-of-the-art IE models to document-level IE. Analyzing the model performance shows a significant gap between human performance and current baselines, inviting the community to use our dataset as a challenge to develop document-level IE models. Our data and code are publicly available at https://github.com/allenai/SciREX .</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper9"> <b>9. A Joint Neural Model for Information Extraction with Global Features</b>  <a href="https://www.aclweb.org/anthology/2020.acl-main.713.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title9" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. <br>&nbsp;&nbsp;<i>Ying Lin, Heng Ji, Fei Huang, Lingfei Wu</i><br>
+<font size="3">
+Most existing joint neural models for Information Extraction (IE) use local task-specific classifiers to predict labels for individual instances (e.g., trigger, relation) regardless of their interactions. For example, a victim of a die event is likely to be a victim of an attack event in the same sentence. In order to capture such cross-subtask and cross-instance inter-dependencies, we propose a joint neural framework, OneIE, that aims to extract the globally optimal IE result as a graph from an input sentence. OneIE performs end-to-end IE in four stages: (1) Encoding a given sentence as contextualized word representations; (2) Identifying entity mentions and event triggers as nodes; (3) Computing label scores for all nodes and their pairwise links using local classifiers; (4) Searching for the globally optimal graph with a beam decoder. At the decoding stage, we incorporate global features to capture the cross-subtask and cross-instance interactions. Experiments show that adding global features improves the performance of our model and achieves new state of-the-art on all subtasks. In addition, as OneIE does not use any language-specific feature, we prove it can be easily applied to new languages or trained in a multilingual manner.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper10"> <b>10. Multi-modal Information Extraction from Text, Semi-structured, and Tabular Data on the Web</b>  <a href="https://www.aclweb.org/anthology/2020.acl-tutorials.6.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title10" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. Tutorial Abstracts<br>&nbsp;&nbsp;<i>Xin Luna Dong, Hannaneh Hajishirzi, Colin Lockard, Prashant Shiralkar</i><br>
+<font size="3">
+The World Wide Web contains vast quantities of textual information in several forms: unstructured text, template-based semi-structured webpages (which present data in key-value pairs and lists), and tables. Methods for extracting information from these sources and converting it to a structured form have been a target of research from the natural language processing (NLP), data mining, and database communities. While these researchers have largely separated extraction from web data into different problems based on the modality of the data, they have faced similar problems such as learning with limited labeled data, defining (or avoiding defining) ontologies, making use of prior knowledge, and scaling solutions to deal with the size of the Web. In this tutorial we take a holistic view toward information extraction, exploring the commonalities in the challenges and solutions developed to address these different forms of text. We will explore the approaches targeted at unstructured text that largely rely on learning syntactic or semantic textual patterns, approaches targeted at semi-structured documents that learn to identify structural patterns in the template, and approaches targeting web tables which rely heavily on entity linking and type information. While these different data modalities have largely been considered separately in the past, recent research has started taking a more inclusive approach toward textual extraction, in which the multiple signals offered by textual, layout, and visual clues are combined into a single extraction model made possible by new deep learning approaches. At the same time, trends within purely textual extraction have shifted toward full-document understanding rather than considering sentences as independent units. With this in mind, it is worth considering the information extraction problem as a whole to motivate solutions that harness textual semantics along with visual and semi-structured layout information. We will discuss these approaches and suggest avenues for future work.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper11"> <b>11. Information Retrieval and Extraction on COVID-19 Clinical Articles Using Graph Community Detection and Bio-BERT Embeddings</b>  <a href="https://www.aclweb.org/anthology/2020.nlpcovid19-acl.7.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title11" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. the 1st Workshop on NLP for COVID-19 at ACL 2020<br>&nbsp;&nbsp;<i>Debasmita Das, Yatin Katyal, Janu Verma, Shashank Dubey, AakashDeep Singh, Kushagra Agarwal, Sourojit Bhaduri, RajeshKumar Ranjan</i><br>
+<font size="3">
+In this paper, we present an information retrieval system on a corpus of scientific articles related to COVID-19. We build a similarity network on the articles where similarity is determined via shared citations and biological domain-specific sentence embeddings. Ego-splitting community detection on the article network is employed to cluster the articles and then the queries are matched with the clusters. Extractive summarization using BERT and PageRank methods is used to provide responses to the query. We also provide a Question-Answer bot on a small set of intents to demonstrate the efficacy of our model for an information extraction module.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper12"> <b>12. NLP-based Feature Extraction for the Detection of COVID-19 Misinformation Videos on YouTube</b>  <a href="https://www.aclweb.org/anthology/2020.nlpcovid19-acl.17.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title12" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2020. the 1st Workshop on NLP for COVID-19 at ACL 2020<br>&nbsp;&nbsp;<i>Juan Carlos Medina Serrano, Orestis Papakyriakopoulos, Simon Hegelich</i><br>
+<font size="3">
+We present a simple NLP methodology for detecting COVID-19 misinformation videos on YouTube by leveraging user comments. We use transfer learning pre-trained models to generate a multi-label classifier that can categorize conspiratorial content. We use the percentage of misinformation comments on each video as a new feature for video classification.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper13"> <b>13. Incorporating Multimodal Information in Open-Domain Web Keyphrase Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.emnlp-main.140.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title13" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Long Paper<br>&nbsp;&nbsp;<i>Yansen Wang, Zhen Fan, Carolyn Rose</i><br>
+<font size="3">
+Open-domain Keyphrase extraction (KPE) on the Web is a fundamental yet complex NLP task with a wide range of practical applications within the field of Information Retrieval. In contrast to other document types, web page designs are intended for easy navigation and information finding. Effective designs encode within the layout and formatting signals that point to where the important information can be found. In this work, we propose a modeling approach that leverages these multi-modal signals to aid in the KPE task. In particular, we leverage both lexical and visual features (e.g., size, font, position) at the micro-level to enable effective strategy induction and meta-level features that describe pages at a macro-level to aid in strategy selection. Our evaluation demonstrates that a combination of effective strategy induction and strategy selection within this approach for the KPE task outperforms state-of-the-art models. A qualitative post-hoc analysis illustrates how these features function within the model.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper14"> <b>14. Systematic Comparison of Neural Architectures and Training Approaches for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.emnlp-main.690.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title14" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Long Paper<br>&nbsp;&nbsp;<i>Patrick Hohenecker, Frank Mtumbuka, Vid Kocijan, Thomas Lukasiewicz</i><br>
+<font size="3">
+The goal of open information extraction (OIE) is to extract facts from natural language text, and to represent them as structured triples of the form <subject,predicate, object>. For example, given the sentence "Beethoven composed the Ode to Joy.", we are expected to extract the triple <beethoven, composed, ode to joy>. In this work, we systematically compare different neural network architectures and training approaches, and improve the performance of the currently best models on the OIE16 benchmark (Stanovsky and Dagan, 2016) by 0.421 F1 score and 0.420 AUC-PR, respectively, in our experiments (i.e., by more than 200% in both cases). Furthermore, we show that appropriate problem and loss formulations often affect the performance more than the network architecture.</beethoven,></subject,predicate,></font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper15"> <b>15. An Information Bottleneck Approach for Controlling Conciseness in Rationale Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.emnlp-main.153.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title15" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Long Paper<br>&nbsp;&nbsp;<i>Bhargavi Paranjape, Mandar Joshi, John Thickstun, Hannaneh Hajishirzi, Luke Zettlemoyer</i><br>
+<font size="3">
+Decisions of complex models for language understanding can be explained by limiting the inputs they are provided to a relevant subsequence of the original text --- a rationale. Models that condition predictions on a concise rationale, while being more interpretable, tend to be less accurate than models that are able to use the entire context. In this paper, we show that it is possible to better manage the trade-off between concise explanations and high task accuracy by optimizing a bound on the Information Bottleneck (IB) objective. Our approach jointly learns an explainer that predicts sparse binary masks over input sentences without explicit supervision, and an end-task predictor that considers only the residual sentences. Using IB, we derive a learning objective that allows direct control of mask sparsity levels through a tunable sparse prior. Experiments on the ERASER benchmark demonstrate significant gains over previous work for both task performance and agreement with human rationales. Furthermore, we find that in the semi-supervised setting, a modest amount of gold rationales (25% of training examples with gold masks) can close the performance gap with a model that uses the full input.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper16"> <b>16. Constrained Iterative Labeling for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.emnlp-main.306.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title16" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Long Paper<br>&nbsp;&nbsp;<i>Keshav Kolluru, Vaibhav Adlakha, Samarth Aggarwal, Mausam, Soumen Chakrabarti</i><br>
+<font size="3">
+A recent state-of-the-art neural open information extraction (OpenIE) system generates extractions iteratively, requiring repeated encoding of partial outputs. This comes at a significant computational cost. On the other hand,sequence labeling approaches for OpenIE are much faster, but worse in extraction quality. In this paper, we bridge this trade-off by presenting an iterative labeling-based system that establishes a new state of the art for OpenIE, while extracting 10x faster. This is achieved through a novel Iterative Grid Labeling (IGL) architecture, which treats OpenIE as a 2-D grid labeling task. We improve its performance further by applying coverage (soft) constraints on the grid at training time. Moreover, on observing that the best OpenIE systems falter at handling coordination structures, our OpenIE system also incorporates a new coordination analyzer built with the same IGL architecture. This IGL based coordination analyzer helps our OpenIE system handle complicated coordination structures, while also establishing a new state of the art on the task of coordination analysis, with a 12.3 pts improvement in F1 over previous analyzers. Our OpenIE system - OpenIE6 - beats the previous systems by as much as 4 pts in F1, while being much faster.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper17"> <b>17. An Empirical Study of Pre-trained Transformers for Arabic Information Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.emnlp-main.382.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title17" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Short Paper<br>&nbsp;&nbsp;<i>Wuwei Lan, Yang Chen, Wei Xu, Alan Ritter</i><br>
+<font size="3">
+Multilingual pre-trained Transformers, such as mBERT (Devlin et al., 2019) and XLM-RoBERTa (Conneau et al., 2020a), have been shown to enable effective cross-lingual zero-shot transfer. However, their performance on Arabic information extraction (IE) tasks is not very well studied. In this paper, we pre-train a customized bilingual BERT, dubbed GigaBERT, that is designed specifically for Arabic NLP and English-to-Arabic zero-shot transfer learning. We study GigaBERT's effectiveness on zero-short transfer across four IE tasks: named entity recognition, part-of-speech tagging, argument role labeling, and relation extraction. Our best model significantly outperforms mBERT, XLM-RoBERTa, and AraBERT (Antoun et al., 2020) in both the supervised and zero-shot transfer settings. We have made our pre-trained models publicly available at: https://github.com/lanwuwei/GigaBERT.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper18"> <b>18. Syntactic and Semantic-driven Learning for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/2020.findings-emnlp.69.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title18" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Findings Short Paper<br>&nbsp;&nbsp;<i>Jialong Tang, Yaojie Lu, Hongyu Lin, Xianpei Han, Le Sun, Xinyan Xiao, Hua Wu</i><br>
+<font size="3">
+One of the biggest bottlenecks in building accurate, high coverage neural open IE systems is the need for large labelled corpora. The diversity of open domain corpora and the variety of natural language expressions further exacerbate this problem. In this paper, we propose a syntactic and semantic-driven learning approach, which can learn neural open IE models without any human-labelled data by leveraging syntactic and semantic knowledge as noisier, higher-level supervision. Specifically, we first employ syntactic patterns as data labelling functions and pretrain a base model using the generated labels. Then we propose a syntactic and semantic-driven reinforcement learning algorithm, which can effectively generalize the base model to open situations with high accuracy. Experimental results show that our approach significantly outperforms the supervised counterparts, and can even achieve competitive performance to supervised state-of-the-art (SoA) model.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper19"> <b>19. Multiˆ2OIE: Multilingual Open Information Extraction based on Multi-Head Attention with BERT</b>  <a href="https://www.aclweb.org/anthology/2020.findings-emnlp.99.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title19" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2020. Findings Short Paper<br>&nbsp;&nbsp;<i>Youngbin Ro, Yukyung Lee, Pilsung Kang</i><br>
+<font size="3">
+In this paper, we propose Multi2OIE, which performs open information extraction (open IE) by combining BERT with multi-head attention. Our model is a sequence-labeling system with an efficient and effective argument extraction method. We use a query, key, and value setting inspired by the Multimodal Transformer to replace the previously used bidirectional long short-term memory architecture with multi-head attention. Multi2OIE outperforms existing sequence-labeling systems with high computational efficiency on two benchmark evaluation datasets, Re-OIE2016 and CaRB. Additionally, we apply the proposed method to multilingual open IE using multilingual BERT. Experimental results on new benchmark datasets introduced for two languages (Spanish and Portuguese) demonstrate that our model outperforms other multilingual systems without training data for the target languages.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper20"> <b>20. A Survey on Temporal Reasoning for Temporal Information Extraction from Text (Extended Abstract)</b>  <a href="https://www.ijcai.org/proceedings/2020/0712.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title20" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2020. <br>&nbsp;&nbsp;<i>Artuur Leeuwenberg, Marie-Francine Moens</i><br>
+<font size="3">
+Time is deeply woven into how people perceive, and communicate about the world. Almost unconsciously, we provide our language utterances with temporal cues, like verb tenses, and we can hardly produce sentences without such cues. Extracting temporal cues from text, and constructing a global temporal view about the order of described events is a major challenge of automatic natural language understanding. Temporal reasoning, the process of combining different temporal cues into a coherent temporal view, plays a central role in temporal information extraction. This article presents a comprehensive survey of the research from the past decades on temporal reasoning for automatic temporal information extraction from text, providing a case study on the integration of symbolic reasoning with machine learning-based information extraction systems.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper21"> <b>21. Unsupervised Information Extraction: Regularizing Discriminative Approaches with Relation Distribution Losses</b>  <a href="https://www.aclweb.org/anthology/P19-1133.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title21" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2019. <br>&nbsp;&nbsp;<i>Étienne Simon, Vincent Guigue, Benjamin Piwowarski</i><br>
+<font size="3">
+Unsupervised relation extraction aims at extracting relations between entities in text. Previous unsupervised approaches are either generative or discriminative. In a supervised setting, discriminative approaches, such as deep neural network classifiers, have demonstrated substantial improvement. However, these models are hard to train without supervision, and the currently proposed solutions are unstable. To overcome this limitation, we introduce a skewness loss which encourages the classifier to predict a relation with confidence given a sentence, and a distribution distance loss enforcing that all relations are predicted in average. These losses improve the performance of discriminative based models, and enable us to train deep neural networks satisfactorily, surpassing current state of the art on three different datasets.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper22"> <b>22. Chinese Relation Extraction with Multi-Grained Information and External Linguistic Knowledge</b>  <a href="https://www.aclweb.org/anthology/P19-1430.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title22" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2019. <br>&nbsp;&nbsp;<i>Ziran Li, Ning Ding, Zhiyuan Liu, Haitao Zheng, Ying Shen</i><br>
+<font size="3">
+Chinese relation extraction is conducted using neural networks with either character-based or word-based inputs, and most existing methods typically suffer from segmentation errors and ambiguity of polysemy. To address the issues, we propose a multi-grained lattice framework (MG lattice) for Chinese relation extraction to take advantage of multi-grained language information and external linguistic knowledge. In this framework, (1) we incorporate word-level information into character sequence inputs so that segmentation errors can be avoided. (2) We also model multiple senses of polysemous words with the help of external linguistic knowledge, so as to alleviate polysemy ambiguity. Experiments on three real-world datasets in distinct domains show consistent and significant superiority and robustness of our model, as compared with other baselines. We will release the source code of this paper in the future.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper23"> <b>23. Improving Open Information Extraction via Iterative Rank-Aware Learning</b>  <a href="https://www.aclweb.org/anthology/P19-1523.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title23" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2019. <br>&nbsp;&nbsp;<i>Zhengbao Jiang, Pengcheng Yin, Graham Neubig</i><br>
+<font size="3">
+Open information extraction (IE) is the task of extracting open-domain assertions from natural language sentences. A key step in open IE is confidence modeling, ranking the extractions based on their estimated quality to adjust precision and recall of extracted assertions. We found that the extraction likelihood, a confidence measure used by current supervised open IE systems, is not well calibrated when comparing the quality of assertions extracted from different sentences. We propose an additional binary classification loss to calibrate the likelihood to make it more globally comparable, and an iterative learning process, where extractions generated by the open IE model are incrementally included as training samples to help the model learn from trial and error. Experiments on OIE2016 demonstrate the effectiveness of our method. Code and data are available at https://github.com/jzbjyb/oie_rank.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper24"> <b>24. WiRe57 : A Fine-Grained Benchmark for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/W19-4002.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title24" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2019. the 13th Linguistic Annotation Workshop<br>&nbsp;&nbsp;<i>William Lechelle, Fabrizio Gotti, Phillippe Langlais</i><br>
+<font size="3">
+We build a reference for the task of Open Information Extraction, on five documents. We tentatively resolve a number of issues that arise, including coreference and granularity, and we take steps toward addressing inference, a significant problem. We seek to better pinpoint the requirements for the task. We produce our annotation guidelines specifying what is correct to extract and what is not. In turn, we use this reference to score existing Open IE systems. We address the non-trivial problem of evaluating the extractions produced by systems against the reference tuples, and share our evaluation script. Among seven compared extractors, we find the MinIE system to perform best.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper25"> <b>25. Supervising Unsupervised Open Information Extraction Models</b>  <a href="https://www.aclweb.org/anthology/D19-1067.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title25" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2019. <br>&nbsp;&nbsp;<i>Arpita Roy, Youngja Park, Taesung Lee, Shimei Pan</i><br>
+<font size="3">
+We propose a novel supervised open information extraction (Open IE) framework that leverages an ensemble of unsupervised Open IE systems and a small amount of labeled data to improve system performance. It uses the outputs of multiple unsupervised Open IE systems plus a diverse set of lexical and syntactic information such as word embedding, part-of-speech embedding, syntactic role embedding and dependency structure as its input features and produces a sequence of word labels indicating whether the word belongs to a relation, the arguments of the relation or irrelevant. Comparing with existing supervised Open IE systems, our approach leverages the knowledge in existing unsupervised Open IE systems to overcome the problem of insufficient training data. By employing multiple unsupervised Open IE systems, our system learns to combine the strength and avoid the weakness in each individual Open IE system. We have conducted experiments on multiple labeled benchmark data sets. Our evaluation results have demonstrated the superiority of the proposed method over existing supervised and unsupervised models by a significant margin.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper26"> <b>26. Easy First Relation Extraction with Information Redundancy</b>  <a href="https://www.aclweb.org/anthology/D19-1398.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title26" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2019. <br>&nbsp;&nbsp;<i>Shuai Ma, Gang Wang, Yansong Feng, Jinpeng Huai</i><br>
+<font size="3">
+Many existing relation extraction (RE) models make decisions globally using integer linear programming (ILP). However, it is nontrivial to make use of integer linear programming as a blackbox solver for RE. Its cost of time and memory may become unacceptable with the increase of data scale, and redundant information needs to be encoded cautiously for ILP. In this paper, we propose an easy first approach for relation extraction with information redundancies, embedded in the results produced by local sentence level extractors, during which conflict decisions are resolved with domain and uniqueness constraints. Information redundancies are leveraged to support both easy first collective inference for easy decisions in the first stage and ILP for hard decisions in a subsequent stage. Experimental study shows that our approach improves the efficiency and accuracy of RE, and outperforms both ILP and neural network-based methods.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper27"> <b>27. Coverage of Information Extraction from Sentences and Paragraphs</b>  <a href="https://www.aclweb.org/anthology/D19-1583.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title27" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2019. <br>&nbsp;&nbsp;<i>Simon Razniewski, Nitisha Jain, Paramita Mirza, Gerhard Weikum</i><br>
+<font size="3">
+Scalar implicatures are language features that imply the negation of stronger statements, e.g., “She was married twice” typically implicates that she was not married thrice. In this paper we discuss the importance of scalar implicatures in the context of textual information extraction. We investigate how textual features can be used to predict whether a given text segment mentions all objects standing in a certain relationship with a certain subject. Preliminary results on Wikipedia indicate that this prediction is feasible, and yields informative assessments.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper28"> <b>28. Conceptualisation and Annotation of Drug Nonadherence Information for Knowledge Extraction from Patient-Generated Texts</b>  <a href="https://www.aclweb.org/anthology/D19-5526.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title28" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2019. the 5th Workshop on Noisy User-generated Text (W-NUT 2019)<br>&nbsp;&nbsp;<i>Anja Belz, Richard Hoile, Elizabeth Ford, Azam Mullick</i><br>
+<font size="3">
+Approaches to knowledge extraction (KE) in the health domain often start by annotating text to indicate the knowledge to be extracted, and then use the annotated text to train systems to perform the KE. This may work for annotat- ing named entities or other contiguous noun phrases (drugs, some drug effects), but be- comes increasingly difficult when items tend to be expressed across multiple, possibly non- contiguous, syntactic constituents (e.g. most descriptions of drug effects in user-generated text). Other issues include that it is not al- ways clear how annotations map to actionable insights, or how they scale up to, or can form part of, more complex KE tasks. This paper reports our efforts in developing an approach to extracting knowledge about drug nonadher- ence from health forums which led us to con- clude that development cannot proceed in sep- arate steps but that all aspects—from concep- tualisation to annotation scheme development, annotation, KE system training and knowl- edge graph instantiation—are interdependent and need to be co-developed. Our aim in this paper is two-fold: we describe a generally ap- plicable framework for developing a KE ap- proach, and present a specific KE approach, developed with the framework, for the task of gathering information about antidepressant drug nonadherence. We report the conceptual- isation, the annotation scheme, the annotated corpus, and an analysis of annotated texts.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper29"> <b>29. Multi-View Multi-Label Learning with View-Specific Information Extraction</b>  <a href="https://www.ijcai.org/proceedings/2019/0539.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title29" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2019. <br>&nbsp;&nbsp;<i>Xuan Wu, Qing-Guo Chen, Yao Hu, Dengbao Wang, Xiaodong Chang, Xiaobo Wang, Min-Ling Zhang</i><br>
+<font size="3">
+Multi-view multi-label learning serves an important framework to learn from objects with diverse representations and rich semantics. Existing multi-view multi-label learning techniques focus on exploiting shared subspace for fusing multi-view representations, where helpful view-specific information for discriminative modeling is usually ignored. In this paper, a novel multi-view multi-label learning approach named SIMM is proposed which leverages shared subspace exploitation and view-specific information extraction. For shared subspace exploitation, SIMM jointly minimizes confusion adversarial loss and multi-label loss to utilize shared information from all views. For view-specific information extraction, SIMM enforces an orthogonal constraint w.r.t. the shared subspace to utilize view-specific discriminative information. Extensive experiments on real-world data sets clearly show the favorable performance of SIMM against other state-of-the-art multi-view multi-label learning approaches.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper30"> <b>30. Improving Cross-Domain Performance for Relation Extraction via Dependency Prediction and Information Flow Control</b>  <a href="https://www.ijcai.org/proceedings/2019/0716.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title30" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2019. <br>&nbsp;&nbsp;<i>Amir Pouran Ben Veyseh, Thien Huu Nguyen, Dejing Dou</i><br>
+<font size="3">
+Relation Extraction (RE) is one of the fundamental tasks in Information Extraction and Natural Language Processing. Dependency trees have been shown to be a very useful source of information for this task. The current deep learning models for relation extraction has mainly exploited this dependency information by guiding their computation along the structures of the dependency trees. One potential problem with this approach is it might prevent the models from capturing important context information beyond syntactic structures and cause the poor cross-domain generalization. This paper introduces a novel method to use dependency trees in RE for deep learning models that jointly predicts dependency and semantics relations. We also propose a new mechanism to control the information flow in the model based on the input entity mentions. Our extensive experiments on benchmark datasets show that the proposed model outperforms the existing methods for RE significantly.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper31"> <b>31. GraphIE: A Graph-Based Framework for Information Extraction</b>  <a href="https://www.aclweb.org/anthology/N19-1082.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title31" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Yujie Qian, Enrico Santus, Zhijing Jin, Jiang Guo, Regina Barzilay</i><br>
+<font size="3">
+Most modern Information Extraction (IE) systems are implemented as sequential taggers and only model local dependencies. Non-local and non-sequential context is, however, a valuable source of information to improve predictions. In this paper, we introduce GraphIE, a framework that operates over a graph representing a broad set of dependencies between textual units (i.e. words or sentences). The algorithm propagates information between connected nodes through graph convolutions, generating a richer representation that can be exploited to improve word-level predictions. Evaluation on three different tasks — namely textual, social media and visual information extraction — shows that GraphIE consistently outperforms the state-of-the-art sequence tagging model by a significant margin.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper32"> <b>32. OpenKI: Integrating Open Information Extraction and Knowledge Bases with Relation Inference</b>  <a href="https://www.aclweb.org/anthology/N19-1083.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title32" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Dongxu Zhang, Subhabrata Mukherjee, Colin Lockard, Luna Dong, Andrew McCallum</i><br>
+<font size="3">
+In this paper, we consider advancing web-scale knowledge extraction and alignment by integrating OpenIE extractions in the form of (subject, predicate, object) triples with Knowledge Bases (KB). Traditional techniques from universal schema and from schema mapping fall in two extremes: either they perform instance-level inference relying on embedding for (subject, object) pairs, thus cannot handle pairs absent in any existing triples; or they perform predicate-level mapping and completely ignore background evidence from individual entities, thus cannot achieve satisfying quality. We propose OpenKI to handle sparsity of OpenIE extractions by performing instance-level inference: for each entity, we encode the rich information in its neighborhood in both KB and OpenIE extractions, and leverage this information in relation inference by exploring different methods of aggregation and attention. In order to handle unseen entities, our model is designed without creating entity-specific parameters. Extensive experiments show that this method not only significantly improves state-of-the-art for conventional OpenIE extractions like ReVerb, but also boosts the performance on OpenIE from semi-structured data, where new entity pairs are abundant and data are fairly sparse.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper33"> <b>33. Predicting Annotation Difficulty to Improve Task Routing and Model Performance for Biomedical Information Extraction</b>  <a href="https://www.aclweb.org/anthology/N19-1150.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title33" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Yinfei Yang, Oshin Agarwal, Chris Tar, Byron C. Wallace, Ani Nenkova</i><br>
+<font size="3">
+Modern NLP systems require high-quality annotated data. For specialized domains, expert annotations may be prohibitively expensive; the alternative is to rely on crowdsourcing to reduce costs at the risk of introducing noise. In this paper we demonstrate that directly modeling instance difficulty can be used to improve model performance and to route instances to appropriate annotators. Our difficulty prediction model combines two learned representations: a ‘universal’ encoder trained on out of domain data, and a task-specific encoder. Experiments on a complex biomedical information extraction task using expert and lay annotators show that: (i) simply excluding from the training data instances predicted to be difficult yields a small boost in performance; (ii) using difficulty scores to weight instances during training provides further, consistent gains; (iii) assigning instances predicted to be difficult to domain experts is an effective strategy for task routing. Further, our experiments confirm the expectation that for such domain-specific tasks expert annotations are of much higher quality and preferable to obtain if practical and that augmenting small amounts of expert data with a larger set of lay annotations leads to further improvements in model performance.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper34"> <b>34. Glocal: Incorporating Global Information in Local Convolution for Keyphrase Extraction</b>  <a href="https://www.aclweb.org/anthology/N19-1182.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title34" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Animesh Prasad, Min-Yen Kan</i><br>
+<font size="3">
+Graph Convolutional Networks (GCNs) are a class of spectral clustering techniques that leverage localized convolution filters to perform supervised classification directly on graphical structures. While such methods model nodes’ local pairwise importance, they lack the capability to model global importance relative to other nodes of the graph. This causes such models to miss critical information in tasks where global ranking is a key component for the task, such as in keyphrase extraction. We address this shortcoming by allowing the proper incorporation of global information into the GCN family of models through the use of scaled node weights. In the context of keyphrase extraction, incorporating global random walk scores obtained from TextRank boosts performance significantly. With our proposed method, we achieve state-of-the-art results, bettering a strong baseline by an absolute 2% increase in F1 score.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper35"> <b>35. Open Information Extraction from Question-Answer Pairs</b>  <a href="https://www.aclweb.org/anthology/N19-1239.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title35" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Nikita Bhutani, Yoshihiko Suhara, Wang-Chiew Tan, Alon Halevy, H. V. Jagadish</i><br>
+<font size="3">
+Open Information Extraction (OpenIE) extracts meaningful structured tuples from free-form text. Most previous work on OpenIE considers extracting data from one sentence at a time. We describe NeurON, a system for extracting tuples from question-answer pairs. One of the main motivations for NeurON is to be able to extend knowledge bases in a way that considers precisely the information that users care about. NeurON addresses several challenges. First, an answer text is often hard to understand without knowing the question, and second, relevant information can span multiple sentences. To address these, NeurON formulates extraction as a multi-source sequence-to-sequence learning task, wherein it combines distributed representations of a question and an answer to generate knowledge facts. We describe experiments on two real-world datasets that demonstrate that NeurON can find a significant number of new and interesting facts to extend a knowledge base compared to state-of-the-art OpenIE methods.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper36"> <b>36. A general framework for information extraction using dynamic span graphs</b>  <a href="https://www.aclweb.org/anthology/N19-1308.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title36" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Yi Luan, Dave Wadden, Luheng He, Amy Shah, Mari Ostendorf, Hannaneh Hajishirzi</i><br>
+<font size="3">
+We introduce a general framework for several information extraction tasks that share span representations using dynamically constructed span graphs. The graphs are dynamically constructed by selecting the most confident entity spans and linking these nodes with confidence-weighted relation types and coreferences. The dynamic span graph allow coreference and relation type confidences to propagate through the graph to iteratively refine the span representations. This is unlike previous multi-task frameworks for information extraction in which the only interaction between tasks is in the shared first-layer LSTM. Our framework significantly outperforms state-of-the-art on multiple information extraction tasks across multiple datasets reflecting different domains. We further observe that the span enumeration approach is good at detecting nested span entities, with significant F1 score improvement on the ACE dataset.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper37"> <b>37. OpenCeres: When Open Information Extraction Meets the Semi-Structured Web</b>  <a href="https://www.aclweb.org/anthology/N19-1309.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title37" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. <br>&nbsp;&nbsp;<i>Colin Lockard, Prashant Shiralkar, Xin Luna Dong</i><br>
+<font size="3">
+Open Information Extraction (OpenIE), the problem of harvesting triples from natural language text whose predicate relations are not aligned to any pre-defined ontology, has been a popular subject of research for the last decade. However, this research has largely ignored the vast quantity of facts available in semi-structured webpages. In this paper, we define the problem of OpenIE from semi-structured websites to extract such facts, and present an approach for solving it. We also introduce a labeled evaluation dataset to motivate research in this area. Given a semi-structured website and a set of seed facts for some relations existing on its pages, we employ a semi-supervised label propagation technique to automatically create training data for the relations present on the site. We then use this training data to learn a classifier for relation extraction. Experimental results of this method on our new benchmark dataset obtained a precision of over 70%. A larger scale extraction experiment on 31 websites in the movie vertical resulted in the extraction of over 2 million triples.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper38"> <b>38. Graph Convolution for Multimodal Information Extraction from Visually Rich Documents</b>  <a href="https://www.aclweb.org/anthology/N19-2005.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title38" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. Industry Papers<br>&nbsp;&nbsp;<i>Xiaojing Liu, Feiyu Gao, Qiong Zhang, Huasha Zhao</i><br>
+<font size="3">
+Visually rich documents (VRDs) are ubiquitous in daily business and life. Examples are purchase receipts, insurance policy documents, custom declaration forms and so on. In VRDs, visual and layout information is critical for document understanding, and texts in such documents cannot be serialized into the one-dimensional sequence without losing information. Classic information extraction models such as BiLSTM-CRF typically operate on text sequences and do not incorporate visual features. In this paper, we introduce a graph convolution based model to combine textual and visual information presented in VRDs. Graph embeddings are trained to summarize the context of a text segment in the document, and further combined with text embeddings for entity extraction. Extensive experiments have been conducted to show that our method outperforms BiLSTM-CRF baselines by significant margins, on two real-world datasets. Additionally, ablation studies are also performed to evaluate the effectiveness of each component of our model.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper39"> <b>39. TOI-CNN: a Solution of Information Extraction on Chinese Insurance Policy</b>  <a href="https://www.aclweb.org/anthology/N19-2022.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title39" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. Industry Papers<br>&nbsp;&nbsp;<i>Lin Sun, Kai Zhang, Fule Ji, Zhenhua Yang</i><br>
+<font size="3">
+Contract analysis can significantly ease the work for humans using AI techniques. This paper shows a problem of Element Tagging on Insurance Policy (ETIP). A novel Text-Of-Interest Convolutional Neural Network (TOI-CNN) is proposed for the ETIP solution. We introduce a TOI pooling layer to replace traditional pooling layer for processing the nested phrasal or clausal elements in insurance policies. The advantage of TOI pooling layer is that the nested elements from one sentence could share computation and context in the forward and backward passes. The computation of backpropagation through TOI pooling is also demonstrated in the paper. We have collected a large Chinese insurance contract dataset and labeled the critical elements of seven categories to test the performance of the proposed method. The results show the promising performance of our method in the ETIP problem.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper40"> <b>40. Scalable, Semi-Supervised Extraction of Structured Information from Scientific Literature</b>  <a href="https://www.aclweb.org/anthology/W19-2602.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title40" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. the Workshop on Extracting Structured Knowledge from Scientific Publications<br>&nbsp;&nbsp;<i>Kritika Agrawal, Aakash Mittal, Vikram Pudi</i><br>
+<font size="3">
+As scientific communities grow and evolve, there is a high demand for improved methods for finding relevant papers, comparing papers on similar topics and studying trends in the research community. All these tasks involve the common problem of extracting structured information from scientific articles. In this paper, we propose a novel, scalable, semi-supervised method for extracting relevant structured information from the vast available raw scientific literature. We extract the fundamental concepts of “aim”, ”method” and “result” from scientific articles and use them to construct a knowledge graph. Our algorithm makes use of domain-based word embedding and the bootstrap framework. Our experiments show that our system achieves precision and recall comparable to the state of the art. We also show the domain independence of our algorithm by analyzing the research trends of two distinct communities - computational linguistics and computer vision.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper41"> <b>41. Browsing Health: Information Extraction to Support New Interfaces for Accessing Medical Evidence</b>  <a href="https://www.aclweb.org/anthology/W19-2606.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title41" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2019. the Workshop on Extracting Structured Knowledge from Scientific Publications<br>&nbsp;&nbsp;<i>Soham Parikh, Elizabeth Conrad, Oshin Agarwal, Iain Marshall, Byron Wallace, Ani Nenkova</i><br>
+<font size="3">
+Standard paradigms for search do not work well in the medical context. Typical information needs, such as retrieving a full list of medical interventions for a given condition, or finding the reported efficacy of a particular treatment with respect to a specific outcome of interest cannot be straightforwardly posed in typical text-box search. Instead, we propose faceted-search in which a user specifies a condition and then can browse treatments and outcomes that have been evaluated. Choosing from these, they can access randomized control trials (RCTs) describing individual studies. Realizing such a view of the medical evidence requires information extraction techniques to identify the population, interventions, and outcome measures in an RCT. Patients, health practitioners, and biomedical librarians all stand to benefit from such innovation in search of medical evidence. We present an initial prototype of such an interface applied to pre-registered clinical studies. We also discuss pilot studies into the applicability of information extraction methods to allow for similar access to all published trial results.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper42"> <b>42. Assertion-Based QA With Question-Aware Open Information Extraction</b>  <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16705/16170" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title42" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2018. AAAI18 - NLP and Text Mining<br>&nbsp;&nbsp;<i>Zhao Yan, Duyu Tang, Nan Duan, Shujie Liu, Wendi Wang, Daxin Jiang, Ming Zhou, Zhoujun Li</i><br>
+<font size="3">
+We present assertion based question answering (ABQA), an open domain question answering task that takes a question and a passage as inputs, and outputs a semi-structured assertion consisting of a subject, a predicate and a list of arguments. An assertion conveys more evidences than a short answer span in reading comprehension, and it is more concise than a tedious passage in passage-based QA. These advantages make ABQA more suitable for human-computer interaction scenarios such as voice-controlled speakers. Further progress towards improving ABQA requires richer supervised dataset and powerful models of text understanding. To remedy this, we introduce a new dataset called WebAssertions, which includes hand-annotated QA labels for 358,427 assertions in 55,960 web passages. To address ABQA, we develop both generative and extractive approaches. The backbone of our generative approach is sequence to sequence learning. In order to capture the structure of the output assertion, we introduce a hierarchical decoder that first generates the structure of the assertion and then generates the words of each field. The extractive approach is based on learning to rank. Features at different levels of granularity are designed to measure the semantic relevance between a question and an assertion. Experimental results show that our approaches have the ability to infer question-aware assertions from a passage. We further evaluate our approaches by incorporating the ABQA results as additional features in passage-based QA. Results on two datasets show that ABQA features significantly improve the accuracy on passage-based QA.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper43"> <b>43. Context-Aware Neural Model for Temporal Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P18-1049.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title43" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2018. Long Papers<br>&nbsp;&nbsp;<i>Yuanliang Meng, Anna Rumshisky</i><br>
+<font size="3">
+We propose a context-aware neural network model for temporal information extraction. This model has a uniform architecture for event-event, event-timex and timex-timex pairs. A Global Context Layer (GCL), inspired by Neural Turing Machine (NTM), stores processed temporal relations in narrative order, and retrieves them for use when relevant entities come in. Relations are then classified in context. The GCL model has long-term memory and attention mechanisms to resolve irregular long-distance dependencies that regular RNNs such as LSTM cannot recognize. It does not require any new input features, while outperforming the existing models in literature. To our knowledge it is also the first model to use NTM-like architecture to process the information from global context in discourse-scale natural text processing. We are going to release the source code in the future.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper44"> <b>44. Adaptive Scaling for Sparse Detection in Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P18-1095.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title44" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2018. Long Papers<br>&nbsp;&nbsp;<i>Hongyu Lin, Yaojie Lu, Xianpei Han, Le Sun</i><br>
+<font size="3">
+This paper focuses on detection tasks in information extraction, where positive instances are sparsely distributed and models are usually evaluated using F-measure on positive classes. These characteristics often result in deficient performance of neural network based detection models. In this paper, we propose adaptive scaling, an algorithm which can handle the positive sparsity problem and directly optimize over F-measure via dynamic cost-sensitive learning. To this end, we borrow the idea of marginal utility from economics and propose a theoretical framework for instance importance measuring without introducing any additional hyper-parameters. Experiments show that our algorithm leads to a more effective and stable training of neural network based detection models.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper45"> <b>45. Neural Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P18-2065.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title45" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2018. Short Papers<br>&nbsp;&nbsp;<i>Lei Cui, Furu Wei, Ming Zhou</i><br>
+<font size="3">
+Conventional Open Information Extraction (Open IE) systems are usually built on hand-crafted patterns from other NLP tools such as syntactic parsing, yet they face problems of error propagation. In this paper, we propose a neural Open IE approach with an encoder-decoder framework. Distinct from existing methods, the neural Open IE approach learns highly confident arguments and relation tuples bootstrapped from a state-of-the-art Open IE system. An empirical study on a large benchmark dataset shows that the neural Open IE system significantly outperforms several baselines, while maintaining comparable computational efficiency.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper46"> <b>46. Enhancing Drug-Drug Interaction Extraction from Texts by Molecular Structure Information</b>  <a href="https://www.aclweb.org/anthology/P18-2108.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title46" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2018. Short Papers<br>&nbsp;&nbsp;<i>Masaki Asada, Makoto Miwa, Yutaka Sasaki</i><br>
+<font size="3">
+We propose a novel neural method to extract drug-drug interactions (DDIs) from texts using external drug molecular structure information. We encode textual drug pairs with convolutional neural networks and their molecular pairs with graph convolutional networks (GCNs), and then we concatenate the outputs of these two networks. In the experiments, we show that GCNs can predict DDIs from the molecular structures of drugs in high accuracy and the molecular information can enhance text-based DDI extraction by 2.39 percent points in the F-score on the DDIExtraction 2013 shared task data set.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper47"> <b>47. Last Words: What Can Be Accomplished with the State of the Art in Information Extraction? A Personal View</b>  <a href="https://www.aclweb.org/anthology/J18-4004.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title47" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;CL 2018. <br>&nbsp;&nbsp;<i>Ralph Weischedel, Elizabeth Boschee</i><br>
+<font size="3">
+Though information extraction (IE) research has more than a 25-year history, F1 scores remain low. Thus, one could question continued investment in IE research. In this article, we present three applications where information extraction of entities, relations, and/or events has been used, and note the common features that seem to have led to success. We also identify key research challenges whose solution seems essential for broader successes. Because a few practical deployments already exist and because breakthroughs on particular challenges would greatly broaden the technology’s deployment, further R and D investments are justified.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper48"> <b>48. Open Information Extraction from Conjunctive Sentences</b>  <a href="https://www.aclweb.org/anthology/C18-1194.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title48" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2018. <br>&nbsp;&nbsp;<i>Swarnadeep Saha, Mausam</i><br>
+<font size="3">
+We develop CALM, a coordination analyzer that improves upon the conjuncts identified from dependency parses. It uses a language model based scoring and several linguistic constraints to search over hierarchical conjunct boundaries (for nested coordination). By splitting a conjunctive sentence around these conjuncts, CALM outputs several simple sentences. We demonstrate the value of our coordination analyzer in the end task of Open Information Extraction (Open IE). State-of-the-art Open IE systems lose substantial yield due to ineffective processing of conjunctive sentences. Our Open IE system, CALMIE, performs extraction over the simple sentences identified by CALM to obtain up to 1.8x yield with a moderate increase in precision compared to extractions from original sentences.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper49"> <b>49. Graphene: Semantically-Linked Propositions in Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/C18-1195.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title49" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2018. <br>&nbsp;&nbsp;<i>Matthias Cetto, Christina Niklaus, André Freitas, Siegfried Handschuh</i><br>
+<font size="3">
+We present an Open Information Extraction (IE) approach that uses a two-layered transformation stage consisting of a clausal disembedding layer and a phrasal disembedding layer, together with rhetorical relation identification. In that way, we convert sentences that present a complex linguistic structure into simplified, syntactically sound sentences, from which we can extract propositions that are represented in a two-layered hierarchy in the form of core relational tuples and accompanying contextual information which are semantically linked via rhetorical relations. In a comparative evaluation, we demonstrate that our reference implementation Graphene outperforms state-of-the-art Open IE systems in the construction of correct n-ary predicate-argument structures. Moreover, we show that existing Open IE approaches can benefit from the transformation process of our framework.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper50"> <b>50. Open Information Extraction on Scientific Text: An Evaluation</b>  <a href="https://www.aclweb.org/anthology/C18-1289.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title50" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2018. <br>&nbsp;&nbsp;<i>Paul Groth, Mike Lauruhn, Antony Scerri, Ron Daniel Jr.</i><br>
+<font size="3">
+Open Information Extraction (OIE) is the task of the unsupervised creation of structured information from text. OIE is often used as a starting point for a number of downstream tasks including knowledge base construction, relation extraction, and question answering. While OIE methods are targeted at being domain independent, they have been evaluated primarily on newspaper, encyclopedic or general web text. In this article, we evaluate the performance of OIE on scientific texts originating from 10 different disciplines. To do so, we use two state-of-the-art OIE systems using a crowd-sourcing approach. We find that OIE systems perform significantly worse on scientific text than encyclopedic text. We also provide an error analysis and suggest areas of work to reduce errors. Our corpus of sentences and judgments are made available.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper51"> <b>51. A Survey on Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/C18-1326.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title51" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2018. <br>&nbsp;&nbsp;<i>Christina Niklaus, Matthias Cetto, André Freitas, Siegfried Handschuh</i><br>
+<font size="3">
+We provide a detailed overview of the various approaches that were proposed to date to solve the task of Open Information Extraction. We present the major challenges that such systems face, show the evolution of the suggested approaches over time and depict the specific issues they address. In addition, we provide a critique of the commonly applied evaluation procedures for assessing the performance of Open IE systems and highlight some directions for future work.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper52"> <b>52. Graphene: a Context-Preserving Open Information Extraction System</b>  <a href="https://www.aclweb.org/anthology/C18-2021.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title52" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2018. System Demonstrations<br>&nbsp;&nbsp;<i>Matthias Cetto, Christina Niklaus, André Freitas, Siegfried Handschuh</i><br>
+<font size="3">
+We introduce Graphene, an Open IE system whose goal is to generate accurate, meaningful and complete propositions that may facilitate a variety of downstream semantic applications. For this purpose, we transform syntactically complex input sentences into clean, compact structures in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them in order to maintain their semantic relationship. In that way, we preserve the context of the relational tuples extracted from a source sentence, generating a novel lightweight semantic representation for Open IE that enhances the expressiveness of the extracted propositions.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper53"> <b>53. An Evaluation of Information Extraction Tools for Identifying Health Claims in News Headlines</b>  <a href="https://www.aclweb.org/anthology/W18-4305.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title53" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2018. the Workshop Events and Stories in the News 2018<br>&nbsp;&nbsp;<i>Shi Yuan, Bei Yu</i><br>
+<font size="3">
+This study evaluates the performance of four information extraction tools (extractors) on identifying health claims in health news headlines. A health claim is defined as a triplet: IV (what is being manipulated), DV (what is being measured) and their relation. Tools that can identify health claims provide the foundation for evaluating the accuracy of these claims against authoritative resources. The evaluation result shows that 26% headlines do not in-clude health claims, and all extractors face difficulty separating them from the rest. For those with health claims, OPENIE-5.0 performed the best with F-measure at 0.6 level for ex-tracting “IV-relation-DV”. However, the characteristic linguistic structures in health news headlines, such as incomplete sentences and non-verb relations, pose particular challenge to existing tools.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper54"> <b>54. Temporal Information Extraction by Predicting Relative Time-lines</b>  <a href="https://www.aclweb.org/anthology/D18-1155.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title54" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2018. <br>&nbsp;&nbsp;<i>Artuur Leeuwenberg, Marie-Francine Moens</i><br>
+<font size="3">
+The current leading paradigm for temporal information extraction from text consists of three phases: (1) recognition of events and temporal expressions, (2) recognition of temporal relations among them, and (3) time-line construction from the temporal relations. In contrast to the first two phases, the last phase, time-line construction, received little attention and is the focus of this work. In this paper, we propose a new method to construct a linear time-line from a set of (extracted) temporal relations. But more importantly, we propose a novel paradigm in which we directly predict start and end-points for events from the text, constituting a time-line without going through the intermediate step of prediction of temporal relations as in earlier work. Within this paradigm, we propose two models that predict in linear complexity, and a new training loss using TimeML-style annotations, yielding promising results.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper55"> <b>55. Jointly Multiple Events Extraction via Attention-based Graph Information Aggregation</b>  <a href="https://www.aclweb.org/anthology/D18-1156.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title55" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2018. <br>&nbsp;&nbsp;<i>Xiao Liu, Zhunchen Luo, Heyan Huang</i><br>
+<font size="3">
+Event extraction is of practical utility in natural language processing. In the real world, it is a common phenomenon that multiple events existing in the same sentence, where extracting them are more difficult than extracting a single event. Previous works on modeling the associations between events by sequential modeling methods suffer a lot from the low efficiency in capturing very long-range dependencies. In this paper, we propose a novel Jointly Multiple Events Extraction (JMEE) framework to jointly extract multiple event triggers and arguments by introducing syntactic shortcut arcs to enhance information flow and attention-based graph convolution networks to model graph information. The experiment results demonstrate that our proposed framework achieves competitive results compared with state-of-the-art methods.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper56"> <b>56. RESIDE: Improving Distantly-Supervised Neural Relation Extraction using Side Information</b>  <a href="https://www.aclweb.org/anthology/D18-1157.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title56" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2018. <br>&nbsp;&nbsp;<i>Shikhar Vashishth, Rishabh Joshi, Sai Suman Prayaga, Chiranjib Bhattacharyya, Partha Talukdar</i><br>
+<font size="3">
+Distantly-supervised Relation Extraction (RE) methods train an extractor by automatically aligning relation instances in a Knowledge Base (KB) with unstructured text. In addition to relation instances, KBs often contain other relevant side information, such as aliases of relations (e.g., founded and co-founded are aliases for the relation founderOfCompany). RE models usually ignore such readily available side information. In this paper, we propose RESIDE, a distantly-supervised neural relation extraction method which utilizes additional side information from KBs for improved relation extraction. It uses entity type and relation alias information for imposing soft constraints while predicting relations. RESIDE employs Graph Convolution Networks (GCN) to encode syntactic information from text and improves performance even when limited side information is available. Through extensive experiments on benchmark datasets, we demonstrate RESIDE’s effectiveness. We have made RESIDE’s source code available to encourage reproducible research.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper57"> <b>57. Visual Supervision in Bootstrapped Information Extraction</b>  <a href="https://www.aclweb.org/anthology/D18-1229.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title57" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2018. <br>&nbsp;&nbsp;<i>Matthew Berger, Ajay Nagesh, Joshua Levine, Mihai Surdeanu, Helen Zhang</i><br>
+<font size="3">
+We challenge a common assumption in active learning, that a list-based interface populated by informative samples provides for efficient and effective data annotation. We show how a 2D scatterplot populated with diverse and representative samples can yield improved models given the same time budget. We consider this for bootstrapping-based information extraction, in particular named entity classification, where human and machine jointly label data. To enable effective data annotation in a scatterplot, we have developed an embedding-based bootstrapping model that learns the distributional similarity of entities through the patterns that match them in a large data corpus, while being discriminative with respect to human-labeled and machine-promoted entities. We conducted a user study to assess the effectiveness of these different interfaces, and analyze bootstrapping performance in terms of human labeling accuracy, label quantity, and labeling consensus across multiple users. Our results suggest that supervision acquired from the scatterplot interface, despite being noisier, yields improvements in classification performance compared with the list interface, due to a larger quantity of supervision acquired.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper58"> <b>58. A Multilingual Information Extraction Pipeline for Investigative Journalism</b>  <a href="https://www.aclweb.org/anthology/D18-2014.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title58" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2018. System Demonstrations<br>&nbsp;&nbsp;<i>Gregor Wiedemann, Seid Muhie Yimam, Chris Biemann</i><br>
+<font size="3">
+We introduce an advanced information extraction pipeline to automatically process very large collections of unstructured textual data for the purpose of investigative journalism. The pipeline serves as a new input processor for the upcoming major release of our New/s/leak 2.0 software, which we develop in cooperation with a large German news organization. The use case is that journalists receive a large collection of files up to several Gigabytes containing unknown contents. Collections may originate either from official disclosures of documents, e.g. Freedom of Information Act requests, or unofficial data leaks.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper59"> <b>59. Joint Modeling for Query Expansion and Information Extraction with Reinforcement Learning</b>  <a href="https://www.aclweb.org/anthology/W18-5506.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title59" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2018. the First Workshop on Fact Extraction and VERification (FEVER)<br>&nbsp;&nbsp;<i>Motoki Taniguchi, Yasuhide Miura, Tomoko Ohkuma</i><br>
+<font size="3">
+Information extraction about an event can be improved by incorporating external evidence. In this study, we propose a joint model for pseudo-relevance feedback based query expansion and information extraction with reinforcement learning. Our model generates an event-specific query to effectively retrieve documents relevant to the event. We demonstrate that our model is comparable or has better performance than the previous model in two publicly available datasets. Furthermore, we analyzed the influences of the retrieval effectiveness in our model on the extraction performance.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper60"> <b>60. Improving Information Extraction from Images with Learned Semantic Models</b>  <a href="https://www.ijcai.org/proceedings/2018/0724.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title60" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2018. <br>&nbsp;&nbsp;<i>Stephan Baier, Yunpu Ma, Volker Tresp</i><br>
+<font size="3">
+Many applications require an understanding of an image that goes beyond the simple detection and classification of its objects. In particular, a great deal  of semantic information is carried in the relationships between objects. We have previously shown, that the combination of a visual model and a statistical semantic prior model can improve on the task of mapping images to their associated scene description. In this paper, we review the model and compare it to a novel conditional multi-way model for visual relationship detection, which does not include an explicitly trained visual prior model. We also discuss potential relationships between the proposed methods and memory models of the human brain.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper61"> <b>61. Supervised Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/N18-1081.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title61" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2018. Long Papers<br>&nbsp;&nbsp;<i>Gabriel Stanovsky, Julian Michael, Luke Zettlemoyer, Ido Dagan</i><br>
+<font size="3">
+We present data and methods that enable a supervised learning approach to Open Information Extraction (Open IE). Central to the approach is a novel formulation of Open IE as a sequence tagging problem, addressing challenges such as encoding multiple extractions for a predicate. We also develop a bi-LSTM transducer, extending recent deep Semantic Role Labeling models to extract Open IE tuples and provide confidence scores for tuning their precision-recall tradeoff. Furthermore, we show that the recently released Question-Answer Meaning Representation dataset can be automatically converted into an Open IE corpus which significantly increases the amount of available training data. Our supervised model outperforms the existing state-of-the-art Open IE systems on benchmark datasets.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper62"> <b>62. Keep Your Bearings: Lightly-Supervised Information Extraction with Ladder Networks That Avoids Semantic Drift</b>  <a href="https://www.aclweb.org/anthology/N18-2057.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title62" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2018. Short Papers<br>&nbsp;&nbsp;<i>Ajay Nagesh, Mihai Surdeanu</i><br>
+<font size="3">
+We propose a novel approach to semi-supervised learning for information extraction that uses ladder networks (Rasmus et al., 2015). In particular, we focus on the task of named entity classification, defined as identifying the correct label (e.g., person or organization name) of an entity mention in a given context. Our approach is simple, efficient and has the benefit of being robust to semantic drift, a dominant problem in most semi-supervised learning systems. We empirically demonstrate the superior performance of our system compared to the state-of-the-art on two standard datasets for named entity classification. We obtain between 62% and 200% improvement over the state-of-art baseline on these two datasets.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper63"> <b>63. Syntactic Patterns Improve Information Extraction for Medical Search</b>  <a href="https://www.aclweb.org/anthology/N18-2060.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title63" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2018. Short Papers<br>&nbsp;&nbsp;<i>Roma Patel, Yinfei Yang, Iain Marshall, Ani Nenkova, Byron Wallace</i><br>
+<font size="3">
+Medical professionals search the published literature by specifying the type of patients, the medical intervention(s) and the outcome measure(s) of interest. In this paper we demonstrate how features encoding syntactic patterns improve the performance of state-of-the-art sequence tagging models (both neural and linear) for information extraction of these medically relevant categories. We present an analysis of the type of patterns exploited and of the semantic space induced for these, i.e., the distributed representations learned for identified multi-token patterns. We show that these learned representations differ substantially from those of the constituent unigrams, suggesting that the patterns capture contextual information that is otherwise lost.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper64"> <b>64. Automatic Emphatic Information Extraction from Aligned Acoustic Data and Its Application on Sentence Compression</b>  <a href="https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14779/14127" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title64" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2017. Natural Language Processing and Text Mining<br>&nbsp;&nbsp;<i>Yanju Chen, Rong Pan</i><br>
+<font size="3">
+We introduce a novel method to extract and utilize the semantic information from acoustic data. By automatic Speech-To-Text alignment techniques, we are able to detect word-based acoustic durations that can prosodically emphasize specific words in an utterance. We model and analyze the sentence-based emphatic patterns by predicting the emphatic levels using only the lexical features, and demonstrate the potential ability of emphatic information produced by such an unsupervised method to improve the performance of NLP tasks, such as sentence compression, by providing weak supervision on multi-task learning based on LSTMs.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper65"> <b>65. Answering Complex Questions Using Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P17-2049.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title65" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2017. Short Papers<br>&nbsp;&nbsp;<i>Tushar Khot, Ashish Sabharwal, Peter Clark</i><br>
+<font size="3">
+While there has been substantial progress in factoid question-answering (QA), answering complex questions remains challenging, typically requiring both a large body of knowledge and inference techniques. Open Information Extraction (Open IE) provides a way to generate semi-structured knowledge for QA, but to date such knowledge has only been used to answer simple questions with retrieval-based methods. We overcome this limitation by presenting a method for reasoning with Open IE knowledge, allowing more complex questions to be handled. Using a recently proposed support graph optimization framework for QA, we develop a new inference model for Open IE, in particular one that can work effectively with multiple short facts, noise, and the relational structure of tuples. Our model significantly outperforms a state-of-the-art structured solver on complex questions of varying difficulty, while also removing the reliance on manually curated knowledge.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper66"> <b>66. Temporal Information Extraction for Question Answering Using Syntactic Dependencies in an LSTM-based Architecture</b>  <a href="https://www.aclweb.org/anthology/D17-1092.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title66" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2017. <br>&nbsp;&nbsp;<i>Yuanliang Meng, Anna Rumshisky, Alexey Romanov</i><br>
+<font size="3">
+In this paper, we propose to use a set of simple, uniform in architecture LSTM-based models to recover different kinds of temporal relations from text. Using the shortest dependency path between entities as input, the same architecture is used to extract intra-sentence, cross-sentence, and document creation time relations. A “double-checking” technique reverses entity pairs in classification, boosting the recall of positive cases and reducing misclassifications between opposite classes. An efficient pruning algorithm resolves conflicts globally. Evaluated on QA-TempEval (SemEval2015 Task 5), our proposed technique outperforms state-of-the-art methods by a large margin. We also conduct intrinsic evaluation and post state-of-the-art results on Timebank-Dense.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper67"> <b>67. MinIE: Minimizing Facts in Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/D17-1278.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title67" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2017. <br>&nbsp;&nbsp;<i>Kiril Gashteovski, Rainer Gemulla, Luciano del Corro</i><br>
+<font size="3">
+The goal of Open Information Extraction (OIE) is to extract surface relations and their arguments from natural-language text in an unsupervised, domain-independent manner. In this paper, we propose MinIE, an OIE system that aims to provide useful, compact extractions with high precision and recall. MinIE approaches these goals by (1) representing information about polarity, modality, attribution, and quantities with semantic annotations instead of in the actual extraction, and (2) identifying and removing parts that are considered overly specific. We conducted an experimental study with several real-world datasets and found that MinIE achieves competitive or higher precision and recall than most prior systems, while at the same time producing shorter, semantically enriched extractions.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper68"> <b>68. Scientific Information Extraction with Semi-supervised Neural Tagging</b>  <a href="https://www.aclweb.org/anthology/D17-1279.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title68" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2017. <br>&nbsp;&nbsp;<i>Yi Luan, Mari Ostendorf, Hannaneh Hajishirzi</i><br>
+<font size="3">
+This paper addresses the problem of extracting keyphrases from scientific articles and categorizing them as corresponding to a task, process, or material. We cast the problem as sequence tagging and introduce semi-supervised methods to a neural tagging model, which builds on recent advances in named entity recognition. Since annotated training data is scarce in this domain, we introduce a graph-based semi-supervised algorithm together with a data selection scheme to leverage unannotated articles. Both inductive and transductive semi-supervised learning strategies outperform state-of-the-art information extraction performance on the 2017 SemEval Task 10 ScienceIE task.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper69"> <b>69. Speeding up Reinforcement Learning-based Information Extraction Training using Asynchronous Methods</b>  <a href="https://www.aclweb.org/anthology/D17-1281.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title69" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2017. <br>&nbsp;&nbsp;<i>Aditya Sharma, Zarana Parekh, Partha Talukdar</i><br>
+<font size="3">
+RLIE-DQN is a recently proposed Reinforcement Learning-based Information Extraction (IE) technique which is able to incorporate external evidence during the extraction process. RLIE-DQN trains a single agent sequentially, training on one instance at a time. This results in significant training slowdown which is undesirable. We leverage recent advances in parallel RL training using asynchronous methods and propose RLIE-A3C. RLIE-A3C trains multiple agents in parallel and is able to achieve upto 6x training speedup over RLIE-DQN, while suffering no loss in average accuracy.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper70"> <b>70. Joint Inference over a Lightly Supervised Information Extraction Pipeline: Towards Event Coreference Resolution for Resource-Scarce Languages</b>  <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12413/12041" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title70" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2016. Technical Papers: NLP and Text Mining<br>&nbsp;&nbsp;<i>Chen Chen, Vincent Ng</i><br>
+<font size="3">
+We address two key challenges in end-to-end event coreference resolution research: (1) the error propagation problem, where an event coreference resolver has to assume as input the noisy outputs produced by its upstream components in the standard information extraction (IE) pipeline; and (2) the data annotation bottleneck, where manually annotating data for all the components in the IE pipeline is prohibitively expensive. This is the case in the vast majority of the world's natural languages, where such annotated resources are not readily available. To address these problems, we propose to perform joint inference over a lightly supervised IE pipeline, where all the models are trained using either active learning or unsupervised learning. Using our approach, only 25% of the training sentences in the Chinese portion of the ACE 2005 corpus need to be annotated with entity and event mentions in order for our event coreference resolver to surpass its fully supervised counterpart in performance.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper71"> <b>71. Aggregating Inter-Sentence Information to Enhance Relation Extraction</b>  <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12042/12068" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title71" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2016. Technical Papers: NLP and Text Mining<br>&nbsp;&nbsp;<i>Hao Zheng, Zhoujun Li, Senzhang Wang, Zhao Yan, Jianshe Zhou</i><br>
+<font size="3">
+Previous work for relation extraction from free text is mainly based on intra-sentence information. As relations might be mentioned across sentences, inter-sentence information can be leveraged to improve distantly supervised relation extraction. To effectively exploit inter-sentence information, we propose a ranking based approach, which first learns a scoring function based on a listwise learning-to-rank model and then uses it for multi-label relation extraction. Experimental results verify the effectiveness of our method for aggregating information across sentences. Additionally, to further improve the ranking of high-quality extractions, we propose an effective method to rank relations from different entity pairs. This method can be easily integrated into our overall relation extraction framework, and boosts the precision significantly.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper72"> <b>72. On the Extraction of One Maximal Information Subset That Does Not Conflict with Multiple Contexts</b>  <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11751/12108" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title72" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2016. Technical Papers: Search and Constraint Satisfaction<br>&nbsp;&nbsp;<i>Éric Grégoire, Yacine Izza, Jean-Marie Lagniez</i><br>
+<font size="3">
+The efficient extraction of one maximal information subset that does not conflict with multiple contxts or additional information sources is a key basic issue in many A.I. domains, especially when these contexts or sources can be mutually conflicting. In this paper, this question is addressed from a computational point of view in clausal Boolean logic. A new approach is introduced that experimentally outperforms the currently most efficient technique.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper73"> <b>73. new/s/leak – Information Extraction and Visualization for Investigative Data Journalists</b>  <a href="https://www.aclweb.org/anthology/P16-4028.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title73" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2016. System Demonstrations<br>&nbsp;&nbsp;<i>Seid Muhie Yimam, Heiner Ulrich, Tatiana von Landesberger, Marcel Rosenbach, Michaela Regneri, Alexander Panchenko, Franziska Lehmann, Uli Fahrer, Chris Biemann, Kathrin Ballweg</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper74"> <b>74. OCR++: A Robust Framework For Information Extraction from Scholarly Articles</b>  <a href="https://www.aclweb.org/anthology/C16-1320.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title74" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2016. <br>&nbsp;&nbsp;<i>Mayank Singh, Barnopriyo Barua, Priyank Palod, Manvi Garg, Sidhartha Satapathy, Samuel Bushi, Kumar Ayush, Krishna Sai Rohith, Tulasi Gamidi, Pawan Goyal, Animesh Mukherjee</i><br>
+<font size="3">
+This paper proposes OCR++, an open-source framework designed for a variety of information extraction tasks from scholarly articles including metadata (title, author names, affiliation and e-mail), structure (section headings and body text, table and figure headings, URLs and footnotes) and bibliography (citation instances and references). We analyze a diverse set of scientific articles written in English to understand generic writing patterns and formulate rules to develop this hybrid framework. Extensive evaluations show that the proposed framework outperforms the existing state-of-the-art tools by a large margin in structural information extraction along with improved performance in metadata and bibliography extraction tasks, both in terms of accuracy (around 50% improvement) and processing time (around 52% improvement). A user experience study conducted with the help of 30 researchers reveals that the researchers found this system to be very helpful. As an additional objective, we discuss two novel use cases including automatically extracting links to public datasets from the proceedings, which would further accelerate the advancement in digital libraries. The result of the framework can be exported as a whole into structured TEI-encoded documents. Our framework is accessible online at http://www.cnergres.iitkgp.ac.in/OCR++/home/.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper75"> <b>75. Multilingual Information Extraction with PolyglotIE</b>  <a href="https://www.aclweb.org/anthology/C16-2056.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title75" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2016. System Demonstrations<br>&nbsp;&nbsp;<i>Alan Akbik, Laura Chiticariu, Marina Danilevsky, Yonas Kbrom, Yunyao Li, Huaiyu Zhu</i><br>
+<font size="3">
+We present PolyglotIE, a web-based tool for developing extractors that perform Information Extraction (IE) over multilingual data. Our tool has two core features: First, it allows users to develop extractors against a unified abstraction that is shared across a large set of natural languages. This means that an extractor needs only be created once for one language, but will then run on multilingual data without any additional effort or language-specific knowledge on part of the user. Second, it embeds this abstraction as a set of views within a declarative IE system, allowing users to quickly create extractors using a mature IE query language. We present PolyglotIE as a hands-on demo in which users can experiment with creating extractors, execute them on multilingual text and inspect extraction results. Using the UI, we discuss the challenges and potential of using unified, crosslingual semantic abstractions as basis for downstream applications. We demonstrate multilingual IE for 9 languages from 4 different language groups: English, German, French, Spanish, Japanese, Chinese, Arabic, Russian and Hindi.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper76"> <b>76. Nested Propositions in Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/D16-1006.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title76" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2016. <br>&nbsp;&nbsp;<i>Nikita Bhutani, H. V. Jagadish, Dragomir Radev</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper77"> <b>77. Porting an Open Information Extraction System from English to German</b>  <a href="https://www.aclweb.org/anthology/D16-1086.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title77" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2016. <br>&nbsp;&nbsp;<i>Tobias Falke, Gabriel Stanovsky, Iryna Gurevych, Ido Dagan</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper78"> <b>78. Toward Socially-Infused Information Extraction: Embedding Authors, Mentions, and Entities</b>  <a href="https://www.aclweb.org/anthology/D16-1152.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title78" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2016. <br>&nbsp;&nbsp;<i>Yi Yang, Ming-Wei Chang, Jacob Eisenstein</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper79"> <b>79. Creating a Large Benchmark for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/D16-1252.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title79" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2016. <br>&nbsp;&nbsp;<i>Gabriel Stanovsky, Ido Dagan</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper80"> <b>80. Improving Information Extraction by Acquiring External Evidence with Reinforcement Learning</b>  <a href="https://www.aclweb.org/anthology/D16-1261.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title80" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2016. <br>&nbsp;&nbsp;<i>Karthik Narasimhan, Adam Yala, Regina Barzilay</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper81"> <b>81. Automated Narrative Information Extraction Using Non-Linear Pipelines</b>  <a href="https://www.ijcai.org/Proceedings/16/Papers/592.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title81" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2016. <br>&nbsp;&nbsp;<i>Josep Valls-Vargas</i><br>
+<font size="3">
+Our research focuses on the problem of automatically acquiring structured narrative information from natural language. We have focused on character extraction and narrative role identification from a corpus of Slavic folktales. To address natural language processing (NLP) issues in this particular domain we have explored alternatives to linear pipelined architectures for information extraction, specifically the idea of feedback loops that allow feeding information produced by later modules of the pipeline back to earlier modules. We propose the use of domain knowledge to improve core NLP tasks and the overall performance of our system.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper82"> <b>82. Open Information Extraction Systems and Downstream Applications</b>  <a href="https://www.ijcai.org/Proceedings/16/Papers/604.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title82" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2016. <br>&nbsp;&nbsp;<i>Mausam</i><br>
+<font size="3">
+Open Information Extraction (Open IE) extracts textual tuples comprising relation phrases and argument phrases from within a sentence, without requiring a pre-specified relation vocabulary. In this paper we first describe a decade of our progress on building Open IE extractors, which results in our latest extractor, OpenIE4, which is computationally efficient, outputs n-ary and nested relations, and also outputs relations mediated by nouns in addition to verbs. We also identify several strengths of the Open IE paradigm, which enable it to be a useful intermediate structure for end tasks. We survey its use in both human-facing applications and downstream NLP tasks, including event schema induction, sentence similarity, text comprehension, learning word vector embeddings, and more.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper83"> <b>83. Ontology-Based Information Extraction with a Cognitive Agent</b>  <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9787/9294" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title83" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2015. Cognitive Systems<br>&nbsp;&nbsp;<i>Peter Lindes, Deryle W. Lonsdale, David W. Embley</i><br>
+<font size="3">
+Machine reading is a relatively new field that features computer programs designed to read flowing text and extract fact assertions expressed by the narrative content. This task involves two core technologies: natural language processing (NLP) and information extraction (IE). In this paper we describe a machine reading system that we have developed within a cognitive architecture. We show how we have integrated into the framework several levels of knowledge for a particular domain, ideas from cognitive semantics and construction grammar, plus tools from prior NLP and IE research. The result is a system that is capable of reading and interpreting complex and fairly idiosyncratic texts in the family history domain. We describe the architecture and performance of the system. After presenting the results from several evaluations that we have carried out, we summarize possible future directions.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper84"> <b>84. Leveraging Linguistic Structure For Open Domain Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P15-1034.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title84" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2015. Long Papers<br>&nbsp;&nbsp;<i>Gabor Angeli, Melvin Jose Johnson Premkumar, Christopher D. Manning</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper85"> <b>85. Joint Information Extraction and Reasoning: A Scalable Statistical Relational Learning Approach</b>  <a href="https://www.aclweb.org/anthology/P15-1035.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title85" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2015. Long Papers<br>&nbsp;&nbsp;<i>William Yang Wang, William W. Cohen</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper86"> <b>86. Leveraging Linguistic Structure For Open Domain Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P15-1034.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title86" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2015. Long Papers<br>&nbsp;&nbsp;<i>Gabor Angeli, Melvin Jose Johnson Premkumar, Christopher D. Manning</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper87"> <b>87. Joint Information Extraction and Reasoning: A Scalable Statistical Relational Learning Approach</b>  <a href="https://www.aclweb.org/anthology/P15-1035.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title87" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2015. Long Papers<br>&nbsp;&nbsp;<i>William Yang Wang, William W. Cohen</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper88"> <b>88. A Lexicalized Tree Kernel for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/P15-2046.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title88" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2015. Short Papers<br>&nbsp;&nbsp;<i>Ying Xu, Christoph Ringlstetter, Mi-Young Kim, Grzegorz Kondrak, Randy Goebel, Yusuke Miyao</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper89"> <b>89. Improving Distant Supervision for Information Extraction Using Label Propagation Through Lists</b>  <a href="https://www.aclweb.org/anthology/D15-1060.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title89" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2015. <br>&nbsp;&nbsp;<i>Lidong Bing, Sneha Chaudhari, Richard Wang, William Cohen</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper90"> <b>90. Inferring Binary Relation Schemas for Open Information Extraction</b>  <a href="https://www.aclweb.org/anthology/D15-1065.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title90" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2015. <br>&nbsp;&nbsp;<i>Kangqi Luo, Xusheng Luo, Kenny Zhu</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper91"> <b>91. Abstractive Multi-document Summarization with Semantic Information Extraction</b>  <a href="https://www.aclweb.org/anthology/D15-1219.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title91" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2015. <br>&nbsp;&nbsp;<i>Wei Li</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper92"> <b>92. Transparent Machine Learning for Information Extraction: State-of-the-Art and the Future</b>  <a href style="color:#0000EE;">[PDF]</a>  <a href="#title92" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2015. <br>&nbsp;&nbsp;<i>Laura Chiticariu, Yunyao Li, Frederick Reiss</i><br>
+<font size="3">
+The rise of Big Data analytics over unstructured text has led to renewed interest in information extraction (IE). These applications need effective IE as a first step towards solving end-to-end real world problems (e.g. biology, medicine, finance, media and entertainment, etc). Much recent NLP research has focused on addressing specific IE problems using a pipeline of multiple machine learning techniques. This approach requires an analyst with the expertise to answer questions such as: “What ML techniques should I combine to solve this problem?”; “What features will be useful for the composite pipeline?”; and “Why is my model giving the wrong answer on this document?”. The need for this expertise creates problems in real world applications. It is very difficult in practice to find an analyst who both understands the real world problem and has deep knowledge of applied machine learning. As a result, the real impact by current IE research does not match up to the abundant opportunities available.In this tutorial, we introduce the concept of transparent machine learning. A transparent ML technique is one that:- produces models that a typical real world use can read and understand;- uses algorithms that a typical real world user can understand; and- allows a real world user to adapt models to new domains.The tutorial is aimed at IE researchers in both the academic and industry communities who are interested in developing and applying transparent ML.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper93"> <b>93. Information Extraction of Texts in the Biomedical Domain</b>  <a href="https://www.ijcai.org/Proceedings/15/Papers/626.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title93" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2015. <br>&nbsp;&nbsp;<i>Viviana Cotik</i><br>
+<font size="3">
+https://www.ijcai.org/Automatic detection of relevant terms in medical reports is useful for educational purposes and for clinical research. Natural language processing techniques can be applied in order to identify them. The main goal of this research is to develop a method to identify whether medical reports of imaging studies (usually called radiology reports) written in Spanish are important (in the sense that they have non-negated pathological findings) or not. We also try to identify which finding is present and if possible its relationship with anatomical entities.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper94"> <b>94. Automatic Extraction of References to Future Events from News Articles Using Semantic and Morphological Information</b>  <a href="https://www.ijcai.org/Proceedings/15/Papers/640.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title94" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;IJCAI 2015. <br>&nbsp;&nbsp;<i>Yoko Nakajima</i><br>
+<font size="3">
+https://www.ijcai.org/In my doctoral dissertation I investigate patterns appearing in sentences referring to the future. Such patterns are useful in predicting future events. I base the study on a multiple newspaper corpora. I firstly perform a preliminary study to find out that the patterns appearing in future-reference sentences often consist of disjointed elements within a sentence. Such patterns are also usually semantically and grammatically consistent, although lexically variant. Therefore, I propose a method for automatic extraction of such patterns, applying both grammatical (morphological) and semantic information to represent sentences in morphosemantic structure, and then extract frequent patterns, including those with disjointed elements. Next, I perform a series of experiments, in which I firstly train fourteen classifier versions and compare them to choose the best one. Next, I compare my method to the state-of-the-art, and verify the final performance of the method on a new dataset. I conclude that the proposed method is capable to automatically classify future-reference sentences, significantly outperforming state-of-the-art, and reaching 76% of F-score.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper95"> <b>95. Exploring Relational Features and Learning under Distant Supervision for Information Extraction Tasks</b>  <a href="https://www.aclweb.org/anthology/N15-2006.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title95" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2015. Student Research Workshop<br>&nbsp;&nbsp;<i>Ajay Nagesh</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper96"> <b>96. ICE: Rapid Information Extraction Customization for NLP Novices</b>  <a href="https://www.aclweb.org/anthology/N15-3007.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title96" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;NAACL 2015. Demonstrations<br>&nbsp;&nbsp;<i>Yifan He, Ralph Grishman</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper97"> <b>97. Large-Scale Information Extraction from Textual Definitions through Deep Syntactic and Semantic Analysis</b>  <a href="https://www.aclweb.org/anthology/Q15-1038.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title97" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;TACL 2015. <br>&nbsp;&nbsp;<i>Claudio Delli Bovi, Luca Telesca, Roberto Navigli</i><br>
+<font size="3">
+We present DefIE, an approach to large-scale Information Extraction (IE) based on a syntactic-semantic analysis of textual definitions. Given a large corpus of definitions we leverage syntactic dependencies to reduce data sparsity, then disambiguate the arguments and content words of the relation strings, and finally exploit the resulting information to organize the acquired relations hierarchically. The output of DefIE is a high-quality knowledge base consisting of several million automatically acquired semantic relations.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper98"> <b>98. Experiments on Visual Information Extraction with the Faces of Wikipedia</b>  <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI14/paper/view/8570/8398" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title98" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;AAAI 2014. Main Track: AI and the Web<br>&nbsp;&nbsp;<i>Md. Kamrul Hasan, Christopher Joseph Pal</i><br>
+<font size="3">
+We present a series of visual information extraction experiments using the Faces of Wikipedia database - a new resource that we release into the public domain for both recognition and extraction research containing over 50,000 identities and 60,000 disambiguated images of faces. We compare different techniques for automatically extracting the faces corresponding to the subject of a Wikipedia biography within the images appearing on the page. Our top performing approach is based on probabilistic graphical models and uses the text of Wikipedia pages, similarities of faces as well as various other features of the document, meta-data and image files. Our method resolves the problem jointly for all detected faces on a page. While our experiments focus on extracting faces from Wikipedia biographies, our approach is easily adapted to other types of documents and multiple documents. We focus on Wikipedia because the content is a Creative Commons resource and we provide our database to the community including registered faces, hand labeled and automated disambiguations, processed captions, meta data and evaluation protocols. Our best probabilistic extraction pipeline yields an expected average accuracy of 77\% compared to image only and text only baselines which yield 63\% and 66\% respectively.</font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper99"> <b>99. Information Extraction over Structured Data: Question Answering with Freebase</b>  <a href="https://www.aclweb.org/anthology/P14-1090.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title99" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2014. Long Papers<br>&nbsp;&nbsp;<i>Xuchen Yao, Benjamin Van Durme</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper100"> <b>100. Open Information Extraction for Spanish Language based on Syntactic Constraints</b>  <a href="https://www.aclweb.org/anthology/P14-3011.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title100" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2014. Student Research Workshop<br>&nbsp;&nbsp;<i>Alisa Zhila, Alexander Gelbukh</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper101"> <b>101. Cross-Lingual Information to the Rescue in Keyword Extraction</b>  <a href="https://www.aclweb.org/anthology/P14-5001.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title101" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;ACL 2014. System Demonstrations<br>&nbsp;&nbsp;<i>Chung-Chi Huang, Maxine Eskenazi, Jaime Carbonell, Lun-Wei Ku, Ping-Che Yang</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper102"> <b>102. Single Document Keyphrase Extraction Using Label Information</b>  <a href="https://www.aclweb.org/anthology/C14-1139.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title102" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;COLING 2014. <br>&nbsp;&nbsp;<i>Sumit Negi</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<div id="paper103"> <b>103. Combining Visual and Textual Features for Information Extraction from Online Flyers</b>  <a href="https://www.aclweb.org/anthology/D14-1206.pdf" target="_blank" rel="noopener" style="color:#0000EE;">[PDF]</a>  <a href="#title103" style="color:#0000EE;">返回目录</a>
+ <br>&nbsp;&nbsp;EMNLP 2014. <br>&nbsp;&nbsp;<i>Emilia Apostolova, Noriko Tomuro</i><br>
+<font size="3">
+ </font>
+<br>
+</div>
+
+
+<hr>
+<p><font style="color:red;">注：论文列表使用<a href="https://zhuanlan.zhihu.com/p/282844968" target="_blank" rel="noopener">AC论文搜索器</a>整理！</font></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PROCJX
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://procjx.github.io/2020/12/09/%E3%80%90NLP%E3%80%91%202014-2020%20Information%20Extraction%20%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/" title="【NLP】 2014-2020 Information Extraction 信息抽取相关论文整理">https://procjx.github.io/2020/12/09/%E3%80%90NLP%E3%80%91%202014-2020%20Information%20Extraction%20%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/12/09/%E3%80%90NLP%E3%80%91%202014-2020%20Entity%20Linking%20%E5%AE%9E%E4%BD%93%E9%93%BE%E6%8E%A5%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/" rel="next" title="【NLP】 2014-2020 Entity Linking 实体链接相关论文整理">
+                  <i class="fa fa-chevron-left"></i> 【NLP】 2014-2020 Entity Linking 实体链接相关论文整理
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-wenzhang -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9197824246"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="PROCJX"
+    src="/images/procjx.png">
+  <p class="site-author-name" itemprop="name">PROCJX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">422</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/procjx" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;procjx" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:procjx@gmail.com" title="E-Mail &amp;rarr; mailto:procjx@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+<!--
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AAAI/" rel="tag">AAAI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACL/" rel="tag">ACL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accepted-Papers/" rel="tag">Accepted Papers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArXiv/" rel="tag">ArXiv</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BERT/" rel="tag">BERT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS20SI/" rel="tag">CS20SI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS224d/" rel="tag">CS224d</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS231n/" rel="tag">CS231n</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CVPR/" rel="tag">CVPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cross-Lingual/" rel="tag">Cross Lingual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog-System/" rel="tag">Dialog System</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse/" rel="tag">Discourse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Ranking/" rel="tag">Discourse Ranking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Discourse-Structure/" rel="tag">Discourse Structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document-NMT/" rel="tag">Document NMT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EMNLP/" rel="tag">EMNLP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extractive/" rel="tag">Extractive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICLR/" rel="tag">ICLR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICML/" rel="tag">ICML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IJCAI/" rel="tag">IJCAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Inter-Sentence/" rel="tag">Inter-Sentence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keyphrase-Generation/" rel="tag">Keyphrase Generation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAACL/" rel="tag">NAACL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NMT/" rel="tag">NMT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Relation-Extraction/" rel="tag">Neural Relation Extraction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RST/" rel="tag">RST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Relation-Constraints/" rel="tag">Relation Constraints</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Summarization/" rel="tag">Summarization</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translation/" rel="tag">Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Translation/" rel="tag">Word Translation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alias/" rel="tag">alias</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tgz/" rel="tag">tgz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tts/" rel="tag">tts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1/" rel="tag">冒泡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="tag">冒泡排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B/" rel="tag">写作助手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9/" rel="tag">压缩</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" rel="tag">发送邮件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">合并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E5%8F%B0/" rel="tag">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" rel="tag">基数排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" rel="tag">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6/" rel="tag">归并</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F/" rel="tag">批量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4/" rel="tag">批量删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5/" rel="tag">插入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" rel="tag">插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" rel="tag">斐波那契数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%80%E6%AD%BB%E8%BF%9B%E7%A8%8B/" rel="tag">杀死进程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%89%E8%AF%BA%E5%A1%94/" rel="tag">汉诺塔</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C%E7%BF%BB%E8%AF%91/" rel="tag">谷歌翻译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3%E5%9B%9E%E7%BF%BB/" rel="tag">迭代回翻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9/" rel="tag">选择</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" rel="tag">选择排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%84%E4%BB%B6/" rel="tag">附件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3/" rel="tag">非监督</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%9F%9F%E9%80%82%E5%BA%94/" rel="tag">领域适应</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+        
+-->
+        
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- procjx-hengfu -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="9879871597"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-chuizhi -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="1662238719"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+<!-- procjx-zhengfangxing -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1179774715076800"
+     data-ad-slot="6699421902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PROCJX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2286ab64f5194d9d79ce',
+      clientSecret: 'f912492bec2391664b40478f50f2f943376768d6',
+      repo: 'procjx.github.io',
+      owner: 'procjx',
+      admin: ['procjx'],
+      id: 'e3aaac016a205333e1bae893ab960cba',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
